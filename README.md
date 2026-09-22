@@ -1,43 +1,40 @@
-# TAIJIFU SITE
+# TAIJIFU SITE — WordPress
 
-Repositório oficial do site WordPress do **Taijifu — A Arte Marcial da Adaptação**.
+WordPress implementation of the official public Taijifu site.
 
-Este repositório preserva e evolui apenas o código próprio do Taijifu:
-- tema WordPress `taijifu-theme`;
-- plugin WordPress `taijifu-core`;
-- documentação de arquitetura, autoria e identidade visual.
+**Source of Truth:** `Tehkne-Solutions/taijifu-platform` → `packages/canon`  
+**Current Canon:** `TAIJIFU-CANON-1.0`  
+**Theme:** `taijifu-theme` v2.1.0  
+**Core:** `taijifu-core` v2.1.0
 
-O WordPress Core, plugins de terceiros, uploads, cache, backups, banco de dados e credenciais não são versionados.
+## Canon invariant
+
+The public WordPress site no longer maintains a parallel curriculum. Its official content is rendered from a versioned snapshot of the Canon:
+
+- 4 Bases;
+- 10 Faixas;
+- 32 Caminhos;
+- 128 Núcleos.
+
+Legacy WordPress CPTs are retained as historical/admin material but are not the public authority.
+
+## Identity v2.1
+
+Structural reset:
+
+- warm paper + charcoal authority surfaces;
+- Tai = red;
+- Ji = blue;
+- Fu = yellow/gold;
+- Integration/Survival = green;
+- no gradient, neon, glow, haze or faux tatami/wood/steel texture;
+- mobile gutters >= 24px;
+- content architecture follows Canon before decoration.
+
+## Authorship
 
 **Criação:** Thales Walisson  
 **Co-criação:** Miguel Da Vinci Santos Ferreira (Miguel Da Vinci)  
 **Desde:** 2026
 
-Site de produção: https://taijifu.page.gd/
-
-## Checkpoint atual
-
-**Theme v2.0.0 + Core v2.0.0 — Identity Reset**
-
-North Star:
-- arte marcial séria;
-- força + inteligência + adaptação;
-- experiência de entrar em um dojo virtual contemporâneo.
-
-Sistema cromático:
-- TAI = vermelho marcial;
-- JI = azul profundo;
-- FU = dourado envelhecido;
-- âmbar = apoio;
-- neutros dominantes.
-
-Identity Reset:
-- nova hierarquia editorial;
-- novo hero em duas zonas;
-- banners internos compactos;
-- gutters responsivos de 24px+ no mobile;
-- cards planos e consistentes;
-- sem texturas falsas de tatame/madeira/aço;
-- sem HUD, neon, glow, haze ou degradês decorativos.
-
-O `taijifu-core` v2.0.0 também corrige a semântica de Fundamentos para TAI vermelho, JI azul e FU dourado.
+Production legacy URL: https://taijifu.page.gd/
