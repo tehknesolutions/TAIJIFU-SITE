@@ -17,12 +17,12 @@ Site de produção: https://taijifu.page.gd/
 
 ## Checkpoint atual
 
-**Theme v1.8.2 — Virtual Dojo Material System**
+**Theme v2.0.0 + Core v2.0.0 — Identity Reset**
 
 North Star:
 - arte marcial séria;
 - força + inteligência + adaptação;
-- experiência de entrar em um dojo virtual.
+- experiência de entrar em um dojo virtual contemporâneo.
 
 Sistema cromático:
 - TAI = vermelho marcial;
@@ -31,16 +31,13 @@ Sistema cromático:
 - âmbar = apoio;
 - neutros dominantes.
 
-Materialidade:
-- tatame = treino / base;
-- madeira escura = linhagem / história;
-- aço fosco = estrutura / inteligência.
+Identity Reset:
+- nova hierarquia editorial;
+- novo hero em duas zonas;
+- banners internos compactos;
+- gutters responsivos de 24px+ no mobile;
+- cards planos e consistentes;
+- sem texturas falsas de tatame/madeira/aço;
+- sem HUD, neon, glow, haze ou degradês decorativos.
 
-Bloqueios visuais:
-- sem neon;
-- sem glow;
-- sem haze colorido;
-- sem degradês decorativos;
-- sem título multicolorido.
-
-O pacote WordPress v1.8.2 preserva o plugin `taijifu-core` v1.7.5 e evolui apenas o tema.
+O `taijifu-core` v2.0.0 também corrige a semântica de Fundamentos para TAI vermelho, JI azul e FU dourado.
