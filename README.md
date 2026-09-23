@@ -4,8 +4,8 @@ WordPress implementation of the official public Taijifu site.
 
 **Source of Truth:** `Tehkne-Solutions/taijifu-platform` → `packages/canon`  
 **Current Canon:** `TAIJIFU-CANON-1.0`  
-**Theme:** `taijifu-theme` v2.1.0  
-**Core:** `taijifu-core` v2.1.0
+**Theme:** `taijifu-theme` v2.2.0  
+**Core:** `taijifu-core` v2.2.0
 
 ## Canon invariant
 
@@ -18,18 +18,20 @@ The public WordPress site no longer maintains a parallel curriculum. Its officia
 
 Legacy WordPress CPTs are retained as historical/admin material but are not the public authority.
 
-## Identity v2.1
+## Identity v2.2
 
-Structural reset:
+Premium visual rebuild:
 
-- warm paper + charcoal authority surfaces;
-- Tai = red;
-- Ji = blue;
-- Fu = yellow/gold;
-- Integration/Survival = green;
-- no gradient, neon, glow, haze or faux tatami/wood/steel texture;
+- full-bleed editorial martial hero instead of card-based landing-page composition;
+- original Taijifu emblem and movement-gesture SVGs;
+- asymmetric Base composition;
+- Canon chapters instead of builder-like feature cards;
+- visual belt path instead of spreadsheet-like progression;
+- stronger display hierarchy and editorial rhythm;
+- Tai = red, Ji = blue, Fu = yellow/gold, Integration/Survival = green;
+- no gradient, neon, glow, haze, glassmorphism or faux material texture;
 - mobile gutters >= 24px;
-- content architecture follows Canon before decoration.
+- Canon 1.0 remains unchanged.
 
 ## Authorship
 
