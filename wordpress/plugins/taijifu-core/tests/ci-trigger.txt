@@ -1,0 +1,1 @@
+TAIJIFU Core contract verification trigger.
