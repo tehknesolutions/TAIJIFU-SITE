@@ -1,0 +1,42 @@
+name: TAIJIFU Core Contracts
+
+on:
+  push:
+    paths:
+      - 'wordpress/plugins/taijifu-core/**'
+      - '.github/workflows/taijifu-core-contracts.yml'
+  pull_request:
+    paths:
+      - 'wordpress/plugins/taijifu-core/**'
+      - '.github/workflows/taijifu-core-contracts.yml'
+
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: wordpress_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+          tools: phpunit:9.6
+      - name: Install WordPress test suite
+        run: |
+          bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1 latest
+      - name: Run TAIJIFU Core contracts
+        run: |
+          phpunit --bootstrap wordpress/plugins/taijifu-core/tests/bootstrap.php wordpress/plugins/taijifu-core/tests
