@@ -17,6 +17,7 @@ define( 'TJF_CORE_DIR', plugin_dir_path( __FILE__ ) );
 require_once TJF_CORE_DIR . 'includes/class-content-types.php';
 require_once TJF_CORE_DIR . 'includes/class-taxonomies.php';
 require_once TJF_CORE_DIR . 'includes/class-activation.php';
+require_once TJF_CORE_DIR . 'includes/identity/class-tuid.php';
 
 add_action( 'init', [ 'TJF_Content_Types', 'register' ] );
 add_action( 'init', [ 'TJF_Taxonomies', 'register' ] );
