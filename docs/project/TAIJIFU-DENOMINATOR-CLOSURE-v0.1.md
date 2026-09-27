@@ -1,154 +1,147 @@
 # TAIJIFU Denominator Closure — v0.1
 
-Status: ACTIVE CLOSURE CANDIDATE
+Status: ACTIVE CLOSURE
 TPT Gate: DENOMINATOR CLOSURE
 Date: 2026-09-27
 Evidence source: `TAIJIFU-EVIDENCE-MAP-v0.1.md`
 DoD source: `TAIJIFU-DIVISION-DOD-MATRIX-v0.1.md`
 
 ## Purpose
-Freeze what counts as the denominator for each division before any percentage is emitted. This document does not award completion for planned work. It defines scope, evidence requirements and blockers so future progress is reproducible and cannot drift with conversation memory.
+Freeze what counts as the denominator for each division before any percentage is emitted. Closure defines the ruler; it does not award completion.
 
 ## Closure rule
-A denominator can be `CLOSED` even when many rows are incomplete, provided the rows that define the intended scope are known and accepted. A denominator remains `OPEN` when material scope itself is unresolved or required source authority is missing.
+A denominator can be `CLOSED` while rows remain incomplete if intended scope is known and authoritative. `OPEN` means material scope itself remains unresolved. `BLOCKED BY SOURCE AUTHORITY` means the source required to freeze scope has not been recovered.
 
 Statuses: `CLOSED | CLOSED WITH EXTERNAL EVIDENCE SURFACES | OPEN | BLOCKED BY SOURCE AUTHORITY`.
 
 ## DESIGN — DS1
+Frozen denominator: semantic TAI/JI/FU; Ω1; HNK; wordmark; color/tokens; typography; spacing/grid/radius/elevation/motion; component visual language; asset governance; visual regression.
 
-### Frozen denominator
-The existing ten-row DESIGN denominator is retained:
-1. semantic TAI/JI/FU system;
-2. Ω1 emblem authority;
-3. HNK glyph identity rules;
-4. wordmark system;
-5. color/token system;
-6. typography system;
-7. spacing/grid/radius/elevation/motion tokens;
-8. component visual language;
-9. asset master/source governance;
-10. visual regression references.
-
-### Scope decision
-No additional design capability is required to define the current visual-system denominator. Product implementation may add components later, but those additions are instances under rows 7/8/10 rather than denominator expansion unless CANON itself changes.
-
-### Evidence gates
-- A CANON decision may close a semantic/authority row.
-- Production asset rows require manifested source/master artifacts.
-- System rows require reusable tokens/rules, not screenshots alone.
-- Visual regression requires explicit comparison/audit evidence.
-
-### Closure
 `DESIGN DS1: CLOSED`.
 
-Current incompleteness remains visible: wordmark master, production type system, implementation tokens, component language and whole-product regression are not promoted to DONE by denominator closure.
-
 ## UI — UI1
+Frozen denominator: approved P0-P10 sequence from CANON/assets through theme/core integration, responsive/accessibility/regression and staging/QA.
 
-### Frozen denominator
-The P0-P10 sequence is accepted as the UI denominator:
-- P0 CANON + asset inventory
-- P1 tokens/grid/breakpoints
-- P2 Ω1/wordmark/HNK production assets
-- P3 `taijifu-canon` theme shell/header/footer
-- P4 Dojo Gate
-- P5 `taijifu-core` presentation/content surface
-- P6 theme/core integration
-- P7 responsive pass
-- P8 motion/performance/visual accessibility
-- P9 visual regression
-- P10 packaging/staging/QA
-
-### Scope decision
-P0-P10 spans source inventory through staging/QA and therefore provides an end-to-end implementation denominator. Missing theme source is an implementation/source gap, not a reason to keep changing the denominator.
-
-### Closure
 `UI UI1: CLOSED`.
 
-The closure does not claim UI completion. It freezes the ruler by which UI work will be measured.
-
 ## SEO — SEO1
+Frozen denominator: crawl/indexation; semantic HTML; metadata; canonical/redirects; structured data; sitemap/robots; CWV/performance; social metadata; discoverability/internal linking; measurement.
 
-### Frozen denominator
-The ten existing SEO capabilities are accepted as the intended product SEO denominator:
-1. crawl/indexation policy;
-2. semantic HTML/content hierarchy;
-3. metadata/title/description policy;
-4. canonical/redirect strategy;
-5. structured data/schema;
-6. sitemap/robots;
-7. performance/Core Web Vitals;
-8. social metadata;
-9. content discoverability/internal linking;
-10. measurement/Search Console/analytics.
+Evidence surfaces span repository, runtime and external webmaster/analytics systems.
 
-### Evidence-surface classification
-SEO spans multiple evidence surfaces:
-- repository/source: metadata implementation, structured data, semantic templates, routing/canonical logic, social metadata, internal linking;
-- runtime/staging/production: rendered head, HTTP redirects/status, robots response, generated sitemap, indexability, performance/CWV;
-- external webmaster/measurement: Search Console and analytics ownership/configuration/measurement.
-
-Repository absence cannot settle runtime/external rows. CMS defaults cannot receive project completion credit without observed runtime evidence.
-
-### Closure
 `SEO SEO1: CLOSED WITH EXTERNAL EVIDENCE SURFACES`.
 
-This means the denominator is stable while completion remains largely unverified. Runtime/external inventory is evidence acquisition, not denominator discovery.
+## Evidence Mapping Pass 007 — CODE / DEVOPS scope closure
 
-## CODE — C1 candidate
-The existing CODE denominator is not yet frozen because `CODE-12 Product application shell(s)` still has unresolved product/app scope. Foundation architecture is evidenced, but the number and identity of intended product applications is not established by current evidence.
+### Recovered authority affecting CODE
+The approved Unified Repository Spec establishes two independently deployable product/runtime surfaces:
 
-`CODE C1: OPEN`.
+1. **Platform application/runtime** — historically targeted as `apps/platform/`, with reusable libraries under top-level packages.
+2. **WordPress** — independently deployable, with `taijifu-core` owning domain/content behavior and `taijifu-canon` owning presentation.
 
-Closure requirement: identify the authoritative intended app/product surfaces and decide whether WordPress is the public product shell, one shell among several, or separate from the platform application denominator.
+It explicitly states that Platform and WordPress may share generated/static canonical data contracts but **must not require each other to boot**. This is sufficient to settle the product-shell ambiguity without forcing the current Foundation tree to be relocated back into the historical target path.
 
-## DEVOPS — D1 candidate
-The quality-pipeline denominator is strong, but operational scope remains unresolved for deploy environments, release/version automation, runtime observability and rollback/recovery.
+Current architecture reconciliation still governs physical placement: the executable workspace topology and manifested `services/packages/platform` Foundation are protected. The Unified Spec supplies product/runtime authority; it does not override the later anti-rework placement decision.
+
+### CODE — C1 CLOSED
+The CODE denominator is frozen as these capability groups:
+
+1. domain primitives/invariants;
+2. application ports/use-case boundary;
+3. cross-boundary contracts;
+4. identity/TUID service;
+5. relationship authority/lifecycle;
+6. capability resolution;
+7. dashboard/adaptive BFF;
+8. infrastructure adapters;
+9. runtime composition;
+10. event/snapshot logical-version correctness;
+11. architecture dependency enforcement;
+12. **Platform application/product surface** — independently bootable application experience consuming Foundation contracts/services as appropriate;
+13. **WordPress domain/content runtime** — `taijifu-core`, independently bootable from Node Platform;
+14. **WordPress presentation runtime** — `taijifu-canon`, independently bootable with graceful core-unavailable behavior where required;
+15. cross-runtime canonical/static contract integration where approved, without hard boot dependency.
+
+`CODE C1: CLOSED`.
+
+Important: rows 12-15 are scope closure, not implementation completion. The current absence of a manifested `apps/` shell and current absence of `taijifu-canon` remain implementation/source gaps.
+
+### Personalized Training source correction
+`docs/TAIJIFU-PERSONALIZED-TRAINING-ENGINE-V1.md` is present on current `main` and declares itself `APPROVED DESIGN / implementation source of truth`. It defines runtime composition, adaptive interview, exercise metadata, hard-constraint filtering, scoring/composition, controlled variation, feedback adaptation, WordPress ownership boundaries, privacy and ten acceptance gates.
+
+Therefore the earlier statement that Personalized Training source authority was not retrievable is superseded. UX is no longer blocked on this specific source. Manual V12 remains a separate GAMEDESIGN/source-ingestion concern.
+
+UX denominator closure will be handled in the next source-reconciliation pass using this recovered authority rather than reconstructed memory.
+
+### DEVOPS authority recovered
+The Unified Repository Spec gives several operational requirements that belong in the DEVOPS denominator:
+
+- WordPress and Platform are independently deployable/bootable;
+- Platform must build/test independently after relocation/adaptation;
+- WordPress theme/plugin must install independently;
+- M9 validation includes file/hash integrity, semantic conflict checks, Platform tests, WordPress tests, responsive/accessibility/visual gates;
+- M10 release includes unified release notes, WordPress ZIPs, Platform build artifacts where applicable, and migration/genealogy report;
+- source import must not copy secrets or `.env` values.
+
+Current repository evidence additionally shows GitHub Actions quality workflows, but current-main search did not recover dedicated deploy topology/IaC, staging/production environment configuration, observability implementation, or rollback/recovery implementation.
+
+### DEVOPS — D1 remains OPEN, but ambiguity is narrowed
+The DEVOPS denominator candidate is now:
+
+1. deterministic runtime/package contract;
+2. lint gate;
+3. typecheck gate;
+4. test gate;
+5. build gate;
+6. architecture-test gate;
+7. CI execution;
+8. Platform independent build/package/deploy path;
+9. WordPress independent test/package/install path;
+10. release/version artifacts and release notes;
+11. environment/staging/production topology;
+12. secrets/configuration boundary;
+13. runtime observability/telemetry;
+14. rollback/recovery;
+15. migration integrity/provenance validation where migration is active.
 
 `DEVOPS D1: OPEN`.
 
-Closure requirement: establish intended runtime/deployment topology and which operational responsibilities belong to this repository/project.
+Only one material scope decision remains before closure: establish whether observability + rollback/recovery are mandatory first-release responsibilities of TAIJIFU-SITE itself or external hosting/platform responsibilities with evidence surfaces tracked here. Repository absence cannot decide that ownership question.
 
-## UX — UX1 candidate
-UX rows are conceptually formed, but Personalized Training and related journey source authority is not currently retrievable. Freezing the denominator without those artifacts risks silently redefining the intended experience.
+## UX — UX1 candidate, source block partially removed
+Personalized Training authority is recovered. The source directly establishes adaptive interview, generated workout, regeneration, session execution, feedback, responsive/accessibility/motion presentation responsibilities and graceful core-unavailable state. This materially supports UX-04/05/06/07/08/09.
 
-`UX UX1: BLOCKED BY SOURCE AUTHORITY`.
+`UX UX1: OPEN — SOURCE RECONCILIATION ACTIVE`.
 
-Closure requirement: recover/ingest the named UX source set, then reconcile IA, onboarding, adaptive dashboard, interview, composition/regeneration, feedback/progression, responsive, accessibility, recovery states and usability validation.
+Remaining closure work: reconcile the Personalized Training source with site-wide IA/navigation, onboarding, dashboard journey and usability-validation scope. Do not retain the obsolete blanket `BLOCKED BY SOURCE AUTHORITY` label for UX.
 
 ## GAMEDESIGN — GD1 candidate
-The existing 12-row candidate is useful, but Manual V12 and curriculum/progression/fighter/loadout authority are not currently retrievable. The intended game-system scope therefore cannot yet be frozen losslessly.
+Manual V12 is named and inventoried by the Unified Repository Spec as a 166-file historical source package, including `sistema-xp.html`, `codex-tecnicas.html`, `jornada-90-dias.html`, certification/exam files, modules 00-08 and 12 technique sheets. The spec requires lossless import + classification before promotion to current CANON.
 
-`GAMEDESIGN GD1: BLOCKED BY SOURCE AUTHORITY`.
+The inventory proves the source package existed and defines expected content, but the 166-file source is not currently manifested under the planned Manual destination. Therefore detailed game-system semantics must not be reconstructed from filenames alone.
 
-Closure requirement: recover/ingest Manual V12 and authoritative curriculum, techniques, progression/XP, rank/certification, fighter/loadout and training-loop sources before accepting exclusions/additions.
+`GAMEDESIGN GD1: BLOCKED BY SOURCE INGESTION / AUTHORITY RECONCILIATION`.
 
-## Closure register
+## Closure register after Pass 007
 | Division | Denominator | State | Primary blocker |
 |---|---|---|---|
-| CODE | C1 | OPEN | product/app-shell authority |
-| DEVOPS | D1 | OPEN | deployment/operations topology |
-| DESIGN | DS1 | CLOSED | none for scope; implementation gaps remain |
-| UI | UI1 | CLOSED | none for scope; implementation/source gaps remain |
-| UX | UX1 | BLOCKED BY SOURCE AUTHORITY | Personalized Training/UX source recovery |
-| SEO | SEO1 | CLOSED WITH EXTERNAL EVIDENCE SURFACES | runtime/external verification, not scope |
-| GAMEDESIGN | GD1 | BLOCKED BY SOURCE AUTHORITY | Manual V12/domain source recovery |
+| CODE | C1 | CLOSED | none for scope; app/theme implementation gaps remain |
+| DEVOPS | D1 | OPEN | observability/recovery ownership + deployment evidence surfaces |
+| DESIGN | DS1 | CLOSED | none for scope |
+| UI | UI1 | CLOSED | none for scope |
+| UX | UX1 | OPEN | reconcile recovered Personalized Training authority with site-wide journeys |
+| SEO | SEO1 | CLOSED WITH EXTERNAL EVIDENCE SURFACES | runtime/external verification only |
+| GAMEDESIGN | GD1 | BLOCKED BY SOURCE INGESTION / AUTHORITY RECONCILIATION | Manual V12 source package |
 
-## Percentage policy after Pass 006
-- DESIGN and UI are now eligible for reproducible interim scoring once a scoring weight model is explicitly accepted.
-- SEO is eligible only for a split evidence score or a conservative scoring model that preserves runtime/external UNKNOWN states; UNKNOWN must never be converted to zero by accident.
-- CODE, DEVOPS, UX and GAMEDESIGN remain ineligible for percentage reporting until their denominator state closes.
-- Global Product Progress remains prohibited until all seven denominators are closed.
+## Percentage policy after Pass 007
+- CODE, DESIGN and UI now have closed repository-governed denominators.
+- SEO has a closed denominator with explicit external evidence surfaces.
+- DEVOPS and UX remain open; GAMEDESIGN remains source-blocked.
+- Interim scoring still requires an explicit weight/state conversion model; denominator closure alone is not a percentage.
+- Global Product Progress remains prohibited until all seven denominator authorities are closed.
 
 ## Anti-rework invariant
-Future implementation does not reopen a closed denominator merely because more files/components appear. Reopening requires one of:
-1. authoritative CANON/product scope change;
-2. evidence that a material capability was omitted from the ruler;
-3. explicit governance decision with provenance.
-
-This prevents percentages from moving because the denominator was silently rewritten after work was completed.
+Future implementation does not reopen a closed denominator merely because more files/components appear. Reopening requires an authoritative scope/CANON change, evidence of a materially omitted capability, or an explicit governance decision with provenance.
 
 ## Next gate
-`PASS 006 -> PASS 007 CODE/DEVOPS CLOSURE -> SOURCE RECOVERY UX/GAMEDESIGN -> BASELINE v0.1`.
-
-A Baseline v0.1 may include closed-division telemetry and explicit blocked/open divisions, but no single global completion percentage until all denominator authorities are closed.
+`PASS 007 -> PASS 008 UX CLOSURE + DEVOPS OWNERSHIP DECISION -> MANUAL V12 SOURCE INGESTION -> BASELINE v0.1`.
