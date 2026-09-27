@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "@taijifu/capability-resolver": "workspace:*",
-    "@taijifu/contracts": "workspace:*"
+    "@taijifu/contracts": "workspace:*",
+    "@taijifu/relationships": "workspace:*"
   },
   "devDependencies": { "vitest": "workspace:*", "typescript": "workspace:*" }
 }
