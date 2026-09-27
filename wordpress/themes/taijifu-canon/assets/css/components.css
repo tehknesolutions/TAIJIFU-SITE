@@ -37,6 +37,17 @@
 .primary-cta { display: inline-block; padding: 0.85rem 1.2rem; background: var(--color-paper); color: var(--color-charcoal); border: 2px solid var(--color-paper); text-decoration: none; font-weight: 700; }
 .dojo-entry, .site-authorship { max-width: 48rem; margin-inline: auto; }
 .site-authorship { margin-block: var(--space-6); color: var(--color-muted); font-size: 0.9rem; }
+
+.content-page, .content-single, .content-archive { width: min(100%, 58rem); margin-inline: auto; padding-block: clamp(2rem, 6vw, 5rem); }
+.content-page__header, .content-entry__header, .content-archive__header { max-width: 48rem; margin-bottom: var(--space-4); }
+.content-page h1, .content-entry h1, .content-archive h1 { font-size: clamp(2.25rem, 6vw, 4.5rem); line-height: 1.05; }
+.content-entry__type { color: var(--color-muted); letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.8rem; }
+.content-entry__excerpt, .content-archive__description { font-size: 1.1rem; color: var(--color-muted); }
+.content-page__body, .content-entry__body { max-width: 48rem; }
+.content-archive__list { display: grid; gap: var(--space-2); }
+.content-card { padding: var(--space-2); border-top: 2px solid var(--color-charcoal); }
+.content-card h2 { margin: 0 0 var(--space-1); }
+.content-card a { color: inherit; }
 @media (max-width: 48rem) {
   .site-header { flex-wrap: wrap; }
   .primary-nav { flex-basis: 100%; }
