@@ -23,4 +23,20 @@ describe('resolveDashboard', () => {
     expect(admin.modules.map((module) => module.id)).toEqual(['platform', 'governance', 'observability']);
     expect(front.modules.some((module) => module.id === 'platform')).toBe(false);
   });
+
+  it('intersects surface modules with granted capabilities', () => {
+    const result = resolveDashboard(
+      { tuid: 'tuid_1', context: 'teacher', surface: 'teacher' },
+      new Set(['students.manage', 'sessions.manage']),
+    );
+    expect(result.modules.map((module) => module.id)).toEqual(['students', 'sessions']);
+  });
+
+  it('returns no privileged modules when no capabilities are granted', () => {
+    const result = resolveDashboard(
+      { tuid: 'tuid_1', context: 'dojo', surface: 'dojo' },
+      new Set(),
+    );
+    expect(result.modules).toEqual([]);
+  });
 });
