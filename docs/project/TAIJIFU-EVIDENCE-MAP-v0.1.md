@@ -69,20 +69,18 @@ Interpretation: the workflow was triggered and failed, but retained evidence doe
 | DESIGN-10 visual regression references | Ω1 visual/optical/final technical audits exist; whole-site CANON regression remains P9 | TEST/SPEC | CORROBORATED | PARTIAL |
 
 ### Ω1 technical verification
-`brand/omega1/tests/omega1-v3-final-gate.md` records a technical gate PASS for V3 + MICRO V1, including standard/reverse renders at 128/48/32 and micro at 32/24/16, deterministic SHA-256 sources, and a responsive master rule. `brand/omega1/master/` now contains `omega1-master.svg` and `omega1-micro-master.svg`. This promotes Ω1 from merely specified to **manifested master with recorded technical verification**. It does not prove full-site visual integration.
+`brand/omega1/tests/omega1-v3-final-gate.md` records a technical gate PASS for V3 + MICRO V1, including standard/reverse renders at 128/48/32 and micro at 32/24/16, deterministic SHA-256 sources, and a responsive master rule. `brand/omega1/master/` contains `omega1-master.svg` and `omega1-micro-master.svg`. This promotes Ω1 from merely specified to manifested master with recorded technical verification. It does not prove full-site visual integration.
 
 ### Wordmark status
 The wordmark is materially present but not closed. V1 audit explicitly says `STRUCTURAL BASE ACCEPTED, MASTER REJECTED`; V2 exists as an optically refined construction SVG. No `brand/wordmark/master/` is manifested and no V2 final audit is currently present in the tests directory. Therefore DESIGN-04 cannot be marked DONE.
 
 ### v2.2 genealogy recovered
-Issue #3 is direct evidence for **Premium Visual Rebuild v2.2.0**. It records as implemented: full-bleed editorial hero, original vector emblem, authorial visual gesture, asymmetric Bases, typographic Canon Explorer chapters, graduation visual trail, redesigned internal heroes/footer, removal of gradients/neon/glow/glass/faux materials, and Canon 1.0 preservation. It simultaneously leaves all live QA gates unchecked: Theme/Core 2.2.0 install, cache purge, 1440/1024/390 Home, Canon Explorer, Graduação, mobile menu, contrast/legibility, final visual approval.
-
-Issue #3 cites local source commit `8097238`, but that SHA is not resolvable in the current TAIJIFU-SITE repository. Therefore v2.2 is **DIRECTLY DOCUMENTED HISTORICAL IMPLEMENTATION / LIVE QA UNVERIFIED / SOURCE COMMIT NOT PRESENTLY RESOLVABLE**. It remains genealogy, not current CANON authority.
+Issue #3 is direct evidence for Premium Visual Rebuild v2.2.0. It records implemented visual work while leaving all live QA gates unchecked. Its cited local source commit `8097238` is not resolvable in the current repository. Therefore v2.2 is `DIRECTLY DOCUMENTED HISTORICAL IMPLEMENTATION / LIVE QA UNVERIFIED / SOURCE COMMIT NOT PRESENTLY RESOLVABLE`.
 
 ### UI P0-P10 evidence map
 | Gate | Evidence-backed state |
 |---|---|
-| P0 CANON + asset inventory | PARTIAL — CANON frozen by Issue #7; Ω1/HNK/wordmark inventory now mapped; complete site asset inventory still open |
+| P0 CANON + asset inventory | PARTIAL — CANON frozen by Issue #7; Ω1/HNK/wordmark inventory mapped; complete site asset inventory open |
 | P1 tokens/type/grid/breakpoints | PLANNED / implementation not mapped |
 | P2 Ω1 + wordmark + HNK production assets | PARTIAL — Ω1 master verified; HNK SVG sources manifested; wordmark master open |
 | P3 theme shell/header/footer | NOT MANIFESTED on current `main` |
@@ -94,20 +92,60 @@ Issue #3 cites local source commit `8097238`, but that SHA is not resolvable in 
 | P9 visual regression | PARTIAL at Ω1 asset level only; whole-site regression open |
 | P10 ZIP/staging/QA | OPEN |
 
-### WordPress core physical evidence
-`wordpress/plugins/taijifu-core` contains `taijifu-core.php`, `includes/`, and `tests/`. Includes currently expose activation, content types, taxonomies, identity, and platform surfaces. This proves a plugin implementation surface, not completion against Issue #7's full domain responsibilities.
-
 ### UI authority lock
 Issue #7 remains the current CANON direction and explicitly assigns presentation to `taijifu-canon` and domain/content behavior to `taijifu-core`. v2.2 is a recovered predecessor implementation stage, not authority over Dojo Gate/Ω1.
 
-## UX evidence map — pass 001
-Current project archaeology identifies approved/specified personalized-training flows and Foundation support for adaptive dashboard context. Direct source-to-row mapping remains incomplete for the full UX denominator, especially navigation, onboarding, failure states and usability validation.
+## Evidence Mapping Pass 004 — UX / GAMEDESIGN source reconciliation
+
+### Search scope
+A repository-level search was performed on current `main` for the expected historical/product vocabulary, including `personalized training`, `training`, `curriculum`, `technique`, `progress`, `progression`, `certification`, `fighter`, `loadout`, `XP`, and related combined terms. Matching issue search was also performed. No direct current-main hits were returned for the expected Personalized Training / curriculum / fighter-loadout source set.
+
+The Project-attached source corpus available to this evidence pass was searched for `Personalized Training`, `Manual V12`, `fighter loadout`, and Portuguese equivalents/related terms. No matching chunks were returned.
+
+### UX evidence map — pass 004
+| Area | Evidence state | Telemetry |
+|---|---|---|
+| Personalized Training source specification | Historical archaeology claim exists in prior evidence map, but named source is not retrievable in current repo or attached source corpus in this pass | HISTORICAL CLAIM / SOURCE GAP |
+| Adaptive dashboard context | Foundation architecture previously maps `services/dashboard-bff/`, capability resolver, identity and relationship authority; this proves supporting platform surfaces, not a user flow | SUPPORTING CODE / UX FLOW UNVERIFIED |
+| Navigation / IA | No direct UX artifact mapped | UNKNOWN |
+| Onboarding | No direct UX artifact mapped | UNKNOWN |
+| Training-session flow | No direct retrievable source mapped | UNKNOWN / HISTORICAL SOURCE GAP |
+| Progress feedback | No direct retrievable source mapped | UNKNOWN / HISTORICAL SOURCE GAP |
+| Failure/empty/loading states | No direct UX artifact mapped | UNKNOWN |
+| Accessibility/usability validation | No direct UX research/test evidence mapped | UNKNOWN |
+
+Interpretation lock: platform capability must not be promoted into UX completion. A dashboard BFF or capability resolver can enable personalization, but does not prove that the Personalized Training experience, interaction model, content sequence, or usability gate exists.
+
+### GAMEDESIGN evidence map — pass 004
+| Area | Evidence state | Telemetry |
+|---|---|---|
+| Manual V12 authority | Referenced historically by project archaeology; source not manifested/retrievable in current evidence surfaces | SOURCE GAP |
+| Curriculum | Expected historical domain; no direct current-main or attached-source evidence recovered in this pass | UNKNOWN / SOURCE GAP |
+| Techniques | Expected historical domain; no direct current-main or attached-source evidence recovered | UNKNOWN / SOURCE GAP |
+| Progression / XP | Expected historical domain; no direct current-main or attached-source evidence recovered | UNKNOWN / SOURCE GAP |
+| Graduation / rank | Visual graduation lineage exists historically, but game/progression rules are not evidenced by that visual artifact | PARTIAL GENEALOGY / RULESET UNKNOWN |
+| Certification | Expected historical domain; no direct retrievable evidence recovered | UNKNOWN / SOURCE GAP |
+| Fighter model | Expected historical concept; no direct retrievable evidence recovered | UNKNOWN / SOURCE GAP |
+| Loadouts | Expected historical concept; no direct retrievable evidence recovered | UNKNOWN / SOURCE GAP |
+| Balance/progression tests | No direct evidence mapped | UNKNOWN |
+
+### Pass 004 conclusion
+Pass 004 does **not** establish that the historical UX/Game Design work did not exist. It establishes a narrower and auditable fact: the source material needed to promote those historical claims into the current evidence graph is not presently retrievable from current `main` or the attached source corpus searched in this pass.
+
+Therefore no percentages are assigned and no historical design claim is silently converted into current implementation. The blocker is now explicit: **SOURCE INGESTION / SOURCE RECOVERY**.
+
+Required recovery targets:
+- named Manual V12 source set;
+- Personalized Training specification/flow artifacts;
+- curriculum and technique catalogs;
+- progression/XP/graduation/certification rules;
+- fighter/loadout model artifacts;
+- UX navigation/onboarding/session/failure-state specifications and any usability evidence.
+
+Once recovered, these sources should be ingested losslessly before reconciliation against current Foundation/domain contracts. Reconstruction from memory is not an acceptable substitute for evidence ingestion.
 
 ## SEO evidence map — pass 001
 No implementation evidence has yet been mapped for the SEO denominator rows. This is intentionally `UNKNOWN`, not 0%.
-
-## GAMEDESIGN evidence map — pass 001
-Historical Project evidence identifies curriculum/technique/progression/certification and fighter/loadout concepts, but the named Manual V12 source set is not manifested in current main and has not yet been ingested losslessly into the repository.
 
 ## Evidence rules
 1. A configured CI command proves configuration, not successful execution.
@@ -116,14 +154,16 @@ Historical Project evidence identifies curriculum/technique/progression/certific
 4. A directory proves manifestation of a unit, not completeness of that unit.
 5. A CANON spec proves an approved decision, not shipped product behavior.
 6. Asset-level verification does not prove page/product integration.
-7. Verification requires executable evidence: passing test/run, accepted QA, or another explicit gate appropriate to the row.
-8. Missing logs/steps/source commits are evidence limitations and remain explicit.
-9. Every future percentage must be reproducible from this evidence map + accepted DoD denominator.
+7. Supporting platform code does not prove UX flow completion.
+8. An expected historical concept without retrievable source remains a source gap, not a completed or rejected feature.
+9. Verification requires executable evidence: passing test/run, accepted QA, or another explicit gate appropriate to the row.
+10. Missing logs/steps/source commits/source documents are evidence limitations and remain explicit.
+11. Every future percentage must be reproducible from this evidence map + accepted DoD denominator.
 
 ## Next evidence passes
-- Pass 004: Project-history + repository mapping for UX and GAMEDESIGN.
 - Pass 005: SEO discovery.
 - Pass 006: denominator closure candidates for DESIGN/UI after remaining token/wordmark/theme evidence is classified.
+- Source recovery/ingestion: Manual V12 + Personalized Training + curriculum/progression/fighter artifacts before UX/GAMEDESIGN reconciliation can close.
 - CI remediation remains a DEVOPS blocker; do not rewrite product code to guess at an unknown runner failure.
 
 ## Baseline readiness
@@ -131,6 +171,6 @@ Historical Project evidence identifies curriculum/technique/progression/certific
 - DEVOPS: NOT READY — CI execution blocker + operational denominator incomplete.
 - DESIGN: CLOSER — Ω1 master verified and HNK/wordmark genealogy mapped; production type/tokens/components/wordmark master remain open.
 - UI: NOT READY — P0/P2/P5 partially evidenced; theme/Dojo Gate/integration/responsive/QA open.
-- UX: NOT READY — denominator/evidence mapping incomplete.
+- UX: BLOCKED BY SOURCE GAP — supporting Foundation surfaces exist, but UX source/flow evidence is not retrievable.
 - SEO: NOT READY — discovery incomplete.
-- GAMEDESIGN: NOT READY — historical ingestion/reconciliation incomplete.
+- GAMEDESIGN: BLOCKED BY SOURCE GAP — Manual V12/curriculum/progression/fighter artifacts require recovery/ingestion.
