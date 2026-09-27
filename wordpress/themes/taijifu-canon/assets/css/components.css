@@ -19,10 +19,28 @@
 .nav-toggle { font: inherit; padding: 0.65rem 0.9rem; background: var(--color-paper); color: var(--color-charcoal); border: 1px solid currentColor; }
 .primary-menu { list-style: none; display: flex; gap: var(--space-2); margin: 0; padding: 0; }
 .primary-menu a { display: inline-block; padding: var(--space-1); }
-.nav-toggle:focus-visible, .primary-menu a:focus-visible, .site-brand:focus-visible { outline: 3px solid var(--color-ji); outline-offset: 3px; }
+.nav-toggle:focus-visible, .primary-menu a:focus-visible, .site-brand:focus-visible, .primary-cta:focus-visible { outline: 3px solid var(--color-ji); outline-offset: 3px; }
+.dojo-gate { margin-block: var(--space-4) var(--space-6); padding: clamp(2rem, 6vw, 5rem); background: var(--color-charcoal); color: var(--color-paper); text-align: center; }
+.dojo-gate__identity { width: min(16rem, 58vw); margin-inline: auto; }
+.dojo-gate__identity img { display: block; width: 100%; }
+.dojo-gate__eyebrow { margin-top: var(--space-3); letter-spacing: 0.08em; text-transform: uppercase; }
+.dojo-gate h1 { margin-block: var(--space-1); font-size: clamp(3rem, 10vw, 7rem); line-height: 0.95; letter-spacing: 0.08em; }
+.dojo-gate__maxim { margin: 0.35rem auto; max-width: 42rem; }
+.dojo-triad { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-2); margin-block: var(--space-4); text-align: left; }
+.dojo-axis { padding: var(--space-2); border-top: 4px solid currentColor; }
+.dojo-axis h2 { margin-top: 0; }
+.dojo-axis--tai { color: var(--color-tai); }
+.dojo-axis--ji { color: var(--color-ji); }
+.dojo-axis--fu { color: var(--color-fu); }
+.dojo-axis--integration { color: var(--color-integration); }
+.dojo-axis p { color: var(--color-paper); }
+.primary-cta { display: inline-block; padding: 0.85rem 1.2rem; background: var(--color-paper); color: var(--color-charcoal); border: 2px solid var(--color-paper); text-decoration: none; font-weight: 700; }
+.dojo-entry, .site-authorship { max-width: 48rem; margin-inline: auto; }
+.site-authorship { margin-block: var(--space-6); color: var(--color-muted); font-size: 0.9rem; }
 @media (max-width: 48rem) {
   .site-header { flex-wrap: wrap; }
   .primary-nav { flex-basis: 100%; }
   .primary-menu { flex-direction: column; }
   .primary-nav[hidden] { display: none; }
+  .dojo-triad { grid-template-columns: 1fr; }
 }
