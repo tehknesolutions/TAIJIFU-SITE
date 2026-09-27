@@ -5,3 +5,4 @@ export type {
   RelationshipStatus,
   RelationshipTransition,
 } from './relationship-lifecycle';
+export { createRelationshipRepository } from './relationship-repository';
