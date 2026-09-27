@@ -43,45 +43,62 @@ Confidence: `DIRECT | CORROBORATED | PENDING`
 | DEVOPS-11 | Rollback/recovery | not mapped | — | PENDING | UNKNOWN |
 
 ## Evidence Mapping Pass 002 — GitHub Actions execution
-
-### Foundation merge run
-
 - Workflow: `TAIJIFU Platform Foundation`
-- Run ID: `36331039103`
-- Run number: `71`
-- Trigger: push to `main`
-- Head SHA: `436cec1c3f1bb5b4f99667a0e25cab223913d2e6`
-- Commit: merge PR #13 (`feat/platform-foundation-v1`)
-- Started: `2026-09-27T15:50:41Z`
-- Completed: `2026-09-27T15:50:45Z`
-- Conclusion: `failure`
-- Job: `foundation`, job ID `108652873591`, conclusion `failure`
-- Job step API returned an empty step set.
-- Job log retrieval returned no retained blob (`BlobNotFound`).
+- Run ID: `36331039103`; run number `71`; push to `main`
+- Head SHA: `436cec1c3f1bb5b4f99667a0e25cab223913d2e6`; merge PR #13
+- Started `2026-09-27T15:50:41Z`; completed `15:50:45Z`; conclusion `failure`
+- Job `foundation`, ID `108652873591`, conclusion `failure`
+- Step API returned empty set; retained job log unavailable (`BlobNotFound`).
 
-### Interpretation lock
+Interpretation: the workflow was triggered and failed, but retained evidence does not prove any individual quality command executed. CODE-10/11 remain `IMPLEMENTED / VERIFICATION BLOCKED`; DEVOPS-02..06 remain `CONFIGURED / EXECUTION BLOCKED`; DEVOPS-07 is `RUN FAILED PRE-STEPS / ROOT CAUSE UNKNOWN`.
 
-The run proves the Foundation workflow was triggered on the exact merge commit and failed. It does **not** prove that `architecture:test`, `typecheck`, `lint`, `test`, or `build` executed. Because no steps are reported and no job log is retained, those gates remain **UNVERIFIED/BLOCKED**, not FAILED individually.
+## Evidence Mapping Pass 003 — DESIGN / UI / WordPress
 
-The approximately four-second run duration, empty step set, and unavailable log are consistent with a failure before executable workflow steps, but the root cause is **UNKNOWN** from retained evidence and must not be invented.
+### DESIGN asset inventory
+| DoD ID | Evidence | Confidence | Telemetry state |
+|---|---|---|---|
+| DESIGN-01 semantic TAI/JI/FU | Issue #7 | DIRECT | CANON / DONE decision |
+| DESIGN-02 Ω1 emblem authority | Issue #7 + `docs/lab-ui-ux/TAIJIFU-OFFICIAL-LOGO-OMEGA1.md` + master assets | CORROBORATED | CANON / MASTER MANIFESTED |
+| DESIGN-03 HNK glyph identity | Issue #7 + `brand/omega1/hnk/G01,G03,G05,G22,G25,G36.svg` + construction proof | CORROBORATED | CANON / SOURCE ASSETS MANIFESTED |
+| DESIGN-04 wordmark system | `brand/wordmark/construction/taijifu-wordmark-v1.svg`, `v2.svg`, V1 optical audit | DIRECT | ACTIVE / V2 CANDIDATE / MASTER NOT MANIFESTED |
+| DESIGN-05 color/token system | semantic colors specified by Issue #7; implementation tokens not yet mapped | SPEC | CORROBORATED | CANON SEMANTICS / IMPLEMENTATION OPEN |
+| DESIGN-06 typography system | Issue #7 direction only; production font/type system not mapped | SPEC | PENDING | OPEN |
+| DESIGN-07 spacing/grid/radius/elevation/motion | P1/P8 scope in Issue #7; implementation not mapped | SPEC | PENDING | PLANNED |
+| DESIGN-08 component visual language | Dojo Gate direction/acceptance exists; component implementation not mapped | SPEC | PENDING | PLANNED |
+| DESIGN-09 asset master/source governance | Ω1 construction/master/tests are separated and auditable; wordmark still construction-only | CODE/TEST | CORROBORATED | PARTIAL / STRONG Ω1 GOVERNANCE |
+| DESIGN-10 visual regression references | Ω1 visual/optical/final technical audits exist; whole-site CANON regression remains P9 | TEST/SPEC | CORROBORATED | PARTIAL |
 
-### Telemetry consequences
+### Ω1 technical verification
+`brand/omega1/tests/omega1-v3-final-gate.md` records a technical gate PASS for V3 + MICRO V1, including standard/reverse renders at 128/48/32 and micro at 32/24/16, deterministic SHA-256 sources, and a responsive master rule. `brand/omega1/master/` now contains `omega1-master.svg` and `omega1-micro-master.svg`. This promotes Ω1 from merely specified to **manifested master with recorded technical verification**. It does not prove full-site visual integration.
 
-- Foundation merge status: `MERGED / CI RUN FAILED`.
-- CODE-10: `IMPLEMENTED / VERIFICATION BLOCKED`.
-- CODE-11: `IMPLEMENTED / VERIFICATION BLOCKED`.
-- DEVOPS-02..06: `CONFIGURED / EXECUTION BLOCKED`.
-- DEVOPS-07: `IMPLEMENTED / RUN FAILED PRE-STEPS / ROOT CAUSE UNKNOWN`.
-- No quality gate may be promoted to VERIFIED from run 36331039103.
+### Wordmark status
+The wordmark is materially present but not closed. V1 audit explicitly says `STRUCTURAL BASE ACCEPTED, MASTER REJECTED`; V2 exists as an optically refined construction SVG. No `brand/wordmark/master/` is manifested and no V2 final audit is currently present in the tests directory. Therefore DESIGN-04 cannot be marked DONE.
 
-## DESIGN / UI evidence map — pass 001
-| DoD area | Evidence | Class | Confidence | State |
-|---|---|---|---|---|
-| DESIGN semantic authority | Dojo Gate / Ω1 decisions in archaeology ledger and source issue lineage | SPEC/ISSUE | CORROBORATED | CANON |
-| DESIGN production assets | current asset inventory not fully mapped | CODE/SPEC | PENDING | INVENTORY |
-| UI P0-P10 sequence | approved visual-system issue lineage recorded by archaeology ledger | SPEC/ISSUE | CORROBORATED | ACTIVE DENOMINATOR CANDIDATE |
-| UI theme shell | `wordpress/themes/taijifu-canon` absent from current main | CODE | DIRECT | NOT MANIFESTED |
-| UI core plugin | `wordpress/plugins/taijifu-core` present on current main | CODE | DIRECT | PARTIAL / NEEDS REVIEW |
+### v2.2 genealogy recovered
+Issue #3 is direct evidence for **Premium Visual Rebuild v2.2.0**. It records as implemented: full-bleed editorial hero, original vector emblem, authorial visual gesture, asymmetric Bases, typographic Canon Explorer chapters, graduation visual trail, redesigned internal heroes/footer, removal of gradients/neon/glow/glass/faux materials, and Canon 1.0 preservation. It simultaneously leaves all live QA gates unchecked: Theme/Core 2.2.0 install, cache purge, 1440/1024/390 Home, Canon Explorer, Graduação, mobile menu, contrast/legibility, final visual approval.
+
+Issue #3 cites local source commit `8097238`, but that SHA is not resolvable in the current TAIJIFU-SITE repository. Therefore v2.2 is **DIRECTLY DOCUMENTED HISTORICAL IMPLEMENTATION / LIVE QA UNVERIFIED / SOURCE COMMIT NOT PRESENTLY RESOLVABLE**. It remains genealogy, not current CANON authority.
+
+### UI P0-P10 evidence map
+| Gate | Evidence-backed state |
+|---|---|
+| P0 CANON + asset inventory | PARTIAL — CANON frozen by Issue #7; Ω1/HNK/wordmark inventory now mapped; complete site asset inventory still open |
+| P1 tokens/type/grid/breakpoints | PLANNED / implementation not mapped |
+| P2 Ω1 + wordmark + HNK production assets | PARTIAL — Ω1 master verified; HNK SVG sources manifested; wordmark master open |
+| P3 theme shell/header/footer | NOT MANIFESTED on current `main` |
+| P4 Dojo Gate | CANON SPEC ONLY / current implementation not manifested |
+| P5 `taijifu-core` | MANIFESTED PARTIAL — plugin root, includes, tests; content types/taxonomies + identity/platform modules present |
+| P6 content/component integration | OPEN / not verified |
+| P7 responsive | OPEN; historical v2.2 live QA remains unchecked |
+| P8 motion/performance/accessibility | OPEN |
+| P9 visual regression | PARTIAL at Ω1 asset level only; whole-site regression open |
+| P10 ZIP/staging/QA | OPEN |
+
+### WordPress core physical evidence
+`wordpress/plugins/taijifu-core` contains `taijifu-core.php`, `includes/`, and `tests/`. Includes currently expose activation, content types, taxonomies, identity, and platform surfaces. This proves a plugin implementation surface, not completion against Issue #7's full domain responsibilities.
+
+### UI authority lock
+Issue #7 remains the current CANON direction and explicitly assigns presentation to `taijifu-canon` and domain/content behavior to `taijifu-core`. v2.2 is a recovered predecessor implementation stage, not authority over Dojo Gate/Ω1.
 
 ## UX evidence map — pass 001
 Current project archaeology identifies approved/specified personalized-training flows and Foundation support for adaptive dashboard context. Direct source-to-row mapping remains incomplete for the full UX denominator, especially navigation, onboarding, failure states and usability validation.
@@ -98,21 +115,22 @@ Historical Project evidence identifies curriculum/technique/progression/certific
 3. A historical artifact proves genealogy, not current implementation.
 4. A directory proves manifestation of a unit, not completeness of that unit.
 5. A CANON spec proves an approved decision, not shipped product behavior.
-6. Verification requires executable evidence: passing test/run, accepted QA, or another explicit gate appropriate to the row.
-7. Missing logs/steps are evidence limitations and must remain explicit.
-8. Every future percentage must be reproducible from this evidence map + accepted DoD denominator.
+6. Asset-level verification does not prove page/product integration.
+7. Verification requires executable evidence: passing test/run, accepted QA, or another explicit gate appropriate to the row.
+8. Missing logs/steps/source commits are evidence limitations and remain explicit.
+9. Every future percentage must be reproducible from this evidence map + accepted DoD denominator.
 
 ## Next evidence passes
-- Pass 003: DESIGN/UI asset and WordPress source mapping.
-- Pass 004: Project-history mapping for UX and GAMEDESIGN.
+- Pass 004: Project-history + repository mapping for UX and GAMEDESIGN.
 - Pass 005: SEO discovery.
-- CI remediation is tracked as a DEVOPS blocker; do not rewrite product code to guess at an unknown runner failure.
+- Pass 006: denominator closure candidates for DESIGN/UI after remaining token/wordmark/theme evidence is classified.
+- CI remediation remains a DEVOPS blocker; do not rewrite product code to guess at an unknown runner failure.
 
 ## Baseline readiness
 - CODE: NOT READY — denominator scope open; verification blocked.
 - DEVOPS: NOT READY — CI execution blocker + operational denominator incomplete.
-- DESIGN: NOT READY — production-system denominator incomplete.
-- UI: NOT READY — P0-P10 implementation mapping incomplete.
+- DESIGN: CLOSER — Ω1 master verified and HNK/wordmark genealogy mapped; production type/tokens/components/wordmark master remain open.
+- UI: NOT READY — P0/P2/P5 partially evidenced; theme/Dojo Gate/integration/responsive/QA open.
 - UX: NOT READY — denominator/evidence mapping incomplete.
 - SEO: NOT READY — discovery incomplete.
 - GAMEDESIGN: NOT READY — historical ingestion/reconciliation incomplete.
