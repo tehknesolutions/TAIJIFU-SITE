@@ -1,0 +1,13 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { color-scheme: light; }
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.6;
+}
+img, svg { max-width: 100%; height: auto; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--color-ji); outline-offset: 3px; }
+.site-main { width: min(100% - (2 * var(--space-page-gutter)), var(--content-max)); margin-inline: auto; }
