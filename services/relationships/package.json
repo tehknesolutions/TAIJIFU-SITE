@@ -10,6 +10,13 @@
     "lint": "eslint src --max-warnings=0",
     "build": "tsc --noEmit"
   },
-  "dependencies": { "@taijifu/contracts": "workspace:*" },
-  "devDependencies": { "vitest": "workspace:*", "typescript": "workspace:*" }
+  "dependencies": {
+    "@taijifu/application": "workspace:*",
+    "@taijifu/contracts": "workspace:*"
+  },
+  "devDependencies": {
+    "@taijifu/adapters": "workspace:*",
+    "vitest": "workspace:*",
+    "typescript": "workspace:*"
+  }
 }
