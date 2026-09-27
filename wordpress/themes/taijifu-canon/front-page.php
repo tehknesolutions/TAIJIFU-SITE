@@ -2,6 +2,7 @@
 declare(strict_types=1);
 get_header();
 $themeUri = get_template_directory_uri();
+$coreState = taijifu_canon_core_state();
 ?>
 <section class="dojo-gate" aria-labelledby="dojo-title">
   <div class="dojo-gate__identity" aria-hidden="true">
@@ -24,6 +25,9 @@ $themeUri = get_template_directory_uri();
 <section id="taijifu-entry" class="dojo-entry" aria-labelledby="entry-title">
   <h2 id="entry-title">Comece pela essência</h2>
   <p>O caminho público apresenta TAI, JI e FU preservando a hierarquia semântica do CANON.</p>
+  <?php if (! $coreState['available']) : ?>
+    <p class="core-state" role="status"><?php echo esc_html($coreState['message']); ?></p>
+  <?php endif; ?>
 </section>
 <p class="site-authorship">Criado por Miguel Da Vinci e Thales Walisson — Desde 2026</p>
 <?php get_footer(); ?>
