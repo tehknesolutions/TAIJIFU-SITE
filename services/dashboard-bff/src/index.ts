@@ -3,3 +3,5 @@ export type { GrantedCapabilities } from './dashboard-policy';
 export { resolveContextualDashboard } from './resolve-contextual-dashboard';
 export type { ContextualDashboardInput } from './resolve-contextual-dashboard';
 export { createRelationshipDrivenDashboard } from './relationship-driven-dashboard';
+export { replayRelationshipAuthority } from './relationship-replay';
+export type { RelationshipReplayInput } from './relationship-replay';
