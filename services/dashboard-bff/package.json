@@ -1,0 +1,15 @@
+{
+  "name": "@taijifu/dashboard-bff",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --max-warnings=0",
+    "build": "tsc --noEmit"
+  },
+  "dependencies": { "@taijifu/contracts": "workspace:*" },
+  "devDependencies": { "vitest": "workspace:*", "typescript": "workspace:*" }
+}
