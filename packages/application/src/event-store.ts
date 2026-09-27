@@ -7,6 +7,8 @@ export interface EventStore<TEvent> {
   ): Promise<void>;
 
   load(aggregateType: string, aggregateId: string): Promise<readonly TEvent[]>;
+  seedVersion(aggregateType: string, aggregateId: string, version: number): Promise<void>;
+  version(aggregateType: string, aggregateId: string): Promise<number>;
 }
 
 export type Snapshot<TState> = Readonly<{
