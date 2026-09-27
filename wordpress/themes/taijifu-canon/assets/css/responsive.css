@@ -1,0 +1,21 @@
+/* R2 responsive rules consume the single CANON token source. */
+@media (max-width: 48rem) {
+  :root { --space-page-gutter: 24px; }
+  .dojo-gate { margin-inline: calc(-1 * var(--space-page-gutter)); }
+  .dojo-gate__identity { width: min(13rem, 58vw); }
+  .primary-cta { width: 100%; text-align: center; }
+}
+
+@media (min-width: 48.0625rem) {
+  .nav-toggle { display: none; }
+  .primary-nav { display: block; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
