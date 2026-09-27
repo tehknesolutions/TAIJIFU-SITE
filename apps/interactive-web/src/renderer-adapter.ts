@@ -1,4 +1,4 @@
-import type { ExperienceNode, ExperienceShell } from './experience-shell';
+import type { ExperienceNode, ExperienceShell } from './experience-shell.js';
 
 export type RenderFrame = Readonly<{
   productKind: 'interactive-web-site';
