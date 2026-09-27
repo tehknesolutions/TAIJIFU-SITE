@@ -10,6 +10,9 @@
     "lint": "eslint src --max-warnings=0",
     "build": "tsc --noEmit"
   },
-  "dependencies": { "@taijifu/contracts": "workspace:*" },
+  "dependencies": {
+    "@taijifu/capability-resolver": "workspace:*",
+    "@taijifu/contracts": "workspace:*"
+  },
   "devDependencies": { "vitest": "workspace:*", "typescript": "workspace:*" }
 }
