@@ -2,17 +2,23 @@ import { describe, expect, it } from 'vitest';
 import type { EventStore, SnapshotStore } from './event-store';
 
 describe('event persistence ports', () => {
-  it('supports append-only aggregate event history', async () => {
+  it('supports append-only aggregate event history with logical stream versions', async () => {
     const events: unknown[] = [];
+    let streamVersion = 0;
     const store: EventStore<unknown> = {
       append: async (_aggregateType, _aggregateId, expectedVersion, newEvents) => {
-        expect(expectedVersion).toBe(1);
+        expect(expectedVersion).toBe(streamVersion);
         events.push(...newEvents);
+        streamVersion += newEvents.length;
       },
       load: async () => events,
+      seedVersion: async (_aggregateType, _aggregateId, version) => { streamVersion = version; },
+      version: async () => streamVersion,
     };
 
+    await store.seedVersion('relationship', 'rel_1', 1);
     await store.append('relationship', 'rel_1', 1, [{ eventType: 'relationship.suspended' }]);
+    expect(await store.version('relationship', 'rel_1')).toBe(2);
     expect(await store.load('relationship', 'rel_1')).toEqual([{ eventType: 'relationship.suspended' }]);
   });
 
