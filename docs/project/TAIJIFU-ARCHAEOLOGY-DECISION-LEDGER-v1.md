@@ -43,34 +43,53 @@ Until explicitly superseded by a newer approved decision, archaeology follows th
 | ARC-009 | SEO | SEO baseline | Archaeology Issue #14 | NEEDS_REVIEW | OPEN | No authoritative SEO completion denominator yet. Inventory semantics, metadata, structured data, redirects, indexation, discoverability and performance before progress scoring. |
 | ARC-010 | ALL | Progress reporting | TPT v1 | CANON | KEEP | No percentage without inventoried denominator and evidence. Unknown scope is UNKNOWN, not estimated. |
 
+## Reconciled decisions — Batch 0002 / Visual lineage
+
+| ID | Division(s) | Subject | Evidence | TPT status | Migration disposition | Decision |
+|---|---|---|---|---|---|---|
+| ARC-011 | DESIGN, UI, UX | Identity Reset v2.0.0 | Issue #1 | SUPERSEDED | LEGACY | v2.0 is a documented corrective stage responding to v1.8.2 problems: edge spacing, disproportionate hero, HUD/dashboard cards, faux materials, empty internal-page space and conflicting CSS layers. Its useful lessons remain genealogy; its visual identity is not current authority. |
+| ARC-012 | DESIGN, UI | Dojo Gate / Ω1 Visual System V1 | Issue #7 + Unified Repository Spec V1 | CANON | KEEP | Dojo Gate is the current official visual composition/direction. Ω1 is the dominant emblem; TAI red, JI blue, FU gold are semantic; HNK glyph identity is protected; generic Japanese symbols cannot substitute HNK glyphs. |
+| ARC-013 | UI, UX, CODE | Theme/plugin boundary under current visual CANON | Issue #7 | CANON | KEEP | `taijifu-canon` theme owns tokens/layout/header/footer/Dojo Gate/templates/components/responsive/motion/visual accessibility. `taijifu-core` owns TAIJIFU content/domain structures/blocks/APIs. Theme replacement must not erase or make TAIJIFU knowledge inaccessible. |
+| ARC-014 | UI, UX | Current visual implementation gate | Issue #7 | ACTIVE | KEEP | Current implementation sequence is P0 CANON/assets -> P1 tokens/grid/breakpoints -> P2 Ω1/wordmark/HNK assets -> P3 theme shell -> P4 Dojo Gate -> P5 core -> P6 integration -> P7 responsive -> P8 motion/performance/accessibility -> P9 visual regression -> P10 ZIP/staging/QA. This is a denominator candidate, not yet completion telemetry. |
+| ARC-015 | DESIGN, UI | Premium Visual Rebuild v2.2 | Issue #14 reference; direct source evidence not yet recovered | NEEDS_REVIEW | OPEN | Preserve v2.2 as a named genealogy stage, but do not assign detailed semantics or reuse status until its direct issue/release/source evidence is recovered. |
+| ARC-016 | UI, DESIGN | v1.8.2 -> v2.0 relationship | Issue #1 | SUPERSEDED | LEGACY | v1.8.2 is explicitly the predecessor whose visual defects motivated v2.0. Its release remains useful as implementation genealogy, not current visual authority. |
+
+## Visual genealogy resolved so far
+
+`v1.8.2 [legacy implementation] -> v2.0 Identity Reset [superseded corrective stage] -> v2.2 [genealogy, evidence pending] -> Dojo Gate / Ω1 Visual System V1 [CANON]`
+
+This ordering is a genealogy statement, not permission to delete older assets or releases. Reusable implementation from superseded stages may be ADAPTed only after compatibility review against Dojo Gate/Ω1.
+
 ## Explicit anti-rework locks
 
 1. Do not relocate the current physical repository tree to match an older target diagram until ARC-002 is resolved.
-2. Do not resurrect an earlier WordPress visual release over Dojo Gate/Ω1 CANON without explicit reconciliation.
-3. Do not normalize or rewrite Manual V12 historical source in place.
-4. Do not discard merged Platform Foundation work during archaeology.
-5. Do not declare division percentages before denominators exist.
-6. Preserve provenance and supersession links for every conflict resolution.
+2. Do not resurrect an earlier WordPress visual release over Dojo Gate/Ω1 CANON.
+3. Do not delete v1.8.2/v2.0/v2.2 genealogy merely because Dojo Gate/Ω1 supersedes their visual authority.
+4. Do not normalize or rewrite Manual V12 historical source in place.
+5. Do not discard merged Platform Foundation work during archaeology.
+6. Do not declare division percentages before denominators exist.
+7. Preserve provenance and supersession links for every conflict resolution.
+8. Do not claim detailed v2.2 semantics until direct evidence is recovered.
 
 ## Division archaeology status
 
 - CODE — inventory ACTIVE; current runtime/foundation evidence exists; denominator not closed.
 - DEVOPS — inventory ACTIVE; workflows and runner blocker identified; denominator not closed.
-- DESIGN — inventory ACTIVE; Ω1/wordmark/spec evidence exists; visual genealogy reconciliation pending.
-- UI — inventory ACTIVE; WordPress lineage exists; current theme genealogy/source reconciliation pending.
-- UX — inventory ACTIVE; training-engine and navigation/accessibility specifications identified; denominator not closed.
+- DESIGN — inventory ACTIVE; current visual authority resolved to Dojo Gate/Ω1; asset/implementation denominator still open.
+- UI — inventory ACTIVE; current visual implementation phases P0-P10 provide a denominator candidate; theme source genealogy remains pending.
+- UX — inventory ACTIVE; responsive/accessibility gates now linked to current visual CANON; broader experience denominator not closed.
 - SEO — inventory OPEN; insufficient denominator evidence.
 - GAMEDESIGN — inventory ACTIVE; Manual V12/training-system evidence identified; source genealogy and canonical classification pending.
 
 ## Next reconciliation batch
 
-Batch 0002 must resolve or narrow:
+Batch 0003 must resolve or narrow:
 
 1. ARC-002 repository target architecture vs manifested architecture.
-2. ARC-005 visual lineage: v1.8.2 -> v2.0 -> v2.2 -> Dojo Gate/Ω1.
+2. ARC-015 direct evidence for Premium Visual Rebuild v2.2.
 3. ARC-006 Manual V12 / XP / curriculum / certification / technique genealogy.
 4. WordPress theme source genealogy and whether `taijifu-canon` exists in releases/history but is absent from current `main`.
-5. First evidence-backed denominator candidates for each division.
+5. First evidence-backed denominator candidates for CODE, DEVOPS, DESIGN, UX, SEO and GAMEDESIGN; validate UI P0-P10 denominator candidate.
 
 ## Exit condition
 
