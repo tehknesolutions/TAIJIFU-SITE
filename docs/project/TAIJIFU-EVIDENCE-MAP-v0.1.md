@@ -30,27 +30,16 @@ Confidence: `DIRECT | CORROBORATED | PENDING`
 ## DEVOPS evidence map — pass 001
 | DoD ID | Claim | Evidence | Class | Confidence | Telemetry state |
 |---|---|---|---|---|---|
-| DEVOPS-01 | Runtime/package contract | root `package.json`: `pnpm@10.17.1`, Node `>=22`; `.nvmrc` used by CI | CODE/CI | CORROBORATED | IMPLEMENTED |
-| DEVOPS-02 | Lint gate configured | root `lint`; Foundation workflow | CODE/CI | CORROBORATED | IMPLEMENTED / EXECUTION BLOCKED |
-| DEVOPS-03 | Typecheck gate configured | root `typecheck`; Foundation workflow | CODE/CI | CORROBORATED | IMPLEMENTED / EXECUTION BLOCKED |
-| DEVOPS-04 | Test gate configured | root `test`; Foundation workflow | CODE/CI | CORROBORATED | IMPLEMENTED / EXECUTION BLOCKED |
-| DEVOPS-05 | Build gate configured | root `build`; Foundation workflow | CODE/CI | CORROBORATED | IMPLEMENTED / EXECUTION BLOCKED |
-| DEVOPS-06 | Architecture gate configured | `architecture:test`; Foundation workflow | TEST/CI | CORROBORATED | IMPLEMENTED / EXECUTION BLOCKED |
-| DEVOPS-07 | CI pipeline definition exists | `.github/workflows/platform-foundation.yml` | CI | DIRECT | IMPLEMENTED / RUN FAILED PRE-STEPS |
+| DEVOPS-01 | Runtime/package contract | root package/runtime contract + CI | CODE/CI | CORROBORATED | IMPLEMENTED |
+| DEVOPS-02..06 | quality gates configured | root scripts + Foundation workflow | CODE/TEST/CI | CORROBORATED | IMPLEMENTED / EXECUTION BLOCKED |
+| DEVOPS-07 | CI pipeline definition | `.github/workflows/platform-foundation.yml` | CI | DIRECT | IMPLEMENTED / RUN FAILED PRE-STEPS |
 | DEVOPS-08 | Deploy environments | not mapped | — | PENDING | UNKNOWN |
 | DEVOPS-09 | Release/version automation | not mapped | — | PENDING | UNKNOWN |
 | DEVOPS-10 | Runtime observability | not mapped | — | PENDING | UNKNOWN |
 | DEVOPS-11 | Rollback/recovery | not mapped | — | PENDING | UNKNOWN |
 
 ## Evidence Mapping Pass 002 — GitHub Actions execution
-- Workflow: `TAIJIFU Platform Foundation`
-- Run ID: `36331039103`; run number `71`; push to `main`
-- Head SHA: `436cec1c3f1bb5b4f99667a0e25cab223913d2e6`; merge PR #13
-- Started `2026-09-27T15:50:41Z`; completed `15:50:45Z`; conclusion `failure`
-- Job `foundation`, ID `108652873591`, conclusion `failure`
-- Step API returned empty set; retained job log unavailable (`BlobNotFound`).
-
-Interpretation: the workflow was triggered and failed, but retained evidence does not prove any individual quality command executed. CODE-10/11 remain `IMPLEMENTED / VERIFICATION BLOCKED`; DEVOPS-02..06 remain `CONFIGURED / EXECUTION BLOCKED`; DEVOPS-07 is `RUN FAILED PRE-STEPS / ROOT CAUSE UNKNOWN`.
+Foundation workflow run `36331039103` triggered on merge PR #13 / SHA `436cec1c3f1bb5b4f99667a0e25cab223913d2e6` and concluded failure. Retained evidence does not prove individual quality commands executed. CODE-10/11 remain `IMPLEMENTED / VERIFICATION BLOCKED`; DEVOPS quality gates remain `CONFIGURED / EXECUTION BLOCKED`.
 
 ## Evidence Mapping Pass 003 — DESIGN / UI / WordPress
 
@@ -58,94 +47,66 @@ Interpretation: the workflow was triggered and failed, but retained evidence doe
 | DoD ID | Evidence | Confidence | Telemetry state |
 |---|---|---|---|
 | DESIGN-01 semantic TAI/JI/FU | Issue #7 | DIRECT | CANON / DONE decision |
-| DESIGN-02 Ω1 emblem authority | Issue #7 + `docs/lab-ui-ux/TAIJIFU-OFFICIAL-LOGO-OMEGA1.md` + master assets | CORROBORATED | CANON / MASTER MANIFESTED |
-| DESIGN-03 HNK glyph identity | Issue #7 + `brand/omega1/hnk/G01,G03,G05,G22,G25,G36.svg` + construction proof | CORROBORATED | CANON / SOURCE ASSETS MANIFESTED |
-| DESIGN-04 wordmark system | `brand/wordmark/construction/taijifu-wordmark-v1.svg`, `v2.svg`, V1 optical audit | DIRECT | ACTIVE / V2 CANDIDATE / MASTER NOT MANIFESTED |
-| DESIGN-05 color/token system | semantic colors specified by Issue #7; implementation tokens not yet mapped | SPEC | CORROBORATED | CANON SEMANTICS / IMPLEMENTATION OPEN |
-| DESIGN-06 typography system | Issue #7 direction only; production font/type system not mapped | SPEC | PENDING | OPEN |
-| DESIGN-07 spacing/grid/radius/elevation/motion | P1/P8 scope in Issue #7; implementation not mapped | SPEC | PENDING | PLANNED |
-| DESIGN-08 component visual language | Dojo Gate direction/acceptance exists; component implementation not mapped | SPEC | PENDING | PLANNED |
-| DESIGN-09 asset master/source governance | Ω1 construction/master/tests are separated and auditable; wordmark still construction-only | CODE/TEST | CORROBORATED | PARTIAL / STRONG Ω1 GOVERNANCE |
-| DESIGN-10 visual regression references | Ω1 visual/optical/final technical audits exist; whole-site CANON regression remains P9 | TEST/SPEC | CORROBORATED | PARTIAL |
+| DESIGN-02 Ω1 emblem authority | Issue #7 + official logo spec + master assets | CORROBORATED | CANON / MASTER MANIFESTED / TECHNICAL GATE PASS |
+| DESIGN-03 HNK glyph identity | Issue #7 + HNK SVG sources + construction proof | CORROBORATED | CANON / SOURCE ASSETS MANIFESTED |
+| DESIGN-04 wordmark system | V1/V2 construction + V1 optical audit | DIRECT | ACTIVE / V2 CANDIDATE / MASTER NOT MANIFESTED |
+| DESIGN-05 color/token system | Issue #7 semantic colors; implementation tokens not mapped | SPEC | CORROBORATED | CANON SEMANTICS / IMPLEMENTATION OPEN |
+| DESIGN-06 typography system | production type system not mapped | SPEC | PENDING | OPEN |
+| DESIGN-07 spacing/grid/radius/elevation/motion | P1/P8 scope; implementation not mapped | SPEC | PENDING | PLANNED |
+| DESIGN-08 component visual language | Dojo Gate direction exists; component implementation not mapped | SPEC | PENDING | PLANNED |
+| DESIGN-09 asset master/source governance | Ω1 auditable; wordmark construction-only | CODE/TEST | CORROBORATED | PARTIAL |
+| DESIGN-10 visual regression | Ω1 audits exist; whole-site P9 open | TEST/SPEC | CORROBORATED | PARTIAL |
 
-### Ω1 technical verification
-`brand/omega1/tests/omega1-v3-final-gate.md` records a technical gate PASS for V3 + MICRO V1, including standard/reverse renders at 128/48/32 and micro at 32/24/16, deterministic SHA-256 sources, and a responsive master rule. `brand/omega1/master/` contains `omega1-master.svg` and `omega1-micro-master.svg`. This promotes Ω1 from merely specified to manifested master with recorded technical verification. It does not prove full-site visual integration.
+### v2.2 genealogy
+Issue #3 directly documents Premium Visual Rebuild v2.2.0 implementation while leaving live QA unchecked. Its cited source SHA is not currently resolvable. Classification: `HISTORICAL IMPLEMENTATION / LIVE QA UNVERIFIED / CURRENT CANON SUPERSEDED BY DOJO GATE-Ω1`.
 
-### Wordmark status
-The wordmark is materially present but not closed. V1 audit explicitly says `STRUCTURAL BASE ACCEPTED, MASTER REJECTED`; V2 exists as an optically refined construction SVG. No `brand/wordmark/master/` is manifested and no V2 final audit is currently present in the tests directory. Therefore DESIGN-04 cannot be marked DONE.
-
-### v2.2 genealogy recovered
-Issue #3 is direct evidence for Premium Visual Rebuild v2.2.0. It records implemented visual work while leaving all live QA gates unchecked. Its cited local source commit `8097238` is not resolvable in the current repository. Therefore v2.2 is `DIRECTLY DOCUMENTED HISTORICAL IMPLEMENTATION / LIVE QA UNVERIFIED / SOURCE COMMIT NOT PRESENTLY RESOLVABLE`.
-
-### UI P0-P10 evidence map
-| Gate | Evidence-backed state |
-|---|---|
-| P0 CANON + asset inventory | PARTIAL — CANON frozen by Issue #7; Ω1/HNK/wordmark inventory mapped; complete site asset inventory open |
-| P1 tokens/type/grid/breakpoints | PLANNED / implementation not mapped |
-| P2 Ω1 + wordmark + HNK production assets | PARTIAL — Ω1 master verified; HNK SVG sources manifested; wordmark master open |
-| P3 theme shell/header/footer | NOT MANIFESTED on current `main` |
-| P4 Dojo Gate | CANON SPEC ONLY / current implementation not manifested |
-| P5 `taijifu-core` | MANIFESTED PARTIAL — plugin root, includes, tests; content types/taxonomies + identity/platform modules present |
-| P6 content/component integration | OPEN / not verified |
-| P7 responsive | OPEN; historical v2.2 live QA remains unchecked |
-| P8 motion/performance/accessibility | OPEN |
-| P9 visual regression | PARTIAL at Ω1 asset level only; whole-site regression open |
-| P10 ZIP/staging/QA | OPEN |
-
-### UI authority lock
-Issue #7 remains the current CANON direction and explicitly assigns presentation to `taijifu-canon` and domain/content behavior to `taijifu-core`. v2.2 is a recovered predecessor implementation stage, not authority over Dojo Gate/Ω1.
+### UI P0-P10
+P0 partial; P1 planned; P2 partial/strong; P3 theme not manifested; P4 CANON spec only; P5 `taijifu-core` manifested partial; P6-P8 open; P9 partial at Ω1 asset level; P10 open.
 
 ## Evidence Mapping Pass 004 — UX / GAMEDESIGN source reconciliation
 
+Repository/current evidence search did not recover the expected Personalized Training, Manual V12, curriculum, technique, progression/XP/certification, fighter/loadout source set. Supporting Foundation code does not prove UX flows. Historical concepts without retrievable source remain source gaps rather than completed/rejected features.
+
+- UX: `BLOCKED BY SOURCE GAP` for named experience/source artifacts.
+- GAMEDESIGN: `BLOCKED BY SOURCE GAP` for Manual V12/domain rules ingestion.
+- Reconstruction from memory is prohibited as an evidence substitute.
+
+## Evidence Mapping Pass 005 — SEO discovery
+
 ### Search scope
-A repository-level search was performed on current `main` for the expected historical/product vocabulary, including `personalized training`, `training`, `curriculum`, `technique`, `progress`, `progression`, `certification`, `fighter`, `loadout`, `XP`, and related combined terms. Matching issue search was also performed. No direct current-main hits were returned for the expected Personalized Training / curriculum / fighter-loadout source set.
+Current `main` code search and issue search were queried for SEO-specific implementation vocabulary: `robots`, `sitemap`, `canonical`, `schema.org`, `JSON-LD`, metadata/meta description, OpenGraph/`og:title`, Twitter cards, title hooks, and SEO/performance issue terminology. No dedicated SEO implementation artifact or SEO issue was recovered from those searches.
 
-The Project-attached source corpus available to this evidence pass was searched for `Personalized Training`, `Manual V12`, `fighter loadout`, and Portuguese equivalents/related terms. No matching chunks were returned.
+The recursive repository tree was also inspected for obvious SEO-specific files. No dedicated `robots.txt`, sitemap implementation, SEO module, Search Console/analytics configuration, or current theme surface was identified in the evidence recovered by this pass.
 
-### UX evidence map — pass 004
-| Area | Evidence state | Telemetry |
-|---|---|---|
-| Personalized Training source specification | Historical archaeology claim exists in prior evidence map, but named source is not retrievable in current repo or attached source corpus in this pass | HISTORICAL CLAIM / SOURCE GAP |
-| Adaptive dashboard context | Foundation architecture previously maps `services/dashboard-bff/`, capability resolver, identity and relationship authority; this proves supporting platform surfaces, not a user flow | SUPPORTING CODE / UX FLOW UNVERIFIED |
-| Navigation / IA | No direct UX artifact mapped | UNKNOWN |
-| Onboarding | No direct UX artifact mapped | UNKNOWN |
-| Training-session flow | No direct retrievable source mapped | UNKNOWN / HISTORICAL SOURCE GAP |
-| Progress feedback | No direct retrievable source mapped | UNKNOWN / HISTORICAL SOURCE GAP |
-| Failure/empty/loading states | No direct UX artifact mapped | UNKNOWN |
-| Accessibility/usability validation | No direct UX research/test evidence mapped | UNKNOWN |
+### SEO evidence map — pass 005
+| DoD ID | Capability | Evidence | Telemetry state |
+|---|---|---|---|
+| SEO-01 | crawl/indexation policy | No dedicated policy/module recovered. WordPress public content types exist, but public registration alone is not an indexation policy. | UNKNOWN / DISCOVERY COMPLETE FOR CURRENT MAIN |
+| SEO-02 | semantic HTML/content hierarchy | Current presentation theme is not manifested on `main`; semantic page markup cannot be verified. | BLOCKED BY PRESENTATION SOURCE GAP |
+| SEO-03 | metadata/title/description policy | No dedicated metadata implementation or policy recovered. | UNKNOWN / NOT EVIDENCED |
+| SEO-04 | canonical/redirect strategy | No canonical/redirect implementation recovered. CPT/taxonomy rewrite slugs are routing primitives, not canonical strategy. | UNKNOWN / NOT EVIDENCED |
+| SEO-05 | structured data/schema | No `schema.org` / JSON-LD implementation recovered. | UNKNOWN / NOT EVIDENCED |
+| SEO-06 | sitemap/robots | No dedicated sitemap/robots artifact recovered. WordPress may provide runtime defaults, but runtime behavior was not inspected and is not claimed as project implementation evidence. | UNKNOWN / NOT EVIDENCED |
+| SEO-07 | performance/Core Web Vitals | No CWV/Lighthouse/performance budget or measurement artifact recovered. Historical visual performance intent is not measurement evidence. | UNKNOWN / NOT EVIDENCED |
+| SEO-08 | social metadata | No OpenGraph/Twitter-card implementation recovered. | UNKNOWN / NOT EVIDENCED |
+| SEO-09 | content discoverability/internal linking | Four public CPTs (`principles`, `paths`, `library`, `lab`) and public hierarchical taxonomies (`axis`, `level`, `governance-status`) provide a crawlable information-model foundation, but current navigation/internal-link implementation is not manifested/verified. | FOUNDATION PARTIAL / EXPERIENCE OPEN |
+| SEO-10 | measurement/Search Console analytics | No measurement/Search Console/analytics artifact recovered. | UNKNOWN / NOT EVIDENCED |
 
-Interpretation lock: platform capability must not be promoted into UX completion. A dashboard BFF or capability resolver can enable personalization, but does not prove that the Personalized Training experience, interaction model, content sequence, or usability gate exists.
+### SEO-positive foundation evidence
+`taijifu-core` is a real content-domain foundation rather than an SEO implementation. It registers four public, REST-visible, archived content types with stable rewrite slugs and title/editor/excerpt/thumbnail/revision support. It also registers three public, hierarchical, REST-visible taxonomies with stable rewrite slugs. These structures can support discoverability and semantic content organization, but they do not by themselves satisfy metadata, canonical, schema, sitemap, social or measurement gates.
 
-### GAMEDESIGN evidence map — pass 004
-| Area | Evidence state | Telemetry |
-|---|---|---|
-| Manual V12 authority | Referenced historically by project archaeology; source not manifested/retrievable in current evidence surfaces | SOURCE GAP |
-| Curriculum | Expected historical domain; no direct current-main or attached-source evidence recovered in this pass | UNKNOWN / SOURCE GAP |
-| Techniques | Expected historical domain; no direct current-main or attached-source evidence recovered | UNKNOWN / SOURCE GAP |
-| Progression / XP | Expected historical domain; no direct current-main or attached-source evidence recovered | UNKNOWN / SOURCE GAP |
-| Graduation / rank | Visual graduation lineage exists historically, but game/progression rules are not evidenced by that visual artifact | PARTIAL GENEALOGY / RULESET UNKNOWN |
-| Certification | Expected historical domain; no direct retrievable evidence recovered | UNKNOWN / SOURCE GAP |
-| Fighter model | Expected historical concept; no direct retrievable evidence recovered | UNKNOWN / SOURCE GAP |
-| Loadouts | Expected historical concept; no direct retrievable evidence recovered | UNKNOWN / SOURCE GAP |
-| Balance/progression tests | No direct evidence mapped | UNKNOWN |
+### SEO authority / source conflict note
+The repository README still describes an older WordPress state (`taijifu-theme` v2.2.0 / `taijifu-core` v2.2.0 and an external platform Canon source), while the current physical plugin identifies itself as `TAIJIFU Core 1.0.0-alpha.1` and the current archaeology has established Dojo Gate/Ω1 as the later visual authority. Therefore README SEO/presentation implications are historical/stale until reconciled; they are not current implementation proof.
 
-### Pass 004 conclusion
-Pass 004 does **not** establish that the historical UX/Game Design work did not exist. It establishes a narrower and auditable fact: the source material needed to promote those historical claims into the current evidence graph is not presently retrievable from current `main` or the attached source corpus searched in this pass.
+### Pass 005 conclusion
+SEO discovery for current `main` is now sufficiently bounded to replace the previous blanket `DISCOVERY INCOMPLETE` state with a more useful baseline statement:
 
-Therefore no percentages are assigned and no historical design claim is silently converted into current implementation. The blocker is now explicit: **SOURCE INGESTION / SOURCE RECOVERY**.
+- a crawlable content-model foundation is partially manifested;
+- dedicated SEO implementation is **not evidenced** in current `main`;
+- semantic-page SEO is blocked by the absent current presentation/theme source;
+- runtime WordPress defaults, production hosting configuration and external webmaster tooling have not been inspected and must not be inferred from repository absence.
 
-Required recovery targets:
-- named Manual V12 source set;
-- Personalized Training specification/flow artifacts;
-- curriculum and technique catalogs;
-- progression/XP/graduation/certification rules;
-- fighter/loadout model artifacts;
-- UX navigation/onboarding/session/failure-state specifications and any usability evidence.
-
-Once recovered, these sources should be ingested losslessly before reconciliation against current Foundation/domain contracts. Reconstruction from memory is not an acceptable substitute for evidence ingestion.
-
-## SEO evidence map — pass 001
-No implementation evidence has yet been mapped for the SEO denominator rows. This is intentionally `UNKNOWN`, not 0%.
+SEO remains **UNSCORED**, because the denominator is known conceptually but several gates depend on runtime/external surfaces not yet inventoried.
 
 ## Evidence rules
 1. A configured CI command proves configuration, not successful execution.
@@ -156,21 +117,21 @@ No implementation evidence has yet been mapped for the SEO denominator rows. Thi
 6. Asset-level verification does not prove page/product integration.
 7. Supporting platform code does not prove UX flow completion.
 8. An expected historical concept without retrievable source remains a source gap, not a completed or rejected feature.
-9. Verification requires executable evidence: passing test/run, accepted QA, or another explicit gate appropriate to the row.
-10. Missing logs/steps/source commits/source documents are evidence limitations and remain explicit.
-11. Every future percentage must be reproducible from this evidence map + accepted DoD denominator.
+9. Repository absence does not prove absence in production/runtime/external tooling.
+10. Framework/CMS defaults are not credited as project implementation without runtime evidence.
+11. Verification requires passing run/test/accepted QA or another explicit gate appropriate to the row.
+12. Every future percentage must be reproducible from this evidence map + accepted DoD denominator.
 
 ## Next evidence passes
-- Pass 005: SEO discovery.
-- Pass 006: denominator closure candidates for DESIGN/UI after remaining token/wordmark/theme evidence is classified.
-- Source recovery/ingestion: Manual V12 + Personalized Training + curriculum/progression/fighter artifacts before UX/GAMEDESIGN reconciliation can close.
-- CI remediation remains a DEVOPS blocker; do not rewrite product code to guess at an unknown runner failure.
+- Pass 006: denominator closure candidates for DESIGN/UI and SEO runtime-surface requirements.
+- Pass 007: CODE/DEVOPS scope closure candidates and CI blocker disposition.
+- Source recovery/ingestion remains required for UX/GAMEDESIGN.
 
 ## Baseline readiness
 - CODE: NOT READY — denominator scope open; verification blocked.
 - DEVOPS: NOT READY — CI execution blocker + operational denominator incomplete.
-- DESIGN: CLOSER — Ω1 master verified and HNK/wordmark genealogy mapped; production type/tokens/components/wordmark master remain open.
-- UI: NOT READY — P0/P2/P5 partially evidenced; theme/Dojo Gate/integration/responsive/QA open.
-- UX: BLOCKED BY SOURCE GAP — supporting Foundation surfaces exist, but UX source/flow evidence is not retrievable.
-- SEO: NOT READY — discovery incomplete.
-- GAMEDESIGN: BLOCKED BY SOURCE GAP — Manual V12/curriculum/progression/fighter artifacts require recovery/ingestion.
+- DESIGN: CLOSER — Ω1 verified; type/tokens/components/wordmark master open.
+- UI: NOT READY — theme/Dojo Gate/integration/responsive/QA open.
+- UX: BLOCKED BY SOURCE GAP.
+- SEO: DISCOVERY BOUNDED / UNSCORED — content-model foundation partial; dedicated SEO not evidenced; runtime/external surfaces not inventoried.
+- GAMEDESIGN: BLOCKED BY SOURCE GAP.
