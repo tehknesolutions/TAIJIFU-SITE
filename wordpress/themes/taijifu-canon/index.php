@@ -5,21 +5,19 @@
 
 declare(strict_types=1);
 
-if (function_exists('get_header')) {
-    get_header();
-}
+get_header();
 ?>
-<main id="main" class="site-main">
-    <?php if (function_exists('have_posts')) : ?>
+<section class="content-page" aria-labelledby="fallback-title">
+    <?php if (have_posts()) : ?>
         <?php while (have_posts()) : the_post(); ?>
-            <article id="post-<?php the_ID(); ?>">
-                <h1><?php the_title(); ?></h1>
+            <article id="post-<?php the_ID(); ?>" class="content-entry">
+                <h1 id="fallback-title"><?php the_title(); ?></h1>
                 <?php the_content(); ?>
             </article>
         <?php endwhile; ?>
+    <?php else : ?>
+        <h1 id="fallback-title">TAIJIFU</h1>
+        <p>Nenhum conteúdo disponível neste caminho.</p>
     <?php endif; ?>
-</main>
-<?php
-if (function_exists('get_footer')) {
-    get_footer();
-}
+</section>
+<?php get_footer(); ?>
