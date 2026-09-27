@@ -1,5 +1,7 @@
 import type { DashboardModule, DashboardRequest, DashboardResponse, DashboardSurface } from '@taijifu/contracts';
 
+export type GrantedCapabilities = ReadonlySet<string>;
+
 const modulesBySurface: Readonly<Record<DashboardSurface, readonly DashboardModule[]>> = Object.freeze({
   front: Object.freeze([
     { id: 'practice', title: 'Practice', capability: 'practice.read', priority: 10 },
@@ -22,9 +24,17 @@ const modulesBySurface: Readonly<Record<DashboardSurface, readonly DashboardModu
   ]),
 });
 
-export function resolveDashboard(request: DashboardRequest): DashboardResponse {
+export function resolveDashboard(
+  request: DashboardRequest,
+  grantedCapabilities?: GrantedCapabilities,
+): DashboardResponse {
+  const surfaceModules = modulesBySurface[request.surface];
+  const modules = grantedCapabilities === undefined
+    ? surfaceModules
+    : surfaceModules.filter((module) => grantedCapabilities.has(module.capability));
+
   return Object.freeze({
     ...request,
-    modules: modulesBySurface[request.surface],
+    modules: Object.freeze([...modules]),
   });
 }
