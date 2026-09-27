@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { createExperienceShell } from './experience-shell';
-import { createRendererAdapter } from './renderer-adapter';
+import { createExperienceShell } from './experience-shell.js';
+import { createRendererAdapter } from './renderer-adapter.js';
 
 describe('RendererAdapter', () => {
   it('renders website experience nodes without introducing game-state concepts', () => {
