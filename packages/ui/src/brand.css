@@ -1,0 +1,18 @@
+@import '@taijifu/design-tokens/tokens.css';
+
+.tj-brand { display: inline-flex; box-sizing: content-box; line-height: 0; color: var(--tj-color-ink); }
+.tj-brand > svg { display: block; width: 1em; height: auto; overflow: visible; }
+.tj-brand-lockup-horizontal > svg { width: 4.0167em; }
+.tj-brand-lockup-vertical > svg { width: 1.4667em; }
+.tj-brand-hnk-signature > svg { width: 8.2em; }
+.tj-brand-reverse { color: var(--tj-color-paper); }
+
+.tj-brand-size-16 { font-size: 16px; }
+.tj-brand-size-24 { font-size: 24px; }
+.tj-brand-size-32 { font-size: 32px; }
+.tj-brand-size-48 { font-size: 48px; }
+
+/* N is the 56/1000 Ω1 nucleus diameter. */
+.tj-brand-clear-normal { padding: 0.112em; }
+.tj-brand-clear-compact { padding: 0.056em; }
+.tj-brand-clear-none { padding: 0; }

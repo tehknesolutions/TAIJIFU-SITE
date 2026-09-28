@@ -2,7 +2,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-SVG = ROOT / "construction" / "taijifu-wordmark-v1.svg"
+SVG = ROOT / "construction" / "taijifu-wordmark-v2.svg"
 
 assert SVG.exists(), f"missing candidate: {SVG}"
 root = ET.parse(SVG).getroot()

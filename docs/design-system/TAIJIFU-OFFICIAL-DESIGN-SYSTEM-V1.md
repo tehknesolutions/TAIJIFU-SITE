@@ -183,3 +183,5 @@ Exploration may inspire a component; only Canon/approved Design System can autho
 ## 15. Definition of done
 
 The system is official when the repository contains: calibrated tokens; deterministic Ω1 family; primitives; documented product components; North Star Home implementation; responsive/a11y tests; visual regression references; media prompt library; Brand Book; and a traceability matrix linking references → decisions → components → code.
+
+Implementation note: the Ω1 production-family paths, optical-size behavior, clear-space rules and accessibility contract are recorded in `brand/omega1/BRAND-FAMILY-USAGE.md`; this note does not change the authority order above.
