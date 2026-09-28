@@ -3,23 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="TAIJIFU — experiência web interativa." />
+    <meta name="description" content="TAIJIFU — Arte Marcial de se Adaptar." />
     <title>TAIJIFU</title>
     <link rel="stylesheet" href="/src/styles.css" />
   </head>
   <body>
-    <main class="taijifu-shell" data-product-kind="interactive-web-site">
-      <section class="taijifu-semantic" aria-label="Navegação TAIJIFU">
-        <h1>TAIJIFU</h1>
-        <nav>
-          <a href="/principios/tai/">TAI</a>
-        </nav>
+    <a class="skip-link" href="#main">Pular para o conteúdo</a>
+    <header class="site-header">
+      <a class="site-brand" href="/" aria-label="TAIJIFU — início">
+        <img src="/brand/omega1-master.svg" alt="" width="48" height="48" />
+        <span>TAIJIFU</span>
+      </a>
+    </header>
+
+    <main id="main" class="site-main" data-product-kind="interactive-web-site">
+      <section class="dojo-gate" aria-labelledby="dojo-title">
+        <div class="dojo-gate__identity" aria-hidden="true">
+          <img src="/brand/omega1-master.svg" alt="" width="280" height="280" />
+        </div>
+        <div class="dojo-gate__copy">
+          <p class="dojo-gate__eyebrow">Arte Marcial de se Adaptar</p>
+          <h1 id="dojo-title">TAIJIFU</h1>
+          <p class="dojo-gate__maxim">Firme na essência. Livre na forma.</p>
+          <p class="dojo-gate__maxim">Mudar sem deixar de ser.</p>
+          <div class="dojo-triad" aria-label="Princípios TAIJIFU">
+            <article class="dojo-axis dojo-axis--tai"><h2>TAI</h2><p>Essência · Permanência · Axis</p></article>
+            <article class="dojo-axis dojo-axis--ji"><h2>JI</h2><p>Discernimento · Adaptação · Nexus</p></article>
+            <article class="dojo-axis dojo-axis--fu"><h2>FU</h2><p>Manifestação · Fluxo · Flow</p></article>
+            <article class="dojo-axis dojo-axis--integration"><h2>Integração</h2><p>Axis · Nexus · Flow em relação.</p></article>
+          </div>
+          <a class="primary-cta" href="#taijifu-entry">Entrar no Dojo</a>
+        </div>
       </section>
-      <canvas id="taijifu-experience" aria-label="Experiência interativa TAIJIFU"></canvas>
+
+      <section id="taijifu-entry" class="dojo-entry" aria-labelledby="entry-title">
+        <div class="dojo-entry__copy">
+          <h2 id="entry-title">Comece pela essência</h2>
+          <p>O caminho público apresenta TAI, JI e FU preservando a hierarquia semântica do CANON.</p>
+          <nav aria-label="Conteúdo canônico disponível">
+            <a href="/principios/tai/">TAI</a>
+          </nav>
+        </div>
+        <canvas id="taijifu-experience" aria-label="Experiência interativa TAIJIFU"></canvas>
+      </section>
+
+      <p class="site-authorship">Criado por Miguel Da Vinci e Thales Walisson — Desde 2026</p>
       <noscript>
-        <p>A experiência interativa requer JavaScript. A navegação semântica permanece disponível acima.</p>
+        <p>A experiência interativa requer JavaScript. A navegação semântica permanece disponível.</p>
       </noscript>
     </main>
+
+    <footer class="site-footer"><p>TAIJIFU</p></footer>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

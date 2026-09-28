@@ -1,64 +1,82 @@
 # TAIJIFU Canon Inventory — 2026-09-28
 
-## Purpose
-Track what is actually supported by current project evidence before generating site structure or copy. Missing material is recorded as missing; it is not silently invented.
-
 ## Canon rule
-The project history defines the intended reconciliation model as:
-
 `PROJECT TAIJIFU history + current chat + TAIJIFU repositories + project files/documents = TAIJIFU CANON`.
 
-This document records the evidence currently available to the Web v1 implementation.
+Missing material is recorded as missing. Historical/current conflicts are preserved for reconciliation rather than silently normalized.
 
-## Sources inspected
+## Current authoritative repository evidence
 
-### Project file: SITE TAIJIFU.txt
-Supports the reconciliation rule above and explicitly states that historical chats inside the shared TAIJIFU project are legitimate project history. It does **not** provide a complete page tree, body copy, design tokens or final sitemap.
+### Official brand
+`docs/superpowers/specs/2026-09-23-taijifu-official-brand-system-design.md` is an approved implementation specification.
 
-### Project file: Relatório Taijifu Masters.txt
-Describes production-pack rules for Taijifu Masters reaction-frame assets (including Lian Wu and Training Rival). This is game-production evidence, not sufficient evidence for Web site information architecture.
+Locked decisions include:
+- official emblem: Ω1;
+- standard master: `brand/omega1/master/omega1-master.svg`;
+- micro master for <32 px;
+- uppercase TAIJIFU wordmark direction;
+- monochrome-first identity;
+- semantic accents: TAI red, JI blue, FU gold/yellow, Integration/Survival green;
+- serious contemporary dojo material language;
+- avoid neon/gradient/gamer/cliché martial presentation;
+- site consequence: the experience should feel like entering the TAIJIFU dojo.
 
-### Project file: Análise Taijifu Masters.txt
-Defines technical validation requirements for a Lian Wu character-lock package in Godot. This is game asset/runtime evidence, not official Web page copy.
+### Current CANON theme
+`wordpress/themes/taijifu-canon/front-page.php` manifests the Dojo Gate copy:
+- “Arte Marcial de se Adaptar”
+- “Firme na essência. Livre na forma.”
+- “Mudar sem deixar de ser.”
+- TAI — “Essência · Permanência · Axis”
+- JI — “Discernimento · Adaptação · Nexus”
+- FU — “Manifestação · Fluxo · Flow”
+- Integração — “Axis · Nexus · Flow em relação.”
+- CTA “Entrar no Dojo”
+- entry heading “Comece pela essência”
+- public-path statement preserving TAI/JI/FU CANON hierarchy
+- authorship “Criado por Miguel Da Vinci e Thales Walisson — Desde 2026”
 
-### Project file: Desenvolvimento e Atualização PR.txt
-Describes a proposed modular fighter architecture (Base Fighter, Visual Loadout, Combat Loadout and preset packs). This is relevant to Taijifu Masters product architecture but does not establish official Web routes or final site copy.
+The current theme tokens establish paper/charcoal/ink/muted plus TAI/JI/FU/Integration semantic colors, responsive spacing and reduced-motion behavior.
 
-### Repository: tehknesolutions/TAIJIFU-SITE
-The active interactive-web implementation confirms an `interactive-web-site` product identity and a canonical node:
-- `TAI` → `/principios/tai/`
+### Content-domain model
+`taijifu-core` registers four public REST-visible content types:
+- Principles — rewrite `/principles/`
+- Paths — rewrite `/paths/`
+- Library — rewrite `/library/`
+- Lab — rewrite `/lab/`
 
-Repository code search on the default indexed branch did not surface additional authoritative page/content matches for the queried terms. This is not proof that historical project content does not exist; it means it has not yet been recovered into this inventory.
+It registers hierarchical taxonomies:
+- Axis — `/axis/`
+- Level — `/level/`
+- Governance Status — `/governance-status/`
+
+These are current content-model evidence, not proof that all content records/body copy are already present.
 
 ## Confirmed Web canon entries
 
-| ID | Title | Canonical URL | Evidence | Status |
-|---|---|---|---|---|
-| tai | TAI | /principios/tai/ | interactive-web repository contract | confirmed |
+| ID | Title | Canonical URL | Status |
+|---|---|---|---|
+| tai | TAI | /principios/tai/ | confirmed |
 
-## Evidence present but not yet Web-canonized
-- Lian Wu character identity / validation pipeline.
-- Training Rival.
-- Taijifu Masters reaction-frame production rules.
-- Modular Fighter System proposal: Base Fighter, Visual Loadout, Combat Loadout.
-- Asset pack naming proposals BASE-00..05 and PRESET-01..02.
+## Confirmed semantic canon without final Web URL
+| ID | Title | Official semantic meaning | Status |
+|---|---|---|---|
+| ji | JI | Discernimento · Adaptação · Nexus | URL needs reconciliation |
+| fu | FU | Manifestação · Fluxo · Flow | URL needs reconciliation |
+| integration | Integração | Axis · Nexus · Flow em relação. | URL needs reconciliation |
 
-These items must not automatically become public Web pages until the project history/repository establishes that they belong in the official site IA.
+## Route conflict requiring explicit reconciliation
+The active Interactive Web contract fixes TAI at `/principios/tai/`, while the current WordPress content type uses the English rewrite base `/principles/`. The implementation must not silently change either. Before content-wide routing is finalized, choose the canonical public route family and define redirects/compatibility.
 
-## Missing evidence required for full Web v1 canon
-- Complete official page/section inventory.
-- Official body copy for each page.
-- Final official TAI / JI / FU definitions and relationships beyond the currently confirmed TAI URL.
-- Official global navigation and footer structure.
-- Official visual identity source: logos, typography, colors, spacing, components and motion rules.
-- Official media/assets intended for Web publication.
-- SEO titles/descriptions and any historical canonical URLs that must be preserved/redirected.
+## Project TXT evidence
+The Project TXT files available in the current workspace establish the archaeology/reconciliation requirement and contain Taijifu Masters asset/game-production material (Lian Wu, Training Rival, reaction frames, character-lock validation, modular fighter proposal). They do not by themselves establish public Web routes or full official site body copy.
 
-## Next archaeology targets
-1. Historical TAIJIFU project chats containing SITE/DESIGN/UI/UX/SEO decisions.
-2. Any legacy site export/theme/content files not yet represented in `apps/interactive-web`.
-3. Project documents containing principle definitions and institutional copy.
-4. Official design assets and approved visual references.
+## Remaining canon recovery targets
+- Actual records/body copy for Principles, Paths, Library and Lab.
+- Final URL family and redirect policy.
+- Historical project chats/documents containing approved site copy.
+- Official wordmark master once promoted from candidate status.
+- Web publication media inventory.
+- Dedicated SEO metadata/structured-data policy.
 
-## Implementation consequence
-The Content Registry is now the only source used to generate interactive nodes. It starts conservatively with the confirmed TAI entry and expands only when evidence is reconciled.
+## Implementation state
+The Web runtime now uses the registry for interactive nodes. The public Dojo Gate and Ω1 master are manifested in the browser vertical slice from current repository CANON rather than newly invented presentation.
