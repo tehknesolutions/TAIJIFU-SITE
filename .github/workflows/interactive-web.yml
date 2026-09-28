@@ -25,7 +25,8 @@ jobs:
           node-version-file: '.nvmrc'
       - name: Isolate interactive-web package from workspace discovery
         working-directory: apps/interactive-web
-        run: printf 'packages: []\n' > pnpm-workspace.yaml
+        run: |
+          printf 'packages: []\n' > pnpm-workspace.yaml
       - name: Install interactive-web dependencies
         working-directory: apps/interactive-web
         run: npm install --no-package-lock --ignore-scripts --workspaces=false
