@@ -61,7 +61,7 @@ Foundation workflow run `36331039103` triggered on merge PR #13 / SHA `436cec1c3
 Issue #3 directly documents Premium Visual Rebuild v2.2.0 implementation while leaving live QA unchecked. Its cited source SHA is not currently resolvable. Classification: `HISTORICAL IMPLEMENTATION / LIVE QA UNVERIFIED / CURRENT CANON SUPERSEDED BY DOJO GATE-Ω1`.
 
 ### UI P0-P10
-P0 partial; P1 planned; P2 partial/strong; P3 theme not manifested; P4 CANON spec only; P5 `taijifu-core` manifested partial; P6-P8 open; P9 partial at Ω1 asset level; P10 open.
+P0 partial; P1 planned; P2 partial/strong; P3 theme not manifested; P4 CANON spec only; P5 `taijifu-core` manifested partial. P6-P8 open; P9 partial at Ω1 asset level; P10 open.
 
 ## Evidence Mapping Pass 004 — UX / GAMEDESIGN source reconciliation
 
@@ -108,6 +108,28 @@ SEO discovery for current `main` is now sufficiently bounded to replace the prev
 
 SEO remains **UNSCORED**, because the denominator is known conceptually but several gates depend on runtime/external surfaces not yet inventoried.
 
+## Evidence Mapping Pass 009 — R2 current UI manifestation
+
+Pass 003 and the SEO Pass 005 statements about an absent current theme are historical observations and are superseded for current-state telemetry by fresh repository evidence recorded in `TAIJIFU-R2-UI-EVIDENCE-v0.1.md`.
+
+| UI gate | Fresh evidence | Telemetry state |
+|---|---|---|
+| UI-P0 | Current CANON/Ω1 authority and theme provenance are documented | ACTIVE / EVIDENCED |
+| UI-P1 | `assets/css/tokens.css` + `responsive.css` | IMPLEMENTED / NOT RUNTIME VERIFIED |
+| UI-P2 | Theme Ω1 blobs exactly match approved masters; wordmark candidate remains unpromoted | IMPLEMENTED / Ω1 BLOB VERIFIED |
+| UI-P3 | `wordpress/themes/taijifu-canon/` shell and templates are manifested | IMPLEMENTED / NOT RUNTIME VERIFIED |
+| UI-P4 | `front-page.php` manifests the current Dojo Gate semantic composition | IMPLEMENTED / NOT RUNTIME VERIFIED |
+| UI-P5 | `inc/theme-contract.php` exposes presentation-safe Core availability/state | IMPLEMENTED / NOT RUNTIME VERIFIED |
+| UI-P6 | Theme/Core source boundary exists; Core-on/Core-off runtime QA remains open | IMPLEMENTED / INTEGRATION QA OPEN |
+| UI-P7 | Responsive source rules and 24px mobile gutter contract exist | IMPLEMENTED SOURCE / VIEWPORT QA OPEN |
+| UI-P8 | Focus/reduced-motion/accessibility source contracts exist | IMPLEMENTED SOURCE / RUNTIME QA OPEN |
+| UI-P9 | No whole-product visual regression evidence recorded | OPEN |
+| UI-P10 | ZIP install/staging/QA evidence not recorded | OPEN |
+
+Executable PHP theme tests were not run in this pass: the inspected authorized workstation does not have PHP available on PATH, and repository GitHub Actions remains blocked before workflow steps/runner execution as tracked by issue #15. No test PASS is inferred.
+
+The R2 source manifestation is therefore materially implemented, while runtime verification and release packaging remain open.
+
 ## Evidence rules
 1. A configured CI command proves configuration, not successful execution.
 2. A failed workflow does not prove an individual quality gate failed unless execution evidence shows that gate ran.
@@ -123,15 +145,15 @@ SEO remains **UNSCORED**, because the denominator is known conceptually but seve
 12. Every future percentage must be reproducible from this evidence map + accepted DoD denominator.
 
 ## Next evidence passes
-- Pass 006: denominator closure candidates for DESIGN/UI and SEO runtime-surface requirements.
-- Pass 007: CODE/DEVOPS scope closure candidates and CI blocker disposition.
-- Source recovery/ingestion remains required for UX/GAMEDESIGN.
+- R2 runtime acceptance: PHP contract execution, WordPress activation, Core-on/Core-off, keyboard/viewport/reduced-motion, visual regression and ZIP/staging QA.
+- DEVOPS: issue #15 runner/pre-step blocker disposition and fresh quality-gate execution.
+- Source recovery/ingestion remains required for GAMEDESIGN.
 
 ## Baseline readiness
-- CODE: NOT READY — denominator scope open; verification blocked.
-- DEVOPS: NOT READY — CI execution blocker + operational denominator incomplete.
-- DESIGN: CLOSER — Ω1 verified; type/tokens/components/wordmark master open.
-- UI: NOT READY — theme/Dojo Gate/integration/responsive/QA open.
-- UX: BLOCKED BY SOURCE GAP.
-- SEO: DISCOVERY BOUNDED / UNSCORED — content-model foundation partial; dedicated SEO not evidenced; runtime/external surfaces not inventoried.
-- GAMEDESIGN: BLOCKED BY SOURCE GAP.
+- CODE: denominator CLOSED; implementation/verification remains mixed.
+- DEVOPS: denominator CLOSED WITH EXTERNAL EVIDENCE SURFACES; CI execution blocked.
+- DESIGN: denominator CLOSED; Ω1 verified; type/components/wordmark master remain incomplete.
+- UI: denominator CLOSED; CURRENT CANON SOURCE MANIFESTED / RUNTIME VERIFICATION + P9/P10 OPEN.
+- UX: denominator CLOSED; implementation evidence remains partial.
+- SEO: denominator CLOSED WITH EXTERNAL EVIDENCE SURFACES; dedicated implementation/runtime evidence incomplete.
+- GAMEDESIGN: BLOCKED BY SOURCE INGESTION / AUTHORITY RECONCILIATION.
