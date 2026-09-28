@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="TAIJIFU — experiência web interativa." />
+    <title>TAIJIFU</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <main class="taijifu-shell" data-product-kind="interactive-web-site">
+      <section class="taijifu-semantic" aria-label="Navegação TAIJIFU">
+        <h1>TAIJIFU</h1>
+        <nav>
+          <a href="/principios/tai/">TAI</a>
+        </nav>
+      </section>
+      <canvas id="taijifu-experience" aria-label="Experiência interativa TAIJIFU"></canvas>
+      <noscript>
+        <p>A experiência interativa requer JavaScript. A navegação semântica permanece disponível acima.</p>
+      </noscript>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

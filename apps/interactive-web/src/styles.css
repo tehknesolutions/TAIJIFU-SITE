@@ -1,0 +1,42 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color-scheme: dark;
+  background: #111;
+  color: #fff;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; min-height: 100%; }
+body { min-height: 100vh; }
+
+.taijifu-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.taijifu-semantic {
+  position: absolute;
+  z-index: 2;
+  inset: 1rem auto auto 1rem;
+}
+
+.taijifu-semantic h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.taijifu-semantic a { color: inherit; }
+
+#taijifu-experience {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+noscript {
+  position: absolute;
+  z-index: 3;
+  inset: auto 1rem 1rem;
+}
