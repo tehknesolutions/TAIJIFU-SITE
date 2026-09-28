@@ -1,0 +1,17 @@
+{
+  "authority": "docs/lab-ui-ux/TAIJIFU-OMEGA1-ENGINEERING-SPEC.md",
+  "approvedMasters": [
+    "brand/omega1/master/omega1-master.svg",
+    "brand/omega1/master/omega1-micro-master.svg"
+  ],
+  "requiredProductionFamily": [
+    "omega1-master.svg",
+    "omega1-accent.svg",
+    "omega1-reverse.svg",
+    "omega1-micro.svg",
+    "taijifu-lockup-horizontal.svg",
+    "taijifu-lockup-vertical.svg",
+    "taijifu-hnk-signature.svg"
+  ],
+  "rule": "Only approved deterministic vector masters may be used as canonical brand geometry. Planned family members are contracts, not approval claims."
+}
