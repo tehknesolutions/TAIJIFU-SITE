@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    { "source": "/o-que-e/", "destination": "/manifesto/", "permanent": true },
+    { "source": "/filosofia/", "destination": "/fundamentos/", "permanent": true },
+    { "source": "/artes-base/", "destination": "/influencias/", "permanent": true },
+    { "source": "/trilhas/", "destination": "/metodo/", "permanent": true },
+    { "source": "/niveis-e-graduacao/", "destination": "/graduacao/", "permanent": true },
+    { "source": "/textos-oficiais/", "destination": "/referencias/", "permanent": true },
+    { "source": "/registro/", "destination": "/historia/", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
