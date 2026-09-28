@@ -1,0 +1,19 @@
+@import '@taijifu/design-tokens/tokens.css';
+
+.tj-container { width: min(100% - (2 * var(--tj-space-lg)), 76rem); margin-inline: auto; }
+.tj-stack { display: flex; flex-direction: column; gap: var(--tj-space-md); }
+.tj-cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--tj-space-sm) var(--tj-space-md); }
+.tj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); gap: var(--tj-space-lg); }
+.tj-rule { border: 0; border-top: 1px solid currentColor; opacity: 0.28; }
+.tj-surface { background: var(--tj-color-ink); color: var(--tj-color-paper); padding: var(--tj-space-xl); }
+.tj-eyebrow, .tj-meta { font-family: var(--tj-font-meta); letter-spacing: 0.14em; text-transform: uppercase; }
+.tj-display, .tj-heading { font-family: var(--tj-font-display); font-weight: 500; letter-spacing: 0.04em; }
+.tj-display { font-size: clamp(3rem, 9vw, 7rem); line-height: 0.95; }
+.tj-heading { line-height: 1.08; }
+.tj-body { font-family: var(--tj-font-body); line-height: 1.65; }
+.tj-button, .tj-icon-button, .tj-text-link { font: inherit; color: inherit; }
+.tj-button, .tj-icon-button { border: 1px solid currentColor; background: transparent; padding: var(--tj-space-sm) var(--tj-space-md); }
+.tj-text-link { text-underline-offset: 0.22em; }
+.tj-button:focus-visible, .tj-icon-button:focus-visible, .tj-text-link:focus-visible, .tj-focus-ring:focus-within { outline: 2px solid currentColor; outline-offset: 3px; }
+.tj-media-frame { margin: 0; overflow: hidden; }
+.tj-media-frame img { display: block; width: 100%; height: auto; }

@@ -1,0 +1,34 @@
+:root {
+  /* Semantic color aliases. Calibration slots are intentionally unresolved until the color gate. */
+  --tj-color-ink: var(--tj-calibration-ink);
+  --tj-color-paper: var(--tj-calibration-paper);
+  --tj-color-metal: var(--tj-calibration-metal);
+  --tj-color-tai: var(--tj-calibration-tai);
+  --tj-color-ji: var(--tj-calibration-ji);
+  --tj-color-fu: var(--tj-calibration-fu);
+  --tj-color-integration: var(--tj-calibration-integration);
+
+  --tj-space-xs: 0.25rem;
+  --tj-space-sm: 0.5rem;
+  --tj-space-md: 1rem;
+  --tj-space-lg: 1.5rem;
+  --tj-space-xl: 2.5rem;
+  --tj-space-xxl: 4rem;
+
+  --tj-font-display: ui-serif, Georgia, 'Times New Roman', serif;
+  --tj-font-body: ui-sans-serif, system-ui, sans-serif;
+  --tj-font-meta: ui-sans-serif, system-ui, sans-serif;
+
+  --tj-motion-fast: 120ms;
+  --tj-motion-standard: 220ms;
+  --tj-motion-deliberate: 420ms;
+  --tj-mark-space: 0.25em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --tj-motion-fast: 0ms;
+    --tj-motion-standard: 0ms;
+    --tj-motion-deliberate: 0ms;
+  }
+}
