@@ -80,6 +80,7 @@ contract.productionAssets = {
   hnkSignature: 'brand/omega1/lockups/taijifu-hnk-signature.svg',
 };
 contract.approvedWordmark = wordmarkPath;
+contract.rule = 'Only approved deterministic masters define canonical geometry. Production family members are deterministic derivatives, never independent redraws.';
 write(contractPath, JSON.stringify(contract, null, 2));
 
 const componentSvg = (source) => source

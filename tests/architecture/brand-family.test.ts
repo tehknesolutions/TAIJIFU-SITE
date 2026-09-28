@@ -56,7 +56,9 @@ describe('canonical TAIJIFU brand family', () => {
   });
 
   it('records canonical production paths in the asset contract', () => {
-    const contract = JSON.parse(read('brand/omega1/asset-contract.json')) as { productionAssets?: Record<string, string> };
+    const contract = JSON.parse(read('brand/omega1/asset-contract.json')) as { productionAssets?: Record<string, string>; approvedWordmark?: string; rule?: string };
+    expect(contract.approvedWordmark).toBe('brand/wordmark/master/taijifu-wordmark.svg');
+    expect(contract.rule).toBe('Only approved deterministic masters define canonical geometry. Production family members are deterministic derivatives, never independent redraws.');
     expect(contract.productionAssets).toEqual({
       master: 'brand/omega1/master/omega1-master.svg', accent: 'brand/omega1/variants/omega1-accent.svg',
       reverse: 'brand/omega1/variants/omega1-reverse.svg', micro: 'brand/omega1/variants/omega1-micro.svg',

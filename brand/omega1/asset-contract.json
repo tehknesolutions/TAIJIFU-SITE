@@ -13,7 +13,7 @@
     "taijifu-lockup-vertical.svg",
     "taijifu-hnk-signature.svg"
   ],
-  "rule": "Only approved deterministic vector masters may be used as canonical brand geometry. Planned family members are contracts, not approval claims.",
+  "rule": "Only approved deterministic masters define canonical geometry. Production family members are deterministic derivatives, never independent redraws.",
   "productionAssets": {
     "master": "brand/omega1/master/omega1-master.svg",
     "accent": "brand/omega1/variants/omega1-accent.svg",
