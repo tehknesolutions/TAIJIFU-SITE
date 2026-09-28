@@ -1,0 +1,37 @@
+name: TAIJIFU Interactive Web
+
+on:
+  push:
+    branches:
+      - feat/interactive-web-shell-v0.2
+    paths:
+      - 'apps/interactive-web/**'
+      - '.github/workflows/interactive-web.yml'
+  pull_request:
+    paths:
+      - 'apps/interactive-web/**'
+      - '.github/workflows/interactive-web.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - name: Isolate interactive-web package from workspace discovery
+        working-directory: apps/interactive-web
+        run: printf 'packages: []\n' > pnpm-workspace.yaml
+      - name: Install interactive-web dependencies
+        working-directory: apps/interactive-web
+        run: npm install --no-package-lock --ignore-scripts --workspaces=false
+      - name: Typecheck
+        working-directory: apps/interactive-web
+        run: npm run typecheck
+      - name: Test
+        working-directory: apps/interactive-web
+        run: npm test
