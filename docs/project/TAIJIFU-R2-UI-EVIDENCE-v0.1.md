@@ -43,9 +43,18 @@ No PASS is inferred from the presence of test files.
 
 ### GitHub Actions
 
-Repository issue #15 documents the GitHub Actions runner-assignment blocker. Fresh main runs after PR #25 still fail before workflow steps execute; the Interactive Web main run `36454885939` produced a failed `verify` job with no retained steps. This corroborates that repository CI execution remains blocked at the runner/execution layer rather than proving any theme test result.
+Fresh authenticated API inspection resolved the previously unknown pre-step cause. On main merge SHA `06ee4c8fdba6d8999cfe46618830d1e3139fd182`:
 
-State: `CI EXECUTION BLOCKED — PRE-STEP/RUNNER LAYER`.
+- Interactive Web run `36454885939`, job/check `109038583672`: `runner_id=0`, empty runner name/group and `steps=[]`.
+- Platform Foundation check `109038585014` shows the same pre-step pattern.
+- Both checks carry the failure annotation: `The job was not started because your account is locked due to a billing issue.`
+- The Ubuntu 26 runner-image migration annotation is informational and is not the failure cause.
+
+Issue #15 now records this exact diagnosis.
+
+State: `CI EXECUTION BLOCKED — GITHUB ACCOUNT BILLING LOCK`.
+
+Required remediation is account/billing-side. No application, dependency, PHPUnit, MySQL or workflow-command change is justified by this failure.
 
 ## Runtime-required acceptance
 
@@ -79,12 +88,13 @@ The previous evidence map stated that the current theme was not manifested. That
 
 ## R2 gate conclusion
 
-R2 has moved materially beyond the Baseline v0.1 statement that the current theme was absent. The source manifestation portion is implemented and auditable. R2 is **not runtime-verified or release-complete** because PHP execution, WordPress activation, keyboard/viewport/reduced-motion runtime QA, visual regression, ZIP install evidence and staging QA remain open, while repository CI remains blocked by issue #15.
+R2 has moved materially beyond the Baseline v0.1 statement that the current theme was absent. The source manifestation portion is implemented and auditable. R2 is **not runtime-verified or release-complete** because PHP execution, WordPress activation, keyboard/viewport/reduced-motion runtime QA, visual regression, ZIP install evidence and staging QA remain open. Repository CI is specifically blocked because the GitHub account is locked due to a billing issue.
 
 ## Next actions
 
-1. Resolve issue #15 or provide another retained PHP execution environment, then execute every theme contract script.
-2. Run WordPress activation with Core both active and inactive.
-3. Capture keyboard, responsive, reduced-motion and visual-regression evidence.
-4. Produce/install the independent theme ZIP and record staging QA.
-5. Promote UI-P3..P10 only from those fresh results.
+1. Resolve the GitHub account billing lock from issue #15, then obtain a fresh runner-assigned Actions execution.
+2. Provide PHP execution and run every theme contract script.
+3. Run WordPress activation with Core both active and inactive.
+4. Capture keyboard, responsive, reduced-motion and visual-regression evidence.
+5. Produce/install the independent theme ZIP and record staging QA.
+6. Promote UI-P3..P10 only from those fresh results.
