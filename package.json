@@ -8,7 +8,7 @@
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "build": "turbo run build",
-    "architecture:test": "vitest run tests/architecture"
+    "architecture:test": "vitest run --config vitest.architecture.config.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
