@@ -3,7 +3,7 @@
 Date: 2026-09-28
 Canonical source: `main`
 Development branch: `feat/interactive-web-v1-runtime`
-Authority: GitHub repository state + reconciled CANON evidence.
+Authority: GitHub repository state + released CANON snapshot.
 
 ## Implemented now
 - Executable Vite browser vertical slice.
@@ -14,7 +14,7 @@ Authority: GitHub repository state + reconciled CANON evidence.
 - Seven documented legacy redirects.
 - Persistent semantic HTML navigation.
 - Persistent Three.js navigation layer using the same confirmed canonical routes.
-- Official recovered page content for Manifesto, Fundamentos, Influências (count-level), TAI, Método (count-level), Graduação (count-level), História and Treino Personalizado.
+- Official recovered page content for Manifesto, Fundamentos, Influências, TAI, Método, Graduação, História and Treino Personalizado at the currently integrated depth.
 - Explicit recovery state for unsupported page bodies instead of fabricated copy.
 - Canonical Three.js radial graph with TAIJIFU/Home as origin.
 - Ω1 official asset visually anchored over the graph origin.
@@ -23,47 +23,60 @@ Authority: GitHub repository state + reconciled CANON evidence.
 - Hybrid Dojo navigation selected for Web v1: origin/map → focus → short camera approach → canonical URL.
 - `prefers-reduced-motion` path that commits navigation without the cinematic camera approach.
 - Responsive/reduced-motion CSS baseline.
+- Exact `TAIJIFU-CANON-1.0` curriculum data mirrored into this repository under `canon/TAIJIFU-CANON-1.0/`.
+
+## Canon snapshot recovered
+The previously external curriculum checkpoint is now accessible and mirrored locally.
+
+Source:
+- repository: `Tehkne-Solutions/taijifu-platform`
+- package: `packages/canon/data`
+- checkpoint: `15c81fc99f0bf95560521098e70dec7a92915f24`
+- release: `TAIJIFU-CANON-1.0`
+- release date: `2026-08-04`
+- source document: `TAIJIFU_CANON_MASTER_1.0-FINAL`
+
+Mirrored Git blobs match the source checkpoint exactly:
+- `release.json`: `5c8f76cd6768ce30555ecec72be1eb1b5d0df27e`
+- `bases.json`: `84fd939c3e181706f5f8883b92481ee1d6d5b904`
+- `belts.json`: `49400d7c938aab3c95a4fcf1b38b0fbe7ee37bfd`
+- `paths.json`: `ad5948d657c2424fcc07c65066c0c85c6f4cf4a3`
+- `nuclei.json`: `1de98a864d319bd3253dbb1abc8bfbf9b3ceceff`
+
+The snapshot supplies the complete named curriculum inventory: 4 Bases, 10 Faixas, 32 Caminhos and 128 Núcleos. The 32 Caminhos each reference four Núcleos. Faixa Preta is the synthesis state and carries no additional Caminho IDs in this release.
 
 ## Current content coverage
 Recovered public body or verified public facts:
 - Home / Dojo Gate
 - Manifesto
 - Fundamentos
-- Influências: 4 Bases fact only
-- Método: 4 Bases / 10 Faixas / 32 Caminhos / 128 Núcleos / 4 Núcleos por Caminho
-- Graduação: 10 Faixas fact-level
-- História: current authorship/genealogy statements
+- Influências
+- Método
+- Graduação
+- História
 - TAI
 - Treino Personalizado V1 specification
+- complete released names/relationships for Bases, Faixas, Caminhos and Núcleos in the local Canon snapshot
 
-Route preserved but body still unsupported:
+Route preserved but page body still requires integration from recovered source:
 - Referências
 
-Semantically confirmed but individual public URLs still unresolved:
+Semantically confirmed but individual public URLs still unresolved in the current Web IA:
 - JI
 - FU
 - Integração
 
-## Canon blocker
-`CANON_SYNC.md` identifies the released canonical curriculum source as:
-- repository: `Tehkne-Solutions/taijifu-platform`
-- package: `packages/canon`
-- checkpoint: `15c81fc99f0bf95560521098e70dec7a92915f24`
-- release: `TAIJIFU-CANON-1.0`
-
-That repository/package is not accessible through the current connected GitHub installation, and the historical local source SHA referenced by the v2.2 QA issue is also not resolvable in the current repository. Therefore the individual 4 Bases / 10 Faixas / 32 Caminhos / 128 Núcleos are not reconstructed from memory.
-
 ## Verification state
 - PR #24 merged the Interactive Web v1 runtime into `main` on 2026-09-28.
 - The Interactive Web workflow previously contained invalid YAML because a shell command with `packages: []` was encoded as a plain YAML scalar. The workflow syntax has been corrected and now includes `typecheck`, `test`, and `build` gates.
-- GitHub Actions currently creates jobs but the repository's jobs terminate before any step starts; the same pre-step failure is visible in other repository workflows, so this is currently an Actions/runner infrastructure blocker rather than test evidence.
-- Independent local verification from this ChatGPT environment is also blocked because the execution environment cannot resolve `github.com` to clone the repository.
-- Therefore no green `typecheck + test + build` claim is recorded yet.
+- GitHub Actions creates jobs, but repository jobs currently terminate before any step starts; the same pre-step failure is visible in other repository workflows. This remains an Actions/runner infrastructure blocker rather than green or red test evidence.
+- Independent local verification from this ChatGPT environment remains blocked because the execution environment cannot resolve `github.com` to clone the repository.
+- The Canon mirror itself was verified by comparing the Git blob SHAs in `TAIJIFU-SITE` with the released source checkpoint; all five mirrored JSON blobs match exactly.
+- No green `typecheck + test + build` claim is recorded yet.
 
 ## Next highest-leverage work
-1. Restore executable CI/runner verification and obtain a fresh green `typecheck + test + build` run.
-2. Recover/mirror the official Canon snapshot into the canonical repository.
-3. Materialize all 174 curriculum entities and relationships into the Web registry.
-4. Recover References body and JI/FU/Integration public URL policy.
-5. Continue visual refinement only behind verified interaction contracts: transition easing/continuity, spatial hierarchy and Dojo presentation.
-6. Finish page-level SEO/accessibility/performance/deployment verification.
+1. Materialize the recovered 174 curriculum entities and relationships into the Web registry/routes without duplicating Canon authority.
+2. Integrate the recovered References source and resolve JI/FU/Integration public URL policy from canonical evidence.
+3. Restore executable CI/runner verification and obtain a fresh green `typecheck + test + build` run.
+4. Continue visual refinement behind verified interaction contracts: transition easing/continuity, spatial hierarchy and Dojo presentation.
+5. Finish page-level SEO/accessibility/performance/deployment verification.
