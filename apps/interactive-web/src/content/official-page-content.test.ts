@@ -19,6 +19,31 @@ describe('official page content', () => {
     expect(getOfficialPageContent('referencias')).toBeNull();
   });
 
+  it('projects recovered Canon base names instead of a missing-snapshot notice', () => {
+    const influences = getOfficialPageContent('influencias');
+    const baseList = influences?.blocks.find(
+      (block) => block.kind === 'list' && block.title === 'Bases canônicas',
+    );
+
+    expect(baseList).toEqual(
+      expect.objectContaining({
+        kind: 'list',
+        items: [
+          expect.stringContaining('Tai'),
+          expect.stringContaining('Ji'),
+          expect.stringContaining('Fu'),
+          expect.stringContaining('Integração/Sobrevivência'),
+        ],
+      }),
+    );
+    expect(influences?.blocks).not.toContainEqual(
+      expect.objectContaining({
+        kind: 'notice',
+        text: expect.stringContaining('ainda não recuperado'),
+      }),
+    );
+  });
+
   it('keeps the current TAI/JI/FU semantic questions intact', () => {
     const fundamentals = officialPageContent.fundamentos;
     const axes = fundamentals.blocks.find((block) => block.kind === 'axes');
