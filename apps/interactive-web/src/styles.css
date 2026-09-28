@@ -1,3 +1,5 @@
+@import '@taijifu/design-tokens/tokens.css';
+
 :root {
   --color-paper: #f4efe4;
   --color-charcoal: #1c1c1a;
@@ -299,4 +301,274 @@ a { color: inherit; }
   background: var(--color-paper);
   border-color: var(--color-paper);
   color: var(--color-charcoal);
+}
+
+/* R01/R02 North Star: deterministic Dojo Gate layers. */
+:root {
+  --tj-calibration-ink: var(--color-charcoal);
+  --tj-calibration-paper: var(--color-paper);
+  --tj-calibration-metal: var(--color-muted);
+  --tj-calibration-tai: var(--color-tai);
+  --tj-calibration-ji: var(--color-ji);
+  --tj-calibration-fu: var(--color-fu);
+  --tj-calibration-integration: var(--color-integration);
+}
+
+.site-main {
+  width: 100%;
+  max-width: none;
+}
+
+.site-header--ceremonial {
+  min-height: 5.5rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--tj-color-ink) 14%, transparent);
+  font-family: var(--tj-font-meta);
+}
+
+.site-header__dojo-link {
+  flex: 0 0 auto;
+  border: 1px solid var(--tj-color-fu);
+  padding: var(--tj-space-sm) var(--tj-space-md);
+  text-decoration: none;
+}
+
+.dojo-gate {
+  isolation: isolate;
+  display: grid;
+  min-height: calc(100svh - 5.5rem);
+  margin: 0;
+  padding: 0;
+  background: var(--tj-color-ink);
+  color: var(--tj-color-paper);
+  overflow: clip;
+}
+
+.dojo-gate__media,
+.dojo-gate__threshold {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.dojo-gate__media {
+  z-index: -3;
+  background:
+    radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--tj-color-paper) 18%, transparent), transparent 30%),
+    linear-gradient(90deg, color-mix(in srgb, var(--tj-color-ink) 98%, transparent) 0 12%, transparent 34% 66%, color-mix(in srgb, var(--tj-color-ink) 98%, transparent) 88% 100%),
+    linear-gradient(180deg, #25231f 0%, #171714 48%, #090a09 100%);
+}
+
+.dojo-gate__media::after {
+  content: "";
+  position: absolute;
+  inset: 58% 0 0;
+  background:
+    linear-gradient(90deg, transparent 0 49.85%, color-mix(in srgb, var(--tj-color-paper) 12%, transparent) 50%, transparent 50.15%),
+    linear-gradient(180deg, color-mix(in srgb, var(--tj-color-paper) 7%, transparent), transparent 72%);
+  transform: perspective(28rem) rotateX(58deg) scaleX(1.35);
+  transform-origin: 50% 100%;
+}
+
+.dojo-gate__threshold { z-index: -2; }
+.dojo-gate__threshold::before {
+  content: "";
+  position: absolute;
+  inset: 0 6% auto;
+  height: clamp(1.25rem, 3vw, 2.75rem);
+  background: linear-gradient(180deg, #33291f, #17130f);
+  border-bottom: 1px solid color-mix(in srgb, var(--tj-color-fu) 30%, transparent);
+}
+
+.dojo-gate__threshold span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(2rem, 6vw, 5rem);
+  background: linear-gradient(90deg, #120f0c, #33291f 48%, #17130f);
+}
+
+.dojo-gate__threshold span:first-child { left: 6%; }
+.dojo-gate__threshold span:last-child { right: 6%; }
+
+.dojo-gate__inner {
+  position: relative;
+  z-index: 1;
+  width: min(100% - (2 * var(--space-page-gutter)), var(--content-max));
+  margin-inline: auto;
+  padding: clamp(var(--tj-space-xl), 7vh, var(--tj-space-xxl)) 0 var(--tj-space-lg);
+  text-align: center;
+}
+
+.dojo-gate__identity {
+  width: clamp(10rem, 22vw, 19rem);
+  margin-inline: auto;
+}
+
+.dojo-gate__identity img {
+  display: block;
+  width: 100%;
+  filter: invert(1);
+  opacity: 0.96;
+}
+
+.dojo-gate__eyebrow {
+  margin: var(--tj-space-md) 0 var(--tj-space-sm);
+  font-family: var(--tj-font-meta);
+  font-size: clamp(0.72rem, 1.2vw, 0.9rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.dojo-gate h1 {
+  margin: 0;
+  font-family: var(--tj-font-display);
+  font-size: clamp(3.4rem, 9vw, 7.5rem);
+  font-weight: 500;
+  line-height: 0.86;
+  letter-spacing: 0.1em;
+}
+
+.dojo-gate__maxims {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--tj-space-xl);
+  max-width: 58rem;
+  margin: var(--tj-space-lg) auto 0;
+}
+
+.dojo-gate__maxim {
+  margin: 0;
+  font-family: var(--tj-font-body);
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  opacity: 0.84;
+}
+
+.dojo-triad {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--tj-space-lg);
+  max-width: 64rem;
+  margin: clamp(var(--tj-space-xl), 5vh, var(--tj-space-xxl)) auto var(--tj-space-xl);
+}
+
+.dojo-axis {
+  border-top-width: 2px;
+  padding: var(--tj-space-md) 0 0;
+  text-align: center;
+}
+
+.dojo-axis h2 {
+  margin-bottom: var(--tj-space-xs);
+  font-family: var(--tj-font-display);
+  letter-spacing: 0.12em;
+}
+
+.dojo-axis p,
+.dojo-axis blockquote {
+  font-size: 0.86rem;
+}
+
+.dojo-axis blockquote {
+  margin-top: var(--tj-space-sm);
+  font-style: normal;
+}
+
+.primary-cta {
+  border-color: var(--tj-color-fu);
+  padding: 0.9rem 1.65rem;
+  font-family: var(--tj-font-meta);
+  letter-spacing: 0.08em;
+  transition: background var(--tj-motion-fast), color var(--tj-motion-fast), transform var(--tj-motion-fast);
+}
+
+.primary-cta:hover { transform: translateY(-1px); }
+
+.dojo-gate__footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--tj-space-lg);
+  margin-top: clamp(var(--tj-space-xl), 6vh, var(--tj-space-xxl));
+  text-align: left;
+}
+
+.dojo-gate__provenance {
+  margin: 0;
+  font-family: var(--tj-font-meta);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  opacity: 0.62;
+}
+
+.dojo-gate__scroll-cue {
+  position: relative;
+  padding-bottom: 1.4rem;
+  font-family: var(--tj-font-meta);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.dojo-gate__scroll-cue::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 1px;
+  height: 1rem;
+  background: currentColor;
+}
+
+.dojo-entry__copy,
+.interactive-navigation,
+.site-footer {
+  width: min(100% - (2 * var(--space-page-gutter)), var(--content-max));
+  margin-inline: auto;
+}
+
+.dojo-entry__copy {
+  padding-block: clamp(var(--tj-space-xxl), 10vw, 7rem);
+}
+
+@media (max-width: 64rem) {
+  .site-header--ceremonial {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .site-header--ceremonial .primary-nav {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .dojo-gate__threshold::before { inset-inline: 3%; }
+  .dojo-gate__threshold span:first-child { left: 3%; }
+  .dojo-gate__threshold span:last-child { right: 3%; }
+}
+
+@media (max-width: 48rem) {
+  .site-header--ceremonial { min-height: auto; }
+  .site-brand span { font-size: 0.85rem; }
+  .site-header__dojo-link { margin-left: auto; }
+  .dojo-gate { min-height: auto; }
+  .dojo-gate__inner { padding-block: var(--tj-space-xxl) var(--tj-space-lg); }
+  .dojo-gate__identity { width: min(12rem, 48vw); }
+  .dojo-gate__maxims { grid-template-columns: 1fr; gap: var(--tj-space-sm); }
+  .dojo-triad { grid-template-columns: 1fr; gap: var(--tj-space-md); }
+  .dojo-axis { text-align: left; }
+  .primary-cta { width: min(100%, 24rem); }
+  .dojo-gate__footer { align-items: flex-start; flex-direction: column; }
+  .dojo-gate__threshold span { width: 1.25rem; }
+  .dojo-gate__threshold::before { height: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary-cta,
+  .dojo-gate__scroll-cue,
+  .dojo-gate__identity { transition: none; }
+  .primary-cta:hover { transform: none; }
+}
+
+.dojo-gate :focus-visible {
+  outline-color: var(--tj-color-paper);
 }
