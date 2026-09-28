@@ -55,9 +55,10 @@ describe('ThreeRenderer', () => {
     expect(home?.position.x).toBe(0);
     expect(home?.position.y).toBe(0);
     expect(home?.userData.visualRole).toBe('origin');
-    expect(projection.nodes.filter((node) => node.userData.nodeId !== 'home')).toSatisfy(
-      (nodes: readonly THREE.Object3D[]) =>
-        nodes.every((node) => Math.hypot(node.position.x, node.position.y) > 2.5),
-    );
+    expect(
+      projection.nodes
+        .filter((node) => node.userData.nodeId !== 'home')
+        .every((node) => Math.hypot(node.position.x, node.position.y) > 2.5),
+    ).toBe(true);
   });
 });
