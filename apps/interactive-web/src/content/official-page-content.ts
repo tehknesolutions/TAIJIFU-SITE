@@ -122,7 +122,7 @@ export const officialPageContent: Readonly<
   }),
   metodo: Object.freeze({
     routeId: 'metodo',
-    eyebrow: 'TAIJIFU-CANON-1.0',
+    eyebrow: canonSnapshot.release.id,
     lead: 'O conteúdo público oficial é subordinado ao Canon versionado.',
     blocks: Object.freeze([
       Object.freeze({
@@ -138,16 +138,12 @@ export const officialPageContent: Readonly<
         kind: 'paragraph',
         text: 'O snapshot validado possui exatamente 4 Núcleos por Caminho.',
       }),
-      Object.freeze({
-        kind: 'notice',
-        text: 'Os registros individuais do currículo permanecem pendentes de recuperação do snapshot TAIJIFU-CANON-1.0; não são reconstruídos por inferência.',
-      }),
     ]),
-    sourceAuthority: 'CANON_SYNC.md',
+    sourceAuthority: 'TAIJIFU-CANON-1.0 snapshot',
   }),
   graduacao: Object.freeze({
     routeId: 'graduacao',
-    eyebrow: 'Canon 1.0',
+    eyebrow: canonSnapshot.release.id,
     lead: 'O sistema canônico registra 10 Faixas.',
     blocks: Object.freeze([
       Object.freeze({
@@ -158,12 +154,8 @@ export const officialPageContent: Readonly<
           Object.freeze({ value: '128', label: 'Núcleos' }),
         ]),
       }),
-      Object.freeze({
-        kind: 'notice',
-        text: 'A nomenclatura e o conteúdo individual das Faixas dependem do snapshot oficial ainda não recuperado neste repositório.',
-      }),
     ]),
-    sourceAuthority: 'CANON_SYNC.md',
+    sourceAuthority: 'TAIJIFU-CANON-1.0 snapshot',
   }),
   historia: Object.freeze({
     routeId: 'historia',
