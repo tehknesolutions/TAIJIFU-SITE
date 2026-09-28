@@ -18,17 +18,20 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: apps/interactive-web
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
-      - name: Install isolated interactive-web dependencies
-        run: npm install --no-package-lock --ignore-scripts
+      - name: Isolate interactive-web package from workspace discovery
+        working-directory: apps/interactive-web
+        run: printf 'packages: []\n' > pnpm-workspace.yaml
+      - name: Install interactive-web dependencies
+        working-directory: apps/interactive-web
+        run: npm install --no-package-lock --ignore-scripts --workspaces=false
       - name: Typecheck
+        working-directory: apps/interactive-web
         run: npm run typecheck
       - name: Test
+        working-directory: apps/interactive-web
         run: npm test
