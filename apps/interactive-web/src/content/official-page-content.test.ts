@@ -44,6 +44,64 @@ describe('official page content', () => {
     );
   });
 
+  it('projects all ordered belts and the Black synthesis state from Canon', () => {
+    const graduation = getOfficialPageContent('graduacao');
+    const curriculum = graduation?.blocks.find(
+      (block) => Reflect.get(block, 'kind') === 'curriculum',
+    ) as
+      | Readonly<{
+          groups: readonly Readonly<{
+            id: string;
+            title: string;
+            items: readonly unknown[];
+          }>[];
+        }>
+      | undefined;
+
+    expect(curriculum?.groups).toHaveLength(10);
+    expect(curriculum?.groups[0]).toEqual(
+      expect.objectContaining({ id: 'BELT-WHITE', title: expect.stringContaining('Branca') }),
+    );
+    expect(curriculum?.groups[9]).toEqual(
+      expect.objectContaining({
+        id: 'BELT-BLACK',
+        title: expect.stringContaining('Preta'),
+        items: [],
+      }),
+    );
+  });
+
+  it('projects each path with its four canonical nuclei', () => {
+    const method = getOfficialPageContent('metodo');
+    const curriculum = method?.blocks.find(
+      (block) => Reflect.get(block, 'kind') === 'curriculum',
+    ) as
+      | Readonly<{
+          groups: readonly Readonly<{
+            items: readonly Readonly<{
+              id: string;
+              title: string;
+              details: readonly string[];
+            }>[];
+          }>[];
+        }>
+      | undefined;
+    const firstPath = curriculum?.groups.flatMap((group) => group.items)[0];
+
+    expect(firstPath).toEqual(
+      expect.objectContaining({
+        id: 'PATH-C01',
+        title: expect.stringContaining('C01 · Presença e Segurança'),
+        details: [
+          'Presença Corporal',
+          'Respiração e Centro',
+          'Consentimento, Tap e Stop Response',
+          'Etiqueta, Parceiro e Espaço Seguro',
+        ],
+      }),
+    );
+  });
+
   it('keeps the current TAI/JI/FU semantic questions intact', () => {
     const fundamentals = officialPageContent.fundamentos;
     const axes = fundamentals.blocks.find((block) => block.kind === 'axes');
