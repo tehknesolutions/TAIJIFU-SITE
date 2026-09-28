@@ -17,6 +17,7 @@
     "vite": "^7.1.7"
   },
   "dependencies": {
+    "@taijifu/design-tokens": "workspace:*",
     "three": "^0.180.0"
   }
 }

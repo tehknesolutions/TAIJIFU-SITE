@@ -32,6 +32,9 @@ importers:
 
   apps/interactive-web:
     dependencies:
+      '@taijifu/design-tokens':
+        specifier: workspace:*
+        version: link:../../packages/design-tokens
       three:
         specifier: ^0.180.0
         version: 0.180.0
