@@ -3,7 +3,7 @@ name: TAIJIFU Interactive Web
 on:
   push:
     branches:
-      - feat/interactive-web-shell-v0.2
+      - feat/interactive-web-v1-runtime
     paths:
       - 'apps/interactive-web/**'
       - '.github/workflows/interactive-web.yml'
@@ -35,3 +35,6 @@ jobs:
       - name: Test
         working-directory: apps/interactive-web
         run: npm test
+      - name: Build
+        working-directory: apps/interactive-web
+        run: npm run build
