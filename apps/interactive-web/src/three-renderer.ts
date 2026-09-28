@@ -32,12 +32,34 @@ function radialPosition(index: number, count: number): THREE.Vector3 {
   );
 }
 
-function materialColor(node: ExperienceNode, index: number): number {
-  if (node.id === 'home') return 0xf4efe4;
+function materialColor(node: ExperienceNode): number {
   if (node.id === 'tai') return 0xb43a32;
+  return 0xf4efe4;
+}
 
-  const semanticColors = [0x2d6487, 0xb68a2f, 0x467257, 0x6f6b62];
-  return semanticColors[index % semanticColors.length];
+function addCanonicalConnections(
+  scene: THREE.Scene,
+  nodes: readonly THREE.Object3D[],
+): void {
+  const origin = nodes.find((node) => node.userData.nodeId === 'home');
+  if (!origin) return;
+
+  const material = new THREE.LineBasicMaterial({
+    color: 0x6f6b62,
+    transparent: true,
+    opacity: 0.55,
+  });
+
+  for (const node of nodes) {
+    if (node === origin) continue;
+    const geometry = new THREE.BufferGeometry().setFromPoints([
+      origin.position,
+      node.position,
+    ]);
+    scene.add(new THREE.Line(geometry, material));
+  }
+
+  scene.userData.connectionCount = nodes.length - 1;
 }
 
 export function createThreeScene(frame: RenderFrame): ThreeSceneProjection {
@@ -65,7 +87,7 @@ export function createThreeScene(frame: RenderFrame): ThreeSceneProjection {
     const mesh = new THREE.Mesh(
       geometry,
       new THREE.MeshBasicMaterial({
-        color: materialColor(node, index),
+        color: materialColor(node),
         side: THREE.DoubleSide,
       }),
     );
@@ -74,7 +96,9 @@ export function createThreeScene(frame: RenderFrame): ThreeSceneProjection {
       if (isRoot) {
         mesh.position.set(0, 0, 0.1);
       } else {
-        const orbitIndex = orbitNodes.findIndex((candidate) => candidate.id === node.id);
+        const orbitIndex = orbitNodes.findIndex(
+          (candidate) => candidate.id === node.id,
+        );
         mesh.position.copy(radialPosition(orbitIndex, orbitNodes.length));
       }
     } else {
@@ -87,10 +111,13 @@ export function createThreeScene(frame: RenderFrame): ThreeSceneProjection {
       canonicalUrl: node.canonicalUrl,
       parentId: node.parentId,
       visualRole: isRoot ? 'origin' : node.id === 'tai' ? 'axis' : 'content',
+      baseZ: mesh.position.z,
     };
     scene.add(mesh);
     return mesh;
   });
+
+  addCanonicalConnections(scene, nodes);
 
   return Object.freeze({ scene, camera, nodes: Object.freeze(nodes) });
 }

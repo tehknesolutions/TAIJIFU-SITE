@@ -24,11 +24,18 @@ if (redirect && redirect !== window.location.pathname) {
   }
 
   const canvas = document.querySelector<HTMLCanvasElement>('#taijifu-experience');
+  const focusLabel =
+    document.querySelector<HTMLOutputElement>('#interactive-focus-label');
 
   if (canvas) {
     const runtime = bootstrapInteractiveWeb({
       canvas,
       navigate: (canonicalUrl) => window.location.assign(canonicalUrl),
+      onFocus: (focus) => {
+        if (focusLabel) {
+          focusLabel.value = focus?.label ?? 'TAIJIFU';
+        }
+      },
     });
 
     window.addEventListener('pagehide', () => runtime.dispose(), { once: true });

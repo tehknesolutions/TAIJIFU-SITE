@@ -235,3 +235,38 @@ a { color: inherit; }
     transition-duration: 0.01ms !important;
   }
 }
+
+.interactive-stage {
+  position: relative;
+  isolation: isolate;
+}
+
+.interactive-origin-mark {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  width: clamp(2.8rem, 7vw, 4.75rem);
+  aspect-ratio: 1;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  color: var(--color-charcoal);
+  opacity: 0.92;
+}
+
+.interactive-focus-label {
+  display: block;
+  min-height: 1.5em;
+  margin-top: var(--space-2);
+  color: var(--color-paper);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interactive-origin-mark {
+    transition: none;
+  }
+}
