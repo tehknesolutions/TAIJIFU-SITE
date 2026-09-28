@@ -98,6 +98,15 @@ export function mountThreeWebSurface(options: {
   return Object.freeze({
     canvas: options.canvas,
     projection,
+    focusNode(nodeId: string | null) {
+      const node =
+        nodeId === null
+          ? null
+          : projection.nodes.find(
+              (candidate) => candidate.userData.nodeId === nodeId,
+            ) ?? null;
+      renderFocusedState(node);
+    },
     dispose() {
       options.canvas.removeEventListener('pointermove', onPointerMove);
       options.canvas.removeEventListener('pointerleave', onPointerLeave);

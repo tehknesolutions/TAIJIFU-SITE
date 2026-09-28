@@ -5,7 +5,10 @@ import type { RenderFrame } from './renderer-adapter.js';
 import type { ProjectedFocus } from './three-focus.js';
 import type { WebSurfaceCanvas } from './three-web-surface.js';
 
-type MountedSurface = Readonly<{ dispose(): void }>;
+type MountedSurface = Readonly<{
+  focusNode(nodeId: string | null): void;
+  dispose(): void;
+}>;
 
 type MountSurface = (options: {
   canvas: WebSurfaceCanvas;
@@ -34,6 +37,7 @@ export function bootstrapInteractiveWeb(options: {
 
   return Object.freeze({
     experience,
+    focusNode: (nodeId: string | null) => surface.focusNode(nodeId),
     dispose: () => surface.dispose(),
   });
 }

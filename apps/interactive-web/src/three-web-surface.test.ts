@@ -42,8 +42,18 @@ describe('Three web surface', () => {
       expect.any(Function),
     );
 
-    listeners.get('pointermove')?.({ clientX: 200, clientY: 100 });
+    surface.focusNode('tai');
     expect(onFocus).toHaveBeenCalledWith({
+      nodeId: 'tai',
+      label: 'TAI',
+      canonicalUrl: '/principios/tai/',
+    });
+
+    surface.focusNode(null);
+    expect(onFocus).toHaveBeenLastCalledWith(null);
+
+    listeners.get('pointermove')?.({ clientX: 200, clientY: 100 });
+    expect(onFocus).toHaveBeenLastCalledWith({
       nodeId: 'tai',
       label: 'TAI',
       canonicalUrl: '/principios/tai/',

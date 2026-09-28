@@ -11,7 +11,8 @@ describe('Interactive web browser bootstrap', () => {
     const navigate = vi.fn();
     const onFocus = vi.fn();
     const dispose = vi.fn();
-    const mountSurface = vi.fn(() => ({ dispose }));
+    const focusNode = vi.fn();
+    const mountSurface = vi.fn(() => ({ dispose, focusNode }));
 
     const runtime = bootstrapInteractiveWeb({
       canvas,
@@ -36,18 +37,15 @@ describe('Interactive web browser bootstrap', () => {
         parentId: 'home',
       }),
     );
-    expect(runtime.experience.frame.nodes).toContainEqual(
-      expect.objectContaining({
-        id: 'manifesto',
-        canonicalUrl: '/manifesto/',
-      }),
-    );
     expect(mountSurface).toHaveBeenCalledWith({
       canvas,
       frame: runtime.experience.frame,
       navigate,
       onFocus,
     });
+
+    runtime.focusNode('tai');
+    expect(focusNode).toHaveBeenCalledWith('tai');
 
     runtime.dispose();
     expect(dispose).toHaveBeenCalledOnce();

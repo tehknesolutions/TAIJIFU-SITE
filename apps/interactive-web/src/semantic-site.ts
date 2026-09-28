@@ -1,3 +1,4 @@
+import { canonToExperienceNodes } from './content/canon-registry.js';
 import { getOfficialPageContent, type ContentBlock } from './content/official-page-content.js';
 import {
   findSiteRoute,
@@ -62,6 +63,15 @@ export function renderSemanticRoute(pathname: string): string | null {
       <nav class="content-navigation" aria-label="Navegação TAIJIFU">${renderPrimaryNavigation()}</nav>
     </div>
   </section>`;
+}
+
+export function renderInteractiveLegend(): string {
+  return canonToExperienceNodes()
+    .map(
+      (node) =>
+        `<a data-node-id="${escapeHtml(node.id)}" href="${escapeHtml(node.canonicalUrl)}">${escapeHtml(node.label)}</a>`,
+    )
+    .join('');
 }
 
 export function canonicalRedirectFor(pathname: string): string | null {

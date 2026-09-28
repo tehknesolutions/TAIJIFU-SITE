@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   canonicalRedirectFor,
+  renderInteractiveLegend,
   renderPrimaryNavigation,
   renderSemanticRoute,
 } from './semantic-site.js';
@@ -30,6 +31,13 @@ describe('semantic TAIJIFU site', () => {
     const navigation = renderPrimaryNavigation();
     expect(navigation).toContain('href="/manifesto/"');
     expect(navigation).toContain('href="/treino-personalizado/"');
+  });
+
+  it('renders a visible legend from the same canonical graph as Three.js', () => {
+    const legend = renderInteractiveLegend();
+    expect(legend).toContain('data-node-id="home"');
+    expect(legend).toContain('data-node-id="tai"');
+    expect(legend).toContain('href="/principios/tai/"');
   });
 
   it('leaves the homepage to the Dojo Gate document', () => {
