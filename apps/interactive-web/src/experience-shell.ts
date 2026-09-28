@@ -2,6 +2,7 @@ export type ExperienceNode = Readonly<{
   id: string;
   label: string;
   canonicalUrl: string;
+  parentId?: string;
 }>;
 
 export type ExperienceShell = Readonly<{

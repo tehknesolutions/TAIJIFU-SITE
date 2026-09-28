@@ -17,13 +17,15 @@ describe('ThreeRenderer', () => {
       nodeId: 'tai',
       label: 'TAI',
       canonicalUrl: '/principios/tai/',
+      parentId: undefined,
+      visualRole: 'axis',
     });
     expect(projection.scene.userData).not.toHaveProperty('health');
     expect(projection.scene.userData).not.toHaveProperty('score');
     expect(projection.scene.userData).not.toHaveProperty('inventory');
   });
 
-  it('lays out larger site graphs in a centered grid instead of an off-screen line', () => {
+  it('uses a centered grid when no canonical home root exists', () => {
     const nodes = Array.from({ length: 9 }, (_, index) => ({
       id: `node-${index}`,
       label: `Node ${index}`,
@@ -32,12 +34,30 @@ describe('ThreeRenderer', () => {
     const experience = createInteractiveWebExperience({ nodes });
     const projection = createThreeScene(experience.frame);
 
+    expect(projection.scene.userData.layoutKind).toBe('fallback-grid');
     const xs = projection.nodes.map((node) => node.position.x);
-    const ys = projection.nodes.map((node) => node.position.y);
-
     expect(Math.max(...xs)).toBeLessThanOrEqual(2.1);
     expect(Math.min(...xs)).toBeGreaterThanOrEqual(-2.1);
-    expect(Math.max(...ys)).toBeLessThanOrEqual(1.4);
-    expect(Math.min(...ys)).toBeGreaterThanOrEqual(-1.4);
+  });
+
+  it('projects canonical site content around the home origin', () => {
+    const experience = createInteractiveWebExperience({
+      nodes: [
+        { id: 'home', label: 'TAIJIFU', canonicalUrl: '/' },
+        { id: 'manifesto', label: 'Manifesto', canonicalUrl: '/manifesto/', parentId: 'home' },
+        { id: 'tai', label: 'TAI', canonicalUrl: '/principios/tai/', parentId: 'home' },
+      ],
+    });
+    const projection = createThreeScene(experience.frame);
+    const home = projection.nodes.find((node) => node.userData.nodeId === 'home');
+
+    expect(projection.scene.userData.layoutKind).toBe('canonical-radial');
+    expect(home?.position.x).toBe(0);
+    expect(home?.position.y).toBe(0);
+    expect(home?.userData.visualRole).toBe('origin');
+    expect(projection.nodes.filter((node) => node.userData.nodeId !== 'home')).toSatisfy(
+      (nodes: readonly THREE.Object3D[]) =>
+        nodes.every((node) => Math.hypot(node.position.x, node.position.y) > 2.5),
+    );
   });
 });

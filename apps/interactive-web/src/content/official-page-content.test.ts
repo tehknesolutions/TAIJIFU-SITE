@@ -10,12 +10,12 @@ describe('official page content', () => {
       'TAIJIFU = Arte Marcial de se Adaptar.',
     );
     expect(getOfficialPageContent('fundamentos')).not.toBeNull();
+    expect(getOfficialPageContent('influencias')?.lead).toContain('4 Bases');
     expect(getOfficialPageContent('metodo')).not.toBeNull();
     expect(getOfficialPageContent('graduacao')).not.toBeNull();
     expect(getOfficialPageContent('historia')).not.toBeNull();
     expect(getOfficialPageContent('treino-personalizado')).not.toBeNull();
 
-    expect(getOfficialPageContent('influencias')).toBeNull();
     expect(getOfficialPageContent('referencias')).toBeNull();
   });
 

@@ -21,24 +21,32 @@ describe('TAIJIFU canon registry', () => {
     );
   });
 
-  it('projects confirmed public routes into interactive nodes', () => {
+  it('projects the canonical home and confirmed public routes into interactive nodes', () => {
     const nodes = canonToExperienceNodes();
 
-    expect(nodes).toContainEqual({
-      id: 'tai',
-      label: 'TAI',
-      canonicalUrl: '/principios/tai/',
-    });
-    expect(nodes).toContainEqual({
-      id: 'manifesto',
-      label: 'Manifesto',
-      canonicalUrl: '/manifesto/',
-    });
-    expect(nodes).toContainEqual({
-      id: 'treino-personalizado',
-      label: 'Treino Personalizado',
-      canonicalUrl: '/treino-personalizado/',
-    });
+    expect(nodes[0]).toEqual(
+      expect.objectContaining({
+        id: 'home',
+        label: 'TAIJIFU',
+        canonicalUrl: '/',
+      }),
+    );
+    expect(nodes).toContainEqual(
+      expect.objectContaining({
+        id: 'manifesto',
+        label: 'Manifesto',
+        canonicalUrl: '/manifesto/',
+        parentId: 'home',
+      }),
+    );
+    expect(nodes).toContainEqual(
+      expect.objectContaining({
+        id: 'tai',
+        label: 'TAI',
+        canonicalUrl: '/principios/tai/',
+        parentId: 'home',
+      }),
+    );
   });
 
   it('does not expose semantic principles without reconciled public URLs', () => {

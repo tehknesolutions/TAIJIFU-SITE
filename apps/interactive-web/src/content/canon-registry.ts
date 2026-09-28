@@ -29,29 +29,30 @@ export type CanonContentItem = Readonly<{
   }>;
 }>;
 
-const routeItems: readonly CanonContentItem[] = siteRoutes
-  .filter((route) => route.id !== 'home')
-  .map((route) =>
-    Object.freeze({
-      id: route.id,
-      title: route.title,
-      slug: route.canonicalUrl.split('/').filter(Boolean).at(-1) ?? route.id,
-      canonicalUrl: route.canonicalUrl,
-      kind: route.id === 'tai' ? ('principle' as const) : ('page' as const),
-      source: Object.freeze([
-        route.source === 'canon-sync'
-          ? ('canon-sync' as const)
-          : route.source === 'personalized-training-spec'
-            ? ('personalized-training-spec' as const)
-            : ('current-implementation' as const),
-      ]),
-      status: 'confirmed' as const,
-      summary:
-        route.id === 'tai'
+const routeItems: readonly CanonContentItem[] = siteRoutes.map((route) =>
+  Object.freeze({
+    id: route.id,
+    title: route.title,
+    slug: route.canonicalUrl.split('/').filter(Boolean).at(-1) ?? route.id,
+    canonicalUrl: route.canonicalUrl,
+    kind: route.id === 'tai' ? ('principle' as const) : ('page' as const),
+    parentId: route.id === 'home' ? undefined : 'home',
+    source: Object.freeze([
+      route.source === 'canon-sync'
+        ? ('canon-sync' as const)
+        : route.source === 'personalized-training-spec'
+          ? ('personalized-training-spec' as const)
+          : ('current-implementation' as const),
+    ]),
+    status: 'confirmed' as const,
+    summary:
+      route.id === 'home'
+        ? 'Arte Marcial de se Adaptar'
+        : route.id === 'tai'
           ? 'Essência · Permanência · Axis'
           : undefined,
-    }),
-  );
+  }),
+);
 
 export const canonRegistry: readonly CanonContentItem[] = Object.freeze([
   ...routeItems,
@@ -60,6 +61,7 @@ export const canonRegistry: readonly CanonContentItem[] = Object.freeze([
     title: 'JI',
     slug: 'ji',
     kind: 'principle',
+    parentId: 'fundamentos',
     source: Object.freeze(['wordpress-canon-theme', 'official-brand-spec']),
     status: 'needs-reconciliation',
     summary: 'Discernimento · Adaptação · Nexus',
@@ -69,6 +71,7 @@ export const canonRegistry: readonly CanonContentItem[] = Object.freeze([
     title: 'FU',
     slug: 'fu',
     kind: 'principle',
+    parentId: 'fundamentos',
     source: Object.freeze(['wordpress-canon-theme', 'official-brand-spec']),
     status: 'needs-reconciliation',
     summary: 'Manifestação · Fluxo · Flow',
@@ -78,6 +81,7 @@ export const canonRegistry: readonly CanonContentItem[] = Object.freeze([
     title: 'Integração',
     slug: 'integracao',
     kind: 'principle',
+    parentId: 'fundamentos',
     source: Object.freeze(['wordpress-canon-theme', 'official-brand-spec']),
     status: 'needs-reconciliation',
     summary: 'Axis · Nexus · Flow em relação.',
@@ -98,6 +102,7 @@ export function canonToExperienceNodes(
           id: item.id,
           label: item.title,
           canonicalUrl: item.canonicalUrl,
+          parentId: item.parentId,
         }),
       ),
   );

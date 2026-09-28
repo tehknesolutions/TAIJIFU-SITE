@@ -53,14 +53,8 @@ export const officialPageContent: Readonly<
     eyebrow: 'TAIJIFU',
     lead: 'TAIJIFU = Arte Marcial de se Adaptar.',
     blocks: Object.freeze([
-      Object.freeze({
-        kind: 'quote',
-        text: 'Firme na essência. Livre na forma.',
-      }),
-      Object.freeze({
-        kind: 'quote',
-        text: 'Mudar sem deixar de ser.',
-      }),
+      Object.freeze({ kind: 'quote', text: 'Firme na essência. Livre na forma.' }),
+      Object.freeze({ kind: 'quote', text: 'Mudar sem deixar de ser.' }),
       Object.freeze({
         kind: 'paragraph',
         text: 'HNK nasce do AMOR e torna-se ferramenta/manifestação do AMOR; TAIJIFU trabalha o tornar-se e a adaptação sem abandono da essência.',
@@ -85,15 +79,30 @@ export const officialPageContent: Readonly<
     ]),
     sourceAuthority: 'Issue #7 + TAIJIFU WordPress Architecture V1',
   }),
+  influencias: Object.freeze({
+    routeId: 'influencias',
+    eyebrow: 'TAIJIFU-CANON-1.0',
+    lead: 'O Canon versionado registra 4 Bases.',
+    blocks: Object.freeze([
+      Object.freeze({
+        kind: 'stats',
+        items: Object.freeze([
+          Object.freeze({ value: '4', label: 'Bases' }),
+        ]),
+      }),
+      Object.freeze({
+        kind: 'notice',
+        text: 'Os nomes e conteúdos individuais das Bases dependem do snapshot oficial ainda não recuperado neste repositório.',
+      }),
+    ]),
+    sourceAuthority: 'CANON_SYNC.md',
+  }),
   tai: Object.freeze({
     routeId: 'tai',
     eyebrow: 'Princípio',
     lead: 'TAI — Essência / Permanência — Axis',
     blocks: Object.freeze([
-      Object.freeze({
-        kind: 'quote',
-        text: 'O que deve permanecer?',
-      }),
+      Object.freeze({ kind: 'quote', text: 'O que deve permanecer?' }),
       Object.freeze({
         kind: 'paragraph',
         text: 'TAI representa essência, permanência e Axis dentro da tríade semântica aprovada.',
