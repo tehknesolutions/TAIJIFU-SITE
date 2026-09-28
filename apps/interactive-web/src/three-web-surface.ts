@@ -1,7 +1,6 @@
 import type { Camera, Object3D, Scene } from 'three';
 import type { RenderFrame } from './renderer-adapter.js';
 import {
-  handleCanonicalPointerNavigation,
   normalizePointer,
   type PointerCoordinates,
 } from './browser-pointer-navigation.js';
@@ -30,6 +29,10 @@ export type WebSurfaceRenderer = {
   dispose(): void;
 };
 
+export type DojoTransition = ProjectedFocus & Readonly<{
+  phase: 'preview' | 'commit';
+}>;
+
 export function mountThreeWebSurface(options: {
   canvas: WebSurfaceCanvas;
   frame: RenderFrame;
@@ -37,6 +40,8 @@ export function mountThreeWebSurface(options: {
   renderer: WebSurfaceRenderer;
   reducedMotion?: boolean;
   onFocus?: (focus: ProjectedFocus | null) => void;
+  onTransition?: (transition: DojoTransition) => void;
+  transitionDurationMs?: number;
 }) {
   const projection = createThreeRendererAdapter().render(options.frame);
   const bounds = options.canvas.getBoundingClientRect();
@@ -51,6 +56,7 @@ export function mountThreeWebSurface(options: {
   options.renderer.render(projection.scene, projection.camera);
 
   let focusedNode: Object3D | null = null;
+  let navigationTimer: ReturnType<typeof setTimeout> | null = null;
 
   const renderFocusedState = (nextFocus: Object3D | null) => {
     if (focusedNode === nextFocus) return;
@@ -82,13 +88,41 @@ export function mountThreeWebSurface(options: {
   };
 
   const onPointerUp = (event: PointerCoordinates) => {
-    handleCanonicalPointerNavigation(
+    const normalized = normalizePointer(
       event,
       options.canvas.getBoundingClientRect(),
-      projection.camera,
-      projection.nodes,
-      options.navigate,
     );
+    const selected = normalized
+      ? pickProjectedNode(normalized, projection.camera, projection.nodes)
+      : null;
+    const destination = describeProjectedFocus(selected);
+
+    if (!selected || !destination) return;
+
+    renderFocusedState(selected);
+
+    if (options.reducedMotion) {
+      options.onTransition?.({ ...destination, phase: 'commit' });
+      options.navigate(destination.canonicalUrl);
+      return;
+    }
+
+    projection.camera.position.z = 7.35;
+    projection.camera.lookAt(
+      selected.position.x * 0.32,
+      selected.position.y * 0.32,
+      0,
+    );
+    projection.camera.updateMatrixWorld(true);
+    projection.scene.updateMatrixWorld(true);
+    options.renderer.render(projection.scene, projection.camera);
+    options.onTransition?.({ ...destination, phase: 'preview' });
+
+    if (navigationTimer) clearTimeout(navigationTimer);
+    navigationTimer = setTimeout(() => {
+      options.onTransition?.({ ...destination, phase: 'commit' });
+      options.navigate(destination.canonicalUrl);
+    }, options.transitionDurationMs ?? 220);
   };
 
   options.canvas.addEventListener('pointermove', onPointerMove);
@@ -108,6 +142,7 @@ export function mountThreeWebSurface(options: {
       renderFocusedState(node);
     },
     dispose() {
+      if (navigationTimer) clearTimeout(navigationTimer);
       options.canvas.removeEventListener('pointermove', onPointerMove);
       options.canvas.removeEventListener('pointerleave', onPointerLeave);
       options.canvas.removeEventListener('pointerup', onPointerUp);
