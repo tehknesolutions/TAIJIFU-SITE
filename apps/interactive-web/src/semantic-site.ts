@@ -1,4 +1,9 @@
 import { canonToExperienceNodes } from './content/canon-registry.js';
+import {
+  canonGraduationGroups,
+  canonMethodGroups,
+  type CanonCurriculumGroup,
+} from './content/canon-curriculum-pages.js';
 import { getOfficialPageContent, type ContentBlock } from './content/official-page-content.js';
 import {
   findSiteRoute,
@@ -44,13 +49,46 @@ function renderBlock(block: ContentBlock): string {
   }
 }
 
+function renderCurriculumGroups(groups: readonly CanonCurriculumGroup[]): string {
+  return `<section class="canon-curriculum" aria-label="Currículo TAIJIFU">${groups
+    .map(
+      (group) => `<details class="canon-curriculum__group">
+        <summary>${escapeHtml(group.title)}</summary>
+        ${group.summary ? `<p>${escapeHtml(group.summary)}</p>` : ''}
+        <div class="canon-curriculum__items">${group.items
+          .map((item) =>
+            item.details.length > 0
+              ? `<details class="canon-curriculum__item"><summary>${escapeHtml(item.title)}</summary><p>${escapeHtml(item.summary)}</p><ul>${item.details.map((detail) => `<li>${escapeHtml(detail)}</li>`).join('')}</ul></details>`
+              : `<article class="canon-curriculum__item"><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.summary)}</p></article>`,
+          )
+          .join('')}</div>
+      </details>`,
+    )
+    .join('')}</section>`;
+}
+
 export function renderSemanticRoute(pathname: string): string | null {
   const route = findSiteRoute(pathname);
   if (!route || route.id === 'home') return null;
 
   const content = getOfficialPageContent(route.id);
+  const curriculumGroups =
+    route.id === 'metodo'
+      ? canonMethodGroups
+      : route.id === 'graduacao'
+        ? canonGraduationGroups
+        : null;
+  const blocks =
+    content?.blocks.filter(
+      (block) =>
+        !(
+          curriculumGroups &&
+          block.kind === 'notice' &&
+          block.text.includes('ainda não recuperado')
+        ),
+    ) ?? [];
   const body = content
-    ? `<p class="content-lead">${escapeHtml(content.lead)}</p>${content.blocks.map(renderBlock).join('')}<p class="content-source">Fonte de autoridade: ${escapeHtml(content.sourceAuthority)}</p>`
+    ? `<p class="content-lead">${escapeHtml(content.lead)}</p>${blocks.map(renderBlock).join('')}${curriculumGroups ? renderCurriculumGroups(curriculumGroups) : ''}<p class="content-source">Fonte de autoridade: ${escapeHtml(curriculumGroups ? 'TAIJIFU-CANON-1.0 snapshot' : content.sourceAuthority)}</p>`
     : '<p class="canon-reconciliation">O corpo oficial desta seção está em reconciliação a partir do TAIJIFU CANON. A rota é canônica e já está preservada.</p>';
 
   return `<section class="content-page" aria-labelledby="page-title">

@@ -18,9 +18,24 @@ describe('semantic TAIJIFU site', () => {
     expect(fundamentos).toContain('Que forma deve existir agora?');
   });
 
-  it('keeps an explicit reconciliation state where body copy is unsupported', () => {
+  it('renders recovered Canon Bases instead of reconciliation copy', () => {
     const html = renderSemanticRoute('/influencias/');
-    expect(html).toContain('O corpo oficial desta seção está em reconciliação');
+    expect(html).toContain('Bases canônicas');
+    expect(html).toContain('Integração/Sobrevivência');
+    expect(html).not.toContain('ainda não recuperado');
+  });
+
+  it('renders curriculum as progressive disclosure instead of 174 top-level cards', () => {
+    const method = renderSemanticRoute('/metodo/');
+    const graduation = renderSemanticRoute('/graduacao/');
+
+    expect(method).toContain('<details');
+    expect(method).toContain('C01 · Presença e Segurança');
+    expect(method).toContain('Presença Corporal');
+    expect(method).toContain('Etiqueta, Parceiro e Espaço Seguro');
+    expect(graduation).toContain('Branca · Entrar');
+    expect(graduation).toContain('Preta · Sintetizar');
+    expect(graduation).not.toContain('ainda não recuperado');
   });
 
   it('maps legacy paths to current canonical destinations', () => {

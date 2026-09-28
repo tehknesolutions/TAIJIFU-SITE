@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import {
+  canonGraduationGroups,
+  canonMethodGroups,
+} from './canon-curriculum-pages.js';
+import {
   getOfficialPageContent,
   officialPageContent,
 } from './official-page-content.js';
@@ -17,6 +21,62 @@ describe('official page content', () => {
     expect(getOfficialPageContent('treino-personalizado')).not.toBeNull();
 
     expect(getOfficialPageContent('referencias')).toBeNull();
+  });
+
+  it('projects recovered Canon base names instead of a missing-snapshot notice', () => {
+    const influences = getOfficialPageContent('influencias');
+    const baseList = influences?.blocks.find(
+      (block) => block.kind === 'list' && block.title === 'Bases canônicas',
+    );
+
+    expect(baseList).toEqual(
+      expect.objectContaining({
+        kind: 'list',
+        items: [
+          expect.stringContaining('Tai'),
+          expect.stringContaining('Ji'),
+          expect.stringContaining('Fu'),
+          expect.stringContaining('Integração/Sobrevivência'),
+        ],
+      }),
+    );
+    expect(influences?.blocks).not.toContainEqual(
+      expect.objectContaining({
+        kind: 'notice',
+        text: expect.stringContaining('ainda não recuperado'),
+      }),
+    );
+  });
+
+  it('projects all ordered belts and the Black synthesis state from Canon', () => {
+    expect(canonGraduationGroups).toHaveLength(10);
+    expect(canonGraduationGroups[0]).toEqual(
+      expect.objectContaining({ id: 'BELT-WHITE', title: expect.stringContaining('Branca') }),
+    );
+    expect(canonGraduationGroups[9]).toEqual(
+      expect.objectContaining({
+        id: 'BELT-BLACK',
+        title: expect.stringContaining('Preta'),
+        items: [],
+      }),
+    );
+  });
+
+  it('projects each path with its four canonical nuclei', () => {
+    const firstPath = canonMethodGroups.flatMap((group) => group.items)[0];
+
+    expect(firstPath).toEqual(
+      expect.objectContaining({
+        id: 'PATH-C01',
+        title: expect.stringContaining('C01 · Presença e Segurança'),
+        details: [
+          'Presença Corporal',
+          'Respiração e Centro',
+          'Consentimento, Tap e Stop Response',
+          'Etiqueta, Parceiro e Espaço Seguro',
+        ],
+      }),
+    );
   });
 
   it('keeps the current TAI/JI/FU semantic questions intact', () => {
