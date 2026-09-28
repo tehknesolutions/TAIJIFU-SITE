@@ -54,6 +54,11 @@ const routeItems: readonly CanonContentItem[] = siteRoutes.map((route) =>
   }),
 );
 
+const principleSources: readonly CanonSource[] = Object.freeze([
+  'wordpress-canon-theme',
+  'official-brand-spec',
+]);
+
 export const canonRegistry: readonly CanonContentItem[] = Object.freeze([
   ...routeItems,
   Object.freeze({
@@ -62,7 +67,7 @@ export const canonRegistry: readonly CanonContentItem[] = Object.freeze([
     slug: 'ji',
     kind: 'principle',
     parentId: 'fundamentos',
-    source: Object.freeze(['wordpress-canon-theme', 'official-brand-spec']),
+    source: principleSources,
     status: 'needs-reconciliation',
     summary: 'Discernimento · Adaptação · Nexus',
   }),
@@ -72,7 +77,7 @@ export const canonRegistry: readonly CanonContentItem[] = Object.freeze([
     slug: 'fu',
     kind: 'principle',
     parentId: 'fundamentos',
-    source: Object.freeze(['wordpress-canon-theme', 'official-brand-spec']),
+    source: principleSources,
     status: 'needs-reconciliation',
     summary: 'Manifestação · Fluxo · Flow',
   }),
@@ -82,7 +87,7 @@ export const canonRegistry: readonly CanonContentItem[] = Object.freeze([
     slug: 'integracao',
     kind: 'principle',
     parentId: 'fundamentos',
-    source: Object.freeze(['wordpress-canon-theme', 'official-brand-spec']),
+    source: principleSources,
     status: 'needs-reconciliation',
     summary: 'Axis · Nexus · Flow em relação.',
   }),
