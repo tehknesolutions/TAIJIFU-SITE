@@ -64,4 +64,12 @@ describe('canonical TAIJIFU brand family', () => {
       hnkSignature: 'brand/omega1/lockups/taijifu-hnk-signature.svg',
     });
   });
+
+  it('documents optical sizes, clear space, accessibility and ancestral-state boundaries', () => {
+    const usage = read('brand/omega1/BRAND-FAMILY-USAGE.md');
+    for (const phrase of ['N = 56/1000', '2N', '16 px', '24 px', '32 px', '48 px', 'aria-hidden="true"']) expect(usage).toContain(phrase);
+    expect(usage).toMatch(/ORIGIN.*NEXUS.*FLOW/s);
+    expect(usage).toContain('not production logos');
+    expect(usage).toContain('role="img"');
+  });
 });
