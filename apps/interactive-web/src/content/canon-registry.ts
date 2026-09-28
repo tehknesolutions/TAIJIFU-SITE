@@ -1,4 +1,5 @@
 import type { ExperienceNode } from '../experience-shell.js';
+import { siteRoutes } from './site-ia.js';
 
 export type CanonSource =
   | 'taijifu-project-history'
@@ -6,7 +7,9 @@ export type CanonSource =
   | 'project-document'
   | 'current-implementation'
   | 'wordpress-canon-theme'
-  | 'official-brand-spec';
+  | 'official-brand-spec'
+  | 'canon-sync'
+  | 'personalized-training-spec';
 
 export type CanonStatus = 'confirmed' | 'needs-reconciliation';
 
@@ -26,22 +29,39 @@ export type CanonContentItem = Readonly<{
   }>;
 }>;
 
-export const canonRegistry: readonly CanonContentItem[] = Object.freeze([
+const routeItems: readonly CanonContentItem[] = siteRoutes.map((route) =>
   Object.freeze({
-    id: 'tai',
-    title: 'TAI',
-    slug: 'tai',
-    canonicalUrl: '/principios/tai/',
-    kind: 'principle',
-    source: Object.freeze(['current-implementation', 'taijifu-site-repository', 'wordpress-canon-theme']),
-    status: 'confirmed',
-    summary: 'Essência · Permanência · Axis',
+    id: route.id,
+    title: route.title,
+    slug: route.canonicalUrl.split('/').filter(Boolean).at(-1) ?? route.id,
+    canonicalUrl: route.canonicalUrl,
+    kind: route.id === 'tai' ? ('principle' as const) : ('page' as const),
+    parentId: route.id === 'home' ? undefined : 'home',
+    source: Object.freeze([
+      route.source === 'canon-sync'
+        ? ('canon-sync' as const)
+        : route.source === 'personalized-training-spec'
+          ? ('personalized-training-spec' as const)
+          : ('current-implementation' as const),
+    ]),
+    status: 'confirmed' as const,
+    summary:
+      route.id === 'home'
+        ? 'Arte Marcial de se Adaptar'
+        : route.id === 'tai'
+          ? 'Essência · Permanência · Axis'
+          : undefined,
   }),
+);
+
+export const canonRegistry: readonly CanonContentItem[] = Object.freeze([
+  ...routeItems,
   Object.freeze({
     id: 'ji',
     title: 'JI',
     slug: 'ji',
     kind: 'principle',
+    parentId: 'fundamentos',
     source: Object.freeze(['wordpress-canon-theme', 'official-brand-spec']),
     status: 'needs-reconciliation',
     summary: 'Discernimento · Adaptação · Nexus',
@@ -51,6 +71,7 @@ export const canonRegistry: readonly CanonContentItem[] = Object.freeze([
     title: 'FU',
     slug: 'fu',
     kind: 'principle',
+    parentId: 'fundamentos',
     source: Object.freeze(['wordpress-canon-theme', 'official-brand-spec']),
     status: 'needs-reconciliation',
     summary: 'Manifestação · Fluxo · Flow',
@@ -60,21 +81,11 @@ export const canonRegistry: readonly CanonContentItem[] = Object.freeze([
     title: 'Integração',
     slug: 'integracao',
     kind: 'principle',
+    parentId: 'fundamentos',
     source: Object.freeze(['wordpress-canon-theme', 'official-brand-spec']),
     status: 'needs-reconciliation',
     summary: 'Axis · Nexus · Flow em relação.',
   }),
-  ...['principles', 'paths', 'library', 'lab'].map((id) =>
-    Object.freeze({
-      id: `content-model-${id}`,
-      title: id,
-      slug: id,
-      canonicalUrl: `/${id}/`,
-      kind: 'section' as const,
-      source: Object.freeze(['taijifu-site-repository'] as const),
-      status: 'needs-reconciliation' as const,
-    }),
-  ),
 ]);
 
 export function canonToExperienceNodes(
@@ -91,6 +102,7 @@ export function canonToExperienceNodes(
           id: item.id,
           label: item.title,
           canonicalUrl: item.canonicalUrl,
+          parentId: item.parentId,
         }),
       ),
   );

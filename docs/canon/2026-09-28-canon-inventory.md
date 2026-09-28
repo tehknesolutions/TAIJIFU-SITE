@@ -10,73 +10,76 @@ Missing material is recorded as missing. Historical/current conflicts are preser
 ### Official brand
 `docs/superpowers/specs/2026-09-23-taijifu-official-brand-system-design.md` is an approved implementation specification.
 
-Locked decisions include:
-- official emblem: Ω1;
-- standard master: `brand/omega1/master/omega1-master.svg`;
-- micro master for <32 px;
-- uppercase TAIJIFU wordmark direction;
-- monochrome-first identity;
-- semantic accents: TAI red, JI blue, FU gold/yellow, Integration/Survival green;
-- serious contemporary dojo material language;
-- avoid neon/gradient/gamer/cliché martial presentation;
-- site consequence: the experience should feel like entering the TAIJIFU dojo.
+Locked decisions include Ω1 as official emblem, monochrome-first identity, TAI red / JI blue / FU gold / Integration green, contemporary serious dojo material language, and explicit rejection of neon/gradient/gamer/cliché martial presentation.
 
-### Current CANON theme
-`wordpress/themes/taijifu-canon/front-page.php` manifests the Dojo Gate copy:
-- “Arte Marcial de se Adaptar”
-- “Firme na essência. Livre na forma.”
-- “Mudar sem deixar de ser.”
-- TAI — “Essência · Permanência · Axis”
-- JI — “Discernimento · Adaptação · Nexus”
-- FU — “Manifestação · Fluxo · Flow”
-- Integração — “Axis · Nexus · Flow em relação.”
-- CTA “Entrar no Dojo”
-- entry heading “Comece pela essência”
-- public-path statement preserving TAI/JI/FU CANON hierarchy
-- authorship “Criado por Miguel Da Vinci e Thales Walisson — Desde 2026”
+### Current CANON theme / Dojo Gate
+`wordpress/themes/taijifu-canon/front-page.php` provides current public home copy:
+- Arte Marcial de se Adaptar
+- Firme na essência. Livre na forma.
+- Mudar sem deixar de ser.
+- TAI — Essência · Permanência · Axis
+- JI — Discernimento · Adaptação · Nexus
+- FU — Manifestação · Fluxo · Flow
+- Integração — Axis · Nexus · Flow em relação.
+- Entrar no Dojo
+- Comece pela essência
+- Criado por Miguel Da Vinci e Thales Walisson — Desde 2026
 
-The current theme tokens establish paper/charcoal/ink/muted plus TAI/JI/FU/Integration semantic colors, responsive spacing and reduced-motion behavior.
+### Public routing authority
+`docs/CANON_SYNC.md` records the current public destination routes and legacy redirects:
+- /o-que-e/ → /manifesto/
+- /filosofia/ → /fundamentos/
+- /artes-base/ → /influencias/
+- /trilhas/ → /metodo/
+- /niveis-e-graduacao/ → /graduacao/
+- /textos-oficiais/ → /referencias/
+- /registro/ → /historia/
 
-### Content-domain model
-`taijifu-core` registers four public REST-visible content types:
-- Principles — rewrite `/principles/`
-- Paths — rewrite `/paths/`
-- Library — rewrite `/library/`
-- Lab — rewrite `/lab/`
+It also records the released TAIJIFU-CANON-1.0 snapshot counts:
+- 4 Bases
+- 10 Faixas
+- 32 Caminhos
+- 128 Núcleos
+- exactly 4 Núcleos per Caminho
 
-It registers hierarchical taxonomies:
-- Axis — `/axis/`
-- Level — `/level/`
-- Governance Status — `/governance-status/`
+The source snapshot is described as living in `Tehkne-Solutions/taijifu-platform/packages/canon` at checkpoint `15c81fc99f0bf95560521098e70dec7a92915f24`. That repository/package is not currently accessible through the connected GitHub installation, so the individual 174 curriculum records cannot yet be losslessly materialized here.
 
-These are current content-model evidence, not proof that all content records/body copy are already present.
+### Personalized Training
+`docs/TAIJIFU-PERSONALIZED-TRAINING-ENGINE-V1.md` is APPROVED DESIGN / implementation source of truth and assigns a public navigation tab “Treino Personalizado” to the presentation layer. The current Web IA therefore reserves `/treino-personalizado/` without inventing training content or engine behavior.
 
-## Confirmed Web canon entries
+### WordPress content-domain model
+`taijifu-core` registers Principles, Paths, Library and Lab CPTs and Axis/Level/Governance Status taxonomies. However, `CANON_SYNC.md` explicitly says official public curriculum no longer renders from editable legacy CPTs: those records are historical/admin material while official public pages come from the Canon snapshot.
 
-| ID | Title | Canonical URL | Status |
-|---|---|---|---|
-| tai | TAI | /principios/tai/ | confirmed |
+Therefore CPT archive slugs are **not** promoted as competing current public IA.
 
-## Confirmed semantic canon without final Web URL
-| ID | Title | Official semantic meaning | Status |
-|---|---|---|---|
-| ji | JI | Discernimento · Adaptação · Nexus | URL needs reconciliation |
-| fu | FU | Manifestação · Fluxo · Flow | URL needs reconciliation |
-| integration | Integração | Axis · Nexus · Flow em relação. | URL needs reconciliation |
+## Current Web IA
 
-## Route conflict requiring explicit reconciliation
-The active Interactive Web contract fixes TAI at `/principios/tai/`, while the current WordPress content type uses the English rewrite base `/principles/`. The implementation must not silently change either. Before content-wide routing is finalized, choose the canonical public route family and define redirects/compatibility.
+| Route | Authority | Body state |
+|---|---|---|
+| / | current CANON theme | recovered |
+| /manifesto/ | CANON_SYNC | body pending recovery |
+| /fundamentos/ | CANON_SYNC | body pending recovery |
+| /influencias/ | CANON_SYNC | body pending recovery |
+| /metodo/ | CANON_SYNC | body pending recovery |
+| /graduacao/ | CANON_SYNC | body pending recovery |
+| /referencias/ | CANON_SYNC | body pending recovery |
+| /historia/ | CANON_SYNC | body pending recovery |
+| /principios/tai/ | active Interactive Web contract | body pending recovery |
+| /treino-personalizado/ | approved Personalized Training spec | implementation/content pending |
 
-## Project TXT evidence
-The Project TXT files available in the current workspace establish the archaeology/reconciliation requirement and contain Taijifu Masters asset/game-production material (Lian Wu, Training Rival, reaction frames, character-lock validation, modular fighter proposal). They do not by themselves establish public Web routes or full official site body copy.
+## Semantic principles with unresolved public URLs
+- JI — Discernimento · Adaptação · Nexus
+- FU — Manifestação · Fluxo · Flow
+- Integração — Axis · Nexus · Flow em relação.
 
-## Remaining canon recovery targets
-- Actual records/body copy for Principles, Paths, Library and Lab.
-- Final URL family and redirect policy.
-- Historical project chats/documents containing approved site copy.
-- Official wordmark master once promoted from candidate status.
-- Web publication media inventory.
-- Dedicated SEO metadata/structured-data policy.
+The current sources establish their semantic authority but do not yet establish their final individual Web URLs.
 
-## Implementation state
-The Web runtime now uses the registry for interactive nodes. The public Dojo Gate and Ω1 master are manifested in the browser vertical slice from current repository CANON rather than newly invented presentation.
+## Remaining recovery blockers
+1. Connected access to the released `taijifu-platform/packages/canon` snapshot or an equivalent manifested copy.
+2. Official body copy for current public route destinations.
+3. Final individual public URL policy for JI/FU/Integration.
+4. Wordmark master promotion (current construction V2 is not master).
+5. Dedicated SEO metadata/structured-data policy.
+
+## Implementation consequence
+The browser runtime now materializes the current destination IA and documented legacy redirects. Routes whose body copy has not been recovered render an explicit reconciliation state rather than fabricated official text. The same confirmed public route registry feeds the Three.js ExperienceNodes.
