@@ -1,8 +1,15 @@
 import { bootstrapInteractiveWeb } from './browser-bootstrap.js';
 import {
   canonicalRedirectFor,
+  renderPrimaryNavigation,
   renderSemanticRoute,
 } from './semantic-site.js';
+
+const primaryNavigation =
+  document.querySelector<HTMLElement>('#primary-navigation');
+if (primaryNavigation) {
+  primaryNavigation.innerHTML = renderPrimaryNavigation();
+}
 
 const redirect = canonicalRedirectFor(window.location.pathname);
 if (redirect && redirect !== window.location.pathname) {
