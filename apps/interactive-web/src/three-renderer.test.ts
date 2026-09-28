@@ -19,6 +19,7 @@ describe('ThreeRenderer', () => {
       canonicalUrl: '/principios/tai/',
       parentId: undefined,
       visualRole: 'axis',
+      baseZ: 0,
     });
     expect(projection.scene.userData).not.toHaveProperty('health');
     expect(projection.scene.userData).not.toHaveProperty('score');
@@ -55,6 +56,7 @@ describe('ThreeRenderer', () => {
     expect(home?.position.x).toBe(0);
     expect(home?.position.y).toBe(0);
     expect(home?.userData.visualRole).toBe('origin');
+    expect(projection.scene.userData.connectionCount).toBe(2);
     expect(
       projection.nodes
         .filter((node) => node.userData.nodeId !== 'home')

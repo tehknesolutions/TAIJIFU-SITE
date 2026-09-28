@@ -104,7 +104,7 @@ a { color: inherit; }
 .dojo-gate__copy,
 .dojo-gate__identity { position: relative; z-index: 1; }
 .dojo-gate__identity { width: min(17rem, 58vw); margin-inline: auto; }
-.dojo-gate__identity img { display: block; width: 100%; color: var(--color-paper); }
+.dojo-gate__identity img { display: block; width: 100%; filter: invert(1); }
 .dojo-gate__eyebrow { margin-top: var(--space-3); letter-spacing: 0.14em; text-transform: uppercase; }
 .dojo-gate h1 { margin-block: var(--space-1); font-size: clamp(3.5rem, 11vw, 8rem); line-height: 0.9; letter-spacing: 0.08em; }
 .dojo-gate__maxim { margin: 0.35rem auto; max-width: 42rem; }
@@ -252,6 +252,7 @@ a { color: inherit; }
   translate: -50% -50%;
   color: var(--color-charcoal);
   opacity: 0.92;
+  filter: invert(1);
 }
 
 .interactive-focus-label {

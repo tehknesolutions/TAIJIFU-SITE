@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { createInteractiveWebExperience } from './experience.js';
 import { createThreeRendererAdapter } from './three-renderer-adapter.js';
-import { pickCanonicalNavigation } from './three-raycast-navigation.js';
+import {
+  pickCanonicalNavigation,
+  pickProjectedNode,
+} from './three-raycast-navigation.js';
 
 describe('Three raycast navigation', () => {
   it('picks the projected node at the pointer and resolves its canonical URL', () => {
@@ -16,6 +19,9 @@ describe('Three raycast navigation', () => {
       nodeId: 'tai',
       canonicalUrl: '/principios/tai/',
     });
+    expect(
+      pickProjectedNode({ x: 0, y: 0 }, projection.camera, projection.nodes)?.userData.nodeId,
+    ).toBe('tai');
   });
 
   it('returns null when the pointer misses every projected node', () => {
