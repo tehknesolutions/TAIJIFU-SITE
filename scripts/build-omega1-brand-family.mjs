@@ -1,0 +1,85 @@
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const read = (path) => readFileSync(resolve(root, path), 'utf8').replace(/^\uFEFF/, '').trim();
+const write = (path, content) => {
+  const target = resolve(root, path);
+  mkdirSync(dirname(target), { recursive: true });
+  writeFileSync(target, `${content.trim()}\n`, 'utf8');
+};
+const inner = (svg) => svg.replace(/^<svg\b[^>]*>/, '').replace(/<\/svg>\s*$/, '').replace(/<title\b[^>]*>.*?<\/title>/s, '').replace(/<desc\b[^>]*>.*?<\/desc>/s, '').trim();
+const svg = (viewBox, title, desc, content, attrs = '') => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}" role="img" aria-labelledby="title desc"${attrs}><title id="title">${title}</title><desc id="desc">${desc}</desc>${content}</svg>`;
+
+const masterPath = 'brand/omega1/master/omega1-master.svg';
+const microMasterPath = 'brand/omega1/master/omega1-micro-master.svg';
+const wordmarkPath = 'brand/wordmark/master/taijifu-wordmark.svg';
+const master = read(masterPath);
+const microMaster = read(microMasterPath);
+const wordmark = read(wordmarkPath);
+
+let accentBody = inner(master);
+const strokeRoles = ['tai', 'tai', 'ji', 'fu'];
+let strokeIndex = 0;
+accentBody = accentBody.replace(/<path\b([^>]*stroke-width="[^"]+"[^>]*)\/>/g, (node) => {
+  const role = strokeRoles[strokeIndex++];
+  return node.replace('<path ', `<path stroke="var(--tj-color-${role})" `);
+});
+accentBody = accentBody.replace('<circle cx="500" cy="500" r="28" fill="currentColor"', '<circle cx="500" cy="500" r="28" fill="var(--tj-color-integration)"');
+const lastPath = [...accentBody.matchAll(/<path\b[^>]*\/>/g)].at(-1)?.[0];
+if (!lastPath) throw new Error('Omega1 terminal path not found');
+accentBody = accentBody.replace(lastPath, lastPath.replace('fill="currentColor"', 'fill="var(--tj-color-tai)"'));
+
+write('brand/omega1/variants/omega1-accent.svg', svg(
+  '0 0 1000 1000', 'TAIJIFU Ω1 Accent Mark',
+  'Canonical Ω1 geometry with TAI, JI, FU and Integration semantic accent loci.', accentBody,
+  ' data-variant="accent"',
+));
+write('brand/omega1/variants/omega1-reverse.svg', svg(
+  '0 0 1000 1000', 'TAIJIFU Ω1 Reverse Mark',
+  'Canonical Ω1 geometry for light-on-dark use; presentation supplies the paper color token.', inner(master),
+  ' data-variant="reverse"',
+));
+write('brand/omega1/variants/omega1-micro.svg', svg(
+  '0 0 1000 1000', 'TAIJIFU Ω1 Micro Mark',
+  'Canonical optical-size Ω1 geometry for use below 32 pixels.', inner(microMaster),
+  ' data-variant="micro"',
+));
+
+const masterBody = inner(master);
+const wordmarkBody = inner(wordmark);
+const horizontal = `<g data-source="omega1-master" transform="translate(100 100)">${masterBody}</g><g data-source="taijifu-wordmark" transform="translate(1200 100)">${wordmarkBody}</g>`;
+const vertical = `<g data-source="omega1-master" transform="translate(1260 100)">${masterBody}</g><g data-source="taijifu-wordmark" transform="translate(0 1300)">${wordmarkBody}</g>`;
+write('brand/omega1/lockups/taijifu-lockup-horizontal.svg', svg(
+  '0 0 4820 1200', 'TAIJIFU Horizontal Lockup', 'Canonical Ω1 master with promoted TAIJIFU wordmark.', horizontal,
+));
+write('brand/omega1/lockups/taijifu-lockup-vertical.svg', svg(
+  '0 0 3520 2400', 'TAIJIFU Vertical Lockup', 'Canonical Ω1 master above the promoted TAIJIFU wordmark.', vertical,
+));
+
+const sequence = ['G22', 'G01', 'G03', 'G36', 'G03', 'G25', 'G05'];
+const signatureBody = sequence.map((glyph, index) => {
+  const glyphBody = inner(read(`brand/omega1/hnk/${glyph}.svg`));
+  return `<g data-glyph="${glyph}" transform="translate(${index * 120} 0)">${glyphBody}</g>`;
+}).join('');
+write('brand/omega1/lockups/taijifu-hnk-signature.svg', svg(
+  '0 0 820 100', 'TAIJIFU HNK Signature',
+  'Official seven-position HNK signature: G22, G01, G03, G36, G03, G25, G05.', signatureBody,
+));
+
+const contractPath = 'brand/omega1/asset-contract.json';
+const contract = JSON.parse(read(contractPath));
+contract.productionAssets = {
+  master: masterPath,
+  accent: 'brand/omega1/variants/omega1-accent.svg',
+  reverse: 'brand/omega1/variants/omega1-reverse.svg',
+  micro: 'brand/omega1/variants/omega1-micro.svg',
+  horizontalLockup: 'brand/omega1/lockups/taijifu-lockup-horizontal.svg',
+  verticalLockup: 'brand/omega1/lockups/taijifu-lockup-vertical.svg',
+  hnkSignature: 'brand/omega1/lockups/taijifu-hnk-signature.svg',
+};
+contract.approvedWordmark = wordmarkPath;
+write(contractPath, JSON.stringify(contract, null, 2));
+
+console.log('OMEGA1_BRAND_FAMILY_BUILT');

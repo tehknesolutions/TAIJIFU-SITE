@@ -13,5 +13,15 @@
     "taijifu-lockup-vertical.svg",
     "taijifu-hnk-signature.svg"
   ],
-  "rule": "Only approved deterministic vector masters may be used as canonical brand geometry. Planned family members are contracts, not approval claims."
+  "rule": "Only approved deterministic vector masters may be used as canonical brand geometry. Planned family members are contracts, not approval claims.",
+  "productionAssets": {
+    "master": "brand/omega1/master/omega1-master.svg",
+    "accent": "brand/omega1/variants/omega1-accent.svg",
+    "reverse": "brand/omega1/variants/omega1-reverse.svg",
+    "micro": "brand/omega1/variants/omega1-micro.svg",
+    "horizontalLockup": "brand/omega1/lockups/taijifu-lockup-horizontal.svg",
+    "verticalLockup": "brand/omega1/lockups/taijifu-lockup-vertical.svg",
+    "hnkSignature": "brand/omega1/lockups/taijifu-hnk-signature.svg"
+  },
+  "approvedWordmark": "brand/wordmark/master/taijifu-wordmark.svg"
 }
