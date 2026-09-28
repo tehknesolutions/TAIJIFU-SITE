@@ -25,7 +25,7 @@ importers:
         version: 8.71.0(eslint@9.39.5)(typescript@5.9.3)
       vitest:
         specifier: ^3.2.4
-        version: 3.2.7(yaml@2.9.1)
+        version: 3.2.7(@types/node@22.20.4)(yaml@2.9.1)
       yaml:
         specifier: ^2.8.1
         version: 2.9.1
@@ -44,10 +44,10 @@ importers:
         version: 5.9.3
       vite:
         specifier: ^7.1.7
-        version: 7.3.6(yaml@2.9.1)
+        version: 7.3.6(@types/node@22.20.4)(yaml@2.9.1)
       vitest:
         specifier: ^3.2.4
-        version: 3.2.7(yaml@2.9.1)
+        version: 3.2.7(@types/node@22.20.4)(yaml@2.9.1)
 
   packages/application:
     devDependencies:
@@ -56,7 +56,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.7(yaml@2.9.1)
+        version: 3.2.7(@types/node@22.20.4)(yaml@2.9.1)
 
   packages/contracts:
     dependencies:
@@ -69,7 +69,19 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.7(yaml@2.9.1)
+        version: 3.2.7(@types/node@22.20.4)(yaml@2.9.1)
+
+  packages/design-tokens:
+    devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.9.2
+        version: 5.9.3
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.7(@types/node@22.20.4)(yaml@2.9.1)
 
   packages/domain:
     devDependencies:
@@ -78,7 +90,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.7(yaml@2.9.1)
+        version: 3.2.7(@types/node@22.20.4)(yaml@2.9.1)
 
   platform/adapters:
     dependencies:
@@ -91,7 +103,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.7(yaml@2.9.1)
+        version: 3.2.7(@types/node@22.20.4)(yaml@2.9.1)
 
   platform/runtime:
     dependencies:
@@ -107,7 +119,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.7(yaml@2.9.1)
+        version: 3.2.7(@types/node@22.20.4)(yaml@2.9.1)
 
   services/capability-resolver:
     dependencies:
@@ -120,7 +132,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.7(yaml@2.9.1)
+        version: 3.2.7(@types/node@22.20.4)(yaml@2.9.1)
 
   services/dashboard-bff:
     dependencies:
@@ -139,7 +151,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.7(yaml@2.9.1)
+        version: 3.2.7(@types/node@22.20.4)(yaml@2.9.1)
 
   services/identity:
     dependencies:
@@ -158,7 +170,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.7(yaml@2.9.1)
+        version: 3.2.7(@types/node@22.20.4)(yaml@2.9.1)
 
   services/relationships:
     dependencies:
@@ -177,7 +189,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.7(yaml@2.9.1)
+        version: 3.2.7(@types/node@22.20.4)(yaml@2.9.1)
 
 packages:
 
@@ -576,6 +588,9 @@ packages:
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+
+  '@types/node@22.20.4':
+    resolution: {integrity: sha512-zJRE40jpHtKqE/C4fgHrAKQLJuSpzEnP9ff9Y7YtoR3Wd2pwqzlekDeEuUQXjRd+QCYnVnNwuJYmhdk9XV8gvA==}
 
   '@types/stats.js@0.17.4':
     resolution: {integrity: sha512-jIBvWWShCvlBqBNIZt0KAshWpvSjhkwkEu4ZUcASoAvhmrgAUI2t1dXrjSL4xXVLB4FznPrIsX3nKXFl/Dt4vA==}
@@ -1112,6 +1127,9 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  undici-types@6.21.0:
+    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
+
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
@@ -1466,6 +1484,10 @@ snapshots:
 
   '@types/json-schema@7.0.15': {}
 
+  '@types/node@22.20.4':
+    dependencies:
+      undici-types: 6.21.0
+
   '@types/stats.js@0.17.4': {}
 
   '@types/three@0.186.0':
@@ -1578,13 +1600,13 @@ snapshots:
       chai: 5.3.3
       tinyrainbow: 2.0.0
 
-  '@vitest/mocker@3.2.7(vite@7.3.6(yaml@2.9.1))':
+  '@vitest/mocker@3.2.7(vite@7.3.6(@types/node@22.20.4)(yaml@2.9.1))':
     dependencies:
       '@vitest/spy': 3.2.7
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 7.3.6(yaml@2.9.1)
+      vite: 7.3.6(@types/node@22.20.4)(yaml@2.9.1)
 
   '@vitest/pretty-format@3.2.7':
     dependencies:
@@ -2051,17 +2073,19 @@ snapshots:
 
   typescript@5.9.3: {}
 
+  undici-types@6.21.0: {}
+
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
 
-  vite-node@3.2.4(yaml@2.9.1):
+  vite-node@3.2.4(@types/node@22.20.4)(yaml@2.9.1):
     dependencies:
       cac: 6.7.14
       debug: 4.4.3
       es-module-lexer: 1.7.0
       pathe: 2.0.3
-      vite: 7.3.6(yaml@2.9.1)
+      vite: 7.3.6(@types/node@22.20.4)(yaml@2.9.1)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -2076,7 +2100,7 @@ snapshots:
       - tsx
       - yaml
 
-  vite@7.3.6(yaml@2.9.1):
+  vite@7.3.6(@types/node@22.20.4)(yaml@2.9.1):
     dependencies:
       esbuild: 0.28.2
       fdir: 6.5.0(picomatch@4.0.7)
@@ -2085,14 +2109,15 @@ snapshots:
       rollup: 4.63.5
       tinyglobby: 0.2.17
     optionalDependencies:
+      '@types/node': 22.20.4
       fsevents: 2.3.3
       yaml: 2.9.1
 
-  vitest@3.2.7(yaml@2.9.1):
+  vitest@3.2.7(@types/node@22.20.4)(yaml@2.9.1):
     dependencies:
       '@types/chai': 5.2.3
       '@vitest/expect': 3.2.7
-      '@vitest/mocker': 3.2.7(vite@7.3.6(yaml@2.9.1))
+      '@vitest/mocker': 3.2.7(vite@7.3.6(@types/node@22.20.4)(yaml@2.9.1))
       '@vitest/pretty-format': 3.2.7
       '@vitest/runner': 3.2.7
       '@vitest/snapshot': 3.2.7
@@ -2110,9 +2135,11 @@ snapshots:
       tinyglobby: 0.2.17
       tinypool: 1.1.1
       tinyrainbow: 2.0.0
-      vite: 7.3.6(yaml@2.9.1)
-      vite-node: 3.2.4(yaml@2.9.1)
+      vite: 7.3.6(@types/node@22.20.4)(yaml@2.9.1)
+      vite-node: 3.2.4(@types/node@22.20.4)(yaml@2.9.1)
       why-is-node-running: 2.3.0
+    optionalDependencies:
+      '@types/node': 22.20.4
     transitivePeerDependencies:
       - jiti
       - less
