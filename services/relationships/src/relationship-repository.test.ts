@@ -1,11 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { InMemoryEventStore, InMemorySnapshotStore } from '@taijifu/adapters';
 import { createRelationshipRepository } from './relationship-repository';
+import type { Relationship, RelationshipTransition } from './relationship-lifecycle';
+
+type StoredEvent = RelationshipTransition['event'];
 
 describe('relationship repository', () => {
   it('persists transitions and rebuilds relationship state', async () => {
-    const events = new InMemoryEventStore<any>();
-    const snapshots = new InMemorySnapshotStore<any>();
+    const events = new InMemoryEventStore<StoredEvent>();
+    const snapshots = new InMemorySnapshotStore<Relationship>();
     const repository = createRelationshipRepository({ events, snapshots });
 
     await repository.saveInitial({ relationshipId: 'rel_1', tuid: 'tuid_1', kind: 'teacher', status: 'active', version: 1 });
@@ -16,8 +19,8 @@ describe('relationship repository', () => {
   });
 
   it('persists suspend activate and revoke lifecycle', async () => {
-    const events = new InMemoryEventStore<any>();
-    const snapshots = new InMemorySnapshotStore<any>();
+    const events = new InMemoryEventStore<StoredEvent>();
+    const snapshots = new InMemorySnapshotStore<Relationship>();
     const repository = createRelationshipRepository({ events, snapshots });
 
     await repository.saveInitial({ relationshipId: 'rel_1', tuid: 'tuid_1', kind: 'teacher', status: 'active', version: 1 });
@@ -29,8 +32,8 @@ describe('relationship repository', () => {
   });
 
   it('checkpoints current state without changing event history', async () => {
-    const events = new InMemoryEventStore<any>();
-    const snapshots = new InMemorySnapshotStore<any>();
+    const events = new InMemoryEventStore<StoredEvent>();
+    const snapshots = new InMemorySnapshotStore<Relationship>();
     const repository = createRelationshipRepository({ events, snapshots });
 
     await repository.saveInitial({ relationshipId: 'rel_1', tuid: 'tuid_1', kind: 'teacher', status: 'active', version: 1 });
@@ -43,8 +46,8 @@ describe('relationship repository', () => {
   });
 
   it('rejects a stale concurrent transition', async () => {
-    const events = new InMemoryEventStore<any>();
-    const snapshots = new InMemorySnapshotStore<any>();
+    const events = new InMemoryEventStore<StoredEvent>();
+    const snapshots = new InMemorySnapshotStore<Relationship>();
     const first = createRelationshipRepository({ events, snapshots });
     const second = createRelationshipRepository({ events, snapshots });
 
