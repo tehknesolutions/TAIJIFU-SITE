@@ -25,5 +25,11 @@ Run from the repository root when PHP is available:
 - `php wordpress/themes/taijifu-canon/tests/test-theme-contract.php`
 - `php wordpress/themes/taijifu-canon/tests/test-canon-tokens.php`
 - `php wordpress/themes/taijifu-canon/tests/test-brand-assets.php`
+- `php wordpress/themes/taijifu-canon/tests/test-accessibility-contract.php`
+- `php wordpress/themes/taijifu-canon/tests/test-front-page-contract.php`
+- `php wordpress/themes/taijifu-canon/tests/test-core-boundary.php`
+- `php wordpress/themes/taijifu-canon/tests/test-theme-templates.php`
 
-GitHub Actions runtime verification remains blocked by the repository-level runner scheduling issue; source presence alone is not CI verification.
+Source presence is not runtime verification. The current R2 evidence state is recorded in `docs/project/TAIJIFU-R2-UI-EVIDENCE-v0.1.md`.
+
+GitHub Actions runtime verification remains blocked by the repository-level runner scheduling issue (#15). WordPress activation, Core-on/Core-off runtime QA, keyboard/viewport/reduced-motion acceptance, visual regression, independent ZIP install and staging QA remain explicit release gates.
