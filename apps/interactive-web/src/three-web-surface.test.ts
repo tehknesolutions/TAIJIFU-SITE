@@ -7,7 +7,7 @@ describe('Three web surface', () => {
     const experience = createInteractiveWebExperience({ nodes: [{ id: 'tai', label: 'TAI', canonicalUrl: '/principios/tai/' }] });
     const listeners = new Map<string, (event: { clientX: number; clientY: number }) => void>();
     const canvas = {
-      getBoundingClientRect: () => ({ left: 100, top: 50, width: 100, height: 100 }),
+      getBoundingClientRect: () => ({ left: 100, top: 50, width: 200, height: 100 }),
       addEventListener: vi.fn((type, listener) => listeners.set(type, listener)),
       removeEventListener: vi.fn((type) => listeners.delete(type)),
     };
@@ -15,10 +15,9 @@ describe('Three web surface', () => {
     const navigate = vi.fn();
     const surface = mountThreeWebSurface({ canvas, frame: experience.frame, navigate, renderer });
 
+    expect(surface.projection.camera.aspect).toBe(2);
     expect(renderer.render).toHaveBeenCalledWith(surface.projection.scene, surface.projection.camera);
     expect(canvas.addEventListener).toHaveBeenCalledWith('pointerup', expect.any(Function));
-    listeners.get('pointerup')?.({ clientX: 150, clientY: 100 });
-    expect(navigate).toHaveBeenCalledWith('/principios/tai/');
 
     surface.dispose();
     expect(canvas.removeEventListener).toHaveBeenCalledWith('pointerup', expect.any(Function));

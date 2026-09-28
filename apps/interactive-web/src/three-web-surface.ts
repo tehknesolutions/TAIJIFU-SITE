@@ -11,15 +11,41 @@ export type WebSurfaceCanvas = {
 export type WebSurfaceRenderer = { render(scene: Scene, camera: Camera): void; dispose(): void };
 
 export function mountThreeWebSurface(options: {
-  canvas: WebSurfaceCanvas; frame: RenderFrame; navigate: (url: string) => void; renderer: WebSurfaceRenderer;
+  canvas: WebSurfaceCanvas;
+  frame: RenderFrame;
+  navigate: (url: string) => void;
+  renderer: WebSurfaceRenderer;
 }) {
   const projection = createThreeRendererAdapter().render(options.frame);
+  const bounds = options.canvas.getBoundingClientRect();
+
+  if (bounds.width > 0 && bounds.height > 0) {
+    projection.camera.aspect = bounds.width / bounds.height;
+    projection.camera.updateProjectionMatrix();
+  }
+
   projection.scene.updateMatrixWorld(true);
   projection.camera.updateMatrixWorld(true);
   options.renderer.render(projection.scene, projection.camera);
+
   const onPointerUp = (event: { clientX: number; clientY: number }) => {
-    handleCanonicalPointerNavigation(event, options.canvas.getBoundingClientRect(), projection.camera, projection.nodes as readonly Object3D[], options.navigate);
+    handleCanonicalPointerNavigation(
+      event,
+      options.canvas.getBoundingClientRect(),
+      projection.camera,
+      projection.nodes as readonly Object3D[],
+      options.navigate,
+    );
   };
+
   options.canvas.addEventListener('pointerup', onPointerUp);
-  return Object.freeze({ canvas: options.canvas, projection, dispose() { options.canvas.removeEventListener('pointerup', onPointerUp); options.renderer.dispose(); } });
+
+  return Object.freeze({
+    canvas: options.canvas,
+    projection,
+    dispose() {
+      options.canvas.removeEventListener('pointerup', onPointerUp);
+      options.renderer.dispose();
+    },
+  });
 }

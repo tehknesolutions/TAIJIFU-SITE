@@ -9,10 +9,11 @@ if (redirect && redirect !== window.location.pathname) {
   window.location.replace(redirect);
 } else {
   const semanticRoute = renderSemanticRoute(window.location.pathname);
-  const main = document.querySelector<HTMLElement>('#main');
+  const semanticContent =
+    document.querySelector<HTMLElement>('#semantic-content');
 
-  if (semanticRoute && main) {
-    main.innerHTML = semanticRoute;
+  if (semanticRoute && semanticContent) {
+    semanticContent.innerHTML = semanticRoute;
   }
 
   const canvas = document.querySelector<HTMLCanvasElement>('#taijifu-experience');
