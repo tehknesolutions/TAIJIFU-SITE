@@ -1,4 +1,5 @@
 import { mountBrowserThreeSurface } from './browser-three-surface.js';
+import { canonToExperienceNodes } from './content/canon-registry.js';
 import { createInteractiveWebExperience } from './experience.js';
 import type { RenderFrame } from './renderer-adapter.js';
 import type { WebSurfaceCanvas } from './three-web-surface.js';
@@ -17,13 +18,7 @@ export function bootstrapInteractiveWeb(options: {
   mountSurface?: MountSurface;
 }) {
   const experience = createInteractiveWebExperience({
-    nodes: [
-      {
-        id: 'tai',
-        label: 'TAI',
-        canonicalUrl: '/principios/tai/',
-      },
-    ],
+    nodes: canonToExperienceNodes(),
   });
 
   const mountSurface = options.mountSurface ?? mountBrowserThreeSurface;
