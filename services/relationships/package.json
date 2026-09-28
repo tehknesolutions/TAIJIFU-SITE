@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@taijifu/adapters": "workspace:*",
-    "vitest": "workspace:*",
-    "typescript": "workspace:*"
+    "vitest": "^3.2.4",
+    "typescript": "^5.9.2"
   }
 }

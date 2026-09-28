@@ -11,5 +11,5 @@
     "build": "tsc --noEmit"
   },
   "dependencies": { "@taijifu/application": "workspace:*" },
-  "devDependencies": { "vitest": "workspace:*", "typescript": "workspace:*" }
+  "devDependencies": { "vitest": "^3.2.4", "typescript": "^5.9.2" }
 }

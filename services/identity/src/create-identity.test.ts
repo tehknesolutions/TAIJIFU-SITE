@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createIdentityUseCase } from './create-identity';
+import { createIdentityUseCase, type IdentityCreated } from './create-identity';
 
 class MemoryStore {
   values = new Map<string, string>();
@@ -16,7 +16,7 @@ class MemoryEvents<T> {
 describe('createIdentityUseCase', () => {
   it('persists sovereign identity and emits its domain event', async () => {
     const identities = new MemoryStore();
-    const events = new MemoryEvents<any>();
+    const events = new MemoryEvents<IdentityCreated>();
     let sequence = 0;
     const createIdentity = createIdentityUseCase({
       identities,
