@@ -7,18 +7,22 @@
   --tj-presentation-threshold-warm: #33291f;
   --tj-presentation-threshold-deep: #17130f;
   --tj-presentation-threshold-shadow: #120f0c;
+  --tj-presentation-r01-gold: #c79a4b;
 }
 
-/*
- * Deterministic R01 environment.
- * It is complete without network media: an approved repository-owned asset may
- * enhance this layer later, but content and navigation never depend on it.
- */
+.dojo-gate {
+  min-height: calc(100svh - 5rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Deterministic approximation of the approved R01 depth while binary ingestion is pending. */
 .dojo-gate__media,
 .dojo-gate__media[data-media-state="fallback"] {
   background:
-    radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--tj-color-paper) 18%, transparent), transparent 30%),
-    linear-gradient(90deg, color-mix(in srgb, var(--tj-color-ink) 98%, transparent) 0 12%, transparent 34% 66%, color-mix(in srgb, var(--tj-color-ink) 98%, transparent) 88% 100%),
+    radial-gradient(ellipse at 72% 34%, color-mix(in srgb, var(--tj-presentation-r01-gold) 28%, transparent), transparent 28%),
+    radial-gradient(ellipse at 50% 30%, color-mix(in srgb, var(--tj-color-paper) 14%, transparent), transparent 36%),
+    linear-gradient(90deg, color-mix(in srgb, var(--tj-color-ink) 99%, transparent) 0 18%, transparent 31% 69%, color-mix(in srgb, var(--tj-color-ink) 99%, transparent) 82% 100%),
     linear-gradient(180deg, var(--tj-presentation-dojo-depth-near) 0%, var(--tj-presentation-dojo-depth-mid) 48%, var(--tj-presentation-dojo-depth-far) 100%);
 }
 
@@ -30,23 +34,100 @@
   background: linear-gradient(90deg, var(--tj-presentation-threshold-shadow), var(--tj-presentation-threshold-warm) 48%, var(--tj-presentation-threshold-deep));
 }
 
-.dojo-triad { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.dojo-gate__inner {
+  width: min(72rem, calc(100% - 18rem));
+  min-height: calc(100svh - 5rem);
+  margin-inline: auto;
+  padding: clamp(1.5rem, 3vh, 2.5rem) 0 clamp(1.25rem, 2.5vh, 2rem);
+  gap: clamp(.45rem, 1.2vh, .9rem);
+}
+
+.dojo-gate__identity img {
+  width: clamp(13rem, 23vw, 21rem);
+  height: auto;
+}
+
+#dojo-title {
+  font-size: clamp(3.2rem, 6.6vw, 6.4rem);
+  line-height: .88;
+  letter-spacing: .18em;
+  margin-right: -.18em;
+}
+
+.dojo-gate__eyebrow {
+  font-size: clamp(.72rem, 1.25vw, 1.05rem);
+  letter-spacing: .38em;
+  margin-right: -.38em;
+}
+
+.dojo-gate__maxims {
+  inset: 18% 3.5% auto;
+}
+
+.dojo-gate__maxim {
+  max-height: 20rem;
+  letter-spacing: .16em;
+  line-height: 1.65;
+}
+
+.dojo-triad {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(34rem, 100%);
+  margin-inline: auto;
+  gap: clamp(1.4rem, 3vw, 3rem);
+}
+
+.dojo-axis {
+  padding: .65rem .25rem;
+  text-align: center;
+}
+
+.dojo-axis h2 {
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  letter-spacing: .18em;
+  margin-right: -.18em;
+}
+
+.dojo-axis p {
+  font-size: .7rem;
+  letter-spacing: .16em;
+}
+
+.dojo-axis blockquote {
+  font-size: .76rem;
+  line-height: 1.35;
+}
+
+.primary-cta {
+  margin-top: .35rem;
+  min-width: min(22rem, 100%);
+  min-height: 4rem;
+  letter-spacing: .18em;
+  border-color: var(--tj-presentation-r01-gold);
+}
+
+.dojo-gate__footer {
+  width: min(42rem, 100%);
+  margin-inline: auto;
+}
+
+.dojo-gate__provenance {
+  letter-spacing: .28em;
+  font-size: .62rem;
+}
 
 @media (max-width: 48rem) {
-  .dojo-gate {
-    min-height: auto;
-  }
+  .dojo-gate { min-height: auto; }
 
   .dojo-gate__inner {
+    width: min(100% - 2rem, 36rem);
     min-height: auto;
     padding-block: clamp(6rem, 18vw, 8rem) var(--tj-space-8);
     gap: var(--tj-space-5);
   }
 
-  .dojo-gate__identity img {
-    width: min(56vw, 15rem);
-    height: auto;
-  }
+  .dojo-gate__identity img { width: min(56vw, 15rem); height: auto; }
+  #dojo-title { font-size: clamp(2.8rem, 15vw, 4.5rem); }
 
   .dojo-gate__maxims {
     position: static;
@@ -56,30 +137,16 @@
     margin-inline: auto;
   }
 
-  .dojo-gate__maxim {
-    writing-mode: horizontal-tb;
-    text-orientation: mixed;
-    text-align: center;
-  }
-
-  .dojo-triad { grid-template-columns: 1fr; }
+  .dojo-gate__maxim { writing-mode: horizontal-tb; text-orientation: mixed; text-align: center; }
+  .dojo-triad { grid-template-columns: 1fr; width: min(100%, 24rem); }
 
   .dojo-axis,
   .primary-cta,
   .site-header__dojo-link,
-  .dojo-gate__scroll-cue {
-    min-height: 44px;
-  }
+  .dojo-gate__scroll-cue { min-height: 44px; }
 
-  .dojo-axis {
-    display: grid;
-    align-content: center;
-    width: 100%;
-  }
-
-  .primary-cta {
-    width: min(100%, 22rem);
-  }
+  .dojo-axis { display: grid; align-content: center; width: 100%; }
+  .primary-cta { width: min(100%, 22rem); }
 
   .dojo-gate__footer {
     position: static;
@@ -91,14 +158,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .dojo-gate *,
-  .dojo-gate *::before,
-  .dojo-gate *::after {
-    animation: none;
-    transition: none;
-  }
+  html { scroll-behavior: auto; }
+  .dojo-gate *, .dojo-gate *::before, .dojo-gate *::after { animation: none; transition: none; }
 }
