@@ -44,7 +44,7 @@ const routeItems: readonly CanonContentItem[] = siteRoutes.map((route) =>
     slug: route.canonicalUrl.split('/').filter(Boolean).at(-1) ?? route.id,
     canonicalUrl: route.canonicalUrl,
     kind: ['tai', 'ji', 'fu'].includes(route.id) ? ('principle' as const) : ('page' as const),
-    parentId: route.id === 'home' ? undefined : 'home',
+    parentId: route.id === 'home' ? undefined : ['tai', 'ji', 'fu'].includes(route.id) ? 'fundamentos' : 'home',
     source: Object.freeze([
       route.source === 'canon-sync'
         ? ('canon-sync' as const)
