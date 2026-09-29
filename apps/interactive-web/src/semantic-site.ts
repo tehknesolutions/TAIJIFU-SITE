@@ -84,7 +84,7 @@ function renderContextNavigation(route: NonNullable<ReturnType<typeof findSiteRo
     ? `<nav class="content-context" aria-label="Contexto da seção">${items.join('')}</nav>`
     : '';
 }
-\nexport function renderSemanticRoute(pathname: string): string | null {
+export function renderSemanticRoute(pathname: string): string | null {
   const route = findSiteRoute(pathname);
   if (!route || route.id === 'home') return null;
 
@@ -115,7 +115,8 @@ function renderContextNavigation(route: NonNullable<ReturnType<typeof findSiteRo
     </header>
     <div class="content-page__body">
       ${body}
-      ${renderContextNavigation(route)}\n      <nav class="content-navigation" aria-label="Navegação TAIJIFU">${renderPrimaryNavigation()}</nav>
+      ${renderContextNavigation(route)}
+      <nav class="content-navigation" aria-label="Navegação TAIJIFU">${renderPrimaryNavigation()}</nav>
     </div>
   </section>`;
 }
