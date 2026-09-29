@@ -53,6 +53,14 @@ describe('semantic TAIJIFU site', () => {
     expect(legend).toContain('data-node-id="home"');
     expect(legend).toContain('data-node-id="tai"');
     expect(legend).toContain('href="/principios/tai/"');
+    expect(legend).toContain('href="/principios/ji/"');
+    expect(legend).toContain('href="/principios/fu/"');
+  });
+
+  it('renders all three canonical principle routes with official triad content', () => {
+    expect(renderSemanticRoute('/principios/tai/')).toContain('TAI — Essência / Permanência — Axis');
+    expect(renderSemanticRoute('/principios/ji/')).toContain('JI — Discernimento / Adaptação — Nexus');
+    expect(renderSemanticRoute('/principios/fu/')).toContain('FU — Manifestação / Fluxo — Flow');
   });
 
   it('leaves the homepage to the Dojo Gate document', () => {
