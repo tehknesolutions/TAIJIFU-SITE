@@ -27,11 +27,11 @@ describe('R01/R02 Dojo Gate north star', () => {
 });
 
 describe('Dojo Gate resilience', () => {
-  it('declares environmental media optional and supplies a deterministic fallback layer', () => {
+  it('declares environmental media optional and supplies a presentation-layer fallback', () => {
     expect(html).toContain('class="dojo-gate__media" aria-hidden="true" data-media-state="fallback"');
     expect(html).toContain('data-media-optional="true"');
     expect(css).toContain('.dojo-gate__media');
-    expect(css).toContain('linear-gradient');
+    expect(css).toContain('var(--tj-presentation-');
   });
 
   it('keeps provenance and a scroll cue inside the primary threshold', () => {
@@ -49,10 +49,27 @@ describe('Dojo Gate resilience', () => {
 });
 
 describe('North Star design-system authority', () => {
-  it('consumes semantic design tokens rather than owning a second token vocabulary', () => {
+  it('consumes semantic design tokens rather than owning a second canonical token vocabulary', () => {
     expect(css).toContain("@import '@taijifu/design-tokens/tokens.css';");
     expect(css).toContain('var(--tj-color-');
     expect(css).toContain('var(--tj-space-');
+  });
+
+  it('keeps atmospheric values explicitly presentation-scoped while color calibration remains unresolved', () => {
+    expect(css).toContain('--tj-presentation-dojo-depth-near');
+    expect(css).toContain('--tj-presentation-dojo-depth-mid');
+    expect(css).toContain('--tj-presentation-dojo-depth-far');
+    expect(css).not.toContain('--tj-calibration-tai:');
+    expect(css).not.toContain('--tj-calibration-ji:');
+    expect(css).not.toContain('--tj-calibration-fu:');
+    expect(css).not.toContain('--tj-calibration-integration:');
+  });
+
+  it('does not introduce prohibited presentation primitives', () => {
+    expect(css.toLowerCase()).not.toContain('glassmorphism');
+    expect(css.toLowerCase()).not.toContain('neon');
+    expect(css.toLowerCase()).not.toContain('drop-shadow(');
+    expect(css.toLowerCase()).not.toContain('backdrop-filter');
   });
 });
 
