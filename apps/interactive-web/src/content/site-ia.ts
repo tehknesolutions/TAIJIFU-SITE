@@ -82,6 +82,20 @@ export const siteRoutes: readonly SiteRoute[] = Object.freeze([
     contentState: 'official-body-recovered',
   }),
   Object.freeze({
+    id: 'ji',
+    title: 'JI',
+    canonicalUrl: '/principios/ji/',
+    source: 'interactive-web-contract',
+    contentState: 'official-body-recovered',
+  }),
+  Object.freeze({
+    id: 'fu',
+    title: 'FU',
+    canonicalUrl: '/principios/fu/',
+    source: 'interactive-web-contract',
+    contentState: 'official-body-recovered',
+  }),
+  Object.freeze({
     id: 'treino-personalizado',
     title: 'Treino Personalizado',
     canonicalUrl: '/treino-personalizado/',
