@@ -5,6 +5,7 @@ import {
   renderPrimaryNavigation,
   renderSemanticRoute,
 } from './semantic-site.js';
+import { findSiteRoute } from './content/site-ia.js';
 
 const primaryNavigation =
   document.querySelector<HTMLElement>('#primary-navigation');
@@ -46,9 +47,11 @@ if (redirect && redirect !== window.location.pathname) {
   };
 
   if (canvas) {
+    const currentRoute = findSiteRoute(window.location.pathname);
     const runtime = bootstrapInteractiveWeb({
       canvas,
       navigate: (canonicalUrl) => window.location.assign(canonicalUrl),
+      initialFocusNode: currentRoute?.id ?? null,
       onFocus: (focus) => {
         if (focusLabel) {
           focusLabel.value = focus?.label ?? 'TAIJIFU';
@@ -56,6 +59,7 @@ if (redirect && redirect !== window.location.pathname) {
         syncLegendFocus(focus?.nodeId ?? null);
       },
     });
+ 
 
     for (const link of legendLinks) {
       const nodeId = link.dataset.nodeId ?? null;
