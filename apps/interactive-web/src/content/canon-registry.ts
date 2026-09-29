@@ -37,6 +37,16 @@ export type CanonCoverage = Readonly<{
   unreconciledItems: readonly string[];
 }>;
 
+const sectionParents = Object.freeze<Record<string, string>>({
+  tai: 'fundamentos',
+  ji: 'fundamentos',
+  fu: 'fundamentos',
+  metodo: 'influencias',
+  graduacao: 'metodo',
+  referencias: 'graduacao',
+  historia: 'referencias',
+});
+
 const routeItems: readonly CanonContentItem[] = siteRoutes.map((route) =>
   Object.freeze({
     id: route.id,
@@ -44,7 +54,7 @@ const routeItems: readonly CanonContentItem[] = siteRoutes.map((route) =>
     slug: route.canonicalUrl.split('/').filter(Boolean).at(-1) ?? route.id,
     canonicalUrl: route.canonicalUrl,
     kind: ['tai', 'ji', 'fu'].includes(route.id) ? ('principle' as const) : ('page' as const),
-    parentId: route.id === 'home' ? undefined : ['tai', 'ji', 'fu'].includes(route.id) ? 'fundamentos' : 'home',
+    parentId: route.id === 'home' ? undefined : sectionParents[route.id] ?? 'home',
     source: Object.freeze([
       route.source === 'canon-sync'
         ? ('canon-sync' as const)
@@ -66,6 +76,18 @@ const routeItems: readonly CanonContentItem[] = siteRoutes.map((route) =>
   }),
 );
 
+export const canonRegistry: readonly CanonContentItem[] = Object.freeze([
+  ...routeItems,
+  Object.freeze({
+    id: 'integration',
+    title: 'Integração',
+    slug: 'integracao',
+    kind: 'section' as const,
+    source: Object.freeze(['canon-sync' as const]),
+    status: 'needs-reconciliation' as const,
+    summary: 'Conceito canônico ainda sem rota pública reconciliada.',
+  }),
+]);
 
 export function getCanonCoverage(): CanonCoverage {
   const pendingOfficialBodies = siteRoutes
