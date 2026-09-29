@@ -23,6 +23,12 @@ describe('TAIJIFU canon registry', () => {
         status: 'confirmed',
       }),
     );
+    expect(canonRegistry).toContainEqual(
+      expect.objectContaining({ id: 'ji', canonicalUrl: '/principios/ji/', status: 'confirmed' }),
+    );
+    expect(canonRegistry).toContainEqual(
+      expect.objectContaining({ id: 'fu', canonicalUrl: '/principios/fu/', status: 'confirmed' }),
+    );
   });
 
   it('projects the canonical home and confirmed public routes into interactive nodes', () => {
@@ -51,12 +57,18 @@ describe('TAIJIFU canon registry', () => {
         parentId: 'home',
       }),
     );
+    expect(nodes).toContainEqual(
+      expect.objectContaining({ id: 'ji', label: 'JI', canonicalUrl: '/principios/ji/' }),
+    );
+    expect(nodes).toContainEqual(
+      expect.objectContaining({ id: 'fu', label: 'FU', canonicalUrl: '/principios/fu/' }),
+    );
   });
 
-  it('does not expose semantic principles without reconciled public URLs', () => {
+  it('keeps only unresolved semantic concepts out of the interactive graph', () => {
     const ids = canonToExperienceNodes().map((node) => node.id);
-    expect(ids).not.toContain('ji');
-    expect(ids).not.toContain('fu');
+    expect(ids).toContain('ji');
+    expect(ids).toContain('fu');
     expect(ids).not.toContain('integration');
   });
 
@@ -64,9 +76,9 @@ describe('TAIJIFU canon registry', () => {
     const coverage = getCanonCoverage();
 
     expect(coverage.totalItems).toBe(canonRegistry.length);
-    expect(coverage.reconciledRoutes).toBe(10);
-    expect(coverage.recoveredOfficialBodies).toBe(9);
+    expect(coverage.reconciledRoutes).toBe(12);
+    expect(coverage.recoveredOfficialBodies).toBe(11);
     expect(coverage.pendingOfficialBodies).toEqual(['referencias']);
-    expect(coverage.unreconciledItems).toEqual(['ji', 'fu', 'integration']);
+    expect(coverage.unreconciledItems).toEqual(['integration']);
   });
 });
