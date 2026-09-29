@@ -38,6 +38,17 @@ describe('semantic TAIJIFU site', () => {
     expect(graduation).not.toContain('ainda não recuperado');
   });
 
+  it('renders a canonical journey overview before graduation detail', () => {
+    const graduation = renderSemanticRoute('/graduacao/') ?? '';
+    expect(graduation).toContain('id="curriculum-overview-title"');
+    expect(graduation).toContain('Percurso canônico');
+    expect(graduation).toContain('data-belt-id="BELT-WHITE"');
+    expect(graduation).toContain('data-belt-id="BELT-BLACK"');
+    expect(graduation).toContain('3 Caminhos · 12 Núcleos');
+    expect(graduation).toContain('0 Caminhos · 0 Núcleos');
+    expect(graduation).toContain('href="/metodo/"');
+  });
+
   it('maps legacy paths to current canonical destinations', () => {
     expect(canonicalRedirectFor('/filosofia/')).toBe('/fundamentos/');
   });
