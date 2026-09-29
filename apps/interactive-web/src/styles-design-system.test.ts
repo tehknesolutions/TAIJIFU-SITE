@@ -23,6 +23,7 @@ describe('Web v1 visual design-system contract', () => {
     expect(styles).not.toContain('--space-6:');
     expect(styles).not.toContain('--motion-fast:');
     expect(styles).not.toContain('--motion-standard:');
+    expect(styles.match(/--tj-color-(paper|ink|metal|tai|ji|fu|integration)\\s*:/g) ?? []).toHaveLength(0);
   });
 
   it('defines the Dojo Gate surface once', () => {
