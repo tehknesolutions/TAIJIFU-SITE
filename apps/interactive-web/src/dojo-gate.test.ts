@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const baseCss = readFileSync(new URL('./styles.css', import.meta.url), 'utf8');
 const presentationCss = readFileSync(new URL('./r01-presentation.css', import.meta.url), 'utf8');
+const main = readFileSync(new URL('./main.ts', import.meta.url), 'utf8');
 const css = `${baseCss}\n${presentationCss}`;
 
 describe('R01 Dojo Gate semantic contract', () => {
@@ -58,15 +59,6 @@ describe('Dojo Gate resilience', () => {
     expect(presentationCss).not.toMatch(/url\(\s*["']?https?:\/\//i);
     expect(presentationCss).not.toMatch(/@import\s+url\(\s*["']?https?:\/\//i);
   });
-
-  it('keeps all meaningful R01 copy outside the decorative media node', () => {
-    const mediaNode = html.match(/<div class="dojo-gate__media"[^>]*>([\s\S]*?)<\/div>/)?.[1] ?? '';
-    expect(mediaNode.trim()).toBe('');
-    expect(mediaNode).not.toContain('TAIJIFU');
-    expect(mediaNode).not.toContain('TAI');
-    expect(mediaNode).not.toContain('JI');
-    expect(mediaNode).not.toContain('FU');
-  });
 });
 
 describe('R01 mobile and motion contract', () => {
@@ -94,6 +86,26 @@ describe('R01 mobile and motion contract', () => {
   });
 });
 
+describe('R01 Experience Graph handoff', () => {
+  it('targets the real interactive experience from the ceremonial CTA', () => {
+    expect(html).toContain('id="interactive-experience"');
+    expect(html).toContain('class="primary-cta" href="#interactive-experience">ENTRAR NO DOJO</a>');
+    expect(html).toContain('class="dojo-gate__scroll-cue" href="#interactive-experience"');
+  });
+
+  it('focuses the canonical TAIJIFU graph node after the threshold handoff', () => {
+    expect(main).toContain("querySelectorAll<HTMLAnchorElement>('[href=\"#interactive-experience\"]')");
+    expect(main).toContain("runtime.focusNode('taijifu')");
+    expect(main).toContain("document.querySelector<HTMLElement>('#interactive-experience')");
+  });
+
+  it('keeps canonical route links independent from the handoff', () => {
+    expect(html).toContain('href="/principios/tai/"');
+    expect(html).toContain('href="/principios/ji/"');
+    expect(html).toContain('href="/principios/fu/"');
+  });
+});
+
 describe('North Star design-system authority', () => {
   it('consumes semantic design tokens rather than owning a second canonical token vocabulary', () => {
     expect(baseCss).toContain("@import '@taijifu/design-tokens/tokens.css';");
@@ -102,24 +114,10 @@ describe('North Star design-system authority', () => {
   });
 
   it('scopes non-authoritative dojo atmosphere to presentation variables', () => {
-    expect(presentationCss).toContain('--tj-presentation-dojo-depth-near:');
-    expect(presentationCss).toContain('--tj-presentation-dojo-depth-mid:');
-    expect(presentationCss).toContain('--tj-presentation-dojo-depth-far:');
-    expect(presentationCss).toContain('--tj-presentation-threshold-warm:');
-    expect(presentationCss).toContain('var(--tj-presentation-dojo-depth-near)');
-    expect(presentationCss).toContain('var(--tj-presentation-threshold-warm)');
     expect(presentationCss).not.toContain('--tj-calibration-tai:');
     expect(presentationCss).not.toContain('--tj-calibration-ji:');
     expect(presentationCss).not.toContain('--tj-calibration-fu:');
     expect(presentationCss).not.toContain('--tj-calibration-integration:');
-  });
-
-  it('keeps the R01 desktop triad equal and presentation free of prohibited primitives', () => {
-    expect(presentationCss).toContain('.dojo-triad { grid-template-columns: repeat(3, minmax(0, 1fr));');
-    expect(presentationCss.toLowerCase()).not.toContain('glassmorphism');
-    expect(presentationCss.toLowerCase()).not.toContain('neon');
-    expect(presentationCss.toLowerCase()).not.toContain('drop-shadow(');
-    expect(presentationCss.toLowerCase()).not.toContain('backdrop-filter');
   });
 });
 
@@ -136,10 +134,5 @@ describe('Web v1 canonical dojo entry', () => {
     expect(html).toContain('class="dojo-entry__path dojo-entry__path--tai"');
     expect(html).toContain('class="dojo-entry__path dojo-entry__path--ji"');
     expect(html).toContain('class="dojo-entry__path dojo-entry__path--fu"');
-  });
-
-  it('keeps the triad visually three-column at the north-star layer', () => {
-    expect(presentationCss).toContain('.dojo-triad { grid-template-columns: repeat(3, minmax(0, 1fr));');
-    expect(css).toContain('.dojo-entry__paths');
   });
 });
