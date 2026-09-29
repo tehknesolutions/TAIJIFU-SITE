@@ -1,23 +1,13 @@
 @import '@taijifu/design-tokens/tokens.css';
 
 :root {
-  --tj-color-paper: #f4efe4;
-  --tj-color-ink: #1c1c1a;
-  --tj-color-ink: #24231f;
-  --tj-color-metal: #6f6b62;
-  --tj-color-tai: #b43a32;
-  --tj-color-ji: #2d6487;
-  --tj-color-fu: #b68a2f;
-  --tj-color-integration: #467257;
-  --tj-space-page-gutter: 24px;
-  --tj-space-1: 0.5rem;
-  --tj-space-2: 1rem;
-  --tj-space-3: 1.5rem;
-  --tj-space-4: 2rem;
-  --tj-space-6: 3rem;
+  --tj-space-page-gutter: var(--tj-space-lg);
+  --tj-space-1: var(--tj-space-sm);
+  --tj-space-2: var(--tj-space-md);
+  --tj-space-3: var(--tj-space-lg);
+  --tj-space-4: var(--tj-space-xl);
+  --tj-space-6: var(--tj-space-xxl);
   --tj-content-max: 76rem;
-  --tj-motion-fast: 160ms;
-  --tj-motion-standard: 240ms;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -260,9 +250,7 @@ a { color: inherit; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .interactive-origin-mark {
-    transition: none;
-  }
+  .interactive-origin-mark { transition: none; }
 }
 
 .interactive-node-links {
