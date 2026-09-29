@@ -24,7 +24,7 @@ export const siteRoutes: readonly SiteRoute[] = Object.freeze([
     canonicalUrl: '/manifesto/',
     legacyUrls: Object.freeze(['/o-que-e/']),
     source: 'canon-sync',
-    contentState: 'official-route-body-pending',
+    contentState: 'official-body-recovered',
   }),
   Object.freeze({
     id: 'fundamentos',
@@ -32,7 +32,7 @@ export const siteRoutes: readonly SiteRoute[] = Object.freeze([
     canonicalUrl: '/fundamentos/',
     legacyUrls: Object.freeze(['/filosofia/']),
     source: 'canon-sync',
-    contentState: 'official-route-body-pending',
+    contentState: 'official-body-recovered',
   }),
   Object.freeze({
     id: 'influencias',
@@ -40,7 +40,7 @@ export const siteRoutes: readonly SiteRoute[] = Object.freeze([
     canonicalUrl: '/influencias/',
     legacyUrls: Object.freeze(['/artes-base/']),
     source: 'canon-sync',
-    contentState: 'official-route-body-pending',
+    contentState: 'official-body-recovered',
   }),
   Object.freeze({
     id: 'metodo',
@@ -48,7 +48,7 @@ export const siteRoutes: readonly SiteRoute[] = Object.freeze([
     canonicalUrl: '/metodo/',
     legacyUrls: Object.freeze(['/trilhas/']),
     source: 'canon-sync',
-    contentState: 'official-route-body-pending',
+    contentState: 'official-body-recovered',
   }),
   Object.freeze({
     id: 'graduacao',
@@ -56,7 +56,7 @@ export const siteRoutes: readonly SiteRoute[] = Object.freeze([
     canonicalUrl: '/graduacao/',
     legacyUrls: Object.freeze(['/niveis-e-graduacao/']),
     source: 'canon-sync',
-    contentState: 'official-route-body-pending',
+    contentState: 'official-body-recovered',
   }),
   Object.freeze({
     id: 'referencias',
@@ -72,21 +72,21 @@ export const siteRoutes: readonly SiteRoute[] = Object.freeze([
     canonicalUrl: '/historia/',
     legacyUrls: Object.freeze(['/registro/']),
     source: 'canon-sync',
-    contentState: 'official-route-body-pending',
+    contentState: 'official-body-recovered',
   }),
   Object.freeze({
     id: 'tai',
     title: 'TAI',
     canonicalUrl: '/principios/tai/',
     source: 'interactive-web-contract',
-    contentState: 'official-route-body-pending',
+    contentState: 'official-body-recovered',
   }),
   Object.freeze({
     id: 'treino-personalizado',
     title: 'Treino Personalizado',
     canonicalUrl: '/treino-personalizado/',
     source: 'personalized-training-spec',
-    contentState: 'official-route-body-pending',
+    contentState: 'official-body-recovered',
   }),
 ]);
 
