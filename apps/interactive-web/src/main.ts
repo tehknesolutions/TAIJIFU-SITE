@@ -5,6 +5,7 @@ import {
   renderPrimaryNavigation,
   renderSemanticRoute,
 } from './semantic-site.js';
+import { findSiteRoute } from './content/site-ia.js';
 
 const primaryNavigation =
   document.querySelector<HTMLElement>('#primary-navigation');
@@ -56,6 +57,11 @@ if (redirect && redirect !== window.location.pathname) {
         syncLegendFocus(focus?.nodeId ?? null);
       },
     });
+
+    const currentRoute = findSiteRoute(window.location.pathname);
+    if (currentRoute) {
+      runtime.focusNode(currentRoute.id);
+    }
 
     for (const link of legendLinks) {
       const nodeId = link.dataset.nodeId ?? null;
