@@ -52,6 +52,22 @@ describe('Dojo Gate resilience', () => {
     expect(css).toContain('.dojo-gate__media');
   });
 
+  it('keeps the environment independent from remote runtime media', () => {
+    expect(presentationCss).toContain('--tj-presentation-environment-mode: fallback;');
+    expect(presentationCss).toContain('.dojo-gate__media[data-media-state="fallback"]');
+    expect(presentationCss).not.toMatch(/url\(\s*["']?https?:\/\//i);
+    expect(presentationCss).not.toMatch(/@import\s+url\(\s*["']?https?:\/\//i);
+  });
+
+  it('keeps all meaningful R01 copy outside the decorative media node', () => {
+    const mediaNode = html.match(/<div class="dojo-gate__media"[^>]*>([\s\S]*?)<\/div>/)?.[1] ?? '';
+    expect(mediaNode.trim()).toBe('');
+    expect(mediaNode).not.toContain('TAIJIFU');
+    expect(mediaNode).not.toContain('TAI');
+    expect(mediaNode).not.toContain('JI');
+    expect(mediaNode).not.toContain('FU');
+  });
+
   it('defines compact and reduced-motion presentation gates', () => {
     expect(css).toContain('@media (max-width: 48rem)');
     expect(css).toContain('@media (prefers-reduced-motion: reduce)');
