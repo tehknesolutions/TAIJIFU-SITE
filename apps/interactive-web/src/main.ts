@@ -7,43 +7,26 @@ import {
 } from './semantic-site.js';
 import { findSiteRoute } from './content/site-ia.js';
 
-const primaryNavigation =
-  document.querySelector<HTMLElement>('#primary-navigation');
-if (primaryNavigation) {
-  primaryNavigation.innerHTML = renderPrimaryNavigation();
-}
+const primaryNavigation = document.querySelector<HTMLElement>('#primary-navigation');
+if (primaryNavigation) primaryNavigation.innerHTML = renderPrimaryNavigation();
 
-const interactiveLegend =
-  document.querySelector<HTMLElement>('#interactive-node-links');
-if (interactiveLegend) {
-  interactiveLegend.innerHTML = renderInteractiveLegend();
-}
+const interactiveLegend = document.querySelector<HTMLElement>('#interactive-node-links');
+if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend();
 
 const redirect = canonicalRedirectFor(window.location.pathname);
 if (redirect && redirect !== window.location.pathname) {
   window.location.replace(redirect);
 } else {
   const semanticRoute = renderSemanticRoute(window.location.pathname);
-  const semanticContent =
-    document.querySelector<HTMLElement>('#semantic-content');
-
-  if (semanticRoute && semanticContent) {
-    semanticContent.innerHTML = semanticRoute;
-  }
+  const semanticContent = document.querySelector<HTMLElement>('#semantic-content');
+  if (semanticRoute && semanticContent) semanticContent.innerHTML = semanticRoute;
 
   const canvas = document.querySelector<HTMLCanvasElement>('#taijifu-experience');
-  const focusLabel =
-    document.querySelector<HTMLOutputElement>('#interactive-focus-label');
-  const legendLinks = Array.from(
-    document.querySelectorAll<HTMLAnchorElement>(
-      '#interactive-node-links [data-node-id]',
-    ),
-  );
+  const focusLabel = document.querySelector<HTMLOutputElement>('#interactive-focus-label');
+  const legendLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('#interactive-node-links [data-node-id]'));
 
   const syncLegendFocus = (nodeId: string | null) => {
-    for (const link of legendLinks) {
-      link.classList.toggle('is-focused', link.dataset.nodeId === nodeId);
-    }
+    for (const link of legendLinks) link.classList.toggle('is-focused', link.dataset.nodeId === nodeId);
   };
 
   if (canvas) {
@@ -53,13 +36,19 @@ if (redirect && redirect !== window.location.pathname) {
       navigate: (canonicalUrl) => window.location.assign(canonicalUrl),
       initialFocusNode: currentRoute?.id ?? null,
       onFocus: (focus) => {
-        if (focusLabel) {
-          focusLabel.value = focus?.label ?? 'TAIJIFU';
-        }
+        if (focusLabel) focusLabel.value = focus?.label ?? 'TAIJIFU';
         syncLegendFocus(focus?.nodeId ?? null);
       },
     });
- 
+
+    const interactiveExperience = document.querySelector<HTMLElement>('#interactive-experience');
+    const dojoEntryLinks = document.querySelectorAll<HTMLAnchorElement>('[href="#interactive-experience"]');
+    for (const link of dojoEntryLinks) {
+      link.addEventListener('click', () => {
+        runtime.focusNode('taijifu');
+        interactiveExperience?.focus({ preventScroll: true });
+      });
+    }
 
     for (const link of legendLinks) {
       const nodeId = link.dataset.nodeId ?? null;
