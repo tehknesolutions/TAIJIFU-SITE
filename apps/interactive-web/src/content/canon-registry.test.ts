@@ -54,14 +54,14 @@ describe('TAIJIFU canon registry', () => {
         id: 'tai',
         label: 'TAI',
         canonicalUrl: '/principios/tai/',
-        parentId: 'home',
+        parentId: 'fundamentos',
       }),
     );
     expect(nodes).toContainEqual(
-      expect.objectContaining({ id: 'ji', label: 'JI', canonicalUrl: '/principios/ji/' }),
+      expect.objectContaining({ id: 'ji', label: 'JI', canonicalUrl: '/principios/ji/', parentId: 'fundamentos' }),
     );
     expect(nodes).toContainEqual(
-      expect.objectContaining({ id: 'fu', label: 'FU', canonicalUrl: '/principios/fu/' }),
+      expect.objectContaining({ id: 'fu', label: 'FU', canonicalUrl: '/principios/fu/', parentId: 'fundamentos' }),
     );
   });
 
