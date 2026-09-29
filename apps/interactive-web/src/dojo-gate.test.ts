@@ -2,7 +2,9 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
-const css = readFileSync(new URL('./styles.css', import.meta.url), 'utf8');
+const baseCss = readFileSync(new URL('./styles.css', import.meta.url), 'utf8');
+const presentationCss = readFileSync(new URL('./r01-presentation.css', import.meta.url), 'utf8');
+const css = `${baseCss}\n${presentationCss}`;
 
 describe('R01 Dojo Gate semantic contract', () => {
   it('keeps the ceremonial header semantic and exposes the full threshold action', () => {
@@ -46,6 +48,7 @@ describe('Dojo Gate resilience', () => {
   it('declares environmental media optional and supplies a presentation-layer fallback', () => {
     expect(html).toContain('class="dojo-gate__media" aria-hidden="true" data-media-state="fallback"');
     expect(html).toContain('data-media-optional="true"');
+    expect(html).toContain('href="/src/r01-presentation.css"');
     expect(css).toContain('.dojo-gate__media');
   });
 
@@ -59,30 +62,30 @@ describe('Dojo Gate resilience', () => {
 
 describe('North Star design-system authority', () => {
   it('consumes semantic design tokens rather than owning a second canonical token vocabulary', () => {
-    expect(css).toContain("@import '@taijifu/design-tokens/tokens.css';");
+    expect(baseCss).toContain("@import '@taijifu/design-tokens/tokens.css';");
     expect(css).toContain('var(--tj-color-');
     expect(css).toContain('var(--tj-space-');
   });
 
   it('scopes non-authoritative dojo atmosphere to presentation variables', () => {
-    expect(css).toContain('--tj-presentation-dojo-depth-near:');
-    expect(css).toContain('--tj-presentation-dojo-depth-mid:');
-    expect(css).toContain('--tj-presentation-dojo-depth-far:');
-    expect(css).toContain('--tj-presentation-threshold-warm:');
-    expect(css).toContain('var(--tj-presentation-dojo-depth-near)');
-    expect(css).toContain('var(--tj-presentation-threshold-warm)');
-    expect(css).not.toContain('--tj-calibration-tai:');
-    expect(css).not.toContain('--tj-calibration-ji:');
-    expect(css).not.toContain('--tj-calibration-fu:');
-    expect(css).not.toContain('--tj-calibration-integration:');
+    expect(presentationCss).toContain('--tj-presentation-dojo-depth-near:');
+    expect(presentationCss).toContain('--tj-presentation-dojo-depth-mid:');
+    expect(presentationCss).toContain('--tj-presentation-dojo-depth-far:');
+    expect(presentationCss).toContain('--tj-presentation-threshold-warm:');
+    expect(presentationCss).toContain('var(--tj-presentation-dojo-depth-near)');
+    expect(presentationCss).toContain('var(--tj-presentation-threshold-warm)');
+    expect(presentationCss).not.toContain('--tj-calibration-tai:');
+    expect(presentationCss).not.toContain('--tj-calibration-ji:');
+    expect(presentationCss).not.toContain('--tj-calibration-fu:');
+    expect(presentationCss).not.toContain('--tj-calibration-integration:');
   });
 
   it('keeps the R01 desktop triad equal and presentation free of prohibited primitives', () => {
-    expect(css).toContain('.dojo-triad { grid-template-columns: repeat(3, minmax(0, 1fr));');
-    expect(css.toLowerCase()).not.toContain('glassmorphism');
-    expect(css.toLowerCase()).not.toContain('neon');
-    expect(css.toLowerCase()).not.toContain('drop-shadow(');
-    expect(css.toLowerCase()).not.toContain('backdrop-filter');
+    expect(presentationCss).toContain('.dojo-triad { grid-template-columns: repeat(3, minmax(0, 1fr));');
+    expect(presentationCss.toLowerCase()).not.toContain('glassmorphism');
+    expect(presentationCss.toLowerCase()).not.toContain('neon');
+    expect(presentationCss.toLowerCase()).not.toContain('drop-shadow(');
+    expect(presentationCss.toLowerCase()).not.toContain('backdrop-filter');
   });
 });
 
@@ -102,7 +105,7 @@ describe('Web v1 canonical dojo entry', () => {
   });
 
   it('keeps the triad visually three-column at the north-star layer', () => {
-    expect(css).toContain('.dojo-triad { grid-template-columns: repeat(3, minmax(0, 1fr));');
+    expect(presentationCss).toContain('.dojo-triad { grid-template-columns: repeat(3, minmax(0, 1fr));');
     expect(css).toContain('.dojo-entry__paths');
   });
 });
