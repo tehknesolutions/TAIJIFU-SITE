@@ -156,3 +156,9 @@ a { color: inherit; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   .primary-cta:hover, .dojo-entry__path:hover { transform: none; }
 }
+
+
+.content-context { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--tj-space-1) var(--tj-space-2); margin-top: var(--tj-space-4); padding: var(--tj-space-2) 0; border-top: 1px solid color-mix(in srgb, var(--tj-color-ink) 20%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--tj-color-ink) 20%, transparent); font-family: var(--tj-font-meta); font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.content-context a { text-decoration: none; }
+.content-context a:hover, .content-context a:focus-visible { text-decoration: underline; text-underline-offset: 0.2em; }
+.content-context__home { font-weight: 700; }

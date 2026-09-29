@@ -67,3 +67,18 @@ describe('semantic TAIJIFU site', () => {
     expect(renderSemanticRoute('/')).toBeNull();
   });
 });
+
+
+describe('contextual principle navigation', () => {
+  it('keeps TAI, JI and FU inside Fundamentos and exposes adjacent canonical paths', () => {
+    const tai = renderSemanticRoute('/principios/tai/') ?? '';
+    const ji = renderSemanticRoute('/principios/ji/') ?? '';
+    const fu = renderSemanticRoute('/principios/fu/') ?? '';
+    expect(tai).toContain('href="/fundamentos/"');
+    expect(tai).toContain('href="/principios/ji/" rel="next"');
+    expect(ji).toContain('href="/principios/tai/" rel="prev"');
+    expect(ji).toContain('href="/principios/fu/" rel="next"');
+    expect(fu).toContain('href="/principios/ji/" rel="prev"');
+    expect(fu).not.toContain('rel="next"');
+  });
+});
