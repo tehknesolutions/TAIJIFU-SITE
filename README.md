@@ -1,22 +1,24 @@
-# TAIJIFU SITE — WordPress
+# TAIJIFU — Official Repository
 
-WordPress implementation of the official public Taijifu site.
+Official and sole repository for TAIJIFU Canon, documentation, identity, product specifications, assets and public/interactive implementations.
 
-**Source of Truth:** `Tehkne-Solutions/taijifu-platform` → `packages/canon`  
+**Source of Truth:** this repository (`tehknesolutions/TAIJIFU-SITE`)  
 **Current Canon:** `TAIJIFU-CANON-1.0`  
 **Theme:** `taijifu-theme` v2.2.0  
 **Core:** `taijifu-core` v2.2.0
 
+Historical references to `taijifu-platform`, previous TAIJIFU repositories or parallel curriculum stores are legacy architecture. Recoverable TAIJIFU material is being consolidated here with provenance preserved. See `docs/CANON-AUTHORITY.md`, `docs/SOURCE-REGISTRY.md`, `docs/PROJECT-ARCHAEOLOGY.md` and `docs/CONSOLIDATION-ROADMAP.md`.
+
 ## Canon invariant
 
-The public WordPress site no longer maintains a parallel curriculum. Its official content is rendered from a versioned snapshot of the Canon:
+Official product projections render the versioned Canon maintained in this repository:
 
 - 4 Bases;
 - 10 Faixas;
 - 32 Caminhos;
 - 128 Núcleos.
 
-Legacy WordPress CPTs are retained as historical/admin material but are not the public authority.
+Legacy implementations and historical/admin material may be retained for provenance but are not allowed to silently override current Canon.
 
 ## Identity v2.2
 
@@ -31,7 +33,7 @@ Premium visual rebuild:
 - Tai = red, Ji = blue, Fu = yellow/gold, Integration/Survival = green;
 - no gradient, neon, glow, haze, glassmorphism or faux material texture;
 - mobile gutters >= 24px;
-- Canon 1.0 remains unchanged.
+- Canon 1.0 remains unchanged until an explicit Canon change is merged here.
 
 ## Authorship
 
