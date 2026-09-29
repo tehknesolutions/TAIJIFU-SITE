@@ -4,6 +4,7 @@ Status: OFFICIAL PRODUCT DESIGN REFERENCE
 Scope: Home / first viewport / Dojo Gate
 Authority: product presentation reference; does not modify martial Canon
 Source: reference image supplied and explicitly approved in the TAIJIFU GPT Project on 2026-09-29.
+Reference artifact status: PENDING REPOSITORY INGESTION — the approved binary image exists in the GPT Project conversation but is not yet stored as an immutable repository artifact. Until ingestion is possible, this document records its approved composition contract; visual acceptance must not claim pixel-level verification from a clean checkout.
 
 ## Purpose
 
@@ -39,10 +40,10 @@ Right: `Mudar sem deixar de ser.`
 The reference presents these as ceremonial vertical banners. Responsive implementations may adapt the physical layout without changing the text hierarchy.
 
 ### 5. TAI / JI / FU triad
-Three equal paths occupy the lower central composition:
-- TAI — Essência — `O que deve permanecer?`
-- JI — Adaptação — `O que precisa mudar?`
-- FU — Manifestação — `Que forma deve existir agora?`
+Three equal paths occupy the lower central composition. R01 may visually emphasize the short axis names, but implementation must preserve the complete canonical labels from the authoritative Home inventory:
+- TAI — `Essência · Permanência · Axis` — `O que deve permanecer?`
+- JI — `Discernimento · Adaptação · Nexus` — `O que precisa mudar?`
+- FU — `Manifestação · Fluxo · Flow` — `Que forma deve existir agora?`
 
 Each path requires a distinct official semantic identity. Decorative approximations must not silently become official brand assets.
 
@@ -74,6 +75,8 @@ Implementation review should compare at least:
 9. keyboard navigation and reduced-motion behavior;
 10. correct use of official content and assets.
 
+Until the approved R01 image is stored in the repository, gates 1–7 are reviewable against the approved project conversation but must be recorded as `REFERENCE ARTIFACT PENDING` rather than represented as reproducible pixel-level acceptance from the repository alone.
+
 ## Responsive rule
 
 R01 is a desktop North Star, not a command to crop desktop composition onto mobile. Mobile must preserve hierarchy in this order: brand → TAIJIFU → descriptor → maxims → TAI/JI/FU → Entrar no Dojo → provenance.
@@ -83,7 +86,8 @@ R01 is a desktop North Star, not a command to crop desktop composition onto mobi
 Home v1 is visually reconciled when:
 - its desktop first viewport is recognizably the same composition and hierarchy as R01;
 - it uses official Ω1 assets and authoritative text;
-- TAI/JI/FU paths navigate correctly;
+- TAI/JI/FU paths navigate correctly and preserve their canonical labels;
 - `Entrar no Dojo` enters the interactive experience;
 - responsive and accessibility gates pass;
-- any deliberate deviation from R01 is documented with a product/accessibility reason.
+- any deliberate deviation from R01 is documented with a product/accessibility reason;
+- repository-level visual acceptance explicitly reports the R01 binary artifact status until that artifact is ingested.
