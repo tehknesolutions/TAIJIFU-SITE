@@ -82,3 +82,14 @@ describe('contextual principle navigation', () => {
     expect(fu).not.toContain('rel="next"');
   });
 });
+
+
+describe('fundamentos principle links', () => {
+  it('exposes the three canonical principle paths from Fundamentos', () => {
+    const page = renderSemanticRoute('/fundamentos/') ?? '';
+    expect(page).toContain('aria-label="Princípios TAIJIFU"');
+    expect(page).toContain('href="/principios/tai/"');
+    expect(page).toContain('href="/principios/ji/"');
+    expect(page).toContain('href="/principios/fu/"');
+  });
+});

@@ -84,6 +84,16 @@ function renderContextNavigation(route: NonNullable<ReturnType<typeof findSiteRo
     ? `<nav class="content-context" aria-label="Contexto da seção">${items.join('')}</nav>`
     : '';
 }
+
+function renderPrincipleLinks(): string {
+  return `<nav class="principle-links" aria-label="Princípios TAIJIFU">${principleIds.map((id) => {
+    const route = siteRoutes.find((candidate) => candidate.id === id);
+    return route
+      ? `<a class="principle-links__item principle-links__item--${escapeHtml(id)}" href="${escapeHtml(route.canonicalUrl)}"><strong>${escapeHtml(route.title)}</strong><span>Explorar princípio</span></a>`
+      : '';
+  }).join('')}</nav>`;
+}
+
 export function renderSemanticRoute(pathname: string): string | null {
   const route = findSiteRoute(pathname);
   if (!route || route.id === 'home') return null;
@@ -115,6 +125,7 @@ export function renderSemanticRoute(pathname: string): string | null {
     </header>
     <div class="content-page__body">
       ${body}
+      ${route.id === 'fundamentos' ? renderPrincipleLinks() : ''}
       ${renderContextNavigation(route)}
       <nav class="content-navigation" aria-label="Navegação TAIJIFU">${renderPrimaryNavigation()}</nav>
     </div>
