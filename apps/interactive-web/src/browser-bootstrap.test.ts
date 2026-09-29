@@ -34,7 +34,7 @@ describe('Interactive web browser bootstrap', () => {
         id: 'tai',
         label: 'TAI',
         canonicalUrl: '/principios/tai/',
-        parentId: 'home',
+        parentId: 'fundamentos',
       }),
     );
     expect(mountSurface).toHaveBeenCalledWith({
@@ -46,6 +46,10 @@ describe('Interactive web browser bootstrap', () => {
 
     runtime.focusNode('tai');
     expect(focusNode).toHaveBeenCalledWith('tai');
+
+    const focused = bootstrapInteractiveWeb({ canvas, navigate, mountSurface, initialFocusNode: 'fu' });
+    expect(focusNode).toHaveBeenLastCalledWith('fu');
+    focused.dispose();
 
     runtime.dispose();
     expect(dispose).toHaveBeenCalledOnce();
