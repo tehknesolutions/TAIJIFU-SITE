@@ -33,5 +33,72 @@
 .dojo-triad { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
 @media (max-width: 48rem) {
+  .dojo-gate {
+    min-height: auto;
+  }
+
+  .dojo-gate__inner {
+    min-height: auto;
+    padding-block: clamp(6rem, 18vw, 8rem) var(--tj-space-8);
+    gap: var(--tj-space-5);
+  }
+
+  .dojo-gate__identity img {
+    width: min(56vw, 15rem);
+    height: auto;
+  }
+
+  .dojo-gate__maxims {
+    position: static;
+    display: grid;
+    gap: var(--tj-space-3);
+    width: min(100%, 32rem);
+    margin-inline: auto;
+  }
+
+  .dojo-gate__maxim {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    text-align: center;
+  }
+
   .dojo-triad { grid-template-columns: 1fr; }
+
+  .dojo-axis,
+  .primary-cta,
+  .site-header__dojo-link,
+  .dojo-gate__scroll-cue {
+    min-height: 44px;
+  }
+
+  .dojo-axis {
+    display: grid;
+    align-content: center;
+    width: 100%;
+  }
+
+  .primary-cta {
+    width: min(100%, 22rem);
+  }
+
+  .dojo-gate__footer {
+    position: static;
+    display: grid;
+    justify-items: center;
+    gap: var(--tj-space-3);
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .dojo-gate *,
+  .dojo-gate *::before,
+  .dojo-gate *::after {
+    animation: none;
+    transition: none;
+  }
 }

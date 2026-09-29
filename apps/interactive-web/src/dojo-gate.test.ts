@@ -67,12 +67,30 @@ describe('Dojo Gate resilience', () => {
     expect(mediaNode).not.toContain('JI');
     expect(mediaNode).not.toContain('FU');
   });
+});
 
-  it('defines compact and reduced-motion presentation gates', () => {
-    expect(css).toContain('@media (max-width: 48rem)');
-    expect(css).toContain('@media (prefers-reduced-motion: reduce)');
-    expect(css).toContain('.dojo-triad');
-    expect(css).toContain('grid-template-columns: 1fr');
+describe('R01 mobile and motion contract', () => {
+  it('preserves the approved mobile hierarchy without desktop cropping', () => {
+    expect(presentationCss).toContain('@media (max-width: 48rem)');
+    expect(presentationCss).toContain('.dojo-gate__inner');
+    expect(presentationCss).toContain('.dojo-gate__maxims');
+    expect(presentationCss).toContain('.dojo-triad { grid-template-columns: 1fr; }');
+    expect(presentationCss).toContain('.primary-cta');
+    expect(presentationCss).toContain('.dojo-gate__footer');
+    expect(presentationCss).toContain('min-height: auto;');
+  });
+
+  it('keeps touch targets usable in the compact threshold', () => {
+    expect(presentationCss).toContain('min-height: 44px;');
+    expect(presentationCss).toContain('.dojo-axis');
+    expect(presentationCss).toContain('.site-header__dojo-link');
+  });
+
+  it('removes non-essential motion when reduced motion is requested', () => {
+    expect(presentationCss).toContain('@media (prefers-reduced-motion: reduce)');
+    expect(presentationCss).toContain('scroll-behavior: auto;');
+    expect(presentationCss).toContain('animation: none;');
+    expect(presentationCss).toContain('transition: none;');
   });
 });
 
