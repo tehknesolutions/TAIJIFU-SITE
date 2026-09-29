@@ -31,38 +31,24 @@ describe('TAIJIFU canon registry', () => {
     );
   });
 
-  it('projects the canonical home and confirmed public routes into interactive nodes', () => {
+  it('projects the canonical hierarchy into interactive nodes', () => {
     const nodes = canonToExperienceNodes();
+    const parentOf = (id: string) => nodes.find((node) => node.id === id)?.parentId;
 
     expect(nodes[0]).toEqual(
-      expect.objectContaining({
-        id: 'home',
-        label: 'TAIJIFU',
-        canonicalUrl: '/',
-      }),
+      expect.objectContaining({ id: 'home', label: 'TAIJIFU', canonicalUrl: '/' }),
     );
-    expect(nodes).toContainEqual(
-      expect.objectContaining({
-        id: 'manifesto',
-        label: 'Manifesto',
-        canonicalUrl: '/manifesto/',
-        parentId: 'home',
-      }),
-    );
-    expect(nodes).toContainEqual(
-      expect.objectContaining({
-        id: 'tai',
-        label: 'TAI',
-        canonicalUrl: '/principios/tai/',
-        parentId: 'fundamentos',
-      }),
-    );
-    expect(nodes).toContainEqual(
-      expect.objectContaining({ id: 'ji', label: 'JI', canonicalUrl: '/principios/ji/', parentId: 'fundamentos' }),
-    );
-    expect(nodes).toContainEqual(
-      expect.objectContaining({ id: 'fu', label: 'FU', canonicalUrl: '/principios/fu/', parentId: 'fundamentos' }),
-    );
+    expect(parentOf('manifesto')).toBe('home');
+    expect(parentOf('fundamentos')).toBe('home');
+    expect(parentOf('tai')).toBe('fundamentos');
+    expect(parentOf('ji')).toBe('fundamentos');
+    expect(parentOf('fu')).toBe('fundamentos');
+    expect(parentOf('influencias')).toBe('home');
+    expect(parentOf('metodo')).toBe('influencias');
+    expect(parentOf('graduacao')).toBe('metodo');
+    expect(parentOf('referencias')).toBe('graduacao');
+    expect(parentOf('historia')).toBe('referencias');
+    expect(parentOf('treino-personalizado')).toBe('home');
   });
 
   it('keeps only unresolved semantic concepts out of the interactive graph', () => {
