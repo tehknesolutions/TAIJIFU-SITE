@@ -63,6 +63,27 @@ describe('North Star design-system authority', () => {
     expect(css).toContain('var(--tj-color-');
     expect(css).toContain('var(--tj-space-');
   });
+
+  it('scopes non-authoritative dojo atmosphere to presentation variables', () => {
+    expect(css).toContain('--tj-presentation-dojo-depth-near:');
+    expect(css).toContain('--tj-presentation-dojo-depth-mid:');
+    expect(css).toContain('--tj-presentation-dojo-depth-far:');
+    expect(css).toContain('--tj-presentation-threshold-warm:');
+    expect(css).toContain('var(--tj-presentation-dojo-depth-near)');
+    expect(css).toContain('var(--tj-presentation-threshold-warm)');
+    expect(css).not.toContain('--tj-calibration-tai:');
+    expect(css).not.toContain('--tj-calibration-ji:');
+    expect(css).not.toContain('--tj-calibration-fu:');
+    expect(css).not.toContain('--tj-calibration-integration:');
+  });
+
+  it('keeps the R01 desktop triad equal and presentation free of prohibited primitives', () => {
+    expect(css).toContain('.dojo-triad { grid-template-columns: repeat(3, minmax(0, 1fr));');
+    expect(css.toLowerCase()).not.toContain('glassmorphism');
+    expect(css.toLowerCase()).not.toContain('neon');
+    expect(css.toLowerCase()).not.toContain('drop-shadow(');
+    expect(css.toLowerCase()).not.toContain('backdrop-filter');
+  });
 });
 
 describe('Dojo Gate focus contrast', () => {
@@ -81,7 +102,7 @@ describe('Web v1 canonical dojo entry', () => {
   });
 
   it('keeps the triad visually three-column at the north-star layer', () => {
-    expect(css).toContain('.dojo-triad {\n  grid-template-columns: repeat(3, minmax(0, 1fr));');
+    expect(css).toContain('.dojo-triad { grid-template-columns: repeat(3, minmax(0, 1fr));');
     expect(css).toContain('.dojo-entry__paths');
   });
 });
