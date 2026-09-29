@@ -62,3 +62,23 @@ describe('Dojo Gate focus contrast', () => {
     expect(css).toContain('outline-color: var(--tj-color-paper)');
   });
 });
+
+describe('Web v1 canonical dojo entry', () => {
+  it('exposes TAI, JI and FU as equal canonical entry paths', () => {
+    expect(html).toContain('<nav class="dojo-entry__paths" aria-label="Conteúdo canônico disponível">');
+    expect(html).toContain('href="/principios/tai/"');
+    expect(html).toContain('href="/principios/ji/"');
+    expect(html).toContain('href="/principios/fu/"');
+    expect(html).toContain('class="dojo-entry__path dojo-entry__path--tai"');
+    expect(html).toContain('class="dojo-entry__path dojo-entry__path--ji"');
+    expect(html).toContain('class="dojo-entry__path dojo-entry__path--fu"');
+  });
+
+  it('keeps the triad visually three-column at the north-star layer', () => {
+    expect(css).toContain('.dojo-triad {\n  grid-template-columns: repeat(3, minmax(0, 1fr));');
+    expect(css).toContain('.dojo-entry__paths');
+    expect(css).toContain('.dojo-entry__path--tai');
+    expect(css).toContain('.dojo-entry__path--ji');
+    expect(css).toContain('.dojo-entry__path--fu');
+  });
+});
