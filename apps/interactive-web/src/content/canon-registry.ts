@@ -19,7 +19,6 @@ export type CanonContentItem = Readonly<{
   slug: string;
   canonicalUrl?: string;
   kind: 'principle' | 'page' | 'section' | 'profile' | 'other';
-  parentId?: string;
   source: readonly CanonSource[];
   status: CanonStatus;
   summary?: string;
@@ -37,7 +36,9 @@ export type CanonCoverage = Readonly<{
   unreconciledItems: readonly string[];
 }>;
 
-const sectionParents = Object.freeze<Record<string, string>>({
+// Editorial/experience navigation only. These relationships organize the public
+// journey and Three.js projection; they are not assertions about Canon semantics.
+export const experienceParentByRouteId = Object.freeze<Record<string, string>>({
   tai: 'fundamentos',
   ji: 'fundamentos',
   fu: 'fundamentos',
@@ -54,7 +55,6 @@ const routeItems: readonly CanonContentItem[] = siteRoutes.map((route) =>
     slug: route.canonicalUrl.split('/').filter(Boolean).at(-1) ?? route.id,
     canonicalUrl: route.canonicalUrl,
     kind: ['tai', 'ji', 'fu'].includes(route.id) ? ('principle' as const) : ('page' as const),
-    parentId: route.id === 'home' ? undefined : sectionParents[route.id] ?? 'home',
     source: Object.freeze([
       route.source === 'canon-sync'
         ? ('canon-sync' as const)
@@ -123,7 +123,8 @@ export function canonToExperienceNodes(
           id: item.id,
           label: item.title,
           canonicalUrl: item.canonicalUrl,
-          parentId: item.parentId,
+          parentId:
+            item.id === 'home' ? undefined : experienceParentByRouteId[item.id] ?? 'home',
         }),
       ),
   );

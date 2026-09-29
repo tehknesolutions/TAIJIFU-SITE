@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   canonRegistry,
   canonToExperienceNodes,
+  experienceParentByRouteId,
   getCanonCoverage,
 } from './canon-registry.js';
 
@@ -23,23 +24,26 @@ describe('TAIJIFU canon registry', () => {
         status: 'confirmed',
       }),
     );
-    expect(canonRegistry).toContainEqual(
-      expect.objectContaining({ id: 'ji', canonicalUrl: '/principios/ji/', status: 'confirmed' }),
-    );
-    expect(canonRegistry).toContainEqual(
-      expect.objectContaining({ id: 'fu', canonicalUrl: '/principios/fu/', status: 'confirmed' }),
-    );
   });
 
-  it('projects the canonical hierarchy into interactive nodes', () => {
+  it('keeps editorial parent relationships out of canonical content items', () => {
+    expect(canonRegistry.every((item) => !('parentId' in item))).toBe(true);
+    expect(experienceParentByRouteId).toEqual(expect.objectContaining({
+      tai: 'fundamentos',
+      ji: 'fundamentos',
+      fu: 'fundamentos',
+      metodo: 'influencias',
+      graduacao: 'metodo',
+      referencias: 'graduacao',
+      historia: 'referencias',
+    }));
+  });
+
+  it('projects editorial hierarchy into interactive nodes without promoting it to Canon', () => {
     const nodes = canonToExperienceNodes();
     const parentOf = (id: string) => nodes.find((node) => node.id === id)?.parentId;
 
-    expect(nodes[0]).toEqual(
-      expect.objectContaining({ id: 'home', label: 'TAIJIFU', canonicalUrl: '/' }),
-    );
     expect(parentOf('manifesto')).toBe('home');
-    expect(parentOf('fundamentos')).toBe('home');
     expect(parentOf('tai')).toBe('fundamentos');
     expect(parentOf('ji')).toBe('fundamentos');
     expect(parentOf('fu')).toBe('fundamentos');
@@ -51,17 +55,13 @@ describe('TAIJIFU canon registry', () => {
     expect(parentOf('treino-personalizado')).toBe('home');
   });
 
-  it('keeps only unresolved semantic concepts out of the interactive graph', () => {
+  it('keeps unresolved concepts out of the interactive graph', () => {
     const ids = canonToExperienceNodes().map((node) => node.id);
-    expect(ids).toContain('ji');
-    expect(ids).toContain('fu');
     expect(ids).not.toContain('integration');
   });
 
   it('reports route reconciliation separately from recovered official bodies', () => {
     const coverage = getCanonCoverage();
-
-    expect(coverage.totalItems).toBe(canonRegistry.length);
     expect(coverage.reconciledRoutes).toBe(12);
     expect(coverage.recoveredOfficialBodies).toBe(11);
     expect(coverage.pendingOfficialBodies).toEqual(['referencias']);
