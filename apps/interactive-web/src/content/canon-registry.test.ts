@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { canonRegistry, canonToExperienceNodes } from './canon-registry.js';
+import {
+  canonRegistry,
+  canonToExperienceNodes,
+  getCanonCoverage,
+} from './canon-registry.js';
 
 describe('TAIJIFU canon registry', () => {
   it('keeps confirmed canonical identities and URLs unique', () => {
@@ -54,5 +58,27 @@ describe('TAIJIFU canon registry', () => {
     expect(ids).not.toContain('ji');
     expect(ids).not.toContain('fu');
     expect(ids).not.toContain('integration');
+  });
+
+  it('reports route reconciliation separately from recovered official bodies', () => {
+    const coverage = getCanonCoverage();
+
+    expect(coverage.totalItems).toBe(canonRegistry.length);
+    expect(coverage.reconciledRoutes).toBe(10);
+    expect(coverage.recoveredOfficialBodies).toBe(1);
+    expect(coverage.pendingOfficialBodies).toEqual(
+      expect.arrayContaining([
+        'manifesto',
+        'fundamentos',
+        'influencias',
+        'metodo',
+        'graduacao',
+        'referencias',
+        'historia',
+        'tai',
+        'treino-personalizado',
+      ]),
+    );
+    expect(coverage.unreconciledItems).toEqual(['ji', 'fu', 'integration']);
   });
 });
