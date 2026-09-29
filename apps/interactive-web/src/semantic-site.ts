@@ -67,7 +67,24 @@ function renderCurriculumGroups(groups: readonly CanonCurriculumGroup[]): string
     .join('')}</section>`;
 }
 
-export function renderSemanticRoute(pathname: string): string | null {
+
+const principleIds = Object.freeze(['tai', 'ji', 'fu']);
+
+function renderContextNavigation(route: NonNullable<ReturnType<typeof findSiteRoute>>): string {
+  const principleIndex = principleIds.indexOf(route.id);
+  const items: string[] = [];
+  if (principleIndex >= 0) {
+    const previous = siteRoutes.find((candidate) => candidate.id === principleIds[principleIndex - 1]);
+    const next = siteRoutes.find((candidate) => candidate.id === principleIds[principleIndex + 1]);
+    items.push('<a class="content-context__home" href="/fundamentos/">Fundamentos</a>');
+    if (previous) items.push(`<a href="${escapeHtml(previous.canonicalUrl)}" rel="prev">← ${escapeHtml(previous.title)}</a>`);
+    if (next) items.push(`<a href="${escapeHtml(next.canonicalUrl)}" rel="next">${escapeHtml(next.title)} →</a>`);
+  }
+  return items.length > 0
+    ? `<nav class="content-context" aria-label="Contexto da seção">${items.join('')}</nav>`
+    : '';
+}
+\nexport function renderSemanticRoute(pathname: string): string | null {
   const route = findSiteRoute(pathname);
   if (!route || route.id === 'home') return null;
 
@@ -98,7 +115,7 @@ export function renderSemanticRoute(pathname: string): string | null {
     </header>
     <div class="content-page__body">
       ${body}
-      <nav class="content-navigation" aria-label="Navegação TAIJIFU">${renderPrimaryNavigation()}</nav>
+      ${renderContextNavigation(route)}\n      <nav class="content-navigation" aria-label="Navegação TAIJIFU">${renderPrimaryNavigation()}</nav>
     </div>
   </section>`;
 }
