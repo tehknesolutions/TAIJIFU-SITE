@@ -29,6 +29,14 @@ export type CanonContentItem = Readonly<{
   }>;
 }>;
 
+export type CanonCoverage = Readonly<{
+  totalItems: number;
+  reconciledRoutes: number;
+  recoveredOfficialBodies: number;
+  pendingOfficialBodies: readonly string[];
+  unreconciledItems: readonly string[];
+}>;
+
 const routeItems: readonly CanonContentItem[] = siteRoutes.map((route) =>
   Object.freeze({
     id: route.id,
@@ -92,6 +100,26 @@ export const canonRegistry: readonly CanonContentItem[] = Object.freeze([
     summary: 'Axis · Nexus · Flow em relação.',
   }),
 ]);
+
+export function getCanonCoverage(): CanonCoverage {
+  const pendingOfficialBodies = siteRoutes
+    .filter((route) => route.contentState === 'official-route-body-pending')
+    .map((route) => route.id);
+  const recoveredOfficialBodies = siteRoutes.filter(
+    (route) => route.contentState === 'official-body-recovered',
+  ).length;
+  const unreconciledItems = canonRegistry
+    .filter((item) => item.status === 'needs-reconciliation')
+    .map((item) => item.id);
+
+  return Object.freeze({
+    totalItems: canonRegistry.length,
+    reconciledRoutes: siteRoutes.length,
+    recoveredOfficialBodies,
+    pendingOfficialBodies: Object.freeze(pendingOfficialBodies),
+    unreconciledItems: Object.freeze(unreconciledItems),
+  });
+}
 
 export function canonToExperienceNodes(
   items: readonly CanonContentItem[] = canonRegistry,
