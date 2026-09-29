@@ -27,7 +27,7 @@ describe('Web v1 visual design-system contract', () => {
 
   it('defines the Dojo Gate surface once', () => {
     const styles = fs.readFileSync(path.join(process.cwd(), 'src/styles.css'), 'utf8');
-    const dojoGateDefinitions = styles.match(/(^|\\n)\\.dojo-gate\\s*\\{/g) ?? [];
+    const dojoGateDefinitions = styles.match(/(^|\n)\.dojo-gate\s*\{/g) ?? [];
 
     expect(dojoGateDefinitions).toHaveLength(1);
     expect(styles).toContain('grid-template-columns: repeat(3, minmax(0, 1fr));');
