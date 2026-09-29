@@ -21,6 +21,7 @@ export function bootstrapInteractiveWeb(options: {
   canvas: WebSurfaceCanvas;
   navigate: (url: string) => void;
   onFocus?: (focus: ProjectedFocus | null) => void;
+  initialFocusNode?: string | null;
   mountSurface?: MountSurface;
 }) {
   const experience = createInteractiveWebExperience({
@@ -34,6 +35,10 @@ export function bootstrapInteractiveWeb(options: {
     navigate: options.navigate,
     onFocus: options.onFocus,
   });
+
+  if (options.initialFocusNode) {
+    surface.focusNode(options.initialFocusNode);
+  }
 
   return Object.freeze({
     experience,
