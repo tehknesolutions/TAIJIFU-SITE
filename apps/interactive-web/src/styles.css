@@ -48,13 +48,7 @@ a { color: inherit; }
 .dojo-gate h1 { margin: 0; font-family: var(--tj-font-display); font-size: clamp(3.4rem, 9vw, 7.5rem); font-weight: 500; line-height: 0.86; letter-spacing: 0.1em; }
 .dojo-gate__maxims { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--tj-space-xl); max-width: 58rem; margin: var(--tj-space-lg) auto 0; }
 .dojo-gate__maxim { margin: 0; font-family: var(--tj-font-body); font-size: clamp(0.95rem, 1.6vw, 1.15rem); opacity: 0.84; }
-.dojo-triad {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  display: grid;
-  gap: var(--tj-space-lg);
-  max-width: 64rem;
-  margin: clamp(var(--tj-space-xl), 5vh, var(--tj-space-xxl)) auto var(--tj-space-xl);
-}
+.dojo-triad { grid-template-columns: repeat(3, minmax(0, 1fr)); display: grid; gap: var(--tj-space-lg); max-width: 64rem; margin: clamp(var(--tj-space-xl), 5vh, var(--tj-space-xxl)) auto var(--tj-space-xl); }
 .dojo-axis { padding: var(--tj-space-md) 0 0; border-top: 2px solid currentColor; text-align: center; }
 .dojo-axis h2 { margin: 0 0 var(--tj-space-xs); font-family: var(--tj-font-display); font-size: clamp(1.4rem, 3vw, 2.2rem); letter-spacing: 0.12em; }
 .dojo-axis p, .dojo-axis blockquote { font-size: 0.86rem; }
@@ -110,33 +104,51 @@ a { color: inherit; }
 .principle-card--ji { color: var(--tj-color-ji); }
 .principle-card--fu { color: var(--tj-color-fu); }
 .principle-card p, .principle-card blockquote { color: var(--tj-color-ink); }
-.principle-card blockquote { border-color: currentColor; }
-.canon-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--tj-space-2); margin-block: var(--tj-space-4); }
-.canon-stats article { border-top: 2px solid var(--tj-color-ink); padding-block: var(--tj-space-2); }
-.canon-stats strong { display: block; font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1; }
-.canon-stats span { color: var(--tj-color-metal); }
-.content-list { margin-block: var(--tj-space-4); }
-.content-list ul { padding-left: 1.2rem; }
-.content-list li + li { margin-top: 0.55rem; }
-.content-navigation { display: flex; flex-wrap: wrap; gap: var(--tj-space-1) var(--tj-space-2); margin-top: var(--tj-space-4); padding-top: var(--tj-space-3); border-top: 1px solid color-mix(in srgb, var(--tj-color-ink) 20%, transparent); }
-.content-navigation a { font-weight: 700; }
-.site-authorship { max-width: 48rem; margin: var(--tj-space-6) auto; color: var(--tj-color-metal); font-size: 0.9rem; }
+.canon-curriculum { display: grid; gap: var(--tj-space-2); margin-block: var(--tj-space-4); }
+.canon-curriculum__group, .canon-curriculum__item { border: 1px solid color-mix(in srgb, var(--tj-color-ink) 18%, transparent); }
+.canon-curriculum summary { cursor: pointer; padding: var(--tj-space-2); font-weight: 700; }
+.canon-curriculum__group > p, .canon-curriculum__item > p, .canon-curriculum__item > ul { margin-inline: var(--tj-space-2); }
+.canon-curriculum__items { display: grid; gap: var(--tj-space-1); padding: 0 var(--tj-space-2) var(--tj-space-2); }
+.canon-curriculum__item { padding: var(--tj-space-1); }
+.canon-curriculum__item h3 { margin: 0; }
+.canon-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--tj-space-1); margin-block: var(--tj-space-3); }
+.canon-stats article { display: grid; padding: var(--tj-space-2); border-top: 3px solid var(--tj-color-ji); }
+.canon-stats strong { font-size: 2rem; }
+.canon-stats span { font-size: 0.78rem; }
+.content-navigation { display: flex; flex-wrap: wrap; gap: var(--tj-space-1) var(--tj-space-2); margin-top: var(--tj-space-4); padding-top: var(--tj-space-2); border-top: 1px solid color-mix(in srgb, var(--tj-color-ink) 20%, transparent); }
+.content-navigation a { font-size: 0.82rem; }
 
-@media (max-width: 64rem) {
-  .site-header--ceremonial { flex-direction: row; align-items: center; flex-wrap: wrap; }
-  .site-header--ceremonial .primary-nav { order: 3; width: 100%; justify-content: flex-start; }
-  .dojo-gate__threshold::before { inset-inline: 3%; }
-  .dojo-gate__threshold span:first-child { left: 3%; }
-  .dojo-gate__threshold span:last-child { right: 3%; }
-  .canon-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
+.curriculum-overview { margin-block: var(--tj-space-4); padding-block: var(--tj-space-3); border-block: 1px solid color-mix(in srgb, var(--tj-color-ink) 18%, transparent); }
+.curriculum-overview__header { max-width: 44rem; margin-bottom: var(--tj-space-3); }
+.curriculum-overview__header h2 { margin-block: 0 var(--tj-space-1); font-size: clamp(2rem, 5vw, 3.5rem); }
+.curriculum-overview__journey { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; counter-reset: belt; }
+.curriculum-overview__belt { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr) auto; align-items: center; gap: var(--tj-space-2); padding: var(--tj-space-2) 0; border-top: 1px solid color-mix(in srgb, var(--tj-color-ink) 14%, transparent); }
+.curriculum-overview__order { font-family: var(--tj-font-display); font-size: 1.35rem; color: var(--tj-color-metal); }
+.curriculum-overview__belt div { display: grid; }
+.curriculum-overview__belt strong { font-family: var(--tj-font-display); font-size: 1.35rem; }
+.curriculum-overview__belt div span, .curriculum-overview__belt small { font-family: var(--tj-font-meta); font-size: 0.76rem; }
+.curriculum-overview__belt small { text-align: right; color: var(--tj-color-metal); }
+.curriculum-overview__actions { display: flex; flex-wrap: wrap; gap: var(--tj-space-1); margin-top: var(--tj-space-3); }
+.curriculum-overview__actions a { padding: 0.65rem 0.9rem; border: 1px solid currentColor; text-decoration: none; font-family: var(--tj-font-meta); font-size: 0.8rem; }
+
+.content-context { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--tj-space-1) var(--tj-space-2); margin-top: var(--tj-space-4); padding: var(--tj-space-2) 0; border-top: 1px solid color-mix(in srgb, var(--tj-color-ink) 20%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--tj-color-ink) 20%, transparent); font-family: var(--tj-font-meta); font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.content-context a { text-decoration: none; }
+.content-context a:hover, .content-context a:focus-visible { text-decoration: underline; text-underline-offset: 0.2em; }
+.content-context__home { font-weight: 700; }
+
+.principle-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--tj-space-2); margin-top: var(--tj-space-4); }
+.principle-links__item { display: grid; gap: 0.35rem; padding: var(--tj-space-2); border-top: 3px solid currentColor; background: color-mix(in srgb, currentColor 5%, transparent); text-decoration: none; }
+.principle-links__item strong { font-family: var(--tj-font-display); font-size: clamp(1.8rem, 4vw, 3rem); letter-spacing: 0.08em; }
+.principle-links__item span { color: var(--tj-color-ink); font-family: var(--tj-font-meta); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.principle-links__item:hover, .principle-links__item:focus-visible { background: color-mix(in srgb, currentColor 10%, transparent); }
+.principle-links__item--tai { color: var(--tj-color-tai); }
+.principle-links__item--ji { color: var(--tj-color-ji); }
+.principle-links__item--fu { color: var(--tj-color-fu); }
 
 @media (max-width: 48rem) {
-  :root { --tj-space-page-gutter: 24px; }
-  .site-header--ceremonial { min-height: auto; }
-  .site-brand span { font-size: 0.85rem; }
-  .site-header__dojo-link { margin-left: auto; }
-  .primary-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+  :root { --tj-space-page-gutter: var(--tj-space-md); }
+  .site-header { align-items: flex-start; }
+  .primary-nav { justify-content: flex-start; }
   .dojo-gate { min-height: auto; }
   .dojo-gate__inner { padding-block: var(--tj-space-xxl) var(--tj-space-lg); }
   .dojo-gate__identity { width: min(12rem, 48vw); }
@@ -149,6 +161,10 @@ a { color: inherit; }
   .dojo-gate__threshold span { width: 1.25rem; }
   .dojo-gate__threshold::before { height: 1rem; }
   .interactive-navigation { width: 100%; }
+  .canon-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .curriculum-overview__belt { grid-template-columns: 2.5rem minmax(0, 1fr); }
+  .curriculum-overview__belt small { grid-column: 2; text-align: left; }
+  .principle-links { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -156,20 +172,3 @@ a { color: inherit; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   .primary-cta:hover, .dojo-entry__path:hover { transform: none; }
 }
-
-
-.content-context { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--tj-space-1) var(--tj-space-2); margin-top: var(--tj-space-4); padding: var(--tj-space-2) 0; border-top: 1px solid color-mix(in srgb, var(--tj-color-ink) 20%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--tj-color-ink) 20%, transparent); font-family: var(--tj-font-meta); font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase; }
-.content-context a { text-decoration: none; }
-.content-context a:hover, .content-context a:focus-visible { text-decoration: underline; text-underline-offset: 0.2em; }
-.content-context__home { font-weight: 700; }
-
-
-.principle-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--tj-space-2); margin-top: var(--tj-space-4); }
-.principle-links__item { display: grid; gap: 0.35rem; padding: var(--tj-space-2); border-top: 3px solid currentColor; background: color-mix(in srgb, currentColor 5%, transparent); text-decoration: none; }
-.principle-links__item strong { font-family: var(--tj-font-display); font-size: clamp(1.8rem, 4vw, 3rem); letter-spacing: 0.08em; }
-.principle-links__item span { color: var(--tj-color-ink); font-family: var(--tj-font-meta); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
-.principle-links__item:hover, .principle-links__item:focus-visible { background: color-mix(in srgb, currentColor 10%, transparent); }
-.principle-links__item--tai { color: var(--tj-color-tai); }
-.principle-links__item--ji { color: var(--tj-color-ji); }
-.principle-links__item--fu { color: var(--tj-color-fu); }
-@media (max-width: 48rem) { .principle-links { grid-template-columns: 1fr; } }

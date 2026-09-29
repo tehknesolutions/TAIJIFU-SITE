@@ -14,6 +14,15 @@ export type CanonCurriculumGroup = Readonly<{
   items: readonly CanonCurriculumItem[];
 }>;
 
+export type CanonCurriculumOverviewItem = Readonly<{
+  id: string;
+  order: number;
+  title: string;
+  function: string;
+  pathCount: number;
+  nucleusCount: number;
+}>;
+
 const nucleusById = new Map(
   canonSnapshot.nuclei.map((nucleus) => [nucleus.id, nucleus]),
 );
@@ -55,3 +64,17 @@ function groups(includeNuclei: boolean): readonly CanonCurriculumGroup[] {
 
 export const canonGraduationGroups = groups(false);
 export const canonMethodGroups = groups(true);
+
+export const canonCurriculumOverview: readonly CanonCurriculumOverviewItem[] = Object.freeze(
+  canonSnapshot.belts.map((belt) => {
+    const paths = canonSnapshot.paths.filter((path) => path.beltId === belt.id);
+    return Object.freeze({
+      id: belt.id,
+      order: belt.order,
+      title: belt.name,
+      function: belt.function,
+      pathCount: paths.length,
+      nucleusCount: paths.reduce((total, path) => total + path.nucleusIds.length, 0),
+    });
+  }),
+);

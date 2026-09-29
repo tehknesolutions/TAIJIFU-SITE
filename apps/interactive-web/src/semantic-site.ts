@@ -1,5 +1,6 @@
 import { canonToExperienceNodes } from './content/canon-registry.js';
 import {
+  canonCurriculumOverview,
   canonGraduationGroups,
   canonMethodGroups,
   type CanonCurriculumGroup,
@@ -67,6 +68,26 @@ function renderCurriculumGroups(groups: readonly CanonCurriculumGroup[]): string
     .join('')}</section>`;
 }
 
+function renderCurriculumOverview(): string {
+  return `<section class="curriculum-overview" aria-labelledby="curriculum-overview-title">
+    <header class="curriculum-overview__header">
+      <p class="content-entry__type">TAIJIFU-CANON-1.0</p>
+      <h2 id="curriculum-overview-title">Percurso canônico</h2>
+      <p>Visão estrutural das faixas, Caminhos e Núcleos desta release.</p>
+    </header>
+    <ol class="curriculum-overview__journey">${canonCurriculumOverview.map((belt) =>
+      `<li class="curriculum-overview__belt" data-belt-id="${escapeHtml(belt.id)}">
+        <span class="curriculum-overview__order">${String(belt.order).padStart(2, '0')}</span>
+        <div><strong>${escapeHtml(belt.title)}</strong><span>${escapeHtml(belt.function)}</span></div>
+        <small>${belt.pathCount} ${belt.pathCount === 1 ? 'Caminho' : 'Caminhos'} · ${belt.nucleusCount} Núcleos</small>
+      </li>`,
+    ).join('')}</ol>
+    <nav class="curriculum-overview__actions" aria-label="Explorar currículo">
+      <a href="/graduacao/">Ver Graduação</a>
+      <a href="/metodo/">Explorar Método e Núcleos</a>
+    </nav>
+  </section>`;
+}
 
 const principleIds = Object.freeze(['tai', 'ji', 'fu']);
 
@@ -115,7 +136,7 @@ export function renderSemanticRoute(pathname: string): string | null {
         ),
     ) ?? [];
   const body = content
-    ? `<p class="content-lead">${escapeHtml(content.lead)}</p>${blocks.map(renderBlock).join('')}${curriculumGroups ? renderCurriculumGroups(curriculumGroups) : ''}<p class="content-source">Fonte de autoridade: ${escapeHtml(curriculumGroups ? 'TAIJIFU-CANON-1.0 snapshot' : content.sourceAuthority)}</p>`
+    ? `<p class="content-lead">${escapeHtml(content.lead)}</p>${blocks.map(renderBlock).join('')}${route.id === 'graduacao' ? renderCurriculumOverview() : ''}${curriculumGroups ? renderCurriculumGroups(curriculumGroups) : ''}<p class="content-source">Fonte de autoridade: ${escapeHtml(curriculumGroups ? 'TAIJIFU-CANON-1.0 snapshot' : content.sourceAuthority)}</p>`
     : '<p class="canon-reconciliation">O corpo oficial desta seção está em reconciliação a partir do TAIJIFU CANON. A rota é canônica e já está preservada.</p>';
 
   return `<section class="content-page" aria-labelledby="page-title">
