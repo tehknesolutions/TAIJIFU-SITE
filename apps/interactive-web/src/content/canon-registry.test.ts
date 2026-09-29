@@ -65,20 +65,8 @@ describe('TAIJIFU canon registry', () => {
 
     expect(coverage.totalItems).toBe(canonRegistry.length);
     expect(coverage.reconciledRoutes).toBe(10);
-    expect(coverage.recoveredOfficialBodies).toBe(1);
-    expect(coverage.pendingOfficialBodies).toEqual(
-      expect.arrayContaining([
-        'manifesto',
-        'fundamentos',
-        'influencias',
-        'metodo',
-        'graduacao',
-        'referencias',
-        'historia',
-        'tai',
-        'treino-personalizado',
-      ]),
-    );
+    expect(coverage.recoveredOfficialBodies).toBe(9);
+    expect(coverage.pendingOfficialBodies).toEqual(['referencias']);
     expect(coverage.unreconciledItems).toEqual(['ji', 'fu', 'integration']);
   });
 });
