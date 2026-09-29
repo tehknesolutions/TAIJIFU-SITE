@@ -1,0 +1,31 @@
+:root {
+  /* R01 atmosphere is presentation-only. These values are not brand calibration. */
+  --tj-presentation-dojo-depth-near: #25231f;
+  --tj-presentation-dojo-depth-mid: #171714;
+  --tj-presentation-dojo-depth-far: #090a09;
+  --tj-presentation-threshold-warm: #33291f;
+  --tj-presentation-threshold-deep: #17130f;
+  --tj-presentation-threshold-shadow: #120f0c;
+}
+
+/* Overrides the deterministic fallback scene without changing Ω1 or Canon tokens. */
+.dojo-gate__media {
+  background:
+    radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--tj-color-paper) 18%, transparent), transparent 30%),
+    linear-gradient(90deg, color-mix(in srgb, var(--tj-color-ink) 98%, transparent) 0 12%, transparent 34% 66%, color-mix(in srgb, var(--tj-color-ink) 98%, transparent) 88% 100%),
+    linear-gradient(180deg, var(--tj-presentation-dojo-depth-near) 0%, var(--tj-presentation-dojo-depth-mid) 48%, var(--tj-presentation-dojo-depth-far) 100%);
+}
+
+.dojo-gate__threshold::before {
+  background: linear-gradient(180deg, var(--tj-presentation-threshold-warm), var(--tj-presentation-threshold-deep));
+}
+
+.dojo-gate__threshold span {
+  background: linear-gradient(90deg, var(--tj-presentation-threshold-shadow), var(--tj-presentation-threshold-warm) 48%, var(--tj-presentation-threshold-deep));
+}
+
+.dojo-triad { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (max-width: 48rem) {
+  .dojo-triad { grid-template-columns: 1fr; }
+}
