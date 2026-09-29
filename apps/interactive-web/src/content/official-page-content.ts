@@ -120,6 +120,32 @@ export const officialPageContent: Readonly<
     ]),
     sourceAuthority: 'Issue #7 — CANON Visual V1',
   }),
+  ji: Object.freeze({
+    routeId: 'ji',
+    eyebrow: 'Princípio',
+    lead: 'JI — Discernimento / Adaptação — Nexus',
+    blocks: Object.freeze([
+      Object.freeze({ kind: 'quote', text: 'O que precisa mudar?' }),
+      Object.freeze({
+        kind: 'paragraph',
+        text: 'JI representa discernimento, adaptação e Nexus dentro da tríade semântica aprovada.',
+      }),
+    ]),
+    sourceAuthority: 'Issue #7 — CANON Visual V1',
+  }),
+  fu: Object.freeze({
+    routeId: 'fu',
+    eyebrow: 'Princípio',
+    lead: 'FU — Manifestação / Fluxo — Flow',
+    blocks: Object.freeze([
+      Object.freeze({ kind: 'quote', text: 'Que forma deve existir agora?' }),
+      Object.freeze({
+        kind: 'paragraph',
+        text: 'FU representa manifestação, fluxo e Flow dentro da tríade semântica aprovada.',
+      }),
+    ]),
+    sourceAuthority: 'Issue #7 — CANON Visual V1',
+  }),
   metodo: Object.freeze({
     routeId: 'metodo',
     eyebrow: canonSnapshot.release.id,
