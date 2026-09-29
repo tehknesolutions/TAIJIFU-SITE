@@ -43,7 +43,7 @@ const routeItems: readonly CanonContentItem[] = siteRoutes.map((route) =>
     title: route.title,
     slug: route.canonicalUrl.split('/').filter(Boolean).at(-1) ?? route.id,
     canonicalUrl: route.canonicalUrl,
-    kind: route.id === 'tai' ? ('principle' as const) : ('page' as const),
+    kind: ['tai', 'ji', 'fu'].includes(route.id) ? ('principle' as const) : ('page' as const),
     parentId: route.id === 'home' ? undefined : 'home',
     source: Object.freeze([
       route.source === 'canon-sync'
@@ -58,48 +58,14 @@ const routeItems: readonly CanonContentItem[] = siteRoutes.map((route) =>
         ? 'Arte Marcial de se Adaptar'
         : route.id === 'tai'
           ? 'Essência · Permanência · Axis'
-          : undefined,
+          : route.id === 'ji'
+            ? 'Discernimento · Adaptação · Nexus'
+            : route.id === 'fu'
+              ? 'Manifestação · Fluxo · Flow'
+              : undefined,
   }),
 );
 
-const principleSources: readonly CanonSource[] = Object.freeze([
-  'wordpress-canon-theme',
-  'official-brand-spec',
-]);
-
-export const canonRegistry: readonly CanonContentItem[] = Object.freeze([
-  ...routeItems,
-  Object.freeze({
-    id: 'ji',
-    title: 'JI',
-    slug: 'ji',
-    kind: 'principle',
-    parentId: 'fundamentos',
-    source: principleSources,
-    status: 'needs-reconciliation',
-    summary: 'Discernimento · Adaptação · Nexus',
-  }),
-  Object.freeze({
-    id: 'fu',
-    title: 'FU',
-    slug: 'fu',
-    kind: 'principle',
-    parentId: 'fundamentos',
-    source: principleSources,
-    status: 'needs-reconciliation',
-    summary: 'Manifestação · Fluxo · Flow',
-  }),
-  Object.freeze({
-    id: 'integration',
-    title: 'Integração',
-    slug: 'integracao',
-    kind: 'principle',
-    parentId: 'fundamentos',
-    source: principleSources,
-    status: 'needs-reconciliation',
-    summary: 'Axis · Nexus · Flow em relação.',
-  }),
-]);
 
 export function getCanonCoverage(): CanonCoverage {
   const pendingOfficialBodies = siteRoutes
