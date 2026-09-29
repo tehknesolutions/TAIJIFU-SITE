@@ -1,5 +1,6 @@
 :root {
   /* R01 atmosphere is presentation-only. These values are not brand calibration. */
+  --tj-presentation-environment-mode: fallback;
   --tj-presentation-dojo-depth-near: #25231f;
   --tj-presentation-dojo-depth-mid: #171714;
   --tj-presentation-dojo-depth-far: #090a09;
@@ -8,8 +9,13 @@
   --tj-presentation-threshold-shadow: #120f0c;
 }
 
-/* Overrides the deterministic fallback scene without changing Ω1 or Canon tokens. */
-.dojo-gate__media {
+/*
+ * Deterministic R01 environment.
+ * It is complete without network media: an approved repository-owned asset may
+ * enhance this layer later, but content and navigation never depend on it.
+ */
+.dojo-gate__media,
+.dojo-gate__media[data-media-state="fallback"] {
   background:
     radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--tj-color-paper) 18%, transparent), transparent 30%),
     linear-gradient(90deg, color-mix(in srgb, var(--tj-color-ink) 98%, transparent) 0 12%, transparent 34% 66%, color-mix(in srgb, var(--tj-color-ink) 98%, transparent) 88% 100%),
