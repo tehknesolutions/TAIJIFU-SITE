@@ -26,9 +26,9 @@ describe('R01 Dojo Gate semantic contract', () => {
   });
 
   it('makes TAI JI FU equal real links while preserving complete canonical labels', () => {
-    expect(html).toContain('class="dojo-axis dojo-axis--tai" href="/pt-br/principios/tai/"');
-    expect(html).toContain('class="dojo-axis dojo-axis--ji" href="/pt-br/principios/ji/"');
-    expect(html).toContain('class="dojo-axis dojo-axis--fu" href="/pt-br/principios/fu/"');
+    expect(html).toContain('class="dojo-axis dojo-axis--tai" data-route-id="tai" href="/pt-br/principios/tai/"');
+    expect(html).toContain('class="dojo-axis dojo-axis--ji" data-route-id="ji" href="/pt-br/principios/ji/"');
+    expect(html).toContain('class="dojo-axis dojo-axis--fu" data-route-id="fu" href="/pt-br/principios/fu/"');
     expect(html).toContain('Essência · Permanência · Axis');
     expect(html).toContain('Discernimento · Adaptação · Nexus');
     expect(html).toContain('Manifestação · Fluxo · Flow');
