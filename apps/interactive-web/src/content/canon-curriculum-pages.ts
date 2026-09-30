@@ -4,6 +4,7 @@ export type CanonCurriculumItem = Readonly<{
   id: string;
   title: string;
   summary: string;
+  nucleusCount: number;
   details: readonly string[];
 }>;
 
@@ -45,6 +46,7 @@ function groups(includeNuclei: boolean): readonly CanonCurriculumGroup[] {
                 id: path.id,
                 title: `${path.code} · ${path.name}`,
                 summary: path.function,
+                nucleusCount: path.nucleusIds.length,
                 details: Object.freeze(
                   includeNuclei
                     ? path.nucleusIds.map((id) => {
