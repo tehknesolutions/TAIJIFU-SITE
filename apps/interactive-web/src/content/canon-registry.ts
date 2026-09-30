@@ -123,10 +123,14 @@ export function buildLocalizedExperienceNodes(locale: SupportedLocale): readonly
 }
 
 export function canonToExperienceNodes(items: readonly CanonContentItem[] = canonRegistry): readonly ExperienceNode[] {
-  return Object.freeze(items.filter((item): item is CanonContentItem & { canonicalUrl: string } =>
+  const nodes = items.filter((item): item is CanonContentItem & { canonicalUrl: string } =>
     item.status === 'confirmed' && typeof item.canonicalUrl === 'string',
   ).map((item) => Object.freeze({
     id: item.id, label: item.title, canonicalUrl: item.canonicalUrl,
     parentId: item.id === 'home' ? undefined : experienceParentByRouteId[item.id] ?? 'home',
-  })));
+  }));
+  return Object.freeze([
+    Object.freeze({ id: 'home', label: 'TAIJIFU', canonicalUrl: '/', parentId: undefined }),
+    ...nodes.filter((node) => node.id !== 'home'),
+  ]);
 }
