@@ -36,6 +36,12 @@ export type CanonCoverage = Readonly<{
   unreconciledItems: readonly string[];
 }>;
 
+export type ExperienceContext = Readonly<{
+  parent?: CanonContentItem;
+  previous?: CanonContentItem;
+  next?: CanonContentItem;
+}>;
+
 // Editorial/experience navigation only. These relationships organize the public
 // journey and Three.js projection; they are not assertions about Canon semantics.
 export const experienceParentByRouteId = Object.freeze<Record<string, string>>({
@@ -47,6 +53,12 @@ export const experienceParentByRouteId = Object.freeze<Record<string, string>>({
   referencias: 'graduacao',
   historia: 'referencias',
 });
+
+// Ordered editorial sequences only. These do not add relationships to Canon.
+const experienceSequences: readonly (readonly string[])[] = Object.freeze([
+  Object.freeze(['tai', 'ji', 'fu']),
+  Object.freeze(['influencias', 'metodo', 'graduacao', 'referencias', 'historia']),
+]);
 
 const routeItems: readonly CanonContentItem[] = siteRoutes.map((route) =>
   Object.freeze({
@@ -107,6 +119,25 @@ export function getCanonCoverage(): CanonCoverage {
     pendingOfficialBodies: Object.freeze(pendingOfficialBodies),
     unreconciledItems: Object.freeze(unreconciledItems),
   });
+}
+
+export function getExperienceContext(routeId: string): ExperienceContext {
+  if (!routeItems.some((item) => item.id === routeId)) return Object.freeze({});
+
+  const parentId =
+    experienceParentByRouteId[routeId] ?? (routeId === 'home' ? undefined : 'home');
+  const parent = parentId ? routeItems.find((item) => item.id === parentId) : undefined;
+  const sequence = experienceSequences.find((candidate) => candidate.includes(routeId));
+  const sequenceIndex = sequence?.indexOf(routeId) ?? -1;
+  const previousId = sequence && sequenceIndex > 0 ? sequence[sequenceIndex - 1] : undefined;
+  const nextId =
+    sequence && sequenceIndex >= 0 && sequenceIndex < sequence.length - 1
+      ? sequence[sequenceIndex + 1]
+      : undefined;
+  const previous = previousId ? routeItems.find((item) => item.id === previousId) : undefined;
+  const next = nextId ? routeItems.find((item) => item.id === nextId) : undefined;
+
+  return Object.freeze({ parent, previous, next });
 }
 
 export function canonToExperienceNodes(
