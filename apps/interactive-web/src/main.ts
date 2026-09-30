@@ -3,6 +3,7 @@ import { renderInteractiveLegend, renderPrimaryNavigation, renderSemanticRoute }
 import { canonToExperienceNodes } from './content/canon-registry.js';
 import { renderInternationalEntry, renderLanguageSelector } from './content/international-entry.js';
 import { legacyRedirectFor, resolveLocalizedPath } from './content/locale-routing.js';
+import { applyShellLocalization } from './content/shell-localization.js';
 import { findSiteRoute } from './content/site-ia.js';
 import { renderCanonUI } from './content/canon-ui-render.js';
 import { resolvePresentationMedia } from './media-runtime.js';
@@ -21,6 +22,7 @@ if (redirect) {
     if (semanticContent) semanticContent.innerHTML = renderInternationalEntry();
   } else if (routeResolution.kind === 'localized-route') {
     document.documentElement.lang = routeResolution.locale;
+    applyShellLocalization(document, routeResolution.locale);
     const semanticRoute = renderSemanticRoute(pathname);
     if (semanticRoute && semanticContent) {
       semanticContent.innerHTML = `${renderLanguageSelector(routeResolution.routeId, routeResolution.locale)}${semanticRoute}`;
