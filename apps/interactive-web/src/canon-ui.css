@@ -1,0 +1,51 @@
+.canon-curriculum {
+  width: min(100% - (2 * var(--tj-space-page-gutter)), var(--tj-content-max));
+  margin-inline: auto;
+  padding-block: var(--tj-space-6);
+}
+
+.canon-ui { display: grid; gap: var(--tj-space-6); }
+.canon-ui h2 { margin: 0 0 var(--tj-space-3); font-family: var(--tj-font-display); font-size: clamp(2rem, 5vw, 3.75rem); line-height: 1; }
+.canon-ui ul, .canon-ui ol { margin: 0; padding: 0; list-style: none; }
+
+.canon-principles ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--tj-space-2); }
+.canon-principles li { display: grid; gap: var(--tj-space-1); padding: var(--tj-space-2); border-top: 4px solid var(--tj-color-ink); background: color-mix(in srgb, var(--tj-color-ink) 4%, transparent); }
+.canon-principles strong { font-family: var(--tj-font-display); font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1; letter-spacing: .08em; }
+.canon-principles span { font-family: var(--tj-font-meta); font-size: .78rem; }
+.canon-principles li:nth-child(1) { border-color: var(--tj-color-tai); }
+.canon-principles li:nth-child(2) { border-color: var(--tj-color-ji); }
+.canon-principles li:nth-child(3) { border-color: var(--tj-color-fu); }
+
+.canon-bases > ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--tj-space-2); }
+.canon-bases li { padding: var(--tj-space-2); border: 1px solid color-mix(in srgb, var(--tj-color-ink) 18%, transparent); }
+.canon-bases h3 { margin-top: 0; font-family: var(--tj-font-display); font-size: 1.5rem; }
+.canon-bases dl { display: grid; grid-template-columns: auto 1fr; gap: var(--tj-space-1); margin: 0; }
+.canon-bases dt { font-family: var(--tj-font-meta); font-size: .72rem; font-weight: 700; text-transform: uppercase; }
+.canon-bases dd { margin: 0; }
+
+.canon-graduation ol { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--tj-space-1); }
+.canon-graduation li { display: grid; gap: var(--tj-space-1); min-height: 7rem; padding: var(--tj-space-2); border-top: 3px solid var(--tj-color-metal); background: color-mix(in srgb, var(--tj-color-metal) 6%, transparent); }
+.canon-graduation span { font-family: var(--tj-font-meta); font-weight: 700; }
+.canon-graduation small { align-self: end; }
+
+.canon-hierarchy > p { margin-top: calc(-1 * var(--tj-space-2)); margin-bottom: var(--tj-space-3); color: var(--tj-color-metal); font-family: var(--tj-font-meta); letter-spacing: .06em; }
+.canon-belt { border-top: 1px solid color-mix(in srgb, var(--tj-color-ink) 24%, transparent); }
+.canon-belt > summary, .canon-path > summary { cursor: pointer; font-family: var(--tj-font-meta); }
+.canon-belt > summary { padding: var(--tj-space-2); font-size: 1.05rem; font-weight: 700; }
+.canon-belt > p { margin: 0 var(--tj-space-2) var(--tj-space-2); }
+.canon-path { margin: 0 var(--tj-space-2) var(--tj-space-1); border-left: 3px solid var(--tj-color-fu); background: color-mix(in srgb, var(--tj-color-fu) 5%, transparent); }
+.canon-path > summary { padding: var(--tj-space-1) var(--tj-space-2); font-weight: 700; }
+.canon-path > p { margin: 0; padding: 0 var(--tj-space-2) var(--tj-space-1); }
+.canon-path ol { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; padding: 0 var(--tj-space-2) var(--tj-space-2); }
+.canon-path li { padding: var(--tj-space-1); background: var(--tj-color-paper); border: 1px solid color-mix(in srgb, var(--tj-color-ink) 12%, transparent); }
+.canon-synthesis { padding: var(--tj-space-2); font-style: italic; }
+.canon-ui summary:focus-visible { outline: 3px solid var(--tj-color-ji); outline-offset: 2px; }
+
+@media (max-width: 48rem) {
+  .canon-curriculum { padding-block: var(--tj-space-4); }
+  .canon-ui { gap: var(--tj-space-4); }
+  .canon-principles ul, .canon-bases > ul, .canon-graduation ol { grid-template-columns: 1fr; }
+  .canon-path ol { grid-template-columns: 1fr; }
+  .canon-belt > summary { min-height: 44px; }
+  .canon-path > summary { min-height: 44px; }
+}
