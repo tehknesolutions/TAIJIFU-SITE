@@ -33,11 +33,11 @@ describe('Interactive web browser bootstrap', () => {
       expect.objectContaining({
         id: 'tai',
         label: 'TAI',
-        canonicalUrl: '/principios/tai/',
+        canonicalUrl: '/pt-br/principios/tai/',
         parentId: 'fundamentos',
       }),
     );
-    expect(mountSurface).toHaveBeenCalledWith({
+    expect(mountSurface).toHaveBeenNthCalledWith(1, {
       canvas,
       frame: runtime.experience.frame,
       navigate,
@@ -52,6 +52,6 @@ describe('Interactive web browser bootstrap', () => {
     focused.dispose();
 
     runtime.dispose();
-    expect(dispose).toHaveBeenCalledOnce();
+    expect(dispose).toHaveBeenCalledTimes(2);
   });
 });

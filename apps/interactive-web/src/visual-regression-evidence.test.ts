@@ -5,7 +5,7 @@ import { visualRegressionEvidence } from './visual-regression-evidence.js';
 describe('Brand Book visual regression evidence manifest', () => {
   it('defines evidence for every regression scenario exactly once', () => {
     expect(visualRegressionEvidence.map((evidence) => evidence.scenarioId)).toEqual(
-      visualRegressionMatrix.map((scenario) => scenario.id),
+      visualRegressionMatrix.map((scenario) => `${scenario.locale}:${scenario.id}`),
     );
     expect(new Set(visualRegressionEvidence.map((evidence) => evidence.scenarioId)).size)
       .toBe(visualRegressionEvidence.length);

@@ -1,133 +1,85 @@
-export type SiteRoute = Readonly<{
-  id: string;
+import type { SupportedLocale } from './locale.js';
+
+export type LocalizedRouteProjection = Readonly<{
   title: string;
   canonicalUrl: string;
+}>;
+
+export type SiteRoute = Readonly<{
+  id: string;
+  localized?: Readonly<Record<SupportedLocale, LocalizedRouteProjection>>;
   legacyUrls?: readonly string[];
-  source:
-    | 'canon-sync'
-    | 'interactive-web-contract'
-    | 'personalized-training-spec';
+  source: 'canon-sync' | 'interactive-web-contract' | 'personalized-training-spec';
   contentState: 'official-body-recovered' | 'official-route-body-pending';
 }>;
 
+export type ResolvedSiteRoute = SiteRoute & LocalizedRouteProjection;
+
+const localized = (
+  ptBR: LocalizedRouteProjection,
+  en: LocalizedRouteProjection,
+  es: LocalizedRouteProjection,
+): Readonly<Record<SupportedLocale, LocalizedRouteProjection>> =>
+  Object.freeze({ 'pt-BR': Object.freeze(ptBR), en: Object.freeze(en), es: Object.freeze(es) });
+
 export const siteRoutes: readonly SiteRoute[] = Object.freeze([
-  Object.freeze({
-    id: 'home',
-    title: 'TAIJIFU',
-    canonicalUrl: '/',
-    source: 'canon-sync',
-    contentState: 'official-body-recovered',
-  }),
-  Object.freeze({
-    id: 'manifesto',
-    title: 'Manifesto',
-    canonicalUrl: '/manifesto/',
-    legacyUrls: Object.freeze(['/o-que-e/']),
-    source: 'canon-sync',
-    contentState: 'official-body-recovered',
-  }),
-  Object.freeze({
-    id: 'fundamentos',
-    title: 'Fundamentos',
-    canonicalUrl: '/fundamentos/',
-    legacyUrls: Object.freeze(['/filosofia/']),
-    source: 'canon-sync',
-    contentState: 'official-body-recovered',
-  }),
-  Object.freeze({
-    id: 'influencias',
-    title: 'Influências',
-    canonicalUrl: '/influencias/',
-    legacyUrls: Object.freeze(['/artes-base/']),
-    source: 'canon-sync',
-    contentState: 'official-body-recovered',
-  }),
-  Object.freeze({
-    id: 'metodo',
-    title: 'Método',
-    canonicalUrl: '/metodo/',
-    legacyUrls: Object.freeze(['/trilhas/']),
-    source: 'canon-sync',
-    contentState: 'official-body-recovered',
-  }),
-  Object.freeze({
-    id: 'graduacao',
-    title: 'Graduação',
-    canonicalUrl: '/graduacao/',
-    legacyUrls: Object.freeze(['/niveis-e-graduacao/']),
-    source: 'canon-sync',
-    contentState: 'official-body-recovered',
-  }),
-  Object.freeze({
-    id: 'referencias',
-    title: 'Referências',
-    canonicalUrl: '/referencias/',
-    legacyUrls: Object.freeze(['/textos-oficiais/']),
-    source: 'canon-sync',
-    contentState: 'official-route-body-pending',
-  }),
-  Object.freeze({
-    id: 'historia',
-    title: 'História',
-    canonicalUrl: '/historia/',
-    legacyUrls: Object.freeze(['/registro/']),
-    source: 'canon-sync',
-    contentState: 'official-body-recovered',
-  }),
-  Object.freeze({
-    id: 'tai',
-    title: 'TAI',
-    canonicalUrl: '/principios/tai/',
-    source: 'interactive-web-contract',
-    contentState: 'official-body-recovered',
-  }),
-  Object.freeze({
-    id: 'ji',
-    title: 'JI',
-    canonicalUrl: '/principios/ji/',
-    source: 'interactive-web-contract',
-    contentState: 'official-body-recovered',
-  }),
-  Object.freeze({
-    id: 'fu',
-    title: 'FU',
-    canonicalUrl: '/principios/fu/',
-    source: 'interactive-web-contract',
-    contentState: 'official-body-recovered',
-  }),
-  Object.freeze({
-    id: 'treino-personalizado',
-    title: 'Treino Personalizado',
-    canonicalUrl: '/treino-personalizado/',
-    source: 'personalized-training-spec',
-    contentState: 'official-body-recovered',
-  }),
+  Object.freeze({ id: 'home', source: 'canon-sync', contentState: 'official-body-recovered' }),
+  route('manifesto', 'Manifesto', 'manifesto', 'Manifesto', 'manifesto', 'Manifesto', 'manifesto', ['/o-que-e/']),
+  route('fundamentos', 'Fundamentos', 'fundamentos', 'Foundations', 'foundations', 'Fundamentos', 'fundamentos', ['/filosofia/']),
+  route('influencias', 'Influências', 'influencias', 'Influences', 'influences', 'Influencias', 'influencias', ['/artes-base/']),
+  route('metodo', 'Método', 'metodo', 'Method', 'method', 'Método', 'metodo', ['/trilhas/']),
+  route('graduacao', 'Graduação', 'graduacao', 'Graduation', 'graduation', 'Graduación', 'graduacion', ['/niveis-e-graduacao/']),
+  route('referencias', 'Referências', 'referencias', 'References', 'references', 'Referencias', 'referencias', ['/textos-oficiais/'], 'official-route-body-pending'),
+  route('historia', 'História', 'historia', 'History', 'history', 'Historia', 'historia', ['/registro/']),
+  route('tai', 'TAI', 'principios/tai', 'TAI', 'principles/tai', 'TAI', 'principios/tai', [], 'official-body-recovered', 'interactive-web-contract'),
+  route('ji', 'JI', 'principios/ji', 'JI', 'principles/ji', 'JI', 'principios/ji', [], 'official-body-recovered', 'interactive-web-contract'),
+  route('fu', 'FU', 'principios/fu', 'FU', 'principles/fu', 'FU', 'principios/fu', [], 'official-body-recovered', 'interactive-web-contract'),
+  route('treino-personalizado', 'Treino Personalizado', 'treino-personalizado', 'Personalized Training', 'personalized-training', 'Entrenamiento Personalizado', 'entrenamiento-personalizado', [], 'official-body-recovered', 'personalized-training-spec'),
 ]);
 
 export const primaryNavigation = Object.freeze([
-  'manifesto',
-  'fundamentos',
-  'influencias',
-  'metodo',
-  'graduacao',
-  'referencias',
-  'historia',
-  'treino-personalizado',
+  'manifesto', 'fundamentos', 'influencias', 'metodo', 'graduacao', 'referencias', 'historia', 'treino-personalizado',
 ]);
 
+export function findLocalizedRoute(id: string, locale: SupportedLocale): ResolvedSiteRoute | null {
+  const route = siteRoutes.find((candidate) => candidate.id === id);
+  const projection = route?.localized?.[locale];
+  return route && projection ? Object.freeze({ ...route, ...projection }) : null;
+}
+
 export function findSiteRoute(pathname: string): SiteRoute | null {
-  return (
-    siteRoutes.find(
-      (route) =>
-        route.canonicalUrl === pathname ||
-        route.legacyUrls?.includes(pathname),
-    ) ?? null
-  );
+  if (pathname === '/') return siteRoutes.find((route) => route.id === 'home') ?? null;
+  return siteRoutes.find((route) =>
+    Object.values(route.localized ?? {}).some((projection) => projection.canonicalUrl === pathname) ||
+    route.legacyUrls?.includes(pathname) ||
+    route.localized?.['pt-BR']?.canonicalUrl.replace('/pt-br/', '/') === pathname,
+  ) ?? null;
 }
 
 export function resolveLegacyRedirect(pathname: string): string | null {
   const route = siteRoutes.find((candidate) =>
-    candidate.legacyUrls?.includes(pathname),
+    candidate.legacyUrls?.includes(pathname) ||
+    candidate.localized?.['pt-BR']?.canonicalUrl.replace('/pt-br/', '/') === pathname,
   );
-  return route?.canonicalUrl ?? null;
+  return route?.localized?.['pt-BR']?.canonicalUrl ?? null;
+}
+
+function route(
+  id: string,
+  ptTitle: string, ptSlug: string,
+  enTitle: string, enSlug: string,
+  esTitle: string, esSlug: string,
+  legacyUrls: readonly string[] = [],
+  contentState: SiteRoute['contentState'] = 'official-body-recovered',
+  source: SiteRoute['source'] = 'canon-sync',
+): SiteRoute {
+  return Object.freeze({
+    id,
+    localized: localized(
+      { title: ptTitle, canonicalUrl: `/pt-br/${ptSlug}/` },
+      { title: enTitle, canonicalUrl: `/en/${enSlug}/` },
+      { title: esTitle, canonicalUrl: `/es/${esSlug}/` },
+    ),
+    legacyUrls: Object.freeze([...legacyUrls]), source, contentState,
+  });
 }

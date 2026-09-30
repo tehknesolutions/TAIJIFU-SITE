@@ -77,7 +77,7 @@ export function visibleExperienceNodes(
 function flattenRoots(
   roots: readonly ExperienceHierarchyNode[],
 ): readonly ExperienceHierarchyNode[] {
-  return Object.freeze(roots);
+  return Object.freeze(roots.flatMap((root) => [root, ...root.children]));
 }
 
 function findNode(

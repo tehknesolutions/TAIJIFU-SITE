@@ -1,49 +1,73 @@
 import { bootstrapInteractiveWeb } from './browser-bootstrap.js';
-import {
-  canonicalRedirectFor,
-  renderInteractiveLegend,
-  renderPrimaryNavigation,
-  renderSemanticRoute,
-} from './semantic-site.js';
-import { canonToExperienceNodes } from './content/canon-registry.js';
+import { renderInteractiveLegend, renderPrimaryNavigation, renderSemanticRoute } from './semantic-site.js';
+import { buildLocalizedExperienceNodes, canonToExperienceNodes } from './content/canon-registry.js';
+import { renderInternationalEntry, renderLanguageSelector } from './content/international-entry.js';
+import { legacyRedirectFor, resolveLocalizedPath } from './content/locale-routing.js';
+import { applyShellLocalization } from './content/shell-localization.js';
 import { findSiteRoute } from './content/site-ia.js';
-import { renderCanonUI } from './content/canon-ui-render.js';
+import { renderCanonUIForLocale } from './content/canon-ui-render.js';
+import { renderLocalizedSeoHead } from './content/seo-localization.js';
 import { resolvePresentationMedia } from './media-runtime.js';
 import { buildExperienceHierarchy, visibleExperienceNodes } from './spatial-ui.js';
 
-const primaryNavigation = document.querySelector<HTMLElement>('#primary-navigation');
-if (primaryNavigation) primaryNavigation.innerHTML = renderPrimaryNavigation();
-
-const interactiveLegend = document.querySelector<HTMLElement>('#interactive-node-links');
-if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend();
-
-const canonCurriculum = document.querySelector<HTMLElement>('#canon-curriculum');
-if (canonCurriculum) canonCurriculum.innerHTML = renderCanonUI();
-
-const dojoMedia = document.querySelector<HTMLElement>('.dojo-gate__media');
-if (dojoMedia) {
-  const media = resolvePresentationMedia('r01-dojo-environment');
-  dojoMedia.dataset.mediaState = media.state;
-  if (media.url) dojoMedia.style.setProperty('--tj-presentation-media-url', `url("${media.url}")`);
-}
-
-const redirect = canonicalRedirectFor(window.location.pathname);
-if (redirect && redirect !== window.location.pathname) {
+const pathname = window.location.pathname;
+const redirect = legacyRedirectFor(pathname);
+if (redirect) {
   window.location.replace(redirect);
 } else {
-  const semanticRoute = renderSemanticRoute(window.location.pathname);
+  const routeResolution = resolveLocalizedPath(pathname);
   const semanticContent = document.querySelector<HTMLElement>('#semantic-content');
-  if (semanticRoute && semanticContent) semanticContent.innerHTML = semanticRoute;
+
+  if (routeResolution.kind === 'international-entry') {
+    document.documentElement.lang = 'en';
+    if (semanticContent) semanticContent.innerHTML = renderInternationalEntry();
+  } else if (routeResolution.kind === 'localized-route') {
+    document.documentElement.lang = routeResolution.locale;
+    applyShellLocalization(document, routeResolution.locale);
+    const seoHead = document.head;
+    seoHead.querySelectorAll('link[data-taijifu-i18n-seo]').forEach((node) => node.remove());
+    const seoMarkup = renderLocalizedSeoHead(routeResolution.routeId, routeResolution.locale);
+    if (seoMarkup) {
+      const template = document.createElement('template');
+      template.innerHTML = seoMarkup;
+      template.content.querySelectorAll('link').forEach((link) => {
+        link.dataset.taijifuI18nSeo = 'true';
+        seoHead.appendChild(link);
+      });
+    }
+    const semanticRoute = renderSemanticRoute(pathname);
+    if (semanticRoute && semanticContent) {
+      semanticContent.innerHTML = renderLanguageSelector(routeResolution.routeId, routeResolution.locale) + semanticRoute;
+    }
+  }
+
+  const primaryNavigation = document.querySelector<HTMLElement>('#primary-navigation');
+  if (primaryNavigation) primaryNavigation.innerHTML = renderPrimaryNavigation();
+
+  const interactiveLegend = document.querySelector<HTMLElement>('#interactive-node-links');
+  if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend(routeResolution.kind === 'localized-route' ? routeResolution.locale : 'pt-BR');
+
+  const canonCurriculum = document.querySelector<HTMLElement>('#canon-curriculum');
+  if (canonCurriculum) {
+    const locale = routeResolution.kind === 'localized-route' ? routeResolution.locale : 'pt-BR';
+    canonCurriculum.innerHTML = renderCanonUIForLocale(locale);
+  }
+
+  const dojoMedia = document.querySelector<HTMLElement>('.dojo-gate__media');
+  if (dojoMedia) {
+    const media = resolvePresentationMedia('r01-dojo-environment');
+    dojoMedia.dataset.mediaState = media.state;
+    if (media.url) dojoMedia.style.setProperty('--tj-presentation-media-url', 'url("' + media.url + '")');
+  }
 
   const canvas = document.querySelector<HTMLCanvasElement>('#taijifu-experience');
   const focusLabel = document.querySelector<HTMLOutputElement>('#interactive-focus-label');
   const legendLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('#interactive-node-links [data-node-id]'));
-  const experienceHierarchy = buildExperienceHierarchy(canonToExperienceNodes());
+  const activeLocale = routeResolution.kind === 'localized-route' ? routeResolution.locale : 'pt-BR';
+  const experienceHierarchy = buildExperienceHierarchy(buildLocalizedExperienceNodes(activeLocale));
 
   const syncLegend = (focusId: string | null) => {
-    const visibleIds = new Set(
-      visibleExperienceNodes(experienceHierarchy, focusId).map((node) => node.id),
-    );
+    const visibleIds = new Set(visibleExperienceNodes(experienceHierarchy, focusId).map((node) => node.id));
     for (const link of legendLinks) {
       const visible = visibleIds.has(link.dataset.nodeId ?? '');
       link.hidden = !visible;
@@ -60,7 +84,7 @@ if (redirect && redirect !== window.location.pathname) {
   syncLegend(null);
 
   if (canvas) {
-    const currentRoute = findSiteRoute(window.location.pathname);
+    const currentRoute = routeResolution.kind === 'localized-route' ? findSiteRoute(pathname) : null;
     const runtime = bootstrapInteractiveWeb({
       canvas,
       navigate: (canonicalUrl) => window.location.assign(canonicalUrl),
