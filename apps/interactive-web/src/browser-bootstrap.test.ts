@@ -33,7 +33,7 @@ describe('Interactive web browser bootstrap', () => {
       expect.objectContaining({
         id: 'tai',
         label: 'TAI',
-        canonicalUrl: '/principios/tai/',
+        canonicalUrl: '/pt-br/principios/tai/',
         parentId: 'fundamentos',
       }),
     );
