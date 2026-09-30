@@ -1,4 +1,5 @@
 import { canonToExperienceNodes } from './content/canon-registry.js';
+import { canonSnapshot } from './content/canon-snapshot.js';
 import {
   canonCurriculumOverview,
   canonGraduationGroups,
@@ -68,6 +69,29 @@ function renderCurriculumGroups(groups: readonly CanonCurriculumGroup[]): string
     .join('')}</section>`;
 }
 
+function renderCanonBases(): string {
+  return `<section class="canon-bases" aria-labelledby="canon-bases-title">
+    <header class="canon-bases__header">
+      <p class="content-entry__type">TAIJIFU-CANON-1.0</p>
+      <h2 id="canon-bases-title">Bases canônicas</h2>
+      <p>As 4 Bases da release. Esta camada é apresentada separadamente porque a release não define uma relação Base → Faixa nos dados canônicos.</p>
+    </header>
+    <div class="canon-bases__grid">
+      ${canonSnapshot.bases.map((base) =>
+        `<article class="canon-base" data-base-id="${escapeHtml(base.id)}">
+          <p class="canon-base__id">${escapeHtml(base.id)}</p>
+          <h3>${escapeHtml(base.name)}</h3>
+          <p>${escapeHtml(base.function)}</p>
+          <dl>
+            <div><dt>Elemento</dt><dd>${escapeHtml(base.element)}</dd></div>
+            <div><dt>Animal</dt><dd>${escapeHtml(base.animal)}</dd></div>
+            <div><dt>Cor</dt><dd>${escapeHtml(base.color)}</dd></div>
+          </dl>
+        </article>`
+      ).join('')}
+    </div>
+  </section>`;
+}
 function renderCurriculumOverview(): string {
   return `<section class="curriculum-overview" aria-labelledby="curriculum-overview-title">
     <header class="curriculum-overview__header">
@@ -136,7 +160,7 @@ export function renderSemanticRoute(pathname: string): string | null {
         ),
     ) ?? [];
   const body = content
-    ? `<p class="content-lead">${escapeHtml(content.lead)}</p>${blocks.map(renderBlock).join('')}${route.id === 'graduacao' ? renderCurriculumOverview() : ''}${curriculumGroups ? renderCurriculumGroups(curriculumGroups) : ''}<p class="content-source">Fonte de autoridade: ${escapeHtml(curriculumGroups ? 'TAIJIFU-CANON-1.0 snapshot' : content.sourceAuthority)}</p>`
+    ? `<p class="content-lead">${escapeHtml(content.lead)}</p>${blocks.map(renderBlock).join('')}${route.id === 'graduacao' ? renderCurriculumOverview() : ''}${route.id === 'metodo' ? renderCanonBases() : ''}${curriculumGroups ? renderCurriculumGroups(curriculumGroups) : ''}<p class="content-source">Fonte de autoridade: ${escapeHtml(curriculumGroups ? 'TAIJIFU-CANON-1.0 snapshot' : content.sourceAuthority)}</p>`
     : '<p class="canon-reconciliation">O corpo oficial desta seção está em reconciliação a partir do TAIJIFU CANON. A rota é canônica e já está preservada.</p>';
 
   return `<section class="content-page" aria-labelledby="page-title">
