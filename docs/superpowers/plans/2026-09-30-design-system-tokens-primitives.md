@@ -23,9 +23,9 @@
 
 ## Review Focus
 
-- Empty/whitespace-only `IconButton` labels must not silently produce inaccessible controls; Task 3 pins rejection behavior.
+- Empty/whitespace-only `IconButton` labels must not silently produce inaccessible controls; Task 2 now owns the RED→GREEN guard.
 - Heading levels outside 2–6 must remain impossible through the public TypeScript signature; Task 2 preserves the union contract.
-- Untrusted text/href/src/alt values must remain HTML-escaped; Task 2 pins escaping across primitive categories.
+- Untrusted text/href/src/alt values must remain HTML-escaped; Task 2 pins escaping across primitive categories as characterization coverage.
 - Reduced-motion users must not depend on transition/animation to perceive interaction state; Task 3 pins the CSS override.
 - Design-token CSS must not gain raster-derived HEX literals; Task 1 preserves the no-HEX regression assertion.
 
@@ -68,7 +68,7 @@ Expected: PASS.
 
 `git commit -am "feat(tokens): complete semantic design token contract"`
 
-### Task 2: Lock the complete editorial primitive API
+### Task 2: Lock the complete editorial primitive API and accessible-name invariant
 
 **Files:**
 - Modify: `packages/ui/src/index.ts`
@@ -76,27 +76,31 @@ Expected: PASS.
 
 **Interfaces:**
 - Consumes: generic HTML strings/text and the CSS class contract in `primitives.css`.
-- Produces: `Container`, `Stack`, `Cluster`, `Grid`, `Rule`, `Surface`, `Eyebrow`, `Display`, `Heading`, `Body`, `Meta`, `Button`, `IconButton`, `TextLink`, `FocusRing`, `MediaFrame` with no domain imports.
+- Produces: `Container`, `Stack`, `Cluster`, `Grid`, `Rule`, `Surface`, `Eyebrow`, `Display`, `Heading`, `Body`, `Meta`, `Button`, `IconButton`, `TextLink`, `FocusRing`, `MediaFrame` with no domain imports; `IconButton` rejects empty accessible names.
 
-- [ ] **Step 1: Write failing completeness and escaping tests**
+- [ ] **Step 1: Add characterization coverage for the already-existing primitive API**
 
-Extend `primitives.test.ts` to cover all 16 approved primitives, preserving `Heading(text, level: 2 | 3 | 4 | 5 | 6 = 2)`. Assert escaping for text plus `TextLink.href`, `MediaFrame.src`, `MediaFrame.alt`, and `IconButton` label/icon.
+Extend `primitives.test.ts` to cover all 16 approved primitives, preserving `Heading(text, level: 2 | 3 | 4 | 5 | 6 = 2)`. Assert the existing escaping behavior for text plus `TextLink.href`, `MediaFrame.src`, `MediaFrame.alt`, and valid `IconButton` label/icon values.
 
-- [ ] **Step 2: Run UI primitive tests and confirm RED where behavior is missing**
+- [ ] **Step 2: Add one genuinely failing accessibility test**
+
+Add a test requiring `IconButton('', icon)` and a whitespace-only label to throw `TypeError`. This is the missing public contract that drives production code in this task.
+
+- [ ] **Step 3: Run UI primitive tests and confirm RED**
 
 Run: `pnpm --filter @taijifu/ui test`
-Expected: FAIL only for uncovered/missing contract behavior; existing already-correct primitives remain unchanged.
+Expected: characterization assertions remain GREEN; the new empty/whitespace `IconButton` accessible-name assertion FAILS because the guard is not implemented yet.
 
-- [ ] **Step 3: Implement only the missing primitive behavior**
+- [ ] **Step 4: Implement only the missing primitive behavior**
 
-Keep `packages/ui/src/index.ts` domain-agnostic. Do not add Canon, route, curriculum, Experience Graph, asset-selection, or page composition imports.
+In `packages/ui/src/index.ts`, make `IconButton(label, icon)` throw `TypeError` when `label.trim()` is empty. Preserve the existing exports, Heading union, escaping behavior, and domain-agnostic package boundary. Do not add Canon, route, curriculum, Experience Graph, asset-selection, or page composition imports.
 
-- [ ] **Step 4: Run UI tests/typecheck and confirm GREEN**
+- [ ] **Step 5: Run UI tests/typecheck and confirm GREEN**
 
 Run: `pnpm --filter @taijifu/ui test && pnpm --filter @taijifu/ui typecheck`
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 `git commit -am "feat(ui): lock editorial primitive API"`
 
@@ -113,31 +117,27 @@ Expected: PASS.
 
 - [ ] **Step 1: Write failing CSS contract tests**
 
-Read `primitives.css` in `primitives.test.ts` and assert it uses `var(--tj-...)` for reusable semantic values, contains `:focus-visible`, contains `@media (prefers-reduced-motion: reduce)`, and contains no imports/references to Canon/route/curriculum/Experience Graph modules. Add an `IconButton` test requiring a non-empty/trimmed accessible label; choose one explicit public behavior: throw `TypeError` for an empty label.
+Read `primitives.css` in `primitives.test.ts` and assert it uses `var(--tj-...)` for reusable semantic values, contains `:focus-visible`, contains `@media (prefers-reduced-motion: reduce)`, and contains no imports/references to Canon/route/curriculum/Experience Graph modules.
 
 - [ ] **Step 2: Run UI tests and confirm RED**
 
 Run: `pnpm --filter @taijifu/ui test`
-Expected: FAIL on any missing focus/reduced-motion/token-consumption/accessible-label contract.
+Expected: FAIL on any missing focus/reduced-motion/token-consumption contract.
 
 - [ ] **Step 3: Implement CSS accessibility contracts**
 
-Update `primitives.css` to consume the semantic token variables for reusable values, preserve visible focus, and disable non-essential motion under reduced-motion preference.
+Update `primitives.css` to consume the semantic token variables for reusable values, preserve visible focus, and disable non-essential motion under reduced-motion preference. The `IconButton` accessible-name guard already belongs to Task 2 and must not be duplicated here.
 
-- [ ] **Step 4: Implement `IconButton` accessible-name guard**
-
-In `index.ts`, make `IconButton(label, icon)` throw `TypeError` when `label.trim()` is empty; preserve escaping for valid values.
-
-- [ ] **Step 5: Verify package CSS export wiring**
+- [ ] **Step 4: Verify package CSS export wiring**
 
 If `package.json` does not already expose the primitive stylesheet/token dependency in the established package convention, add the minimal export/dependency wiring. Do not create a bundler or new runtime layer.
 
-- [ ] **Step 6: Run UI verification and confirm GREEN**
+- [ ] **Step 5: Run UI verification and confirm GREEN**
 
 Run: `pnpm --filter @taijifu/ui test && pnpm --filter @taijifu/ui typecheck`
 Expected: PASS.
 
-- [ ] **Step 7: Commit**
+- [ ] **Step 6: Commit**
 
 `git commit -am "feat(ui): enforce primitive accessibility contracts"`
 
