@@ -25,6 +25,16 @@ describe('semantic TAIJIFU site', () => {
     expect(html).not.toContain('ainda não recuperado');
   });
 
+  it('materializes the four canonical Bases without inventing Base-to-Belt relationships', () => {
+    const method = renderSemanticRoute('/metodo/') ?? '';
+    expect(method).toContain('id="canon-bases-title"');
+    expect(method).toContain('data-base-id="BASE-TAI"');
+    expect(method).toContain('data-base-id="BASE-JI"');
+    expect(method).toContain('data-base-id="BASE-FU"');
+    expect(method).toContain('data-base-id="BASE-INTEGRATION"');
+    expect(method).toContain('a release não define uma relação Base → Faixa');
+  });
+
   it('renders curriculum as progressive disclosure instead of 174 top-level cards', () => {
     const method = renderSemanticRoute('/metodo/');
     const graduation = renderSemanticRoute('/graduacao/');
