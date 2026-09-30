@@ -2,7 +2,9 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { renderCanonUI } from './content/canon-ui-render.js';
 
-const css = readFileSync(new URL('./styles.css', import.meta.url), 'utf8');
+const baseCss = readFileSync(new URL('./styles.css', import.meta.url), 'utf8');
+const canonCss = readFileSync(new URL('./canon-ui.css', import.meta.url), 'utf8');
+const css = `${baseCss}\n${canonCss}`;
 const html = renderCanonUI();
 
 describe('Canon UI accessible presentation', () => {
@@ -28,19 +30,19 @@ describe('Canon UI accessible presentation', () => {
   });
 
   it('styles the curriculum with semantic tokens and visible disclosure focus', () => {
-    expect(css).toContain('.canon-curriculum');
-    expect(css).toContain('.canon-ui');
-    expect(css).toContain('.canon-belt > summary');
-    expect(css).toContain('.canon-path > summary');
-    expect(css).toContain('.canon-ui summary:focus-visible');
+    expect(canonCss).toContain('.canon-curriculum');
+    expect(canonCss).toContain('.canon-ui');
+    expect(canonCss).toContain('.canon-belt > summary');
+    expect(canonCss).toContain('.canon-path > summary');
+    expect(canonCss).toContain('.canon-ui summary:focus-visible');
     expect(css).toContain('var(--tj-color-');
     expect(css).toContain('var(--tj-space-');
   });
 
   it('adapts dense curriculum structures for compact screens', () => {
-    expect(css).toContain('@media (max-width: 48rem)');
-    expect(css).toContain('.canon-principles ul');
-    expect(css).toContain('.canon-bases > ul');
-    expect(css).toContain('.canon-graduation ol');
+    expect(canonCss).toContain('@media (max-width: 48rem)');
+    expect(canonCss).toContain('.canon-principles ul');
+    expect(canonCss).toContain('.canon-bases > ul');
+    expect(canonCss).toContain('.canon-graduation ol');
   });
 });
