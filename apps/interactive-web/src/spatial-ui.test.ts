@@ -6,6 +6,8 @@ import {
 } from './spatial-ui.js';
 import { canonToExperienceNodes, experienceParentByRouteId } from './content/canon-registry.js';
 
+const flatten = (nodes: readonly import('./experience-shell.js').ExperienceNode[]): import('./experience-shell.js').ExperienceNode[] => nodes.flatMap((node) => [node, ...flatten(node.children)]);
+
 describe('Spatial UI experience hierarchy', () => {
   it('labels parent relationships as experience navigation, not Canon semantics', () => {
     expect(experienceParentByRouteId.tai).toBe('fundamentos');
@@ -20,7 +22,7 @@ describe('Spatial UI experience hierarchy', () => {
   it('preserves canonical URLs while projecting the experience tree', () => {
     const source = canonToExperienceNodes();
     const hierarchy = buildExperienceHierarchy(source);
-    const projected = hierarchy.nodes.flatMap((node) => [node, ...node.children]);
+    const projected = flatten(hierarchy.nodes);
 
     for (const node of source) {
       const match = projected.find((candidate) => candidate.id === node.id);
