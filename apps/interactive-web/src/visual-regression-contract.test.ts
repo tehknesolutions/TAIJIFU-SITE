@@ -2,14 +2,23 @@ import { describe, expect, it } from 'vitest';
 import { visualRegressionMatrix } from './visual-regression-contract.js';
 
 describe('Brand Book visual regression contract', () => {
-  it('pins every required deterministic review mode from #40', () => {
+  it('pins representative desktop review coverage for all supported locales', () => {
+    expect(visualRegressionMatrix.filter((scenario) => scenario.id === 'desktop').map((scenario) => scenario.locale))
+      .toEqual(['pt-BR', 'en', 'es']);
+  });
+
+  it('keeps targeted responsive and accessibility axes without a 3x5 matrix explosion', () => {
     expect(visualRegressionMatrix.map((scenario) => scenario.id)).toEqual([
-      'desktop',
-      'tablet',
-      'mobile',
-      'reduced-motion',
-      'no-media',
+      'desktop', 'desktop', 'desktop', 'tablet', 'mobile', 'reduced-motion', 'no-media',
     ]);
+    expect(visualRegressionMatrix.filter((scenario) => scenario.id !== 'desktop')).toHaveLength(4);
+  });
+
+  it('requires explicit locale-prefixed routes for captured scenarios', () => {
+    for (const scenario of visualRegressionMatrix) {
+      expect(scenario.route).toMatch(/^\/(pt-br|en|es)\//);
+      expect(['pt-BR', 'en', 'es']).toContain(scenario.locale);
+    }
   });
 
   it('keeps viewport and environment state explicit for reproducible captures', () => {
@@ -18,11 +27,10 @@ describe('Brand Book visual regression contract', () => {
       expect(scenario.viewport.height).toBeGreaterThan(0);
       expect(typeof scenario.reducedMotion).toBe('boolean');
       expect(['asset', 'fallback']).toContain(scenario.mediaState);
-      expect(scenario.route).toBe('/');
     }
   });
 
-  it('makes no-media and reduced-motion independent regression axes', () => {
+  it('keeps no-media and reduced-motion independent regression axes', () => {
     const reducedMotion = visualRegressionMatrix.find((scenario) => scenario.id === 'reduced-motion');
     const noMedia = visualRegressionMatrix.find((scenario) => scenario.id === 'no-media');
 
