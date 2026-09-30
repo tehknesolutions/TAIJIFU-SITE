@@ -52,6 +52,6 @@ describe('Interactive web browser bootstrap', () => {
     focused.dispose();
 
     runtime.dispose();
-    expect(dispose).toHaveBeenCalledOnce();
+    expect(dispose).toHaveBeenCalledTimes(2);
   });
 });
