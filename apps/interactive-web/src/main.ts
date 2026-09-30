@@ -8,6 +8,7 @@ import {
 import { canonToExperienceNodes } from './content/canon-registry.js';
 import { findSiteRoute } from './content/site-ia.js';
 import { renderCanonUI } from './content/canon-ui-render.js';
+import { resolvePresentationMedia } from './media-runtime.js';
 import { buildExperienceHierarchy, visibleExperienceNodes } from './spatial-ui.js';
 
 const primaryNavigation = document.querySelector<HTMLElement>('#primary-navigation');
@@ -18,6 +19,13 @@ if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend();
 
 const canonCurriculum = document.querySelector<HTMLElement>('#canon-curriculum');
 if (canonCurriculum) canonCurriculum.innerHTML = renderCanonUI();
+
+const dojoMedia = document.querySelector<HTMLElement>('.dojo-gate__media');
+if (dojoMedia) {
+  const media = resolvePresentationMedia('r01-dojo-environment');
+  dojoMedia.dataset.mediaState = media.state;
+  if (media.url) dojoMedia.style.setProperty('--tj-presentation-media-url', `url("${media.url}")`);
+}
 
 const redirect = canonicalRedirectFor(window.location.pathname);
 if (redirect && redirect !== window.location.pathname) {
