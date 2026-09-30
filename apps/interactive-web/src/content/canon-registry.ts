@@ -36,6 +36,12 @@ export type CanonCoverage = Readonly<{
   unreconciledItems: readonly string[];
 }>;
 
+export type ExperienceContext = Readonly<{
+  parent?: CanonContentItem;
+  previous?: CanonContentItem;
+  next?: CanonContentItem;
+}>;
+
 // Editorial/experience navigation only. These relationships organize the public
 // journey and Three.js projection; they are not assertions about Canon semantics.
 export const experienceParentByRouteId = Object.freeze<Record<string, string>>({
@@ -107,6 +113,18 @@ export function getCanonCoverage(): CanonCoverage {
     pendingOfficialBodies: Object.freeze(pendingOfficialBodies),
     unreconciledItems: Object.freeze(unreconciledItems),
   });
+}
+
+export function getExperienceContext(routeId: string): ExperienceContext {
+  const routeIndex = routeItems.findIndex((item) => item.id === routeId);
+  if (routeIndex < 0) return Object.freeze({});
+
+  const parentId = experienceParentByRouteId[routeId] ?? (routeId === 'home' ? undefined : 'home');
+  const parent = parentId ? routeItems.find((item) => item.id === parentId) : undefined;
+  const previous = routeIndex > 0 ? routeItems[routeIndex - 1] : undefined;
+  const next = routeIndex < routeItems.length - 1 ? routeItems[routeIndex + 1] : undefined;
+
+  return Object.freeze({ parent, previous, next });
 }
 
 export function canonToExperienceNodes(
