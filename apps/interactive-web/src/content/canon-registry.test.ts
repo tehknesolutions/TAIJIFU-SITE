@@ -4,6 +4,7 @@ import {
   canonToExperienceNodes,
   experienceParentByRouteId,
   getCanonCoverage,
+  getExperienceContext,
 } from './canon-registry.js';
 
 describe('TAIJIFU canon registry', () => {
@@ -17,32 +18,20 @@ describe('TAIJIFU canon registry', () => {
     expect(new Set(ids).size).toBe(ids.length);
     expect(new Set(urls).size).toBe(urls.length);
     expect(canonRegistry).toContainEqual(
-      expect.objectContaining({
-        id: 'tai',
-        title: 'TAI',
-        canonicalUrl: '/principios/tai/',
-        status: 'confirmed',
-      }),
+      expect.objectContaining({ id: 'tai', title: 'TAI', canonicalUrl: '/principios/tai/', status: 'confirmed' }),
     );
   });
 
   it('keeps editorial parent relationships out of canonical content items', () => {
     expect(canonRegistry.every((item) => !('parentId' in item))).toBe(true);
     expect(experienceParentByRouteId).toEqual(expect.objectContaining({
-      tai: 'fundamentos',
-      ji: 'fundamentos',
-      fu: 'fundamentos',
-      metodo: 'influencias',
-      graduacao: 'metodo',
-      referencias: 'graduacao',
-      historia: 'referencias',
+      tai: 'fundamentos', ji: 'fundamentos', fu: 'fundamentos', metodo: 'influencias', graduacao: 'metodo', referencias: 'graduacao', historia: 'referencias',
     }));
   });
 
   it('projects editorial hierarchy into interactive nodes without promoting it to Canon', () => {
     const nodes = canonToExperienceNodes();
     const parentOf = (id: string) => nodes.find((node) => node.id === id)?.parentId;
-
     expect(parentOf('manifesto')).toBe('home');
     expect(parentOf('tai')).toBe('fundamentos');
     expect(parentOf('ji')).toBe('fundamentos');
@@ -53,6 +42,19 @@ describe('TAIJIFU canon registry', () => {
     expect(parentOf('referencias')).toBe('graduacao');
     expect(parentOf('historia')).toBe('referencias');
     expect(parentOf('treino-personalizado')).toBe('home');
+  });
+
+  it('derives contextual neighbors from the editorial experience graph', () => {
+    expect(getExperienceContext('graduacao')).toEqual({
+      parent: expect.objectContaining({ id: 'metodo', canonicalUrl: '/metodo/' }),
+      previous: expect.objectContaining({ id: 'metodo', canonicalUrl: '/metodo/' }),
+      next: expect.objectContaining({ id: 'referencias', canonicalUrl: '/referencias/' }),
+    });
+    expect(getExperienceContext('ji')).toEqual({
+      parent: expect.objectContaining({ id: 'fundamentos', canonicalUrl: '/fundamentos/' }),
+      previous: expect.objectContaining({ id: 'tai', canonicalUrl: '/principios/tai/' }),
+      next: expect.objectContaining({ id: 'fu', canonicalUrl: '/principios/fu/' }),
+    });
   });
 
   it('keeps unresolved concepts out of the interactive graph', () => {
