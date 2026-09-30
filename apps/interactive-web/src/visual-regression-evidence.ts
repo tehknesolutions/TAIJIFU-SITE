@@ -12,7 +12,8 @@ export type VisualRegressionEvidence = Readonly<{
 
 export const visualRegressionEvidence: readonly VisualRegressionEvidence[] = Object.freeze(
   visualRegressionMatrix.map((scenario) => Object.freeze({
-    scenarioId: `${scenario.locale}:${scenario.id}`,\n    locale: scenario.locale,
+    scenarioId: `${scenario.locale}:${scenario.id}`,
+    locale: scenario.locale,
     authority: 'evidence-only' as const,
     brandBookPath: 'docs/brand/BRAND-BOOK-V1.md' as const,
     invariant: scenario.invariant,
