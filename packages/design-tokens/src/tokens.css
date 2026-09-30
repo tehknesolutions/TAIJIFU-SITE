@@ -16,19 +16,35 @@
   --tj-space-xxl: 4rem;
 
   --tj-font-display: ui-serif, Georgia, 'Times New Roman', serif;
+  --tj-font-heading: ui-serif, Georgia, 'Times New Roman', serif;
   --tj-font-body: ui-sans-serif, system-ui, sans-serif;
   --tj-font-meta: ui-sans-serif, system-ui, sans-serif;
 
-  --tj-motion-fast: 120ms;
-  --tj-motion-standard: 220ms;
-  --tj-motion-deliberate: 420ms;
-  --tj-mark-space: 0.25em;
+  --tj-type-size-display: clamp(2.5rem, 7vw, 6rem);
+  --tj-type-size-heading: clamp(1.5rem, 3vw, 2.5rem);
+  --tj-type-size-body: 1rem;
+  --tj-type-size-meta: 0.75rem;
+  --tj-type-line-tight: 1.05;
+  --tj-type-line-body: 1.6;
+  --tj-type-tracking-display: -0.02em;
+  --tj-type-tracking-meta: 0.08em;
+
+  --tj-motion-duration-fast: 120ms;
+  --tj-motion-duration-standard: 220ms;
+  --tj-motion-duration-deliberate: 420ms;
+  --tj-motion-easing-standard: ease;
+  --tj-motion-easing-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --tj-mark-clear-space: 0.25em;
+  --tj-mark-size-sm: 1.5rem;
+  --tj-mark-size-md: 2.5rem;
+  --tj-mark-size-lg: 4rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
   :root {
-    --tj-motion-fast: 0ms;
-    --tj-motion-standard: 0ms;
-    --tj-motion-deliberate: 0ms;
+    --tj-motion-duration-fast: 0ms;
+    --tj-motion-duration-standard: 0ms;
+    --tj-motion-duration-deliberate: 0ms;
   }
 }
