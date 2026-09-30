@@ -110,8 +110,9 @@ export function getExperienceContext(routeId: string): ExperienceContext {
 
 export function buildLocalizedExperienceNodes(locale: SupportedLocale): readonly ExperienceNode[] {
   return Object.freeze(siteRoutes.flatMap((route) => {
+    if (route.id === 'home') return [Object.freeze({ id: 'home', label: 'TAIJIFU', canonicalUrl: '/', parentId: undefined })];
     const projection = route.localized?.[locale];
-    if (!projection || route.id === 'home') return [];
+    if (!projection) return [];
     return [Object.freeze({
       id: route.id,
       label: projection.title,
