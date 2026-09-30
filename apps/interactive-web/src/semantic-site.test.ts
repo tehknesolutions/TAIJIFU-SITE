@@ -48,6 +48,14 @@ describe('semantic TAIJIFU site', () => {
     expect(graduation).not.toContain('ainda não recuperado');
   });
 
+  it('exposes the canonical hierarchy counts and stable entity IDs in the curriculum explorer', () => {
+    const method = renderSemanticRoute('/metodo/') ?? '';
+    expect(method).toContain('174 entidades nesta release: 10 Faixas, 32 Caminhos e 128 Núcleos.');
+    expect(method).toContain('data-belt-id="BELT-WHITE"');
+    expect(method).toContain('data-path-id="PATH-C01"');
+    expect(method).toContain('data-nucleus-index="1"');
+  });
+
   it('renders a canonical journey overview before graduation detail', () => {
     const graduation = renderSemanticRoute('/graduacao/') ?? '';
     expect(graduation).toContain('id="curriculum-overview-title"');
