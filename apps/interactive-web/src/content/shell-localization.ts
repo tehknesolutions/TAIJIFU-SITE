@@ -1,5 +1,6 @@
 import type { SupportedLocale } from './locale.js';
 import { shellMessagesFor, type ShellMessages } from './localized-shell.js';
+import { findLocalizedRoute } from './site-ia.js';
 
 export type ShellLocalizationBinding = Readonly<{
   selector: string;
@@ -22,6 +23,10 @@ export const shellLocalizationBindings: readonly ShellLocalizationBinding[] = Ob
 ]);
 
 export function applyShellLocalization(root: ParentNode, locale: SupportedLocale): void {
+  for (const link of root.querySelectorAll<HTMLAnchorElement>('[data-route-id]')) {
+    const route = findLocalizedRoute(link.dataset.routeId ?? '', locale);
+    if (route) link.href = route.canonicalUrl;
+  }
   const messages = shellMessagesFor(locale);
   for (const binding of shellLocalizationBindings) {
     const element = root.querySelector<HTMLElement>(binding.selector);
