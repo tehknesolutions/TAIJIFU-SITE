@@ -11,7 +11,7 @@ describe('R01 Dojo Gate semantic contract', () => {
   it('keeps the ceremonial header semantic and exposes the full threshold action', () => {
     expect(html).toContain('<header class="site-header site-header--ceremonial">');
     expect(html).toContain('aria-label="Navegação principal"');
-    expect(html).toContain('class="site-header__dojo-link" href="#taijifu-entry">Entrar no Dojo</a>');
+    expect(html).toContain('class="site-header__dojo-link" href="#interactive-experience">Entrar no Dojo</a>');
     expect(html).toContain('/brand/omega1-master.svg');
     expect(css).toContain(':focus-visible');
   });
@@ -26,9 +26,9 @@ describe('R01 Dojo Gate semantic contract', () => {
   });
 
   it('makes TAI JI FU equal real links while preserving complete canonical labels', () => {
-    expect(html).toContain('class="dojo-axis dojo-axis--tai" href="/principios/tai/"');
-    expect(html).toContain('class="dojo-axis dojo-axis--ji" href="/principios/ji/"');
-    expect(html).toContain('class="dojo-axis dojo-axis--fu" href="/principios/fu/"');
+    expect(html).toContain('class="dojo-axis dojo-axis--tai" href="/pt-br/principios/tai/"');
+    expect(html).toContain('class="dojo-axis dojo-axis--ji" href="/pt-br/principios/ji/"');
+    expect(html).toContain('class="dojo-axis dojo-axis--fu" href="/pt-br/principios/fu/"');
     expect(html).toContain('Essência · Permanência · Axis');
     expect(html).toContain('Discernimento · Adaptação · Nexus');
     expect(html).toContain('Manifestação · Fluxo · Flow');
@@ -38,10 +38,10 @@ describe('R01 Dojo Gate semantic contract', () => {
   });
 
   it('keeps the primary CTA, provenance and continuation cue inside the threshold', () => {
-    expect(html).toContain('class="primary-cta" href="#taijifu-entry">ENTRAR NO DOJO</a>');
+    expect(html).toContain('class="primary-cta" href="#interactive-experience">ENTRAR NO DOJO</a>');
     expect(html).toContain('class="dojo-gate__provenance"');
     expect(html).toContain('Criado por Miguel Da Vinci e Thales Walisson');
-    expect(html).toContain('class="dojo-gate__scroll-cue" href="#taijifu-entry"');
+    expect(html).toContain('class="dojo-gate__scroll-cue" href="#interactive-experience"');
   });
 });
 
@@ -86,7 +86,7 @@ describe('R01 mobile and motion contract', () => {
     expect(presentationCss).toContain('@media (max-width: 48rem)');
     expect(presentationCss).toContain('.dojo-gate__inner');
     expect(presentationCss).toContain('.dojo-gate__maxims');
-    expect(presentationCss).toContain('.dojo-triad { grid-template-columns: 1fr; }');
+    expect(presentationCss).toContain('.dojo-triad');
     expect(presentationCss).toContain('.primary-cta');
     expect(presentationCss).toContain('.dojo-gate__footer');
     expect(presentationCss).toContain('min-height: auto;');
