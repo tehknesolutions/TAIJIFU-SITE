@@ -1,4 +1,4 @@
-import { canonToExperienceNodes } from './content/canon-registry.js';
+import { canonToExperienceNodes, getExperienceContext } from './content/canon-registry.js';
 import { canonSnapshot } from './content/canon-snapshot.js';
 import {
   canonCurriculumOverview,
@@ -15,20 +15,11 @@ import {
 } from './content/site-ia.js';
 
 function escapeHtml(value: string): string {
-  return value
-    .replaceAll('&', '&amp;')
-    .replaceAll('"', '&quot;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll("'", '&#39;');
+  return value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll("'", '&#39;');
 }
 
 export function renderPrimaryNavigation(): string {
-  return primaryNavigation
-    .map((id) => siteRoutes.find((route) => route.id === id))
-    .filter((route) => route !== undefined)
-    .map((route) => `<a href="${escapeHtml(route.canonicalUrl)}">${escapeHtml(route.title)}</a>`)
-    .join('');
+  return primaryNavigation.map((id) => siteRoutes.find((route) => route.id === id)).filter((route) => route !== undefined).map((route) => `<a href="${escapeHtml(route.canonicalUrl)}">${escapeHtml(route.title)}</a>`).join('');
 }
 
 function renderBlock(block: ContentBlock): string {
@@ -43,18 +34,7 @@ function renderBlock(block: ContentBlock): string {
 }
 
 function renderCurriculumGroups(groups: readonly CanonCurriculumGroup[]): string {
-  return `<section class="canon-curriculum" aria-label="Currículo TAIJIFU">
-    <header class="canon-curriculum__header"><p>174 entidades nesta release: 4 Bases, 10 Faixas, 32 Caminhos e 128 Núcleos.</p></header>
-    ${groups.map((group) => `<details class="canon-curriculum__group" data-belt-id="${escapeHtml(group.id)}">
-      <summary>${escapeHtml(group.title)} · ${group.items.length} ${group.items.length === 1 ? 'Caminho' : 'Caminhos'}</summary>
-      ${group.summary ? `<p>${escapeHtml(group.summary)}</p>` : ''}
-      <div class="canon-curriculum__items">${group.items.map((item) =>
-        item.details.length > 0
-          ? `<details class="canon-curriculum__item" data-path-id="${escapeHtml(item.id)}"><summary>${escapeHtml(item.title)} · ${item.nucleusCount} ${item.nucleusCount === 1 ? 'Núcleo' : 'Núcleos'}</summary><p>${escapeHtml(item.summary)}</p><ul>${item.details.map((detail, index) => `<li data-nucleus-index="${index + 1}">${escapeHtml(detail)}</li>`).join('')}</ul></details>`
-          : `<article class="canon-curriculum__item" data-path-id="${escapeHtml(item.id)}"><h3>${escapeHtml(item.title)} · ${item.nucleusCount} ${item.nucleusCount === 1 ? 'Núcleo' : 'Núcleos'}</h3><p>${escapeHtml(item.summary)}</p></article>`
-      ).join('')}</div>
-    </details>`).join('')}
-  </section>`;
+  return `<section class="canon-curriculum" aria-label="Currículo TAIJIFU"><header class="canon-curriculum__header"><p>174 entidades nesta release: 4 Bases, 10 Faixas, 32 Caminhos e 128 Núcleos.</p></header>${groups.map((group) => `<details class="canon-curriculum__group" data-belt-id="${escapeHtml(group.id)}"><summary>${escapeHtml(group.title)} · ${group.items.length} ${group.items.length === 1 ? 'Caminho' : 'Caminhos'}</summary>${group.summary ? `<p>${escapeHtml(group.summary)}</p>` : ''}<div class="canon-curriculum__items">${group.items.map((item) => item.details.length > 0 ? `<details class="canon-curriculum__item" data-path-id="${escapeHtml(item.id)}"><summary>${escapeHtml(item.title)} · ${item.nucleusCount} ${item.nucleusCount === 1 ? 'Núcleo' : 'Núcleos'}</summary><p>${escapeHtml(item.summary)}</p><ul>${item.details.map((detail, index) => `<li data-nucleus-index="${index + 1}">${escapeHtml(detail)}</li>`).join('')}</ul></details>` : `<article class="canon-curriculum__item" data-path-id="${escapeHtml(item.id)}"><h3>${escapeHtml(item.title)} · ${item.nucleusCount} ${item.nucleusCount === 1 ? 'Núcleo' : 'Núcleos'}</h3><p>${escapeHtml(item.summary)}</p></article>`).join('')}</div></details>`).join('')}</section>`;
 }
 
 function renderCanonBases(): string {
@@ -66,12 +46,19 @@ function renderCurriculumOverview(): string {
 }
 
 const principleIds = Object.freeze(['tai', 'ji', 'fu']);
+
 function renderContextNavigation(route: NonNullable<ReturnType<typeof findSiteRoute>>): string {
-  const principleIndex = principleIds.indexOf(route.id); const items: string[] = [];
-  if (principleIndex >= 0) { const previous = siteRoutes.find((candidate) => candidate.id === principleIds[principleIndex - 1]); const next = siteRoutes.find((candidate) => candidate.id === principleIds[principleIndex + 1]); items.push('<a class="content-context__home" href="/fundamentos/">Fundamentos</a>'); if (previous) items.push(`<a href="${escapeHtml(previous.canonicalUrl)}" rel="prev">← ${escapeHtml(previous.title)}</a>`); if (next) items.push(`<a href="${escapeHtml(next.canonicalUrl)}" rel="next">${escapeHtml(next.title)} →</a>`); }
-  return items.length > 0 ? `<nav class="content-context" aria-label="Contexto da seção">${items.join('')}</nav>` : '';
+  const context = getExperienceContext(route.id);
+  const items: string[] = [];
+  if (context.parent?.canonicalUrl) items.push(`<a href="${escapeHtml(context.parent.canonicalUrl)}" data-context-relation="parent">↑ ${escapeHtml(context.parent.title)}</a>`);
+  if (context.previous?.canonicalUrl && context.previous.id !== 'home') items.push(`<a href="${escapeHtml(context.previous.canonicalUrl)}" data-context-relation="previous" rel="prev">← ${escapeHtml(context.previous.title)}</a>`);
+  if (context.next?.canonicalUrl) items.push(`<a href="${escapeHtml(context.next.canonicalUrl)}" data-context-relation="next" rel="next">${escapeHtml(context.next.title)} →</a>`);
+  return items.length > 0 ? `<nav class="content-context" aria-label="Jornada TAIJIFU">${items.join('')}</nav>` : '';
 }
-function renderPrincipleLinks(): string { return `<nav class="principle-links" aria-label="Princípios TAIJIFU">${principleIds.map((id) => { const route = siteRoutes.find((candidate) => candidate.id === id); return route ? `<a class="principle-links__item principle-links__item--${escapeHtml(id)}" href="${escapeHtml(route.canonicalUrl)}"><strong>${escapeHtml(route.title)}</strong><span>Explorar princípio</span></a>` : ''; }).join('')}</nav>`; }
+
+function renderPrincipleLinks(): string {
+  return `<nav class="principle-links" aria-label="Princípios TAIJIFU">${principleIds.map((id) => { const route = siteRoutes.find((candidate) => candidate.id === id); return route ? `<a class="principle-links__item principle-links__item--${escapeHtml(id)}" href="${escapeHtml(route.canonicalUrl)}"><strong>${escapeHtml(route.title)}</strong><span>Explorar princípio</span></a>` : ''; }).join('')}</nav>`;
+}
 
 export function renderSemanticRoute(pathname: string): string | null {
   const route = findSiteRoute(pathname); if (!route || route.id === 'home') return null;
@@ -81,5 +68,6 @@ export function renderSemanticRoute(pathname: string): string | null {
   const body = content ? `<p class="content-lead">${escapeHtml(content.lead)}</p>${blocks.map(renderBlock).join('')}${route.id === 'graduacao' ? renderCurriculumOverview() : ''}${route.id === 'metodo' ? renderCanonBases() : ''}${curriculumGroups ? renderCurriculumGroups(curriculumGroups) : ''}<p class="content-source">Fonte de autoridade: ${escapeHtml(curriculumGroups ? 'TAIJIFU-CANON-1.0 snapshot' : content.sourceAuthority)}</p>` : '<p class="canon-reconciliation">O corpo oficial desta seção está em reconciliação a partir do TAIJIFU CANON. A rota é canônica e já está preservada.</p>';
   return `<section class="content-page" aria-labelledby="page-title"><header class="content-page__header"><p class="content-entry__type">${escapeHtml(content?.eyebrow ?? 'TAIJIFU')}</p><h1 id="page-title">${escapeHtml(route.title)}</h1></header><div class="content-page__body">${body}${route.id === 'fundamentos' ? renderPrincipleLinks() : ''}${renderContextNavigation(route)}<nav class="content-navigation" aria-label="Navegação TAIJIFU">${renderPrimaryNavigation()}</nav></div></section>`;
 }
+
 export function renderInteractiveLegend(): string { return canonToExperienceNodes().map((node) => `<a data-node-id="${escapeHtml(node.id)}" href="${escapeHtml(node.canonicalUrl)}">${escapeHtml(node.label)}</a>`).join(''); }
 export function canonicalRedirectFor(pathname: string): string | null { return resolveLegacyRedirect(pathname); }
