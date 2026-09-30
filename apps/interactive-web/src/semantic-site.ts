@@ -52,23 +52,21 @@ function renderBlock(block: ContentBlock): string {
 }
 
 function renderCurriculumGroups(groups: readonly CanonCurriculumGroup[]): string {
-  return `<section class="canon-curriculum" aria-label="Currículo TAIJIFU">${groups
-    .map(
-      (group) => `<details class="canon-curriculum__group">
-        <summary>${escapeHtml(group.title)}</summary>
-        ${group.summary ? `<p>${escapeHtml(group.summary)}</p>` : ''}
-        <div class="canon-curriculum__items">${group.items
-          .map((item) =>
-            item.details.length > 0
-              ? `<details class="canon-curriculum__item"><summary>${escapeHtml(item.title)}</summary><p>${escapeHtml(item.summary)}</p><ul>${item.details.map((detail) => `<li>${escapeHtml(detail)}</li>`).join('')}</ul></details>`
-              : `<article class="canon-curriculum__item"><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.summary)}</p></article>`,
-          )
-          .join('')}</div>
-      </details>`,
-    )
-    .join('')}</section>`;
+  return `<section class="canon-curriculum" aria-label="Currículo TAIJIFU">
+    <header class="canon-curriculum__header">
+      <p>174 entidades nesta release: 10 Faixas, 32 Caminhos e 128 Núcleos.</p>
+    </header>
+    ${groups.map((group) => `<details class="canon-curriculum__group" data-belt-id="${escapeHtml(group.id)}">
+      <summary>${escapeHtml(group.title)} · ${group.items.length} ${group.items.length === 1 ? 'Caminho' : 'Caminhos'}</summary>
+      ${group.summary ? `<p>${escapeHtml(group.summary)}</p>` : ''}
+      <div class="canon-curriculum__items">${group.items.map((item) =>
+        item.details.length > 0
+          ? `<details class="canon-curriculum__item" data-path-id="${escapeHtml(item.id)}"><summary>${escapeHtml(item.title)} · ${item.details.length} ${item.details.length === 1 ? 'Núcleo' : 'Núcleos'}</summary><p>${escapeHtml(item.summary)}</p><ul>${item.details.map((detail, index) => `<li data-nucleus-index="${index + 1}">${escapeHtml(detail)}</li>`).join('')}</ul></details>`
+          : `<article class="canon-curriculum__item" data-path-id="${escapeHtml(item.id)}"><h3>${escapeHtml(item.title)} · 0 Núcleos</h3><p>${escapeHtml(item.summary)}</p></article>`
+      ).join('')}</div>
+    </details>`).join('')}
+  </section>`;
 }
-
 function renderCanonBases(): string {
   return `<section class="canon-bases" aria-labelledby="canon-bases-title">
     <header class="canon-bases__header">
