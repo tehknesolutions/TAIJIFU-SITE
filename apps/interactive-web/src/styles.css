@@ -192,3 +192,11 @@ a { color: inherit; }
   .canon-bases__grid { grid-template-columns: 1fr; }
   .canon-base > p:not(.canon-base__id) { min-height: auto; }
 }
+
+.canon-curriculum__header { margin-bottom: var(--tj-space-2); font-family: var(--tj-font-meta); font-size: .75rem; letter-spacing: .08em; }
+.canon-curriculum__group > summary,
+.canon-curriculum__item > summary { cursor: pointer; }
+.canon-curriculum__group > summary { font-weight: 700; }
+.canon-curriculum__item { margin-top: .5rem; }
+.canon-curriculum__item ul { margin-block: .6rem 0; padding-left: 1.25rem; }
+.canon-curriculum__item li { padding-block: .18rem; }
