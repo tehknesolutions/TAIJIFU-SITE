@@ -19,6 +19,9 @@ export const Body = (text: string) => `<p class="tj-body">${escapeHtml(text)}</p
 export const Meta = (text: string) => `<small class="tj-meta">${escapeHtml(text)}</small>`;
 
 export const Button = (label: string, type: 'button' | 'submit' = 'button') => `<button class="tj-button" type="${type}">${escapeHtml(label)}</button>`;
-export const IconButton = (label: string, icon: string) => `<button class="tj-icon-button" type="button" aria-label="${escapeHtml(label)}"><span aria-hidden="true">${escapeHtml(icon)}</span></button>`;
+export const IconButton = (label: string, icon: string) => {
+  if (label.trim().length === 0) throw new TypeError('IconButton requires a non-empty accessible name');
+  return `<button class="tj-icon-button" type="button" aria-label="${escapeHtml(label)}"><span aria-hidden="true">${escapeHtml(icon)}</span></button>`;
+};
 export const TextLink = (href: string, label: string) => `<a class="tj-text-link" href="${escapeHtml(href)}">${escapeHtml(label)}</a>`;
 export const MediaFrame = (src: string, alt: string) => `<figure class="tj-media-frame"><img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}"></figure>`;
