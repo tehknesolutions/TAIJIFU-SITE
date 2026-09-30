@@ -1,4 +1,6 @@
 import { canonSnapshot } from './canon-snapshot.js';
+import { localizeCanonEntity } from './canon-localization.js';
+import type { SupportedLocale } from './locale.js';
 import {
   buildCanonHierarchy,
   buildFourBases,
@@ -35,6 +37,21 @@ export function renderCanonHierarchy(): string {
     return `<details class="canon-belt"><summary>${belt.order}. ${escapeHtml(belt.name)}</summary><p>${escapeHtml(belt.function)}</p>${paths || '<p class="canon-synthesis">Estado de síntese.</p>'}</details>`;
   }).join('');
   return `<section class="canon-hierarchy" aria-labelledby="canon-hierarchy-title"><h2 id="canon-hierarchy-title">Canon curricular</h2><p>10 Faixas · 32 Caminhos · 128 Núcleos</p><div>${belts}</div></section>`;
+}
+
+function renderPendingCanonUI(locale: Exclude<SupportedLocale, 'pt-BR'>): string {
+  const label = locale === 'en' ? 'Canon content translation pending' : 'Traducción del contenido del Canon pendiente';
+  const detail = locale === 'en'
+    ? 'The official TAIJIFU-CANON-1.0 content is not released in this language yet.'
+    : 'El contenido oficial de TAIJIFU-CANON-1.0 aún no está publicado en este idioma.';
+  return `<section class="canon-ui canon-ui--pending" data-canon-release="TAIJIFU-CANON-1.0" data-canon-localization="pending" aria-labelledby="canon-localization-pending-title"><h2 id="canon-localization-pending-title">TAIJIFU-CANON-1.0</h2><p>${escapeHtml(label)}</p><p>${escapeHtml(detail)}</p></section>`;
+}
+
+export function renderCanonUIForLocale(locale: SupportedLocale): string {
+  if (locale !== 'pt-BR' && localizeCanonEntity(canonSnapshot.bases[0]?.id ?? '', locale).kind === 'pending') {
+    return renderPendingCanonUI(locale);
+  }
+  return renderCanonUI();
 }
 
 export function renderCanonUI(): string {
