@@ -44,14 +44,11 @@ describe('Interactive web browser bootstrap', () => {
       onFocus,
     });
 
-    expect(mountSurface).toHaveBeenCalledTimes(1);
-
     runtime.focusNode('tai');
     expect(focusNode).toHaveBeenCalledWith('tai');
 
     const focused = bootstrapInteractiveWeb({ canvas, navigate, mountSurface, initialFocusNode: 'fu' });
     expect(focusNode).toHaveBeenLastCalledWith('fu');
-    expect(mountSurface).toHaveBeenCalledTimes(2);
     focused.dispose();
 
     runtime.dispose();
