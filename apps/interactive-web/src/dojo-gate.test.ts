@@ -120,9 +120,9 @@ describe('R01 Experience Graph handoff', () => {
   });
 
   it('keeps canonical route links independent from the handoff', () => {
-    expect(html).toContain('href="/principios/tai/"');
-    expect(html).toContain('href="/principios/ji/"');
-    expect(html).toContain('href="/principios/fu/"');
+    expect(html).toContain('href="/pt-br/principios/tai/"');
+    expect(html).toContain('href="/pt-br/principios/ji/"');
+    expect(html).toContain('href="/pt-br/principios/fu/"');
   });
 });
 
