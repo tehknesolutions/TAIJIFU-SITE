@@ -1,8 +1,12 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
   Body, Button, Cluster, Container, Display, Eyebrow, FocusRing, Grid, Heading,
   IconButton, MediaFrame, Meta, Rule, Stack, Surface, TextLink,
 } from './index.js';
+
+const css = readFileSync(resolve(import.meta.dirname, 'primitives.css'), 'utf8');
 
 describe('TAIJIFU editorial primitives', () => {
   it('characterizes all approved layout and text primitives', () => {
@@ -36,5 +40,21 @@ describe('TAIJIFU editorial primitives', () => {
   it('rejects missing accessible names for icon-only buttons', () => {
     expect(() => IconButton('', '⌕')).toThrow(TypeError);
     expect(() => IconButton('   ', '⌕')).toThrow(TypeError);
+  });
+
+  it('consumes semantic tokens and preserves keyboard focus visibility', () => {
+    expect(css).toContain("@import '@taijifu/design-tokens/tokens.css';");
+    expect(css).toMatch(/var\(--tj-[^)]+\)/);
+    expect(css).toContain(':focus-visible');
+  });
+
+  it('removes non-essential primitive motion for reduced-motion users', () => {
+    expect(css).toContain('@media (prefers-reduced-motion: reduce)');
+    expect(css).toContain('transition: none;');
+    expect(css).toContain('animation: none;');
+  });
+
+  it('keeps primitive CSS free from application-domain authority', () => {
+    expect(css).not.toMatch(/canon|site-ia|curriculum|experience[-_ ]graph/i);
   });
 });
