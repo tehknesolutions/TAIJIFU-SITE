@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Ambiente cerimonial de dojo com paisagem montanhosa ao amanhecer">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#171613"/><stop offset=".52" stop-color="#5d4a32"/><stop offset="1" stop-color="#c49b63"/></linearGradient>
+  <linearGradient id="mountain" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24221e"/><stop offset="1" stop-color="#4a4033"/></linearGradient>
+  <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4d473d"/><stop offset="1" stop-color="#171716"/></linearGradient>
+  <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33291f"/><stop offset="1" stop-color="#090a09"/></linearGradient>
+  <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#080807"/><stop offset=".5" stop-color="#2b2118"/><stop offset="1" stop-color="#080807"/></linearGradient>
+  <radialGradient id="sun"><stop offset="0" stop-color="#f4d99d" stop-opacity=".95"/><stop offset=".22" stop-color="#d9ad6a" stop-opacity=".35"/><stop offset="1" stop-color="#d9ad6a" stop-opacity="0"/></radialGradient>
+  <linearGradient id="mist" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#eee2ca" stop-opacity="0"/><stop offset=".5" stop-color="#eee2ca" stop-opacity=".22"/><stop offset="1" stop-color="#eee2ca" stop-opacity="0"/></linearGradient>
+  <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+</defs>
+<rect width="1600" height="900" fill="url(#sky)"/>
+<circle cx="1230" cy="315" r="250" fill="url(#sun)"/>
+<path d="M0 505 L180 365 300 470 440 300 590 455 760 335 930 475 1090 350 1260 465 1430 315 1600 470 V610 H0Z" fill="url(#mountain)"/>
+<path d="M0 545 Q260 475 520 540 T1040 530 T1600 515 V675 H0Z" fill="#292722"/>
+<rect y="555" width="1600" height="155" fill="url(#water)"/>
+<path d="M0 610 Q220 590 440 615 T880 608 T1320 620 T1600 605" fill="none" stroke="#cbb48d" stroke-opacity=".18" stroke-width="6"/>
+<path d="M80 560 Q310 525 530 565 T970 558 T1520 565" fill="none" stroke="#eee2ca" stroke-opacity=".12" stroke-width="20" filter="url(#soft)"/>
+<rect y="700" width="1600" height="200" fill="url(#floor)"/>
+<path d="M0 760 H1600 M0 820 H1600 M0 865 H1600" stroke="#806247" stroke-opacity=".18" stroke-width="3"/>
+<path d="M420 700 L650 900 M1180 700 L950 900" stroke="#b18b5b" stroke-opacity=".10" stroke-width="4"/>
+<g fill="#080807">
+  <rect x="0" y="0" width="170" height="900"/>
+  <rect x="1430" y="0" width="170" height="900"/>
+  <rect x="150" y="0" width="78" height="710" fill="#17130f"/>
+  <rect x="1372" y="0" width="78" height="710" fill="#17130f"/>
+  <rect x="0" y="0" width="1600" height="92" fill="url(#beam)"/>
+  <rect x="0" y="116" width="1600" height="34" fill="#120f0c"/>
+  <path d="M170 92 L245 160 H1355 L1430 92 Z" fill="#211a13"/>
+</g>
+<g fill="#2b2118">
+  <rect x="245" y="90" width="24" height="490"/>
+  <rect x="1331" y="90" width="24" height="490"/>
+  <rect x="335" y="92" width="18" height="420"/>
+  <rect x="1247" y="92" width="18" height="420"/>
+</g>
+<g fill="#0c0c0b">
+  <rect x="245" y="520" width="110" height="24"/>
+  <rect x="1245" y="520" width="110" height="24"/>
+</g>
+<g opacity=".85">
+  <path d="M235 525 Q285 450 335 525 Q290 500 235 525Z" fill="#4a503d"/>
+  <path d="M1265 525 Q1315 450 1365 525 Q1320 500 1265 525Z" fill="#4a503d"/>
+  <path d="M210 560 Q270 500 350 560 Q275 545 210 560Z" fill="#3c4234"/>
+  <path d="M1250 560 Q1330 500 1390 560 Q1325 545 1250 560Z" fill="#3c4234"/>
+</g>
+<g fill="#d8b77d" opacity=".78">
+  <rect x="205" y="465" width="18" height="62" rx="4"/>
+  <rect x="1377" y="465" width="18" height="62" rx="4"/>
+  <circle cx="214" cy="465" r="17" fill="#d8b77d" opacity=".22"/>
+  <circle cx="1386" cy="465" r="17" fill="#d8b77d" opacity=".22"/>
+</g>
+<rect x="0" y="0" width="1600" height="900" fill="none" stroke="#050505" stroke-width="28"/>
+</svg>

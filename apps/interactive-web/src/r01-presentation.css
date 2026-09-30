@@ -16,14 +16,16 @@
   isolation: isolate;
 }
 
-/* Deterministic approximation of the approved R01 depth while binary ingestion is pending. */
+/* Asset-backed environmental plate with the deterministic CSS atmosphere retained underneath as failure-safe fallback. */
 .dojo-gate__media,
 .dojo-gate__media[data-media-state="fallback"] {
   background:
+    url("/media/r01-dojo-environment.svg") center / cover no-repeat,
     radial-gradient(ellipse at 72% 34%, color-mix(in srgb, var(--tj-presentation-r01-gold) 28%, transparent), transparent 28%),
     radial-gradient(ellipse at 50% 30%, color-mix(in srgb, var(--tj-color-paper) 14%, transparent), transparent 36%),
     linear-gradient(90deg, color-mix(in srgb, var(--tj-color-ink) 99%, transparent) 0 18%, transparent 31% 69%, color-mix(in srgb, var(--tj-color-ink) 99%, transparent) 82% 100%),
     linear-gradient(180deg, var(--tj-presentation-dojo-depth-near) 0%, var(--tj-presentation-dojo-depth-mid) 48%, var(--tj-presentation-dojo-depth-far) 100%);
+  background-color: var(--tj-presentation-dojo-depth-far);
 }
 
 .dojo-gate__threshold::before {
