@@ -1,6 +1,6 @@
 import { bootstrapInteractiveWeb } from './browser-bootstrap.js';
 import { renderInteractiveLegend, renderPrimaryNavigation, renderSemanticRoute } from './semantic-site.js';
-import { canonToExperienceNodes } from './content/canon-registry.js';
+import { buildLocalizedExperienceNodes, canonToExperienceNodes } from './content/canon-registry.js';
 import { renderInternationalEntry, renderLanguageSelector } from './content/international-entry.js';
 import { legacyRedirectFor, resolveLocalizedPath } from './content/locale-routing.js';
 import { applyShellLocalization } from './content/shell-localization.js';
@@ -33,7 +33,7 @@ if (redirect) {
   if (primaryNavigation) primaryNavigation.innerHTML = renderPrimaryNavigation();
 
   const interactiveLegend = document.querySelector<HTMLElement>('#interactive-node-links');
-  if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend();
+  if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend(routeResolution.kind === 'localized-route' ? routeResolution.locale : 'pt-BR');
 
   const canonCurriculum = document.querySelector<HTMLElement>('#canon-curriculum');
   if (canonCurriculum) {
@@ -51,7 +51,8 @@ if (redirect) {
   const canvas = document.querySelector<HTMLCanvasElement>('#taijifu-experience');
   const focusLabel = document.querySelector<HTMLOutputElement>('#interactive-focus-label');
   const legendLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('#interactive-node-links [data-node-id]'));
-  const experienceHierarchy = buildExperienceHierarchy(canonToExperienceNodes());
+  const activeLocale = routeResolution.kind === 'localized-route' ? routeResolution.locale : 'pt-BR';
+  const experienceHierarchy = buildExperienceHierarchy(buildLocalizedExperienceNodes(activeLocale));
 
   const syncLegend = (focusId: string | null) => {
     const visibleIds = new Set(visibleExperienceNodes(experienceHierarchy, focusId).map((node) => node.id));
