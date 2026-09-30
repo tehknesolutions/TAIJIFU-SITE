@@ -5,8 +5,10 @@ import {
   renderPrimaryNavigation,
   renderSemanticRoute,
 } from './semantic-site.js';
+import { canonToExperienceNodes } from './content/canon-registry.js';
 import { findSiteRoute } from './content/site-ia.js';
 import { renderCanonUI } from './content/canon-ui-render.js';
+import { buildExperienceHierarchy, visibleExperienceNodes } from './spatial-ui.js';
 
 const primaryNavigation = document.querySelector<HTMLElement>('#primary-navigation');
 if (primaryNavigation) primaryNavigation.innerHTML = renderPrimaryNavigation();
@@ -28,10 +30,26 @@ if (redirect && redirect !== window.location.pathname) {
   const canvas = document.querySelector<HTMLCanvasElement>('#taijifu-experience');
   const focusLabel = document.querySelector<HTMLOutputElement>('#interactive-focus-label');
   const legendLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('#interactive-node-links [data-node-id]'));
+  const experienceHierarchy = buildExperienceHierarchy(canonToExperienceNodes());
+
+  const syncLegend = (focusId: string | null) => {
+    const visibleIds = new Set(
+      visibleExperienceNodes(experienceHierarchy, focusId).map((node) => node.id),
+    );
+    for (const link of legendLinks) {
+      const visible = visibleIds.has(link.dataset.nodeId ?? '');
+      link.hidden = !visible;
+      link.setAttribute('aria-hidden', String(!visible));
+      link.tabIndex = visible ? 0 : -1;
+    }
+  };
 
   const syncLegendFocus = (nodeId: string | null) => {
     for (const link of legendLinks) link.classList.toggle('is-focused', link.dataset.nodeId === nodeId);
+    syncLegend(nodeId);
   };
+
+  syncLegend(null);
 
   if (canvas) {
     const currentRoute = findSiteRoute(window.location.pathname);

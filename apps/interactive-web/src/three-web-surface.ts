@@ -11,6 +11,7 @@ import {
 } from './three-focus.js';
 import { pickProjectedNode } from './three-raycast-navigation.js';
 import { createThreeRendererAdapter } from './three-renderer-adapter.js';
+import { buildExperienceHierarchy, visibleExperienceNodes } from './spatial-ui.js';
 
 export type WebSurfaceCanvas = {
   getBoundingClientRect(): { left: number; top: number; width: number; height: number };
@@ -44,6 +45,7 @@ export function mountThreeWebSurface(options: {
   transitionDurationMs?: number;
 }) {
   const projection = createThreeRendererAdapter().render(options.frame);
+  const hierarchy = buildExperienceHierarchy(options.frame.nodes);
   const bounds = options.canvas.getBoundingClientRect();
 
   if (bounds.width > 0 && bounds.height > 0) {
@@ -51,6 +53,20 @@ export function mountThreeWebSurface(options: {
     projection.camera.updateProjectionMatrix();
   }
 
+  const syncVisibility = (focusId: string | null) => {
+    const visibleIds = new Set(
+      visibleExperienceNodes(hierarchy, focusId).map((node) => node.id),
+    );
+    for (const node of projection.nodes) {
+      node.visible = visibleIds.has(node.userData.nodeId as string);
+    }
+    for (const child of projection.scene.children) {
+      const childId = child.userData.childId as string | undefined;
+      if (childId) child.visible = visibleIds.has(childId);
+    }
+  };
+
+  syncVisibility(null);
   projection.scene.updateMatrixWorld(true);
   projection.camera.updateMatrixWorld(true);
   options.renderer.render(projection.scene, projection.camera);
@@ -61,6 +77,8 @@ export function mountThreeWebSurface(options: {
   const renderFocusedState = (nextFocus: Object3D | null) => {
     if (focusedNode === nextFocus) return;
     focusedNode = nextFocus;
+    const focusId = focusedNode?.userData.nodeId as string | undefined;
+    syncVisibility(focusId ?? null);
     applyProjectedFocus(
       projection.nodes,
       focusedNode,
@@ -78,7 +96,7 @@ export function mountThreeWebSurface(options: {
       options.canvas.getBoundingClientRect(),
     );
     const hit = normalized
-      ? pickProjectedNode(normalized, projection.camera, projection.nodes)
+      ? pickProjectedNode(normalized, projection.camera, projection.nodes.filter((node) => node.visible))
       : null;
     renderFocusedState(hit);
   };
@@ -93,7 +111,7 @@ export function mountThreeWebSurface(options: {
       options.canvas.getBoundingClientRect(),
     );
     const selected = normalized
-      ? pickProjectedNode(normalized, projection.camera, projection.nodes)
+      ? pickProjectedNode(normalized, projection.camera, projection.nodes.filter((node) => node.visible))
       : null;
     const destination = describeProjectedFocus(selected);
 
