@@ -1,11 +1,7 @@
 import { bootstrapInteractiveWeb } from './browser-bootstrap.js';
-import {
-  canonicalRedirectFor,
-  renderInteractiveLegend,
-  renderPrimaryNavigation,
-  renderSemanticRoute,
-} from './semantic-site.js';
+import { renderInteractiveLegend, renderPrimaryNavigation, renderSemanticRoute } from './semantic-site.js';
 import { canonToExperienceNodes } from './content/canon-registry.js';
+import { legacyRedirectFor, resolveLocalizedPath } from './content/locale-routing.js';
 import { findSiteRoute } from './content/site-ia.js';
 import { renderCanonUI } from './content/canon-ui-render.js';
 import { resolvePresentationMedia } from './media-runtime.js';
@@ -27,11 +23,13 @@ if (dojoMedia) {
   if (media.url) dojoMedia.style.setProperty('--tj-presentation-media-url', `url("${media.url}")`);
 }
 
-const redirect = canonicalRedirectFor(window.location.pathname);
-if (redirect && redirect !== window.location.pathname) {
+const pathname = window.location.pathname;
+const redirect = legacyRedirectFor(pathname);
+if (redirect) {
   window.location.replace(redirect);
 } else {
-  const semanticRoute = renderSemanticRoute(window.location.pathname);
+  const routeResolution = resolveLocalizedPath(pathname);
+  const semanticRoute = routeResolution.kind === 'localized-route' ? renderSemanticRoute(pathname) : null;
   const semanticContent = document.querySelector<HTMLElement>('#semantic-content');
   if (semanticRoute && semanticContent) semanticContent.innerHTML = semanticRoute;
 
@@ -41,9 +39,7 @@ if (redirect && redirect !== window.location.pathname) {
   const experienceHierarchy = buildExperienceHierarchy(canonToExperienceNodes());
 
   const syncLegend = (focusId: string | null) => {
-    const visibleIds = new Set(
-      visibleExperienceNodes(experienceHierarchy, focusId).map((node) => node.id),
-    );
+    const visibleIds = new Set(visibleExperienceNodes(experienceHierarchy, focusId).map((node) => node.id));
     for (const link of legendLinks) {
       const visible = visibleIds.has(link.dataset.nodeId ?? '');
       link.hidden = !visible;
@@ -60,7 +56,7 @@ if (redirect && redirect !== window.location.pathname) {
   syncLegend(null);
 
   if (canvas) {
-    const currentRoute = findSiteRoute(window.location.pathname);
+    const currentRoute = routeResolution.kind === 'localized-route' ? findSiteRoute(pathname) : null;
     const runtime = bootstrapInteractiveWeb({
       canvas,
       navigate: (canonicalUrl) => window.location.assign(canonicalUrl),
