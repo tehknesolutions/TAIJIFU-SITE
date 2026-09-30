@@ -5,7 +5,7 @@ import { renderInternationalEntry, renderLanguageSelector } from './content/inte
 import { legacyRedirectFor, resolveLocalizedPath } from './content/locale-routing.js';
 import { applyShellLocalization } from './content/shell-localization.js';
 import { findSiteRoute } from './content/site-ia.js';
-import { renderCanonUI } from './content/canon-ui-render.js';
+import { renderCanonUIForLocale } from './content/canon-ui-render.js';
 import { resolvePresentationMedia } from './media-runtime.js';
 import { buildExperienceHierarchy, visibleExperienceNodes } from './spatial-ui.js';
 
@@ -25,7 +25,7 @@ if (redirect) {
     applyShellLocalization(document, routeResolution.locale);
     const semanticRoute = renderSemanticRoute(pathname);
     if (semanticRoute && semanticContent) {
-      semanticContent.innerHTML = `${renderLanguageSelector(routeResolution.routeId, routeResolution.locale)}${semanticRoute}`;
+      semanticContent.innerHTML = renderLanguageSelector(routeResolution.routeId, routeResolution.locale) + semanticRoute;
     }
   }
 
@@ -36,13 +36,16 @@ if (redirect) {
   if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend();
 
   const canonCurriculum = document.querySelector<HTMLElement>('#canon-curriculum');
-  if (canonCurriculum) canonCurriculum.innerHTML = renderCanonUI();
+  if (canonCurriculum) {
+    const locale = routeResolution.kind === 'localized-route' ? routeResolution.locale : 'pt-BR';
+    canonCurriculum.innerHTML = renderCanonUIForLocale(locale);
+  }
 
   const dojoMedia = document.querySelector<HTMLElement>('.dojo-gate__media');
   if (dojoMedia) {
     const media = resolvePresentationMedia('r01-dojo-environment');
     dojoMedia.dataset.mediaState = media.state;
-    if (media.url) dojoMedia.style.setProperty('--tj-presentation-media-url', `url("${media.url}")`);
+    if (media.url) dojoMedia.style.setProperty('--tj-presentation-media-url', 'url("' + media.url + '")');
   }
 
   const canvas = document.querySelector<HTMLCanvasElement>('#taijifu-experience');
