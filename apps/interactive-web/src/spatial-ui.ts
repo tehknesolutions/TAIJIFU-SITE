@@ -19,15 +19,12 @@ export function buildExperienceHierarchy(
   const childrenByParent = new Map<string, ExperienceHierarchyNode[]>();
 
   for (const node of source) {
-    byId.set(
-      node.id,
-      Object.freeze({
-        id: node.id,
-        label: node.label,
-        canonicalUrl: node.canonicalUrl,
-        children: [],
-      }),
-    );
+    byId.set(node.id, Object.freeze({
+      id: node.id,
+      label: node.label,
+      canonicalUrl: node.canonicalUrl,
+      children: [],
+    }));
   }
 
   for (const node of source) {
@@ -72,8 +69,9 @@ export function visibleExperienceNodes(
 
   return Object.freeze([
     ...flattenRoots(hierarchy.nodes),
+    focused,
     ...flattenRoots(focused.children),
-  ]);
+  ].filter((node, index, nodes) => nodes.findIndex((candidate) => candidate.id === node.id) === index));
 }
 
 function flattenRoots(
