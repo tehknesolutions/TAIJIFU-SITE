@@ -6,6 +6,7 @@ import { legacyRedirectFor, resolveLocalizedPath } from './content/locale-routin
 import { applyShellLocalization } from './content/shell-localization.js';
 import { findSiteRoute } from './content/site-ia.js';
 import { renderCanonUIForLocale } from './content/canon-ui-render.js';
+import { renderLocalizedSeoHead } from './content/seo-localization.js';
 import { resolvePresentationMedia } from './media-runtime.js';
 import { buildExperienceHierarchy, visibleExperienceNodes } from './spatial-ui.js';
 
@@ -23,6 +24,17 @@ if (redirect) {
   } else if (routeResolution.kind === 'localized-route') {
     document.documentElement.lang = routeResolution.locale;
     applyShellLocalization(document, routeResolution.locale);
+    const seoHead = document.head;
+    seoHead.querySelectorAll('link[data-taijifu-i18n-seo]').forEach((node) => node.remove());
+    const seoMarkup = renderLocalizedSeoHead(routeResolution.routeId, routeResolution.locale);
+    if (seoMarkup) {
+      const template = document.createElement('template');
+      template.innerHTML = seoMarkup;
+      template.content.querySelectorAll('link').forEach((link) => {
+        link.dataset.taijifuI18nSeo = 'true';
+        seoHead.appendChild(link);
+      });
+    }
     const semanticRoute = renderSemanticRoute(pathname);
     if (semanticRoute && semanticContent) {
       semanticContent.innerHTML = renderLanguageSelector(routeResolution.routeId, routeResolution.locale) + semanticRoute;
