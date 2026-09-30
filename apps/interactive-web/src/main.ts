@@ -6,12 +6,16 @@ import {
   renderSemanticRoute,
 } from './semantic-site.js';
 import { findSiteRoute } from './content/site-ia.js';
+import { renderCanonUI } from './content/canon-ui-render.js';
 
 const primaryNavigation = document.querySelector<HTMLElement>('#primary-navigation');
 if (primaryNavigation) primaryNavigation.innerHTML = renderPrimaryNavigation();
 
 const interactiveLegend = document.querySelector<HTMLElement>('#interactive-node-links');
 if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend();
+
+const canonCurriculum = document.querySelector<HTMLElement>('#canon-curriculum');
+if (canonCurriculum) canonCurriculum.innerHTML = renderCanonUI();
 
 const redirect = canonicalRedirectFor(window.location.pathname);
 if (redirect && redirect !== window.location.pathname) {
