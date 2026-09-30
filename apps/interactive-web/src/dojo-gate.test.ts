@@ -45,6 +45,26 @@ describe('R01 Dojo Gate semantic contract', () => {
   });
 });
 
+describe('R01 official desktop composition calibration', () => {
+  it('keeps the central mark dominant without swallowing the title lockup', () => {
+    expect(presentationCss).toContain('width: clamp(13rem, 21vw, 19rem);');
+    expect(presentationCss).toContain('font-size: clamp(3.7rem, 6.2vw, 6rem);');
+  });
+
+  it('keeps the side maxims as tall edge banners rather than central cards', () => {
+    expect(presentationCss).toContain('inset: 16% 1.75% auto;');
+    expect(presentationCss).toContain('grid-template-columns: minmax(8rem, 10.5rem) minmax(8rem, 10.5rem);');
+    expect(presentationCss).toContain('min-height: 23rem;');
+    expect(presentationCss).toContain('background: color-mix(in srgb, var(--tj-color-ink) 88%, transparent);');
+  });
+
+  it('keeps the triad compact and the CTA subordinate to the identity', () => {
+    expect(presentationCss).toContain('width: min(32rem, 62%);');
+    expect(presentationCss).toContain('min-height: 3.6rem;');
+    expect(presentationCss).toContain('width: min(40rem, 100%);');
+  });
+});
+
 describe('Dojo Gate resilience', () => {
   it('declares environmental media optional and supplies a presentation-layer fallback', () => {
     expect(html).toContain('class="dojo-gate__media" aria-hidden="true" data-media-state="fallback"');
