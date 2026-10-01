@@ -49,6 +49,14 @@ describe('Canon UI accessible presentation', () => {
     expect(baseCss).toContain('var(--tj-color-fu)');
   });
 
+  it('presents the Manifesto as a distinct declaration surface using existing semantic tokens', () => {
+    expect(baseCss).toContain('.content-page--manifesto');
+    expect(baseCss).toContain('.content-page--manifesto .content-lead');
+    expect(baseCss).toContain('.content-page--manifesto blockquote');
+    expect(baseCss).toContain('var(--tj-color-text-primary)');
+    expect(baseCss).toContain('var(--tj-color-border)');
+  });
+
   it('adapts dense curriculum structures for compact screens', () => {
     expect(canonCss).toContain('@media (max-width: 48rem)');
     expect(canonCss).toContain('.canon-principles ul');
