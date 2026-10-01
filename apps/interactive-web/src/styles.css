@@ -97,6 +97,12 @@ a { color: inherit; }
 .content-lead { max-width: 48rem; font-size: clamp(1.3rem, 2.7vw, 2rem); line-height: 1.35; }
 .content-page blockquote { margin: var(--tj-space-3) 0; padding-left: var(--tj-space-2); border-left: 4px solid var(--tj-color-fu); font-size: 1.15rem; }
 .content-source { margin-top: var(--tj-space-4); color: var(--tj-color-metal); font-size: 0.78rem; }
+.content-page--principle { --principle-accent: var(--tj-color-metal); border-top: 4px solid var(--principle-accent); }
+.content-page--principle .content-entry__type, .content-page--principle h1 { color: var(--principle-accent); }
+.content-page--principle blockquote { border-left-color: var(--principle-accent); }
+.content-page--tai { --principle-accent: var(--tj-color-tai); }
+.content-page--ji { --principle-accent: var(--tj-color-ji); }
+.content-page--fu { --principle-accent: var(--tj-color-fu); }
 .canon-reconciliation { padding: var(--tj-space-2); border-left: 4px solid var(--tj-color-fu); background: color-mix(in srgb, var(--tj-color-fu) 9%, transparent); }
 .principle-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--tj-space-2); margin-block: var(--tj-space-4); }
 .principle-card { padding: var(--tj-space-2); border-top: 4px solid currentColor; background: color-mix(in srgb, currentColor 5%, transparent); }
