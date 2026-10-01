@@ -3,6 +3,14 @@ import { canonicalRedirectFor, renderInteractiveLegend, renderPrimaryNavigation,
 
 describe('semantic TAIJIFU site', () => {
   it('renders recovered official content on supported canonical routes', () => { const manifesto = renderSemanticRoute('/manifesto/'); expect(manifesto).toContain('TAIJIFU = Arte Marcial de se Adaptar.'); expect(manifesto).toContain('Firme na essência. Livre na forma.'); const fundamentos = renderSemanticRoute('/fundamentos/'); expect(fundamentos).toContain('O que deve permanecer?'); expect(fundamentos).toContain('O que precisa mudar?'); expect(fundamentos).toContain('Que forma deve existir agora?'); });
+  it('marks Manifesto as the canonical declaration surface', () => {
+    const manifesto = renderSemanticRoute('/manifesto/') ?? '';
+    expect(manifesto).toContain('class="content-page content-page--manifesto"');
+    expect(manifesto).toContain('data-surface="manifesto"');
+    expect(manifesto).toContain('TAIJIFU = Arte Marcial de se Adaptar.');
+    expect(manifesto).toContain('Firme na essência. Livre na forma.');
+    expect(manifesto).toContain('Mudar sem deixar de ser.');
+  });
   it('renders recovered Canon Bases instead of reconciliation copy', () => { const html = renderSemanticRoute('/influencias/'); expect(html).toContain('Bases canônicas'); expect(html).toContain('Integração/Sobrevivência'); expect(html).not.toContain('ainda não recuperado'); });
   it('materializes the four canonical Bases without inventing Base-to-Belt relationships', () => { const method = renderSemanticRoute('/metodo/') ?? ''; expect(method).toContain('id="canon-bases-title"'); expect(method).toContain('data-base-id="BASE-TAI"'); expect(method).toContain('data-base-id="BASE-JI"'); expect(method).toContain('data-base-id="BASE-FU"'); expect(method).toContain('data-base-id="BASE-INTEGRATION"'); expect(method).toContain('a release não define uma relação Base → Faixa'); });
   it('renders curriculum as progressive disclosure instead of 174 top-level cards', () => { const method = renderSemanticRoute('/metodo/'); const graduation = renderSemanticRoute('/graduacao/'); expect(method).toContain('<details'); expect(method).toContain('C01 · Presença e Segurança'); expect(method).toContain('Presença Corporal'); expect(method).toContain('Etiqueta, Parceiro e Espaço Seguro'); expect(graduation).toContain('Branca · Entrar'); expect(graduation).toContain('Preta · Sintetizar'); expect(graduation).not.toContain('ainda não recuperado'); });
