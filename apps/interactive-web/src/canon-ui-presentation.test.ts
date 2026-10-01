@@ -39,6 +39,16 @@ describe('Canon UI accessible presentation', () => {
     expect(css).toContain('var(--tj-space-');
   });
 
+  it('connects principle-specific semantic surfaces to the official TAI, JI and FU tokens', () => {
+    expect(baseCss).toContain('.content-page--principle');
+    expect(baseCss).toContain('.content-page--tai');
+    expect(baseCss).toContain('var(--tj-color-tai)');
+    expect(baseCss).toContain('.content-page--ji');
+    expect(baseCss).toContain('var(--tj-color-ji)');
+    expect(baseCss).toContain('.content-page--fu');
+    expect(baseCss).toContain('var(--tj-color-fu)');
+  });
+
   it('adapts dense curriculum structures for compact screens', () => {
     expect(canonCss).toContain('@media (max-width: 48rem)');
     expect(canonCss).toContain('.canon-principles ul');
