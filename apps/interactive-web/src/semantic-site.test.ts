@@ -13,6 +13,18 @@ describe('semantic TAIJIFU site', () => {
   it('generates primary navigation from the canonical IA', () => { const navigation = renderPrimaryNavigation(); expect(navigation).toContain('href="/pt-br/manifesto/"'); expect(navigation).toContain('href="/pt-br/treino-personalizado/"'); });
   it('renders a visible legend from the same canonical graph as Three.js', () => { const legend = renderInteractiveLegend(); expect(legend).toContain('data-node-id="manifesto"'); expect(legend).toContain('data-node-id="tai"'); expect(legend).toContain('href="/pt-br/principios/tai/"'); expect(legend).toContain('href="/pt-br/principios/ji/"'); expect(legend).toContain('href="/pt-br/principios/fu/"'); });
   it('renders all three canonical principle routes with official triad content', () => { expect(renderSemanticRoute('/principios/tai/')).toContain('TAI — Essência / Permanência — Axis'); expect(renderSemanticRoute('/principios/ji/')).toContain('JI — Discernimento / Adaptação — Nexus'); expect(renderSemanticRoute('/principios/fu/')).toContain('FU — Manifestação / Fluxo — Flow'); });
+  it('marks TAI, JI and FU as principle-specific semantic surfaces', () => {
+    const tai = renderSemanticRoute('/principios/tai/') ?? '';
+    const ji = renderSemanticRoute('/principios/ji/') ?? '';
+    const fu = renderSemanticRoute('/principios/fu/') ?? '';
+
+    expect(tai).toContain('class="content-page content-page--principle content-page--tai"');
+    expect(tai).toContain('data-principle="tai"');
+    expect(ji).toContain('class="content-page content-page--principle content-page--ji"');
+    expect(ji).toContain('data-principle="ji"');
+    expect(fu).toContain('class="content-page content-page--principle content-page--fu"');
+    expect(fu).toContain('data-principle="fu"');
+  });
   it('leaves the homepage to the Dojo Gate document', () => { expect(renderSemanticRoute('/')).toBeNull(); });
 });
 
