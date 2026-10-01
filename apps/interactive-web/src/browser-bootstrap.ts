@@ -17,6 +17,11 @@ type MountSurface = (options: {
   onFocus?: (focus: ProjectedFocus | null) => void;
 }) => MountedSurface;
 
+const unavailableSurface: MountedSurface = Object.freeze({
+  focusNode: () => undefined,
+  dispose: () => undefined,
+});
+
 export function bootstrapInteractiveWeb(options: {
   canvas: WebSurfaceCanvas;
   navigate: (url: string) => void;
@@ -29,12 +34,20 @@ export function bootstrapInteractiveWeb(options: {
   });
 
   const mountSurface = options.mountSurface ?? mountBrowserThreeSurface;
-  const surface = mountSurface({
-    canvas: options.canvas,
-    frame: experience.frame,
-    navigate: options.navigate,
-    onFocus: options.onFocus,
-  });
+  let surface: MountedSurface;
+  let surfaceAvailable = true;
+
+  try {
+    surface = mountSurface({
+      canvas: options.canvas,
+      frame: experience.frame,
+      navigate: options.navigate,
+      onFocus: options.onFocus,
+    });
+  } catch {
+    surface = unavailableSurface;
+    surfaceAvailable = false;
+  }
 
   if (options.initialFocusNode) {
     surface.focusNode(options.initialFocusNode);
@@ -42,6 +55,7 @@ export function bootstrapInteractiveWeb(options: {
 
   return Object.freeze({
     experience,
+    surfaceAvailable,
     focusNode: (nodeId: string | null) => surface.focusNode(nodeId),
     dispose: () => surface.dispose(),
   });
