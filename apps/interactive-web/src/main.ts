@@ -9,6 +9,7 @@ import { renderCanonUIForLocale } from './content/canon-ui-render.js';
 import { renderLocalizedSeoHead } from './content/seo-localization.js';
 import { resolvePresentationMedia } from './media-runtime.js';
 import { buildExperienceHierarchy, visibleExperienceNodes } from './spatial-ui.js';
+import { wireHomeDojoLinks } from './home-dojo-wiring.js';
 
 const pathname = window.location.pathname;
 const redirect = legacyRedirectFor(pathname);
@@ -41,17 +42,17 @@ if (redirect) {
     }
   }
 
+  const activeLocale = routeResolution.kind === 'localized-route' ? routeResolution.locale : 'pt-BR';
+  wireHomeDojoLinks(document.querySelectorAll<HTMLAnchorElement>('[data-route-id]'), activeLocale);
+
   const primaryNavigation = document.querySelector<HTMLElement>('#primary-navigation');
   if (primaryNavigation) primaryNavigation.innerHTML = renderPrimaryNavigation();
 
   const interactiveLegend = document.querySelector<HTMLElement>('#interactive-node-links');
-  if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend(routeResolution.kind === 'localized-route' ? routeResolution.locale : 'pt-BR');
+  if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend(activeLocale);
 
   const canonCurriculum = document.querySelector<HTMLElement>('#canon-curriculum');
-  if (canonCurriculum) {
-    const locale = routeResolution.kind === 'localized-route' ? routeResolution.locale : 'pt-BR';
-    canonCurriculum.innerHTML = renderCanonUIForLocale(locale);
-  }
+  if (canonCurriculum) canonCurriculum.innerHTML = renderCanonUIForLocale(activeLocale);
 
   const dojoMedia = document.querySelector<HTMLElement>('.dojo-gate__media');
   if (dojoMedia) {
@@ -63,7 +64,6 @@ if (redirect) {
   const canvas = document.querySelector<HTMLCanvasElement>('#taijifu-experience');
   const focusLabel = document.querySelector<HTMLOutputElement>('#interactive-focus-label');
   const legendLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('#interactive-node-links [data-node-id]'));
-  const activeLocale = routeResolution.kind === 'localized-route' ? routeResolution.locale : 'pt-BR';
   const experienceHierarchy = buildExperienceHierarchy(buildLocalizedExperienceNodes(activeLocale));
 
   const syncLegend = (focusId: string | null) => {
