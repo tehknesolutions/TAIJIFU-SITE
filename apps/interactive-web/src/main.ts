@@ -10,6 +10,7 @@ import { renderLocalizedSeoHead } from './content/seo-localization.js';
 import { resolvePresentationMedia } from './media-runtime.js';
 import { buildExperienceHierarchy, visibleExperienceNodes } from './spatial-ui.js';
 import { wireHomeDojoLinks } from './home-dojo-wiring.js';
+import { applyInteractiveSurfaceState } from './interactive-surface-state.js';
 
 const pathname = window.location.pathname;
 const redirect = legacyRedirectFor(pathname);
@@ -96,6 +97,11 @@ if (redirect) {
     });
 
     const interactiveExperience = document.querySelector<HTMLElement>('#interactive-experience');
+    const surfaceStatus = document.querySelector<HTMLElement>('#interactive-surface-status');
+    if (interactiveExperience && surfaceStatus) {
+      applyInteractiveSurfaceState(interactiveExperience, surfaceStatus, runtime.surfaceAvailable);
+    }
+
     const dojoEntryLinks = document.querySelectorAll<HTMLAnchorElement>('[href="#interactive-experience"]');
     for (const link of dojoEntryLinks) {
       link.addEventListener('click', () => {
