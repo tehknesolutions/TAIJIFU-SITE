@@ -1,5 +1,6 @@
 import { canonSnapshot } from './canon-snapshot.js';
 import { localizeCanonEntity } from './canon-localization.js';
+import { isCanonContentReleaseReady } from './canon-ui-readiness.js';
 import type { SupportedLocale } from './locale.js';
 import {
   buildCanonHierarchy,
@@ -48,7 +49,7 @@ function renderPendingCanonUI(locale: Exclude<SupportedLocale, 'pt-BR'>): string
 }
 
 export function renderCanonUIForLocale(locale: SupportedLocale): string {
-  if (locale !== 'pt-BR' && localizeCanonEntity(canonSnapshot.bases[0]?.id ?? '', locale).kind === 'pending') {
+  if (!isCanonContentReleaseReady(locale)) {
     return renderPendingCanonUI(locale);
   }
   return renderCanonUI();
