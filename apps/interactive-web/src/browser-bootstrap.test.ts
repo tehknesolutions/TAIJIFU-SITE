@@ -54,4 +54,42 @@ describe('Interactive web browser bootstrap', () => {
     runtime.dispose();
     expect(dispose).toHaveBeenCalledTimes(2);
   });
+
+  it('mounts personalized training only when a training root is supplied', () => {
+    const canvas = {} as never;
+    const trainingRoot = document.createElement('section');
+    const trainingDispose = vi.fn();
+    const mountTraining = vi.fn(() => ({ getState: vi.fn(), dispose: trainingDispose }));
+    const mountSurface = vi.fn(() => ({ dispose: vi.fn(), focusNode: vi.fn() }));
+
+    const runtime = bootstrapInteractiveWeb({
+      canvas,
+      navigate: vi.fn(),
+      mountSurface,
+      trainingRoot,
+      mountTraining,
+    });
+
+    expect(mountTraining).toHaveBeenCalledOnce();
+    expect(mountTraining).toHaveBeenCalledWith(trainingRoot);
+    expect(runtime.trainingAvailable).toBe(true);
+
+    runtime.dispose();
+    expect(trainingDispose).toHaveBeenCalledOnce();
+  });
+
+  it('does not mount personalized training on routes without its root', () => {
+    const mountTraining = vi.fn();
+    const mountSurface = vi.fn(() => ({ dispose: vi.fn(), focusNode: vi.fn() }));
+
+    const runtime = bootstrapInteractiveWeb({
+      canvas: {} as never,
+      navigate: vi.fn(),
+      mountSurface,
+      mountTraining,
+    });
+
+    expect(mountTraining).not.toHaveBeenCalled();
+    expect(runtime.trainingAvailable).toBe(false);
+  });
 });
