@@ -47,7 +47,7 @@ if (redirect) {
   wireHomeDojoLinks(document.querySelectorAll<HTMLAnchorElement>('[data-route-id]'), activeLocale);
 
   const primaryNavigation = document.querySelector<HTMLElement>('#primary-navigation');
-  if (primaryNavigation) primaryNavigation.innerHTML = renderPrimaryNavigation();
+  if (primaryNavigation) primaryNavigation.innerHTML = renderPrimaryNavigation(activeLocale);
 
   const interactiveLegend = document.querySelector<HTMLElement>('#interactive-node-links');
   if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend(activeLocale);
