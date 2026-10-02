@@ -1,7 +1,7 @@
 import type { SupportedLocale } from './locale.js';
+import { primaryNavigationIds } from './primary-navigation.js';
 import { localizeEditorialField, type LocalizedEditorialField } from './editorial-localization.js';
 
-import { primaryNavigationIds } from './primary-navigation.js';
 
 export type PrimaryNavigationId = (typeof primaryNavigationIds)[number];
 
