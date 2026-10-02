@@ -1,0 +1,19 @@
+name: Verify
+
+on:
+  push:
+    branches:
+      - main
+      - web-v1-personalized-training-spec
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  runner-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Runner smoke test
+        run: echo "TAIJIFU GitHub Actions runner started successfully"

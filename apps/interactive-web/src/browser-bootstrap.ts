@@ -4,9 +4,15 @@ import { createInteractiveWebExperience } from './experience.js';
 import type { RenderFrame } from './renderer-adapter.js';
 import type { ProjectedFocus } from './three-focus.js';
 import type { WebSurfaceCanvas } from './three-web-surface.js';
+import { mountTrainingExperience } from './training/training-browser.js';
 
 type MountedSurface = Readonly<{
   focusNode(nodeId: string | null): void;
+  dispose(): void;
+}>;
+
+type MountedTraining = Readonly<{
+  getState(): unknown;
   dispose(): void;
 }>;
 
@@ -16,6 +22,8 @@ type MountSurface = (options: {
   navigate: (url: string) => void;
   onFocus?: (focus: ProjectedFocus | null) => void;
 }) => MountedSurface;
+
+type MountTraining = (root: HTMLElement) => MountedTraining;
 
 const unavailableSurface: MountedSurface = Object.freeze({
   focusNode: () => undefined,
@@ -28,6 +36,8 @@ export function bootstrapInteractiveWeb(options: {
   onFocus?: (focus: ProjectedFocus | null) => void;
   initialFocusNode?: string | null;
   mountSurface?: MountSurface;
+  trainingRoot?: HTMLElement | null;
+  mountTraining?: MountTraining;
 }) {
   const experience = createInteractiveWebExperience({
     nodes: canonToExperienceNodes(),
@@ -53,10 +63,26 @@ export function bootstrapInteractiveWeb(options: {
     surface.focusNode(options.initialFocusNode);
   }
 
+  const trainingRoot = options.trainingRoot ?? null;
+  const mountTraining = options.mountTraining ?? mountTrainingExperience;
+  let training: MountedTraining | null = null;
+
+  if (trainingRoot) {
+    try {
+      training = mountTraining(trainingRoot);
+    } catch {
+      training = null;
+    }
+  }
+
   return Object.freeze({
     experience,
     surfaceAvailable,
+    trainingAvailable: training !== null,
     focusNode: (nodeId: string | null) => surface.focusNode(nodeId),
-    dispose: () => surface.dispose(),
+    dispose: () => {
+      training?.dispose();
+      surface.dispose();
+    },
   });
 }
