@@ -11,6 +11,13 @@ export type EditorialLocalizationRecord = Readonly<{
 
 const authoritativePtBR = Object.freeze({
   'navigation.explore-principle': 'Explorar princípio',
+  'navigation.manifesto': 'Manifesto',
+  'navigation.fundamentos': 'Fundamentos',
+  'navigation.influencias': 'Influências',
+  'navigation.metodo': 'Método',
+  'navigation.graduacao': 'Graduação',
+  'navigation.referencias': 'Referências',
+  'navigation.historia': 'História',
 } as const);
 
 const fieldIds = Object.freeze(Object.keys(authoritativePtBR) as readonly (keyof typeof authoritativePtBR)[]);
