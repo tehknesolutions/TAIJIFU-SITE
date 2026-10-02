@@ -49,3 +49,98 @@
   .canon-belt > summary { min-height: 44px; }
   .canon-path > summary { min-height: 44px; }
 }
+
+
+/* Editorial surfaces — canonical site hierarchy */
+.editorial-surface {
+  width: min(100% - (2 * var(--tj-space-page-gutter)), var(--tj-content-max));
+  margin-inline: auto;
+}
+
+.editorial-surface .content-page__header {
+  display: grid;
+  gap: var(--tj-space-2);
+  padding-block: clamp(var(--tj-space-6), 10vw, var(--tj-space-10)) var(--tj-space-4);
+  border-bottom: 1px solid color-mix(in srgb, var(--tj-color-ink) 18%, transparent);
+}
+
+.editorial-surface .content-entry__type {
+  margin: 0;
+  font-family: var(--tj-font-meta);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.editorial-surface .content-page__header h1 {
+  max-width: 12ch;
+  margin: 0;
+  font-family: var(--tj-font-display);
+  font-size: clamp(3rem, 10vw, 7rem);
+  line-height: .88;
+  letter-spacing: -.03em;
+}
+
+.editorial-surface .content-page__body {
+  display: grid;
+  gap: var(--tj-space-4);
+  padding-block: var(--tj-space-5) var(--tj-space-8);
+}
+
+.editorial-surface .content-lead {
+  max-width: 48rem;
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.45;
+}
+
+.editorial-surface--official .content-page__header {
+  border-bottom-color: color-mix(in srgb, var(--tj-color-tai) 35%, transparent);
+}
+
+.editorial-surface--official .content-source {
+  margin-top: var(--tj-space-3);
+  color: var(--tj-color-metal);
+  font-family: var(--tj-font-meta);
+  font-size: .75rem;
+  letter-spacing: .04em;
+}
+
+.editorial-surface--pending .content-page__header {
+  border-bottom-style: dashed;
+}
+
+.editorial-surface--pending .canon-reconciliation {
+  max-width: 52rem;
+  margin: var(--tj-space-2) 0;
+  padding: var(--tj-space-3);
+  border-left: 3px solid var(--tj-color-ji);
+  background: color-mix(in srgb, var(--tj-color-ji) 6%, transparent);
+}
+
+.editorial-surface--pending .content-page__body::after {
+  content: "CANON · corpo editorial em reconciliação";
+  display: block;
+  padding-top: var(--tj-space-3);
+  border-top: 1px solid color-mix(in srgb, var(--tj-color-ink) 12%, transparent);
+  color: var(--tj-color-metal);
+  font-family: var(--tj-font-meta);
+  font-size: .72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 48rem) {
+  .editorial-surface {
+    width: min(100% - (2 * var(--tj-space-3)), var(--tj-content-max));
+  }
+
+  .editorial-surface .content-page__header {
+    padding-block: var(--tj-space-5) var(--tj-space-3);
+  }
+
+  .editorial-surface .content-page__body {
+    padding-block: var(--tj-space-4) var(--tj-space-6);
+  }
+}
