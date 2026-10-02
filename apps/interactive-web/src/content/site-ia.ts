@@ -1,4 +1,5 @@
 import type { SupportedLocale } from './locale.js';
+import { primaryNavigationDefinitions } from './primary-navigation.js';
 
 export type LocalizedRouteProjection = Readonly<{
   title: string;
@@ -24,21 +25,20 @@ const localized = (
 
 export const siteRoutes: readonly SiteRoute[] = Object.freeze([
   Object.freeze({ id: 'home', source: 'canon-sync', contentState: 'official-body-recovered' }),
-  route('manifesto', 'Manifesto', 'manifesto', 'Manifesto', 'manifesto', 'Manifesto', 'manifesto', ['/o-que-e/']),
-  route('fundamentos', 'Fundamentos', 'fundamentos', 'Foundations', 'foundations', 'Fundamentos', 'fundamentos', ['/filosofia/']),
-  route('influencias', 'Influências', 'influencias', 'Influences', 'influences', 'Influencias', 'influencias', ['/artes-base/']),
-  route('metodo', 'Método', 'metodo', 'Method', 'method', 'Método', 'metodo', ['/trilhas/']),
-  route('graduacao', 'Graduação', 'graduacao', 'Graduation', 'graduation', 'Graduación', 'graduacion', ['/niveis-e-graduacao/']),
-  route('referencias', 'Referências', 'referencias', 'References', 'references', 'Referencias', 'referencias', ['/textos-oficiais/'], 'official-route-body-pending'),
-  route('historia', 'História', 'historia', 'History', 'history', 'Historia', 'historia', ['/registro/']),
+  ...primaryNavigationDefinitions.map((entry) => route(
+    entry.id,
+    entry.ptBR.label, entry.ptBR.slug,
+    entry.en.label, entry.en.slug,
+    entry.es.label, entry.es.slug,
+    entry.legacyUrls,
+    entry.id === 'referencias' ? 'official-route-body-pending' : 'official-body-recovered',
+  )),
   route('tai', 'TAI', 'principios/tai', 'TAI', 'principles/tai', 'TAI', 'principios/tai', [], 'official-body-recovered', 'interactive-web-contract'),
   route('ji', 'JI', 'principios/ji', 'JI', 'principles/ji', 'JI', 'principios/ji', [], 'official-body-recovered', 'interactive-web-contract'),
   route('fu', 'FU', 'principios/fu', 'FU', 'principles/fu', 'FU', 'principios/fu', [], 'official-body-recovered', 'interactive-web-contract'),
 ]);
 
-export const primaryNavigation = Object.freeze([
-  'manifesto', 'fundamentos', 'influencias', 'metodo', 'graduacao', 'referencias', 'historia',
-]);
+export const primaryNavigation = primaryNavigationDefinitions.map((entry) => entry.id);
 
 export function findLocalizedRoute(id: string, locale: SupportedLocale): ResolvedSiteRoute | null {
   const route = siteRoutes.find((candidate) => candidate.id === id);
