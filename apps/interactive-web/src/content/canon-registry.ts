@@ -119,10 +119,11 @@ export function buildLocalizedExperienceNodes(locale: SupportedLocale): readonly
     const projection = route.localized?.[locale];
     if (!projection) return [];
     const governedNavigation = navigation.get(route.id);
+    if (governedNavigation?.availability === 'pending') return [];
     const label = governedNavigation?.label ?? projection.title;
     return [Object.freeze({
       id: route.id,
-      label: label ?? projection.title,
+      label,
       canonicalUrl: projection.canonicalUrl,
       parentId: experienceParentByRouteId[route.id] ?? 'home',
     })];
