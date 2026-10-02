@@ -1,5 +1,6 @@
 import { mountBrowserThreeSurface } from './browser-three-surface.js';
-import { canonToExperienceNodes } from './content/canon-registry.js';
+import { buildLocalizedExperienceNodes } from './content/canon-registry.js';
+import type { SupportedLocale } from './content/locale.js';
 import { createInteractiveWebExperience } from './experience.js';
 import type { RenderFrame } from './renderer-adapter.js';
 import type { ProjectedFocus } from './three-focus.js';
@@ -31,6 +32,7 @@ const unavailableSurface: MountedSurface = Object.freeze({
 });
 
 export function bootstrapInteractiveWeb(options: {
+  locale?: SupportedLocale;
   canvas: WebSurfaceCanvas;
   navigate: (url: string) => void;
   onFocus?: (focus: ProjectedFocus | null) => void;
@@ -40,7 +42,7 @@ export function bootstrapInteractiveWeb(options: {
   mountTraining?: MountTraining;
 }) {
   const experience = createInteractiveWebExperience({
-    nodes: canonToExperienceNodes(),
+    nodes: buildLocalizedExperienceNodes(options.locale ?? 'pt-BR'),
   });
 
   const mountSurface = options.mountSurface ?? mountBrowserThreeSurface;
