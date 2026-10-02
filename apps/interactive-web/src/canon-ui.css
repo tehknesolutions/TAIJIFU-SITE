@@ -179,3 +179,91 @@
   padding-top: var(--tj-space-3);
   border-top: 1px solid color-mix(in srgb, var(--tj-color-tai) 22%, transparent);
 }
+
+
+/* Pending CANON editorial surface */
+.canon-reconciliation-surface {
+  display: grid;
+  grid-template-columns: minmax(8rem, 20%) 1fr;
+  gap: var(--tj-space-4);
+  padding-block: var(--tj-space-5);
+  border-top: 1px solid color-mix(in srgb, var(--tj-color-ink) 18%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--tj-color-ink) 18%, transparent);
+}
+
+.canon-reconciliation-surface__mark {
+  font-family: var(--tj-font-display);
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  line-height: .85;
+  letter-spacing: -.04em;
+}
+
+.canon-reconciliation-surface__content {
+  max-width: 46rem;
+}
+
+.canon-reconciliation-surface__eyebrow {
+  margin: 0 0 var(--tj-space-1);
+  color: var(--tj-color-metal);
+  font-family: var(--tj-font-meta);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.canon-reconciliation-surface__content h2 {
+  margin: 0 0 var(--tj-space-2);
+  font-family: var(--tj-font-display);
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  line-height: .95;
+}
+
+.canon-reconciliation-surface__content > p {
+  max-width: 40rem;
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.canon-reconciliation-surface dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--tj-space-2);
+  margin: var(--tj-space-4) 0 0;
+}
+
+.canon-reconciliation-surface dl div {
+  padding-top: var(--tj-space-1);
+  border-top: 2px solid var(--tj-color-ji);
+}
+
+.canon-reconciliation-surface dt {
+  color: var(--tj-color-metal);
+  font-family: var(--tj-font-meta);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.canon-reconciliation-surface dd {
+  margin: .35rem 0 0;
+  font-family: var(--tj-font-display);
+}
+
+@media (max-width: 48rem) {
+  .canon-reconciliation-surface {
+    grid-template-columns: 1fr;
+    gap: var(--tj-space-3);
+    padding-block: var(--tj-space-4);
+  }
+
+  .canon-reconciliation-surface__mark {
+    font-size: 3rem;
+  }
+
+  .canon-reconciliation-surface dl {
+    grid-template-columns: 1fr;
+  }
+}
