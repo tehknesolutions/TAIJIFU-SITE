@@ -1,5 +1,6 @@
 import type { SupportedLocale } from './locale.js';
 import { isReleaseReadyTranslation, type TranslationStatus } from './canon-localization.js';
+import { primaryNavigationDefinitions } from './primary-navigation.js';
 
 export type EditorialLocalizationRecord = Readonly<{
   fieldId: string;
@@ -9,18 +10,9 @@ export type EditorialLocalizationRecord = Readonly<{
   sourceRelease: 'TAIJIFU-CANON-1.0';
 }>;
 
-const authoritativePtBR = Object.freeze({
-  'navigation.explore-principle': 'Explorar princípio',
-  'navigation.manifesto': 'Manifesto',
-  'navigation.fundamentos': 'Fundamentos',
-  'navigation.influencias': 'Influências',
-  'navigation.metodo': 'Método',
-  'navigation.graduacao': 'Graduação',
-  'navigation.referencias': 'Referências',
-  'navigation.historia': 'História',
-} as const);
-
-const fieldIds = Object.freeze(Object.keys(authoritativePtBR) as readonly (keyof typeof authoritativePtBR)[]);
+const authoritativePtBR = Object.freeze(Object.fromEntries(
+  primaryNavigationDefinitions.map((entry) => [`navigation.${entry.id}`, entry.ptBR.label]),
+) as Record<string, string>);
 
 const ptBR: readonly EditorialLocalizationRecord[] = Object.freeze(fieldIds.map((fieldId) => Object.freeze({
   fieldId,
