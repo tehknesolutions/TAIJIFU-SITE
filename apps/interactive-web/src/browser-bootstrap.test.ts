@@ -55,6 +55,18 @@ describe('Interactive web browser bootstrap', () => {
     expect(dispose).toHaveBeenCalledTimes(2);
   });
 
+  it('uses the governed locale when building the interactive experience', () => {
+    const mountSurface = vi.fn(() => ({ dispose: vi.fn(), focusNode: vi.fn() }));
+    const runtime = bootstrapInteractiveWeb({
+      canvas: {} as never,
+      navigate: vi.fn(),
+      mountSurface,
+      locale: 'pt-BR',
+    });
+
+    expect(runtime.experience.frame.nodes).toContainEqual(expect.objectContaining({ id: 'historia', label: 'História' }));
+  });
+
   it('mounts personalized training only when a training root is supplied', () => {
     const canvas = {} as never;
     const trainingRoot = document.createElement('section');

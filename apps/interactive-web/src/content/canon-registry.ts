@@ -1,6 +1,7 @@
 import type { ExperienceNode } from '../experience-shell.js';
 import type { SupportedLocale } from './locale.js';
 import { siteRoutes } from './site-ia.js';
+import { navigationViewModel } from './navigation-view-model.js';
 
 export type CanonSource =
   | 'taijifu-project-history'
@@ -109,13 +110,20 @@ export function getExperienceContext(routeId: string): ExperienceContext {
 }
 
 export function buildLocalizedExperienceNodes(locale: SupportedLocale): readonly ExperienceNode[] {
+  const navigation = new Map(
+    navigationViewModel(locale).map((item) => [item.id, item]),
+  );
+
   return Object.freeze(siteRoutes.flatMap((route) => {
     if (route.id === 'home') return [Object.freeze({ id: 'home', label: 'TAIJIFU', canonicalUrl: '/', parentId: undefined })];
     const projection = route.localized?.[locale];
     if (!projection) return [];
+    const governedNavigation = navigation.get(route.id);
+    if (governedNavigation?.availability === 'pending') return [];
+    const label = governedNavigation?.label ?? projection.title;
     return [Object.freeze({
       id: route.id,
-      label: projection.title,
+      label,
       canonicalUrl: projection.canonicalUrl,
       parentId: experienceParentByRouteId[route.id] ?? 'home',
     })];
