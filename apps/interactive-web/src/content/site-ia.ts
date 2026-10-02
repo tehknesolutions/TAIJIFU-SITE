@@ -9,7 +9,7 @@ export type SiteRoute = Readonly<{
   id: string;
   localized?: Readonly<Record<SupportedLocale, LocalizedRouteProjection>>;
   legacyUrls?: readonly string[];
-  source: 'canon-sync' | 'interactive-web-contract' | 'personalized-training-spec';
+  source: 'canon-sync' | 'interactive-web-contract';
   contentState: 'official-body-recovered' | 'official-route-body-pending';
 }>;
 
@@ -34,11 +34,10 @@ export const siteRoutes: readonly SiteRoute[] = Object.freeze([
   route('tai', 'TAI', 'principios/tai', 'TAI', 'principles/tai', 'TAI', 'principios/tai', [], 'official-body-recovered', 'interactive-web-contract'),
   route('ji', 'JI', 'principios/ji', 'JI', 'principles/ji', 'JI', 'principios/ji', [], 'official-body-recovered', 'interactive-web-contract'),
   route('fu', 'FU', 'principios/fu', 'FU', 'principles/fu', 'FU', 'principios/fu', [], 'official-body-recovered', 'interactive-web-contract'),
-  route('treino-personalizado', 'Treino Personalizado', 'treino-personalizado', 'Personalized Training', 'personalized-training', 'Entrenamiento Personalizado', 'entrenamiento-personalizado', [], 'official-body-recovered', 'personalized-training-spec'),
 ]);
 
 export const primaryNavigation = Object.freeze([
-  'manifesto', 'fundamentos', 'influencias', 'metodo', 'graduacao', 'referencias', 'historia', 'treino-personalizado',
+  'manifesto', 'fundamentos', 'influencias', 'metodo', 'graduacao', 'referencias', 'historia',
 ]);
 
 export function findLocalizedRoute(id: string, locale: SupportedLocale): ResolvedSiteRoute | null {
