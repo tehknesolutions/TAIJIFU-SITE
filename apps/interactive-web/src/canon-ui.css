@@ -144,3 +144,38 @@
     padding-block: var(--tj-space-4) var(--tj-space-6);
   }
 }
+
+
+/* História — editorial art direction */
+.content-page--historia .content-page__header {
+  min-height: clamp(18rem, 46vw, 34rem);
+  align-content: end;
+  border-bottom-width: 2px;
+}
+
+.content-page--historia .content-page__header h1 {
+  max-width: 8ch;
+  font-size: clamp(4rem, 14vw, 10rem);
+}
+
+.content-page--historia .content-page__body {
+  max-width: 72rem;
+}
+
+.content-page--historia .content-lead {
+  max-width: 56rem;
+  font-family: var(--tj-font-display);
+  font-size: clamp(1.5rem, 3vw, 2.35rem);
+  line-height: 1.12;
+}
+
+.content-page--historia .content-page__body > p:not(.content-lead):not(.content-source) {
+  max-width: 46rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.content-page--historia .content-source {
+  padding-top: var(--tj-space-3);
+  border-top: 1px solid color-mix(in srgb, var(--tj-color-tai) 22%, transparent);
+}
