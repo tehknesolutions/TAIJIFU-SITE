@@ -7,7 +7,18 @@ import {
   setCompositionResult,
   type TrainingExperienceState,
 } from './training-experience.js';
+import { mountTrainingFeedback } from './training-feedback-browser.js';
 import { normalizeTrainingProfile, type TrainingProfileInput } from './training-profile.js';
+
+type MountedFeedback = Readonly<{
+  getState(): TrainingExperienceState;
+  dispose(): void;
+}>;
+
+type MountFeedback = (
+  root: HTMLElement,
+  getTrainingState: () => TrainingExperienceState,
+) => MountedFeedback;
 
 function readNumber(form: HTMLFormElement, name: string): number | undefined {
   const field = form.elements.namedItem(name);
@@ -31,19 +42,16 @@ function readTaiInput(form: HTMLFormElement): TrainingProfileInput {
 }
 
 function statusMessage(state: TrainingExperienceState): string {
-  if (state.composition?.status === 'insufficient-metadata') {
-    return 'O CANON atual ainda não possui metadados suficientes para manifestar uma sessão concreta sem inventar conteúdo.';
-  }
-  if (state.composition?.status === 'no-compatible-candidates') {
-    return 'Nenhuma prática compatível foi encontrada para este estado TAI.';
-  }
-  if (state.composition?.status === 'composed') {
-    return 'FU manifestado a partir dos dados canônicos disponíveis.';
-  }
+  if (state.composition?.status === 'insufficient-metadata') return 'O CANON atual ainda não possui metadados suficientes para manifestar uma sessão concreta sem inventar conteúdo.';
+  if (state.composition?.status === 'no-compatible-candidates') return 'Nenhuma prática compatível foi encontrada para este estado TAI.';
+  if (state.composition?.status === 'composed') return 'FU manifestado a partir dos dados canônicos disponíveis.';
   return 'Revise o estado TAI antes de continuar.';
 }
 
-export function mountTrainingExperience(root: HTMLElement) {
+export function mountTrainingExperience(
+  root: HTMLElement,
+  options: { mountFeedback?: MountFeedback } = {},
+) {
   const form = root.querySelector<HTMLFormElement>('[data-training-form]');
   const status = root.querySelector<HTMLElement>('[data-training-status]');
   let state = advanceTrainingExperience(createTrainingExperience());
@@ -51,7 +59,6 @@ export function mountTrainingExperience(root: HTMLElement) {
   const onSubmit = (event: Event) => {
     event.preventDefault();
     if (!form) return;
-
     const normalized = normalizeTrainingProfile(readTaiInput(form));
     if (!normalized.valid) {
       state = { ...state, stage: 'tai', composition: undefined };
@@ -60,18 +67,21 @@ export function mountTrainingExperience(root: HTMLElement) {
         : 'Revise os valores do estado TAI antes de continuar.';
       return;
     }
-
     state = reviseTaiState(state, normalized.profile);
     state = advanceTrainingExperience(state);
-    const composition = composeTraining(normalized.profile, buildTrainingCatalog());
-    state = setCompositionResult(state, composition);
+    state = setCompositionResult(state, composeTraining(normalized.profile, buildTrainingCatalog()));
     if (status) status.textContent = statusMessage(state);
   };
 
   form?.addEventListener('submit', onSubmit);
 
+  const feedback = (options.mountFeedback ?? mountTrainingFeedback)(root, () => state);
+
   return Object.freeze({
-    getState: () => state,
-    dispose: () => form?.removeEventListener('submit', onSubmit),
+    getState: () => feedback.getState().stage === 'feedback' ? feedback.getState() : state,
+    dispose: () => {
+      feedback.dispose();
+      form?.removeEventListener('submit', onSubmit);
+    },
   });
 }
