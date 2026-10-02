@@ -87,6 +87,7 @@ if (redirect) {
   if (canvas) {
     const currentRoute = routeResolution.kind === 'localized-route' ? findSiteRoute(pathname) : null;
     const runtime = bootstrapInteractiveWeb({
+      locale: activeLocale,
       canvas,
       navigate: (canonicalUrl) => window.location.assign(canonicalUrl),
       initialFocusNode: currentRoute?.id ?? null,
