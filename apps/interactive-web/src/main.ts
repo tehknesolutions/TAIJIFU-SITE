@@ -92,7 +92,7 @@ if (redirect) {
       navigate: (canonicalUrl) => window.location.assign(canonicalUrl),
       initialFocusNode: currentRoute?.id ?? null,
       onFocus: (focus) => {
-        if (focusLabel) focusLabel.value = focus?.label ?? 'TAIJIFU';
+        if (focusLabel) focusLabel.value = focus?.label ?? (activeLocale === 'en' ? 'TAIJIFU' : activeLocale === 'es' ? 'TAIJIFU' : 'TAIJIFU');
         syncLegendFocus(focus?.nodeId ?? null);
       },
     });
