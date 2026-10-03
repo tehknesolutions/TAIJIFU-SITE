@@ -1,17 +1,13 @@
 {
   "$schema": "./registry.schema.json",
-  "registryVersion": "1.0.0-draft",
+  "registryVersion": "1.0.0-draft.2",
   "authority": "tehknesolutions/TAIJIFU-SITE",
   "defaultLocale": "pt-BR",
   "supportedLocales": ["pt-BR", "en", "es"],
   "entities": [
-    {
-      "id": "taijifu",
-      "type": "system",
-      "canonicalName": "TAIJIFU",
-      "status": "canonical",
-      "source": "repo:TAIJIFU-SITE",
-      "aliases": []
-    }
+    {"id":"taijifu","type":"system","canonicalName":"TAIJIFU","status":"canonical","source":"repo:TAIJIFU-SITE","aliases":[]},
+    {"id":"taijifu-canon-1.0","type":"canon-release","canonicalName":"TAIJIFU-CANON-1.0","status":"canonical","source":"repo:TAIJIFU-SITE","aliases":[]},
+    {"id":"canon-foundation-v1","type":"governance","canonicalName":"TAIJIFU Canon Foundation v1.0","status":"candidate","source":"repo:TAIJIFU-SITE","aliases":["EPIC-001"]},
+    {"id":"taijifu-masters","type":"product","canonicalName":"TAIJIFU Masters","status":"candidate","source":"product:masters-legacy","aliases":[]}
   ]
 }
