@@ -1,28 +1,27 @@
 {
-  "version": "1.0.0-draft",
+  "version": "1.0.0-draft.2",
+  "authority": "tehknesolutions/TAIJIFU-SITE",
+  "precedence": [
+    "current-explicit-canon",
+    "materialized-project-decision",
+    "recovered-primary-source",
+    "repository-project-evidence",
+    "legacy-implementation",
+    "external-ecosystem-pattern",
+    "inference"
+  ],
   "sources": [
-    {
-      "id": "repo:TAIJIFU-SITE",
-      "kind": "repository",
-      "name": "TAIJIFU-SITE",
-      "role": "canonical-authority",
-      "status": "active"
-    },
-    {
-      "id": "project:taijifu-history",
-      "kind": "project-conversations",
-      "name": "TAIJIFU Project historical conversations",
-      "role": "migration-source",
-      "status": "active",
-      "promotion": "requires-review"
-    },
-    {
-      "id": "source:legacy-repositories",
-      "kind": "repository-set",
-      "name": "TAIJIFU legacy repositories",
-      "role": "migration-source",
-      "status": "active",
-      "promotion": "requires-review"
-    }
+    {"id":"repo:TAIJIFU-SITE","kind":"repository","name":"TAIJIFU-SITE/main","role":"canonical-authority","canonAuthority":true,"status":"active","classification":"CANON+OFFICIAL_PRODUCT"},
+    {"id":"repo:TAIJIFU-SITE-history","kind":"repository-history","name":"TAIJIFU-SITE history, PRs and issues","role":"decision-evidence","canonAuthority":false,"status":"active","classification":"EVIDENCE","rule":"merged state wins"},
+    {"id":"project:taijifu-history","kind":"project-conversations","name":"GPT Project TAIJIFU chats","role":"migration-source","canonAuthority":false,"status":"active","classification":"SOURCE","promotion":"requires-review","rule":"user decisions and repository-materialized decisions outrank unimplemented assistant proposals"},
+    {"id":"project:uploaded-documents","kind":"document-set","name":"Project uploaded TAIJIFU documents","role":"primary-project-sources","canonAuthority":false,"status":"active","classification":"SOURCE","promotion":"requires-reconciliation"},
+    {"id":"source:legacy-repositories","kind":"repository-set","name":"Previous TAIJIFU repositories","role":"migration-source","canonAuthority":false,"status":"active","classification":"LEGACY","promotion":"classify-before-promotion"},
+    {"id":"product:masters-legacy","kind":"product-history","name":"TAIJIFU Masters material","role":"game-product-archaeology","canonAuthority":false,"status":"active","classification":"LEGACY|EXPERIMENTAL","rule":"must not redefine martial Canon by implication"},
+    {"id":"ecosystem:tehkne-os","kind":"repository","name":"tehkne-os","role":"governance-provenance-reference","canonAuthority":false,"classification":"EVIDENCE"},
+    {"id":"ecosystem:codex-hnk","kind":"repository","name":"codex-hnk","role":"hnk-root-contract-reference","canonAuthority":false,"classification":"EVIDENCE"},
+    {"id":"ecosystem:HNK-KODE","kind":"repository","name":"HNK-KODE","role":"language-runtime-reference","canonAuthority":false,"classification":"EVIDENCE"},
+    {"id":"ecosystem:HNK-VERSE","kind":"repository","name":"HNK-VERSE","role":"manifestation-runtime-reference","canonAuthority":false,"classification":"EVIDENCE"},
+    {"id":"ecosystem:simpleway","kind":"repository-set","name":"SimpleWay repositories","role":"consumer-product-reference","canonAuthority":false,"classification":"EVIDENCE"},
+    {"id":"ecosystem:alakazam-strangeverse","kind":"repository","name":"alakazam-strangeverse","role":"game-runtime-reference","canonAuthority":false,"classification":"EVIDENCE"}
   ]
 }
