@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0-draft",
+  "sources": [
+    {
+      "id": "repo:TAIJIFU-SITE",
+      "kind": "repository",
+      "name": "TAIJIFU-SITE",
+      "role": "canonical-authority",
+      "status": "active"
+    },
+    {
+      "id": "project:taijifu-history",
+      "kind": "project-conversations",
+      "name": "TAIJIFU Project historical conversations",
+      "role": "migration-source",
+      "status": "active",
+      "promotion": "requires-review"
+    },
+    {
+      "id": "source:legacy-repositories",
+      "kind": "repository-set",
+      "name": "TAIJIFU legacy repositories",
+      "role": "migration-source",
+      "status": "active",
+      "promotion": "requires-review"
+    }
+  ]
+}
