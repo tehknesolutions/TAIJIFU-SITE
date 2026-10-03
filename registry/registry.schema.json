@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://taijifu.org/schema/canon-registry-v1.json",
+  "title": "TAIJIFU Canon Registry",
+  "type": "object",
+  "required": ["registryVersion", "authority", "defaultLocale", "supportedLocales", "entities"],
+  "properties": {
+    "registryVersion": { "type": "string" },
+    "authority": { "type": "string" },
+    "defaultLocale": { "enum": ["pt-BR", "en", "es"] },
+    "supportedLocales": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "enum": ["pt-BR", "en", "es"] }
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "canonicalName", "status", "source"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$" },
+          "type": { "type": "string" },
+          "canonicalName": { "type": "string" },
+          "status": { "enum": ["candidate", "verified", "canonical", "deprecated", "rejected"] },
+          "source": { "type": "string" },
+          "aliases": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}
