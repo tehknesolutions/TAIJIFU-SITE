@@ -1,0 +1,17 @@
+{
+  "$schema": "./registry.schema.json",
+  "registryVersion": "1.0.0-draft",
+  "authority": "tehknesolutions/TAIJIFU-SITE",
+  "defaultLocale": "pt-BR",
+  "supportedLocales": ["pt-BR", "en", "es"],
+  "entities": [
+    {
+      "id": "taijifu",
+      "type": "system",
+      "canonicalName": "TAIJIFU",
+      "status": "canonical",
+      "source": "repo:TAIJIFU-SITE",
+      "aliases": []
+    }
+  ]
+}
