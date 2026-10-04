@@ -1,6 +1,6 @@
 {
-  "version": "0.3.0",
-  "status": "P3-01_RECONCILIATION",
+  "version": "0.4.0",
+  "status": "P3-01_HISTORICAL_RECONCILIATION",
   "authority": "tehknesolutions/TAIJIFU-SITE",
   "rules": {
     "singleOfficialAuthority": true,
@@ -8,50 +8,13 @@
     "registrationDoesNotPromoteToCanon": true,
     "emptySearchIsNotEvidenceOfAbsence": true
   },
-  "sourceClasses": [
-    "CREATOR_RULING",
-    "OFFICIAL_CURRENT",
-    "LEGACY_TAIJIFU",
-    "LEGACY_PRODUCT",
-    "PROJECT_RECORD",
-    "EXTERNAL_REFERENCE"
-  ],
+  "sourceClasses": ["CREATOR_RULING","OFFICIAL_CURRENT","LEGACY_TAIJIFU","LEGACY_PRODUCT","PROJECT_RECORD","EXTERNAL_REFERENCE"],
   "sources": [
-    {
-      "sourceId": "PHIL-SRC-0001",
-      "sourceClass": "OFFICIAL_CURRENT",
-      "locator": "tehknesolutions/TAIJIFU-SITE:docs/canon-philosophy/P3-01-SOURCE-INVENTORY.md@b150595080fb308d4344030b20fc960e3e8c71db",
-      "role": "AUDIT_RECORD",
-      "domains": ["manifesto", "principle", "method", "value", "terminology"],
-      "claimExtraction": "NOT_DOCTRINAL",
-      "notes": "Official P3-01 evidence-discovery audit. It records coverage and gaps; it is not itself philosophical doctrine."
-    },
-    {
-      "sourceId": "PHIL-SRC-0002",
-      "sourceClass": "LEGACY_PRODUCT",
-      "locator": "tehknesolutions/SW-TAIJIFU:docs/M001-manifesto.md@d4a8bf09ad05e7b9ef5789f008d4a7ab2e39bde0",
-      "role": "LEGACY_MANIFESTO_EVIDENCE",
-      "domains": ["manifesto", "principle", "method", "terminology"],
-      "claimExtraction": "CANDIDATE_ONLY",
-      "notes": "SimpleWay Taijifu manifesto. Product-layer evidence requiring reconciliation before any Taijifu Canon promotion."
-    },
-    {
-      "sourceId": "PHIL-SRC-0003",
-      "sourceClass": "LEGACY_PRODUCT",
-      "locator": "tehknesolutions/SW-TAIJIFU:docs/M004-principles.md@d4a8bf09ad05e7b9ef5789f008d4a7ab2e39bde0",
-      "role": "LEGACY_PRINCIPLES_EVIDENCE",
-      "domains": ["principle", "method", "value"],
-      "claimExtraction": "CANDIDATE_ONLY",
-      "notes": "Ten explicit SimpleWay Taijifu training principles; evidence only until reconciled with current Taijifu Canon."
-    },
-    {
-      "sourceId": "PHIL-SRC-0004",
-      "sourceClass": "OFFICIAL_CURRENT",
-      "locator": "tehknesolutions/TAIJIFU-SITE:issue#7@2026-09-24T15:03:49Z",
-      "role": "CURRENT_CANON_DECISION_RECORD",
-      "domains": ["manifesto", "principle", "method", "value", "terminology"],
-      "claimExtraction": "CANON_ELIGIBLE",
-      "notes": "Repository-owner decision record explicitly labeled CANON. Establishes Taijifu as 'Arte Marcial de se Adaptar', the approved TAI/JI/FU semantic triad, two maxims, and the HNK/Taijifu relationship. Visual/presentation statements remain outside philosophical promotion unless separately classified."
-    }
+    {"sourceId":"PHIL-SRC-0001","sourceClass":"OFFICIAL_CURRENT","locator":"tehknesolutions/TAIJIFU-SITE:docs/canon-philosophy/P3-01-SOURCE-INVENTORY.md@b150595080fb308d4344030b20fc960e3e8c71db","role":"AUDIT_RECORD","domains":["manifesto","principle","method","value","terminology"],"claimExtraction":"NOT_DOCTRINAL","notes":"Official P3-01 evidence-discovery audit. It records coverage and gaps; it is not itself philosophical doctrine."},
+    {"sourceId":"PHIL-SRC-0002","sourceClass":"LEGACY_PRODUCT","locator":"tehknesolutions/SW-TAIJIFU:docs/M001-manifesto.md@d4a8bf09ad05e7b9ef5789f008d4a7ab2e39bde0","role":"LEGACY_MANIFESTO_EVIDENCE","domains":["manifesto","principle","method","terminology"],"claimExtraction":"CANDIDATE_ONLY","notes":"SimpleWay Taijifu manifesto. Product-layer evidence requiring reconciliation before any Taijifu Canon promotion."},
+    {"sourceId":"PHIL-SRC-0003","sourceClass":"LEGACY_PRODUCT","locator":"tehknesolutions/SW-TAIJIFU:docs/M004-principles.md@d4a8bf09ad05e7b9ef5789f008d4a7ab2e39bde0","role":"LEGACY_PRINCIPLES_EVIDENCE","domains":["principle","method","value"],"claimExtraction":"CANDIDATE_ONLY","notes":"Ten explicit SimpleWay Taijifu training principles; evidence only until reconciled with current Taijifu Canon."},
+    {"sourceId":"PHIL-SRC-0004","sourceClass":"OFFICIAL_CURRENT","locator":"tehknesolutions/TAIJIFU-SITE:issue#7@2026-09-24T15:03:49Z","role":"CURRENT_CANON_DECISION_RECORD","domains":["manifesto","principle","method","value","terminology"],"claimExtraction":"CANON_ELIGIBLE","notes":"Repository-owner decision record explicitly labeled CANON. Establishes Taijifu as 'Arte Marcial de se Adaptar', the approved TAI/JI/FU semantic triad, two maxims, and the HNK/Taijifu relationship."},
+    {"sourceId":"PHIL-SRC-0005","sourceClass":"LEGACY_TAIJIFU","locator":"Tehkne-Solutions/taijifu-platform:packages/canon/src/knowledge.ts@8bed42836b92e31030320b98a8c18d68443e5b0a","role":"HISTORICAL_MASTER_KNOWLEDGE","domains":["manifesto","principle","value","method"],"claimExtraction":"HISTORICAL_CANON_CANDIDATE","notes":"Historical Taijifu canonical package containing six manifestoValues, twelve principles, knowledge domains and historical milestones. Fixed to the 2026-08-05 checkpoint; requires reconciliation with current Canon before promotion."},
+    {"sourceId":"PHIL-SRC-0006","sourceClass":"LEGACY_TAIJIFU","locator":"Tehkne-Solutions/taijifu-platform:packages/canon/src/method.ts@8bed42836b92e31030320b98a8c18d68443e5b0a","role":"HISTORICAL_MASTER_METHOD","domains":["method","principle","value"],"claimExtraction":"HISTORICAL_CANON_CANDIDATE","notes":"Historical ten-stage Taijifu Integral Method and five-state learning cycle, formally added to the Master on 2026-08-05. It postdates the preserved 2026-08-04 TAIJIFU-CANON-1.0 snapshot and must not be retroactively represented as part of that exact snapshot."}
   ]
 }
