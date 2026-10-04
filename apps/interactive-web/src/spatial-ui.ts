@@ -87,31 +87,17 @@ export function contextualNavigationNodes(
   focusId: string | null,
 ): readonly ContextualNavigationNode[] {
   const focused = focusId ? findNode(hierarchy.nodes, focusId) : undefined;
-  const result: ContextualNavigationNode[] = [];
-  const byId = new Map<string, number>();
-  const add = (node: ExperienceHierarchyNode, depth: number, relation: ContextualNavigationNode['relation']) => {
-    const existingIndex = byId.get(node.id);
-    const projected = Object.freeze({ id: node.id, label: node.label, canonicalUrl: node.canonicalUrl, depth, relation });
-    if (existingIndex !== undefined) {
-      if (relation === 'focus' || relation === 'focus-child') result[existingIndex] = projected;
-      return;
-    }
-    byId.set(node.id, result.length);
-    result.push(projected);
-  };
-
-  for (const root of hierarchy.nodes) {
-    add(root, 0, focused?.id === root.id ? 'focus' : 'root');
-    for (const child of root.children) add(child, 1, focused?.id === child.id ? 'focus' : 'child');
-  }
-
-  if (focused) {
-    const depth = nodeDepth(hierarchy.nodes, focused.id) ?? 0;
-    add(focused, depth, 'focus');
-    for (const child of focused.children) add(child, depth + 1, 'focus-child');
-  }
-
-  return Object.freeze(result);
+  return Object.freeze(visibleExperienceNodes(hierarchy, focusId).map((node) => {
+    const depth = nodeDepth(hierarchy.nodes, node.id) ?? 0;
+    const relation: ContextualNavigationNode['relation'] = focused?.id === node.id
+      ? 'focus'
+      : focused && isDescendant(focused, node.id)
+        ? 'focus-child'
+        : depth === 0
+          ? 'root'
+          : 'child';
+    return Object.freeze({ id: node.id, label: node.label, canonicalUrl: node.canonicalUrl, depth, relation });
+  }));
 }
 
 function flattenRoots(
@@ -143,4 +129,8 @@ function nodeDepth(
     if (nested !== undefined) return nested;
   }
   return undefined;
+}
+
+function isDescendant(node: ExperienceHierarchyNode, id: string): boolean {
+  return node.children.some((child) => child.id === id || isDescendant(child, id));
 }
