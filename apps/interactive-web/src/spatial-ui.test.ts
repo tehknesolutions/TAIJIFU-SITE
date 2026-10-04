@@ -50,7 +50,7 @@ describe('Spatial UI experience hierarchy', () => {
 
     expect(initial.some((node) => node.id === 'home' && node.relation === 'root')).toBe(true);
     expect(initial.some((node) => node.id === 'tai')).toBe(false);
-    expect(focused.some((node) => node.id === 'fundamentos' && node.relation === 'focus-child')).toBe(true);
+    expect(focused.some((node) => node.id === 'fundamentos' && node.relation === 'focus')).toBe(true);
     expect(focused.some((node) => node.id === 'tai' && node.relation === 'focus-child')).toBe(true);
     expect(focused.find((node) => node.id === 'tai')?.canonicalUrl).toBe(
       canonToExperienceNodes().find((node) => node.id === 'tai')?.canonicalUrl,
