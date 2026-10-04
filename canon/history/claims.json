@@ -1,0 +1,7 @@
+{
+  "version": "0.1.0",
+  "authority": "tehknesolutions/TAIJIFU-SITE",
+  "epic": "EPIC-002",
+  "statuses": ["candidate", "verified", "canonical", "conflicted", "unresolved", "rejected"],
+  "claims": []
+}
