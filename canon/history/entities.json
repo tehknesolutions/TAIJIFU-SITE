@@ -1,0 +1,7 @@
+{
+  "version": "0.1.0",
+  "authority": "tehknesolutions/TAIJIFU-SITE",
+  "entities": [],
+  "types": ["person", "organization", "event", "period", "relationship"],
+  "note": "Historical entities require source-backed claims and provenance before canonical promotion."
+}
