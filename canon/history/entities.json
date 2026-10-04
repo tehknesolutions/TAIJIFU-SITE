@@ -1,7 +1,12 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "authority": "tehknesolutions/TAIJIFU-SITE",
-  "entities": [],
-  "types": ["person", "organization", "event", "period", "relationship"],
+  "types": ["person", "organization", "event", "period", "relationship", "system"],
+  "entities": [
+    {"id":"taijifu","type":"system","canonicalName":"TAIJIFU","status":"canonical","claimIds":["HIST-CLAIM-001","HIST-CLAIM-002","HIST-CLAIM-003"]},
+    {"id":"miguel-da-vinci","type":"person","canonicalName":"Miguel Da Vinci","status":"verified","claimIds":["HIST-CLAIM-001"],"note":"Name/creator role currently supported by repository Canon issue #7."},
+    {"id":"thales-walisson","type":"person","canonicalName":"Thales Walisson","status":"verified","claimIds":["HIST-CLAIM-001"],"note":"Spelling follows repository Canon issue #7. Other biographical/name variants require separate provenance."},
+    {"id":"hnk","type":"system","canonicalName":"HNK","status":"verified","claimIds":["HIST-CLAIM-003"]}
+  ],
   "note": "Historical entities require source-backed claims and provenance before canonical promotion."
 }
