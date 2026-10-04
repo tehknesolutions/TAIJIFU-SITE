@@ -1,6 +1,6 @@
 import { bootstrapInteractiveWeb } from './browser-bootstrap.js';
 import { renderInteractiveLegend, renderPrimaryNavigation, renderSemanticRoute } from './semantic-site.js';
-import { buildLocalizedExperienceNodes, canonToExperienceNodes } from './content/canon-registry.js';
+import { buildLocalizedExperienceNodes } from './content/canon-registry.js';
 import { renderInternationalEntry, renderLanguageSelector } from './content/international-entry.js';
 import { legacyRedirectFor, resolveLocalizedPath } from './content/locale-routing.js';
 import { applyShellLocalization } from './content/shell-localization.js';
@@ -8,7 +8,6 @@ import { findSiteRoute } from './content/site-ia.js';
 import { renderCanonUIForLocale } from './content/canon-ui-render.js';
 import { renderLocalizedSeoHead } from './content/seo-localization.js';
 import { resolvePresentationMedia } from './media-runtime.js';
-import { buildExperienceHierarchy, visibleExperienceNodes } from './spatial-ui.js';
 import { wireHomeDojoLinks } from './home-dojo-wiring.js';
 import { applyInteractiveSurfaceState } from './interactive-surface-state.js';
 
@@ -50,7 +49,11 @@ if (redirect) {
   if (primaryNavigation) primaryNavigation.innerHTML = renderPrimaryNavigation(activeLocale);
 
   const interactiveLegend = document.querySelector<HTMLElement>('#interactive-node-links');
-  if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend(activeLocale);
+  const renderLegend = (focusId: string | null) => {
+    if (!interactiveLegend) return;
+    interactiveLegend.innerHTML = renderInteractiveLegend(activeLocale, focusId);
+  };
+  renderLegend(null);
 
   const canonCurriculum = document.querySelector<HTMLElement>('#canon-curriculum');
   if (canonCurriculum) canonCurriculum.innerHTML = renderCanonUIForLocale(activeLocale);
@@ -64,38 +67,38 @@ if (redirect) {
 
   const canvas = document.querySelector<HTMLCanvasElement>('#taijifu-experience');
   const focusLabel = document.querySelector<HTMLOutputElement>('#interactive-focus-label');
-  const legendLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('#interactive-node-links [data-node-id]'));
-  const experienceHierarchy = buildExperienceHierarchy(buildLocalizedExperienceNodes(activeLocale));
-
-  const syncLegend = (focusId: string | null) => {
-    const visibleIds = new Set(visibleExperienceNodes(experienceHierarchy, focusId).map((node) => node.id));
-    for (const link of legendLinks) {
-      const visible = visibleIds.has(link.dataset.nodeId ?? '');
-      link.hidden = !visible;
-      link.setAttribute('aria-hidden', String(!visible));
-      link.tabIndex = visible ? 0 : -1;
-    }
-  };
-
-  const syncLegendFocus = (nodeId: string | null) => {
-    for (const link of legendLinks) link.classList.toggle('is-focused', link.dataset.nodeId === nodeId);
-    syncLegend(nodeId);
-  };
-
-  syncLegend(null);
 
   if (canvas) {
     const currentRoute = routeResolution.kind === 'localized-route' ? findSiteRoute(pathname) : null;
-    const runtime = bootstrapInteractiveWeb({
+    let runtime: ReturnType<typeof bootstrapInteractiveWeb>;
+    const wireLegend = () => {
+      if (!interactiveLegend) return;
+      for (const link of interactiveLegend.querySelectorAll<HTMLAnchorElement>('[data-node-id]')) {
+        const nodeId = link.dataset.nodeId ?? null;
+        const focus = () => runtime.focusNode(nodeId);
+        const blur = () => runtime.focusNode(null);
+        link.addEventListener('pointerenter', focus);
+        link.addEventListener('pointerleave', blur);
+        link.addEventListener('focus', focus);
+        link.addEventListener('blur', blur);
+      }
+    };
+    const syncLegendFocus = (nodeId: string | null) => {
+      renderLegend(nodeId);
+      wireLegend();
+    };
+
+    runtime = bootstrapInteractiveWeb({
       locale: activeLocale,
       canvas,
       navigate: (canonicalUrl) => window.location.assign(canonicalUrl),
       initialFocusNode: currentRoute?.id ?? null,
       onFocus: (focus) => {
-        if (focusLabel) focusLabel.value = focus?.label ?? (activeLocale === 'en' ? 'TAIJIFU' : activeLocale === 'es' ? 'TAIJIFU' : 'TAIJIFU');
+        if (focusLabel) focusLabel.value = focus?.label ?? 'TAIJIFU';
         syncLegendFocus(focus?.nodeId ?? null);
       },
     });
+    wireLegend();
 
     const interactiveExperience = document.querySelector<HTMLElement>('#interactive-experience');
     const surfaceStatus = document.querySelector<HTMLElement>('#interactive-surface-status');
@@ -109,16 +112,6 @@ if (redirect) {
         runtime.focusNode('taijifu');
         interactiveExperience?.focus({ preventScroll: true });
       });
-    }
-
-    for (const link of legendLinks) {
-      const nodeId = link.dataset.nodeId ?? null;
-      const focus = () => runtime.focusNode(nodeId);
-      const blur = () => runtime.focusNode(null);
-      link.addEventListener('pointerenter', focus);
-      link.addEventListener('pointerleave', blur);
-      link.addEventListener('focus', focus);
-      link.addEventListener('blur', blur);
     }
 
     window.addEventListener('pagehide', () => runtime.dispose(), { once: true });
