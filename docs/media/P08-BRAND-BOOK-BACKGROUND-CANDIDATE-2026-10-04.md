@@ -1,6 +1,6 @@
 # P08 — Brand Book Background Plate — candidate provenance
 
-Status: **PASS — content/texture gate / PENDING artifact persistence**
+Status: **PASS — content/texture gate / PENDING human approval**
 
 Date: 2026-10-04
 Issue: #39
@@ -11,34 +11,44 @@ Canonical master: **false**
 
 ## Candidate
 
-Generation method: deterministic procedural raster texture
-Generator/model: local procedural texture generator
-Seed: `20261004`
-Aspect ratio: 16:9
-Dimensions: 1600x900
-Local artifact filename: `P08-brand-book-background-procedural.png`
-SHA-256: `d91ab3254fdeef22c155fc6637e36c77105fb572ef3c53fb8335403cd0712006`
+Original procedural raster artifact:
+
+- generation method: deterministic procedural raster texture;
+- seed: `20261004`;
+- aspect ratio: 16:9;
+- dimensions: 1600x900;
+- local filename: `P08-brand-book-background-procedural.png`;
+- SHA-256: `d91ab3254fdeef22c155fc6637e36c77105fb572ef3c53fb8335403cd0712006`.
+
+Durable repository presentation asset:
+
+- sourcePath: `apps/interactive-web/public/media/p08-brand-book-background.svg`;
+- generator: `deterministic-svg-mineral-texture`;
+- seed: `20261004`;
+- aspect ratio: 16:9;
+- commit: `b2c8622ed26bd78c2df853c4a984645d441a4ce0`.
+
+The SVG is a deterministic repository implementation of the same P08 visual contract. It is not claimed to be the byte-identical PNG above.
 
 ## Content review
 
-The candidate is a restrained near-black mineral-paper-like background plate:
+The durable SVG satisfies the P08 contract:
 
+- near-black mineral-paper-like field;
+- subtle tonal/fiber-scale variation;
+- flat base illumination;
 - no text;
 - no symbols;
 - no logos;
 - no UI;
 - no people;
 - no vignette;
-- subtle tonal/fiber-scale variation only;
-- flat even base illumination;
-- suitable as an editorial Brand Book background.
+- suitable as restrained editorial Brand Book background.
 
-The earlier cinematic stone/landscape attempts were rejected because they introduced scene elements, strong directional lighting, rocks/foliage and non-paper environmental composition, which do not satisfy the P08 prompt.
+Earlier cinematic stone/landscape attempts were rejected because they introduced scene elements, strong directional lighting, rocks/foliage and non-paper environmental composition.
 
-## Provenance boundary
+## Registry state
 
-This record does not constitute human approval and does not create a `MediaAsset` registry row.
+The durable SVG is registered as presentation media with `humanApproval: pending` and `deterministicBrandAssetsComposited: false`.
 
-The exact PNG is currently a conversation/local artifact and is not yet persisted at a durable repository `sourcePath`. No repository path or approval state is fabricated.
-
-When persisted, create the registry entry with truthful sourcePath and provenance, initially `humanApproval: pending`. `deterministicBrandAssetsComposited` remains false. `isCanonicalMaster` remains false permanently.
+This does not constitute human approval and `isCanonicalMaster` remains permanently false.
