@@ -1,76 +1,38 @@
 {
-  "version": "0.1.0",
-  "status": "P3-01_RECONCILIATION_REQUIRED",
+  "version": "0.2.0",
+  "status": "P3-01_RECONCILIATION_IN_PROGRESS",
   "authority": "tehknesolutions/TAIJIFU-SITE",
   "rules": {
     "legacyEvidenceDefaultsToCandidate": true,
     "candidateDoesNotImplyCanon": true,
-    "claimsMustBeBoundedBySource": true
+    "claimsMustBeBoundedBySource": true,
+    "currentCanonDecisionMayProduceCanonClaim": true,
+    "nonOverlapDoesNotImplyConflict": true
   },
   "claims": [
-    {
-      "claimId": "PHIL-CLM-0001",
-      "domain": "terminology",
-      "statement": "In the legacy SimpleWay Taijifu manifesto, Taijifu is described as the physical and martial system.",
-      "state": "CANDIDATE",
-      "sourceIds": ["PHIL-SRC-0002"],
-      "conflictState": "NONE",
-      "scope": "LEGACY_PRODUCT_DESCRIPTION"
-    },
-    {
-      "claimId": "PHIL-CLM-0002",
-      "domain": "method",
-      "statement": "In the legacy SimpleWay Taijifu manifesto, SimpleWay Taijifu is described as the teaching, practice, and evolution layer of Taijifu.",
-      "state": "CANDIDATE",
-      "sourceIds": ["PHIL-SRC-0002"],
-      "conflictState": "NONE",
-      "scope": "LEGACY_PRODUCT_RELATIONSHIP"
-    },
-    {
-      "claimId": "PHIL-CLM-0003",
-      "domain": "principle",
-      "statement": "The legacy SimpleWay Taijifu manifesto names a central progression sequence: learn fundamentals, practice, measure, correct, and advance.",
-      "state": "CANDIDATE",
-      "sourceIds": ["PHIL-SRC-0002"],
-      "conflictState": "NONE",
-      "scope": "LEGACY_PRODUCT_PRINCIPLE"
-    },
-    {
-      "claimId": "PHIL-CLM-0004",
-      "domain": "method",
-      "statement": "The legacy SimpleWay Taijifu manifesto states that its curriculum arises from real practice and progressive validation rather than remaining only theoretical.",
-      "state": "CANDIDATE",
-      "sourceIds": ["PHIL-SRC-0002"],
-      "conflictState": "NONE",
-      "scope": "LEGACY_PRODUCT_METHOD"
-    },
-    {
-      "claimId": "PHIL-CLM-0005",
-      "domain": "principle",
-      "statement": "The legacy SimpleWay Taijifu principles prioritize technique before power, control before speed, stability before complexity, progression before intensity, and precision before volume.",
-      "state": "CANDIDATE",
-      "sourceIds": ["PHIL-SRC-0003"],
-      "conflictState": "NONE",
-      "scope": "LEGACY_TRAINING_PRINCIPLES"
-    },
-    {
-      "claimId": "PHIL-CLM-0006",
-      "domain": "principle",
-      "statement": "The legacy SimpleWay Taijifu principles treat recovery as part of training and require evolution to be measurable and training to be adaptable to the practitioner.",
-      "state": "CANDIDATE",
-      "sourceIds": ["PHIL-SRC-0003"],
-      "conflictState": "NONE",
-      "scope": "LEGACY_TRAINING_PRINCIPLES"
-    },
-    {
-      "claimId": "PHIL-CLM-0007",
-      "domain": "principle",
-      "statement": "The legacy SimpleWay Taijifu principles state that physical conditioning and technique are integrated progressively and that safety takes priority over completing a training session.",
-      "state": "CANDIDATE",
-      "sourceIds": ["PHIL-SRC-0003"],
-      "conflictState": "NONE",
-      "scope": "LEGACY_TRAINING_PRINCIPLES"
-    }
+    {"claimId":"PHIL-CLM-0001","domain":"terminology","statement":"In the legacy SimpleWay Taijifu manifesto, Taijifu is described as the physical and martial system.","state":"CANDIDATE","sourceIds":["PHIL-SRC-0002"],"conflictState":"NONE","scope":"LEGACY_PRODUCT_DESCRIPTION"},
+    {"claimId":"PHIL-CLM-0002","domain":"method","statement":"In the legacy SimpleWay Taijifu manifesto, SimpleWay Taijifu is described as the teaching, practice, and evolution layer of Taijifu.","state":"CANDIDATE","sourceIds":["PHIL-SRC-0002"],"conflictState":"NONE","scope":"LEGACY_PRODUCT_RELATIONSHIP"},
+    {"claimId":"PHIL-CLM-0003","domain":"principle","statement":"The legacy SimpleWay Taijifu manifesto names a central progression sequence: learn fundamentals, practice, measure, correct, and advance.","state":"CANDIDATE","sourceIds":["PHIL-SRC-0002"],"conflictState":"NONE","scope":"LEGACY_PRODUCT_PRINCIPLE"},
+    {"claimId":"PHIL-CLM-0004","domain":"method","statement":"The legacy SimpleWay Taijifu manifesto states that its curriculum arises from real practice and progressive validation rather than remaining only theoretical.","state":"CANDIDATE","sourceIds":["PHIL-SRC-0002"],"conflictState":"NONE","scope":"LEGACY_PRODUCT_METHOD"},
+    {"claimId":"PHIL-CLM-0005","domain":"principle","statement":"The legacy SimpleWay Taijifu principles prioritize technique before power, control before speed, stability before complexity, progression before intensity, and precision before volume.","state":"CANDIDATE","sourceIds":["PHIL-SRC-0003"],"conflictState":"NONE","scope":"LEGACY_TRAINING_PRINCIPLES"},
+    {"claimId":"PHIL-CLM-0006","domain":"principle","statement":"The legacy SimpleWay Taijifu principles treat recovery as part of training and require evolution to be measurable and training to be adaptable to the practitioner.","state":"CANDIDATE","sourceIds":["PHIL-SRC-0003"],"conflictState":"NONE","scope":"LEGACY_TRAINING_PRINCIPLES"},
+    {"claimId":"PHIL-CLM-0007","domain":"principle","statement":"The legacy SimpleWay Taijifu principles state that physical conditioning and technique are integrated progressively and that safety takes priority over completing a training session.","state":"CANDIDATE","sourceIds":["PHIL-SRC-0003"],"conflictState":"NONE","scope":"LEGACY_TRAINING_PRINCIPLES"},
+    {"claimId":"PHIL-CLM-0008","domain":"manifesto","statement":"TAIJIFU é Arte Marcial de se Adaptar.","state":"CANON","sourceIds":["PHIL-SRC-0004"],"conflictState":"NONE","scope":"TAIJIFU_CURRENT_CANON"},
+    {"claimId":"PHIL-CLM-0009","domain":"terminology","statement":"TAI expresses essência/permanência/Axis and asks what must remain.","state":"CANON","sourceIds":["PHIL-SRC-0004"],"conflictState":"NONE","scope":"TAIJIFU_CURRENT_CANON"},
+    {"claimId":"PHIL-CLM-0010","domain":"terminology","statement":"JI expresses discernimento/adaptação/Nexus and asks what needs to change.","state":"CANON","sourceIds":["PHIL-SRC-0004"],"conflictState":"NONE","scope":"TAIJIFU_CURRENT_CANON"},
+    {"claimId":"PHIL-CLM-0011","domain":"terminology","statement":"FU expresses manifestação/fluxo/Flow and asks what form must exist now.","state":"CANON","sourceIds":["PHIL-SRC-0004"],"conflictState":"NONE","scope":"TAIJIFU_CURRENT_CANON"},
+    {"claimId":"PHIL-CLM-0012","domain":"principle","statement":"Firme na essência. Livre na forma.","state":"CANON","sourceIds":["PHIL-SRC-0004"],"conflictState":"NONE","scope":"TAIJIFU_CURRENT_CANON"},
+    {"claimId":"PHIL-CLM-0013","domain":"principle","statement":"Mudar sem deixar de ser.","state":"CANON","sourceIds":["PHIL-SRC-0004"],"conflictState":"NONE","scope":"TAIJIFU_CURRENT_CANON"},
+    {"claimId":"PHIL-CLM-0014","domain":"manifesto","statement":"HNK nasce do AMOR e torna-se ferramenta/manifestação do AMOR; TAIJIFU trabalha o tornar-se e a adaptação sem abandono da essência.","state":"CANON","sourceIds":["PHIL-SRC-0004"],"conflictState":"NONE","scope":"TAIJIFU_CURRENT_CANON"}
   ],
-  "canonRegistry": []
+  "reconciliation": [
+    {"legacyClaimId":"PHIL-CLM-0001","currentClaimIds":["PHIL-CLM-0008"],"result":"PARTIAL_ALIGNMENT","decision":"KEEP_CANDIDATE","reason":"Current authority defines Taijifu more broadly as an art of adaptation; it does not explicitly confirm the legacy physical-and-martial-system-only formulation."},
+    {"legacyClaimId":"PHIL-CLM-0002","currentClaimIds":[],"result":"NOT_ADDRESSED","decision":"KEEP_CANDIDATE","reason":"PHIL-SRC-0004 does not define SimpleWay Taijifu's product-layer relationship."},
+    {"legacyClaimId":"PHIL-CLM-0003","currentClaimIds":["PHIL-CLM-0009","PHIL-CLM-0010","PHIL-CLM-0011"],"result":"COMPATIBLE_NOT_CONFIRMED","decision":"KEEP_CANDIDATE","reason":"The TAI/JI/FU cycle is compatible with progression and change but does not explicitly canonize the legacy learning sequence."},
+    {"legacyClaimId":"PHIL-CLM-0004","currentClaimIds":[],"result":"NOT_ADDRESSED","decision":"KEEP_CANDIDATE","reason":"Current authority does not address curriculum construction or progressive validation."},
+    {"legacyClaimId":"PHIL-CLM-0005","currentClaimIds":["PHIL-CLM-0012","PHIL-CLM-0013"],"result":"COMPATIBLE_NOT_CONFIRMED","decision":"KEEP_CANDIDATE","reason":"The current maxims support preservation of essence with adaptable form but do not explicitly canonize these five training priorities."},
+    {"legacyClaimId":"PHIL-CLM-0006","currentClaimIds":["PHIL-CLM-0010","PHIL-CLM-0013"],"result":"PARTIAL_ALIGNMENT","decision":"KEEP_CANDIDATE","reason":"Adaptation is current Canon, while recovery and measurable evolution are not addressed by PHIL-SRC-0004."},
+    {"legacyClaimId":"PHIL-CLM-0007","currentClaimIds":[],"result":"NOT_ADDRESSED","decision":"KEEP_CANDIDATE","reason":"Current authority does not address conditioning integration or training-session safety."}
+  ],
+  "canonRegistry": ["PHIL-CLM-0008","PHIL-CLM-0009","PHIL-CLM-0010","PHIL-CLM-0011","PHIL-CLM-0012","PHIL-CLM-0013","PHIL-CLM-0014"]
 }
