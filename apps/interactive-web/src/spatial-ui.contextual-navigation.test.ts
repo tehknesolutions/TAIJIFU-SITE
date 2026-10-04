@@ -3,7 +3,7 @@ import { buildExperienceHierarchy, contextualNavigationNodes } from './spatial-u
 import type { ExperienceNode } from './experience-shell.js';
 
 const nodes: readonly ExperienceNode[] = [
-  { id: 'home', label: 'TAIJIFU', canonicalUrl: '/', parentId: null },
+  { id: 'home', label: 'TAIJIFU', canonicalUrl: '/' },
   { id: 'tai', label: 'TAI', canonicalUrl: '/tai', parentId: 'home' },
   { id: 'ji', label: 'JI', canonicalUrl: '/ji', parentId: 'home' },
   { id: 'fu', label: 'FU', canonicalUrl: '/fu', parentId: 'home' },
