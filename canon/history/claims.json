@@ -1,7 +1,36 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "authority": "tehknesolutions/TAIJIFU-SITE",
   "epic": "EPIC-002",
   "statuses": ["candidate", "verified", "canonical", "conflicted", "unresolved", "rejected"],
-  "claims": []
+  "claims": [
+    {
+      "id": "HIST-CLAIM-001",
+      "subject": "taijifu",
+      "predicate": "createdBy",
+      "object": ["miguel-da-vinci", "thales-walisson"],
+      "status": "verified",
+      "statement": "TAIJIFU is signed in the repository Canon as created by Miguel Da Vinci and Thales Walisson.",
+      "sourceIds": ["github:TAIJIFU-SITE:issue-7"],
+      "notes": "Verified as an explicit repository Canon statement. This does not independently establish earlier biographical claims."
+    },
+    {
+      "id": "HIST-CLAIM-002",
+      "subject": "taijifu",
+      "predicate": "since",
+      "object": "2026",
+      "status": "verified",
+      "statement": "The repository Canon signature states 'Desde 2026'.",
+      "sourceIds": ["github:TAIJIFU-SITE:issue-7"]
+    },
+    {
+      "id": "HIST-CLAIM-003",
+      "subject": "taijifu",
+      "predicate": "relationshipToHNK",
+      "object": "TAIJIFU works with becoming/adaptation without abandoning essence; HNK is described as born from LOVE and becoming a tool/manifestation of LOVE.",
+      "status": "verified",
+      "sourceIds": ["github:TAIJIFU-SITE:issue-7"],
+      "notes": "Semantic/genealogical relationship explicitly stated in Canon Visual V1; a chronological HNK↔TAIJIFU history remains unresolved."
+    }
+  ]
 }
