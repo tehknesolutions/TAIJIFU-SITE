@@ -5,7 +5,7 @@ These items are intentionally not promoted until source-level evidence or an exp
 | ID | Topic | State | Required evidence / ruling |
 |---|---|---|---|
 | HIST-U001 | Exact origin date/period of TAIJIFU | PARTIALLY RESOLVED | **Year resolved: 2006.** Month/day remain unresolved and must not be inferred. See `RULING-002-SINCE-2006.md`. |
-| HIST-U002 | Founder/person records and exact roles | PARTIALLY RESOLVED | Miguel Da Vinci + Thales Walisson creator attribution is verified; finer role chronology remains open. |
+| HIST-U002 | Creator/person records and exact roles | PARTIALLY RESOLVED | Miguel Da Vinci + Thales Walisson creator attribution is verified; finer role chronology remains open. |
 | HIST-U003 | Complete chronological timeline | UNRESOLVED | event-level sources and dates/periods |
 | HIST-U004 | Historical relationship between TAIJIFU and HNK | PARTIALLY RESOLVED | semantic relationship verified; chronological genealogy still requires explicit historical claims |
 | HIST-U005 | Legacy repository chronology | UNRESOLVED | repository inventory + commit/PR evidence |
