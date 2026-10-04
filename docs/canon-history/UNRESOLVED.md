@@ -12,6 +12,8 @@ These items are intentionally not promoted until source-level evidence or an exp
 | HIST-U006 | Project conversation historical claims | IN PROGRESS | creator ruling for birth year 1992 + origin at age 14 has been promoted; remaining conversation claims require extraction/classification |
 | HIST-U007 | Uploaded-document historical claims | UNRESOLVED | document revision/source locator + reconciliation |
 | HIST-U008 | Exact meaning of 2026 milestone | UNRESOLVED | explicit ruling whether 2026 represents formalization, publication, relaunch or another modern phase |
+| HIST-U009 | Miguel/Thales father-son relationship | UNRESOLVED | explicit creator ruling or source-level evidence; not implied by creator attribution |
+| HIST-U010 | Evolution through multiple martial arts | UNRESOLVED | explicit creator ruling or source-level evidence identifying the historical claim and, where applicable, chronology |
 
 ## Resolved historical invariant
 
