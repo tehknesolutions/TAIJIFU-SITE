@@ -1,0 +1,55 @@
+{
+  "version": "0.1.0",
+  "status": "HISTORICAL_CANON_RECONCILIATION_REQUIRED",
+  "authorityTarget": "tehknesolutions/TAIJIFU-SITE",
+  "sourceIds": ["PHIL-SRC-0005", "PHIL-SRC-0006"],
+  "promotionPolicy": "Historical canonical evidence is preserved literally but is not current Canon until reconciled with current authority.",
+  "values": [
+    {"id":"HIST-VAL-01","name":"Presença","text":"Perceber corpo, espaço, intenção e consequência antes de agir.","sourceId":"PHIL-SRC-0005"},
+    {"id":"HIST-VAL-02","name":"Adaptação","text":"Mudar sem perder identidade, centro ou finalidade.","sourceId":"PHIL-SRC-0005"},
+    {"id":"HIST-VAL-03","name":"Eficiência","text":"Usar ação suficiente, evitando desperdício e excesso.","sourceId":"PHIL-SRC-0005"},
+    {"id":"HIST-VAL-04","name":"Integração","text":"Unir alcance, contato, fluxo e sobrevivência em contexto.","sourceId":"PHIL-SRC-0005"},
+    {"id":"HIST-VAL-05","name":"Domínio próprio","text":"Governar impulso, ego, medo e potência.","sourceId":"PHIL-SRC-0005"},
+    {"id":"HIST-VAL-06","name":"Serviço à vida","text":"Proteger, ensinar, amadurecer e restaurar.","sourceId":"PHIL-SRC-0005"}
+  ],
+  "principles": [
+    "Adapte-se ao espaço disponível.",
+    "Perceba antes de agir.",
+    "Preserve equilíbrio, respiração e consciência.",
+    "Use a menor ação capaz de resolver o problema.",
+    "Não permaneça em uma distância que deixou de existir.",
+    "Conecte defesa, transição e saída.",
+    "Controle a estrutura antes de disputar força.",
+    "Mantenha técnica e intenção proporcionais ao risco.",
+    "Treine respostas, não coreografias vazias.",
+    "Conheça a falha, a defesa e a contramedida de cada técnica.",
+    "Evolua sem transformar tradição em dogma.",
+    "Preserve a vida, a integridade e a responsabilidade do praticante."
+  ],
+  "learningCycle": [
+    {"order":1,"title":"Conhecer","text":"Compreender conceitos, linguagem, função e contexto antes de executar."},
+    {"order":2,"title":"Praticar","text":"Transformar conhecimento em experiência por tarefas, exercícios e prática orientada."},
+    {"order":3,"title":"Demonstrar","text":"Produzir evidência observável de competência, respeitando Safety e contexto."},
+    {"order":4,"title":"Transferir","text":"Levar a competência para variações de parceiro, ambiente, pressão e Capacity State."},
+    {"order":5,"title":"Consolidar","text":"Revisitar, reter, refletir e sustentar competência ao longo do tempo."}
+  ],
+  "integralMethod": {
+    "principle":"O Método Integral desenvolve atenção, respiração, imaginação, auto-observação, autorregulação, disciplina e reflexão como competências transversais da formação Taijifu.",
+    "bardonScope":"Franz Bardon é uma influência metodológica contemporânea de estudo por progressão disciplinada. O Taijifu não reproduz suas etapas exercício por exercício, não declara equivalência doutrinária e não transforma afirmações externas em fato canônico.",
+    "rules":[
+      "Método Integral não substitui treino corporal, Safety, evidência nem avaliação técnica.",
+      "A prática mental e respiratória deve permanecer proporcional ao contexto, à idade, à saúde e à capacidade atual.",
+      "Progresso subjetivo pode gerar reflexão e registro, mas não concede promoção automática.",
+      "As dez etapas acompanham a função pedagógica das dez faixas sem criar uma segunda hierarquia de graduação.",
+      "Experiências pessoais são registradas como experiência do praticante, não como prova universal."
+    ],
+    "stageFunctions":["Entrar","Perceber","Compreender","Manifestar","Conectar","Expandir","Sustentar","Aprofundar","Governar","Sintetizar"]
+  },
+  "reconciliationPreview": {
+    "adaptationValueVsCurrentMaxim":"STRONG_ALIGNMENT: 'Mudar sem perder identidade, centro ou finalidade' aligns closely with current 'Mudar sem deixar de ser' and the TAI/JI semantic model; promotion still requires an explicit registry decision.",
+    "presenceAndIntegralMethod":"NOT_EXPLICITLY_ADDRESSED_BY_CURRENT_SOURCE",
+    "efficiencyIntegrationSelfMasteryService":"NOT_EXPLICITLY_ADDRESSED_BY_CURRENT_SOURCE",
+    "twelvePrinciples":"PARTIAL_THEME_ALIGNMENT_ONLY",
+    "method":"NOT_EXPLICITLY_ADDRESSED_BY_CURRENT_SOURCE"
+  }
+}
