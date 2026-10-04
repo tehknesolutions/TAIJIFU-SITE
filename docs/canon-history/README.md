@@ -14,7 +14,7 @@ Model:
 
 ## Promotion rule
 
-A historical statement may be inventoried without becoming Canon. Promotion requires an identifiable source, explicit claim, provenance record, conflict state and reviewed repository change.
+A historical statement may be inventoried without becoming Canon. Promotion to Canon may occur through either (a) an identifiable historical source with explicit claim, provenance and reviewed repository change, or (b) an explicit Creator Canon decision that is materialized in the official repository. In case (b), archaeological locators remain supporting evidence and are not a prerequisite for the promotion. Conflicts and unsupported details must still remain explicit.
 
 ## Current evidence boundary
 
