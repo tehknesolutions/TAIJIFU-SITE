@@ -11,9 +11,26 @@ permissions:
   contents: read
 
 jobs:
-  runner-smoke:
+  verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     steps:
-      - name: Runner smoke test
-        run: echo "TAIJIFU GitHub Actions runner started successfully"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.17.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run interactive-web tests
+        run: pnpm --dir apps/interactive-web test -- --run
