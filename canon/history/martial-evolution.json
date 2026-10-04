@@ -1,0 +1,23 @@
+{
+  "version": "0.1.0",
+  "authority": "tehknesolutions/TAIJIFU-SITE",
+  "epic": "EPIC-002",
+  "workPackage": "H2-03",
+  "status": "in-progress",
+  "records": [],
+  "candidateClaims": [
+    {
+      "id": "MARTIAL-EVOLUTION-CANDIDATE-001",
+      "subject": "taijifu",
+      "claim": "TAIJIFU evolved through multiple martial arts.",
+      "status": "unresolved",
+      "promotionRequirement": "Explicit creator ruling or stable source locator identifying the supported martial influences and, if claimed, their chronology."
+    }
+  ],
+  "guardrails": [
+    "Do not infer martial influences from similarity of technique or terminology.",
+    "Do not convert Masters/game mechanics into historical martial provenance.",
+    "Do not assign dates, order, teachers, schools or lineages without explicit evidence.",
+    "An influence may be canonical even when its exact date is unresolved, provided the influence itself has explicit provenance."
+  ]
+}
