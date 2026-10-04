@@ -1,10 +1,14 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "authority": "tehknesolutions/TAIJIFU-SITE",
   "records": [
-    {"claimId":"HIST-CLAIM-001","sourceId":"github:TAIJIFU-SITE:issue-7","sourceLocator":"https://github.com/tehknesolutions/TAIJIFU-SITE/issues/7#10-assinatura","classification":"current-explicit-canon","conflictState":"none","evidence":"Criado por Miguel Da Vinci e Thales Walisson — Desde 2026"},
-    {"claimId":"HIST-CLAIM-002","sourceId":"github:TAIJIFU-SITE:issue-7","sourceLocator":"https://github.com/tehknesolutions/TAIJIFU-SITE/issues/7#10-assinatura","classification":"current-explicit-canon","conflictState":"none","evidence":"Desde 2026"},
-    {"claimId":"HIST-CLAIM-003","sourceId":"github:TAIJIFU-SITE:issue-7","sourceLocator":"https://github.com/tehknesolutions/TAIJIFU-SITE/issues/7#essência","classification":"current-explicit-canon","conflictState":"none","evidence":"Relação HNK explicitly defines HNK and TAIJIFU semantic relationship."}
+    {"claimId":"HIST-CLAIM-001","sourceId":"github:TAIJIFU-SITE:issue-7","sourceLocator":"https://github.com/tehknesolutions/TAIJIFU-SITE/issues/7#10-assinatura","classification":"current-explicit-canon","conflictState":"none","evidence":"Criado por Miguel Da Vinci e Thales Walisson"},
+    {"claimId":"HIST-CLAIM-002","sourceId":"project:creator-ruling-2026-10-04","sourceLocator":"GPT Project TAIJIFU — creator ruling: age-14 record defines Desde","classification":"current-explicit-canon","conflictState":"resolved","evidence":"Creator explicitly rules that the age-14 record defines 'Desde'; birth year 1992 + age 14 = 2006."},
+    {"claimId":"HIST-CLAIM-003","sourceId":"github:TAIJIFU-SITE:issue-7","sourceLocator":"https://github.com/tehknesolutions/TAIJIFU-SITE/issues/7#essência","classification":"current-explicit-canon","conflictState":"none","evidence":"Relação HNK explicitly defines HNK and TAIJIFU semantic relationship."},
+    {"claimId":"HIST-CLAIM-004","sourceId":"project:creator-ruling-2026-10-04","sourceLocator":"GPT Project TAIJIFU — creator-provided birth-year record","classification":"current-explicit-canon","conflictState":"none","evidence":"Thales Walisson birth year: 1992."},
+    {"claimId":"HIST-CLAIM-005","sourceId":"project:creator-ruling-2026-10-04","sourceLocator":"GPT Project TAIJIFU — creator ruling: created origin at age 14","classification":"current-explicit-canon","conflictState":"none","evidence":"Creator states the age-14 record is the historical origin marker."},
+    {"claimId":"HIST-CLAIM-006","sourceId":"project:creator-ruling-2026-10-04","sourceLocator":"Derived from HIST-CLAIM-004 + HIST-CLAIM-005","classification":"current-explicit-canon","conflictState":"none","evidence":"1992 + 14 = 2006; year precision only."},
+    {"claimId":"HIST-CLAIM-007","sourceId":"github:TAIJIFU-SITE:issue-7","sourceLocator":"https://github.com/tehknesolutions/TAIJIFU-SITE/issues/7#10-assinatura","classification":"superseded-wording","conflictState":"resolved","evidence":"Issue #7 previously used 'Desde 2026'; creator ruling supersedes this as origin marker while preserving 2026 as evidence requiring modern-milestone classification."}
   ],
   "contract": {
     "requiredForPromotion": ["claimId", "sourceId", "sourceLocator", "classification", "conflictState"],
