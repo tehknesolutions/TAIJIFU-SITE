@@ -1,0 +1,26 @@
+{
+  "version": "0.1.0",
+  "authority": "tehknesolutions/TAIJIFU-SITE",
+  "milestones": [
+    {
+      "id": "MILESTONE-2006-ORIGIN",
+      "year": 2006,
+      "kind": "historical-origin-continuity",
+      "label": "Desde 2006",
+      "status": "canonical",
+      "claimIds": ["HIST-CLAIM-002", "HIST-CLAIM-004", "HIST-CLAIM-005", "HIST-CLAIM-006"],
+      "precision": "year"
+    },
+    {
+      "id": "MILESTONE-2026-MODERN",
+      "year": 2026,
+      "kind": "modern-phase-unclassified",
+      "label": null,
+      "status": "candidate",
+      "claimIds": ["HIST-CLAIM-007"],
+      "precision": "year",
+      "prohibitedUse": ["origin", "since", "historical-start"],
+      "note": "Exact modern milestone meaning awaits explicit ruling."
+    }
+  ]
+}
