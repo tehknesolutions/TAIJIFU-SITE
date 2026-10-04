@@ -1,0 +1,52 @@
+P02 — DOJO INTERIOR ATMOSPHERIC PLATE — STRICT RETRY
+
+Generate ONLY the environment plate. No presentation board, no infographic, no metadata panel, no captions, no typography.
+
+SUBJECT
+An empty functional martial-arts practice hall combining contemporary restraint with traditional construction logic. Interior architecture only. The space is disciplined, quiet, usable and believable — not ceremonial, fantasy, palatial or touristic.
+
+MATERIALS
+Blackened timber structural members; dark natural stone; restrained woven fabric; aged dark metal hardware; matte mineral/plaster surfaces where needed. Materials are tactile, imperfect and functional, never glossy luxury decor.
+
+LIGHT
+Early morning side light entering from one architectural opening. Soft volumetric atmosphere, restrained haze, realistic exposure, calm shadow structure. No theatrical orange fantasy sunset.
+
+COMPOSITION
+Wide 16:9 architectural/environment plate. Eye-level human-scale camera. Clear open training floor. Structural depth and negative space. Minimal functional training elements may appear only if unbranded and physically plausible. No exterior fantasy vista dominating the image.
+
+ABSOLUTE NEGATIVES
+NO PEOPLE.
+NO TEXT OF ANY KIND.
+NO LETTERS.
+NO NUMBERS.
+NO SIGNAGE.
+NO LOGOS.
+NO BRAND MARKS.
+NO TAIJIFU WORDMARK.
+NO OMEGA SYMBOL.
+NO HNK GLYPHS.
+NO CHINESE/JAPANESE/KOREAN CHARACTERS OR CALLIGRAPHY.
+NO YIN-YANG SYMBOL.
+NO TAIJI SYMBOL.
+NO BAGUA OR TRIGRAMS.
+NO EMBLEMS OR CRESTS.
+NO BANNERS WITH SYMBOLS.
+NO DECORATIVE SYMBOLS ON LANTERNS, FLOORS, WALLS OR EQUIPMENT.
+NO UI.
+NO INFOGRAPHIC.
+NO PRESENTATION BOARD.
+NO METADATA.
+NO APPROVAL BADGES.
+NO REFERENCE THUMBNAILS.
+NO WATERMARK.
+NO PAGODAS.
+NO FANTASY TEMPLE.
+NO MOUNTAIN-PALACE VISTA.
+NO BONSAI DISPLAY AESTHETIC.
+NO SHRINE AESTHETIC.
+
+AUTHORITY BOUNDARY
+This image is Presentation-layer environment media only. Do not invent or render Ω1, HNK, canonical diagrams, canonical text, UI text or brand typography. Any official Ω1/HNK/text must be composited deterministically afterward from authoritative repository assets.
+
+OUTPUT
+One clean environment image only, 16:9. No frame, border, labels, captions, specimen sheet or explanatory layout.
