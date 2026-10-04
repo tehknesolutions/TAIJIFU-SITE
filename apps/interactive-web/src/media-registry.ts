@@ -30,11 +30,25 @@ export const mediaRegistry: readonly MediaAsset[] = Object.freeze([
     deterministicBrandAssetsComposited: false,
     isCanonicalMaster: false as const,
   }),
+  Object.freeze({
+    id: 'p08-brand-book-background',
+    promptId: 'P08',
+    references: Object.freeze([]),
+    layer: 'presentation' as const,
+    sourcePath: 'apps/interactive-web/public/media/p08-brand-book-background.svg',
+    generator: 'deterministic-svg-mineral-texture',
+    seed: '20261004',
+    aspectRatio: '16:9',
+    createdAt: '2026-10-04',
+    humanApproval: 'pending' as const,
+    deterministicBrandAssetsComposited: false,
+    isCanonicalMaster: false as const,
+  }),
 ]);
 
 export function getMediaAsset(id: string): MediaAsset {
   const asset = mediaRegistry.find((candidate) => candidate.id === id);
-  if (!asset) throw new Error(`Unknown presentation media asset: ${id}`);
+  if (!asset) throw new Error('Unknown presentation media asset: ' + id);
   return asset;
 }
 
