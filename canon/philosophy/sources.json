@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "status": "P3-01_EVIDENCE_DISCOVERY",
   "authority": "tehknesolutions/TAIJIFU-SITE",
   "rules": {
@@ -22,15 +22,27 @@
       "sourceClass": "OFFICIAL_CURRENT",
       "locator": "tehknesolutions/TAIJIFU-SITE:docs/canon-philosophy/P3-01-SOURCE-INVENTORY.md@b150595080fb308d4344030b20fc960e3e8c71db",
       "role": "AUDIT_RECORD",
-      "domains": [
-        "manifesto",
-        "principle",
-        "method",
-        "value",
-        "terminology"
-      ],
+      "domains": ["manifesto", "principle", "method", "value", "terminology"],
       "claimExtraction": "NOT_DOCTRINAL",
       "notes": "Official P3-01 evidence-discovery audit. It records coverage and gaps; it is not itself philosophical doctrine."
+    },
+    {
+      "sourceId": "PHIL-SRC-0002",
+      "sourceClass": "LEGACY_PRODUCT",
+      "locator": "tehknesolutions/SW-TAIJIFU:docs/M001-manifesto.md@d4a8bf09ad05e7b9ef5789f008d4a7ab2e39bde0",
+      "role": "LEGACY_MANIFESTO_EVIDENCE",
+      "domains": ["manifesto", "principle", "method", "terminology"],
+      "claimExtraction": "CANDIDATE_ONLY",
+      "notes": "SimpleWay Taijifu manifesto. Product-layer evidence requiring reconciliation before any Taijifu Canon promotion."
+    },
+    {
+      "sourceId": "PHIL-SRC-0003",
+      "sourceClass": "LEGACY_PRODUCT",
+      "locator": "tehknesolutions/SW-TAIJIFU:docs/M004-principles.md@d4a8bf09ad05e7b9ef5789f008d4a7ab2e39bde0",
+      "role": "LEGACY_PRINCIPLES_EVIDENCE",
+      "domains": ["principle", "method", "value"],
+      "claimExtraction": "CANDIDATE_ONLY",
+      "notes": "Ten explicit SimpleWay Taijifu training principles; evidence only until reconciled with current Taijifu Canon."
     }
   ]
 }
