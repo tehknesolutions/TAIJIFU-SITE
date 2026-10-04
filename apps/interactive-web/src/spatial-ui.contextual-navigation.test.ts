@@ -19,7 +19,7 @@ describe('contextualNavigationNodes', () => {
   it('expands children of the focused destination while preserving canonical URLs', () => {
     const hierarchy = buildExperienceHierarchy(nodes);
     const projected = contextualNavigationNodes(hierarchy, 'tai');
-    const path = projected.find((node) => node.id === 'tai-path');
-    expect(path).toMatchObject({ canonicalUrl: '/tai/caminho', relation: 'focus-child', depth: 2 });
+    expect(projected.find((node) => node.id === 'tai')).toMatchObject({ relation: 'focus', depth: 1 });
+    expect(projected.find((node) => node.id === 'tai-path')).toMatchObject({ canonicalUrl: '/tai/caminho', relation: 'focus-child', depth: 2 });
   });
 });
