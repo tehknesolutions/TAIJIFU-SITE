@@ -4,11 +4,12 @@ import {
   contextualNavigationNodes,
   visibleExperienceNodes,
   type ExperienceHierarchy,
+  type ExperienceHierarchyNode,
 } from './spatial-ui.js';
 import type { ExperienceNode } from './experience-shell.js';
 import { canonToExperienceNodes, experienceParentByRouteId } from './content/canon-registry.js';
 
-const flatten = (nodes: readonly import('./experience-shell.js').ExperienceNode[]): import('./experience-shell.js').ExperienceNode[] => nodes.flatMap((node) => [node, ...flatten(node.children)]);
+const flatten = (nodes: readonly ExperienceHierarchyNode[]): ExperienceHierarchyNode[] => nodes.flatMap((node) => [node, ...flatten(node.children)]);
 
 describe('Spatial UI experience hierarchy', () => {
   it('labels parent relationships as experience navigation, not Canon semantics', () => {
