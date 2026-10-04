@@ -1,0 +1,29 @@
+{
+  "version": "0.1.0",
+  "authority": "tehknesolutions/TAIJIFU-SITE",
+  "epic": "EPIC-002",
+  "workPackage": "H2-06",
+  "status": "in-progress",
+  "invariants": {
+    "historicalSinceYear": 2006,
+    "historicalSinceLabel": "Desde 2006",
+    "modern2026Classification": "MODERN_PHASE_UNCLASSIFIED"
+  },
+  "flow": ["canon", "platform", "experience", "products"],
+  "consumers": ["platform", "experience", "academy", "masters", "other-products"],
+  "rules": [
+    "TAIJIFU-SITE is the historical Canon authority.",
+    "Consumers must not redefine TAIJIFU historical origin independently.",
+    "2026 must not be represented as origin, creation year, historical start or Desde.",
+    "A cached or local representation must retain traceability to the Canon source.",
+    "Conflicting downstream content is propagation debt and does not supersede Canon."
+  ],
+  "verification": {
+    "canon": "pass",
+    "platform": "to-verify",
+    "experience": "to-verify",
+    "academy": "to-verify",
+    "masters": "to-verify",
+    "other-products": "to-verify"
+  }
+}
