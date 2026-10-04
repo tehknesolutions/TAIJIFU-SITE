@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0",
+  "authority": "tehknesolutions/TAIJIFU-SITE",
+  "records": [],
+  "contract": {
+    "requiredForPromotion": ["claimId", "sourceId", "sourceLocator", "classification", "conflictState"],
+    "conflictStates": ["none", "open", "resolved", "insufficient-evidence"]
+  }
+}
