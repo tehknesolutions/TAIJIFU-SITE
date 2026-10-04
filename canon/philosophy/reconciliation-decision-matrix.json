@@ -1,0 +1,42 @@
+{
+  "version": "0.1.0",
+  "status": "AWAITING_CREATOR_RULING",
+  "authority": "tehknesolutions/TAIJIFU-SITE",
+  "purpose": "Make historical-to-current Canon decisions explicit; semantic similarity alone never promotes a claim.",
+  "allowedDecisions": ["CONFIRM", "SUPERSEDE", "LEGACY_ONLY", "NEEDS_RULING"],
+  "families": [
+    {
+      "familyId": "HIST-VALUES",
+      "name": "Historical Master Values",
+      "sourceId": "PHIL-SRC-0005",
+      "items": ["Presença", "Adaptação", "Eficiência", "Integração", "Domínio próprio", "Serviço à vida"],
+      "currentEvidence": ["PHIL-CLM-0008", "PHIL-CLM-0009", "PHIL-CLM-0010", "PHIL-CLM-0011", "PHIL-CLM-0012", "PHIL-CLM-0013", "PHIL-CLM-0014"],
+      "analysis": "Adaptação has strong semantic alignment with the current adaptation/essence model. The other five values are not explicitly declared as current Values by PHIL-SRC-0004.",
+      "decision": "NEEDS_RULING"
+    },
+    {
+      "familyId": "HIST-12-PRINCIPLES",
+      "name": "Historical Twelve Principles",
+      "sourceId": "PHIL-SRC-0005",
+      "currentEvidence": ["PHIL-CLM-0012", "PHIL-CLM-0013"],
+      "analysis": "Several historical principles are compatible with adaptation, essence, responsibility and preservation of life, but the current authority does not explicitly confirm the twelve-principle set as a set.",
+      "decision": "NEEDS_RULING"
+    },
+    {
+      "familyId": "HIST-INTEGRAL-METHOD",
+      "name": "Historical Integral Method",
+      "sourceId": "PHIL-SRC-0006",
+      "components": ["five-state learning cycle", "Integral Method principle", "Bardon scope boundary", "five governance rules", "ten pedagogical stage functions"],
+      "currentEvidence": [],
+      "analysis": "PHIL-SRC-0004 does not address or supersede the historical Integral Method. Its current status cannot be inferred.",
+      "decision": "NEEDS_RULING"
+    }
+  ],
+  "rulingContract": {
+    "CONFIRM": "Promote the specified historical family or item into current Canon with historical provenance retained.",
+    "SUPERSEDE": "Preserve the historical material but replace its current authority with an explicit new formulation.",
+    "LEGACY_ONLY": "Preserve as historical Canon/evidence and explicitly exclude from current Canon.",
+    "NEEDS_RULING": "No current decision has been made; do not promote, discard or rewrite."
+  },
+  "automaticPromotions": []
+}
