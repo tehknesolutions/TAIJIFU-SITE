@@ -1,0 +1,36 @@
+{
+  "version": "0.1.0",
+  "status": "P3-01_EVIDENCE_DISCOVERY",
+  "authority": "tehknesolutions/TAIJIFU-SITE",
+  "rules": {
+    "singleOfficialAuthority": true,
+    "registrationRequiresStableLocator": true,
+    "registrationDoesNotPromoteToCanon": true,
+    "emptySearchIsNotEvidenceOfAbsence": true
+  },
+  "sourceClasses": [
+    "CREATOR_RULING",
+    "OFFICIAL_CURRENT",
+    "LEGACY_TAIJIFU",
+    "LEGACY_PRODUCT",
+    "PROJECT_RECORD",
+    "EXTERNAL_REFERENCE"
+  ],
+  "sources": [
+    {
+      "sourceId": "PHIL-SRC-0001",
+      "sourceClass": "OFFICIAL_CURRENT",
+      "locator": "tehknesolutions/TAIJIFU-SITE:docs/canon-philosophy/P3-01-SOURCE-INVENTORY.md@b150595080fb308d4344030b20fc960e3e8c71db",
+      "role": "AUDIT_RECORD",
+      "domains": [
+        "manifesto",
+        "principle",
+        "method",
+        "value",
+        "terminology"
+      ],
+      "claimExtraction": "NOT_DOCTRINAL",
+      "notes": "Official P3-01 evidence-discovery audit. It records coverage and gaps; it is not itself philosophical doctrine."
+    }
+  ]
+}
