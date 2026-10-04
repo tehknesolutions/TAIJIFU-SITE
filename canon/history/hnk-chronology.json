@@ -1,0 +1,32 @@
+{
+  "version": "0.1.0",
+  "authority": "tehknesolutions/TAIJIFU-SITE",
+  "epic": "EPIC-002",
+  "workPackage": "H2-04",
+  "status": "in-progress",
+  "verifiedRelationships": [
+    {
+      "id": "HNK-REL-001",
+      "subject": "taijifu",
+      "object": "hnk",
+      "relationshipType": "semantic-genealogical",
+      "status": "verified",
+      "claimIds": ["HIST-CLAIM-003"],
+      "sourceIds": ["github:TAIJIFU-SITE:issue-7"],
+      "note": "This verifies the stated conceptual relationship only; it does not establish chronological precedence or a dated genealogy."
+    }
+  ],
+  "chronologicalEvents": [],
+  "unresolved": [
+    "Date/period when HNK entered the TAIJIFU historical line",
+    "Whether HNK predates, follows, or was formalized independently of specific TAIJIFU phases",
+    "Exact chronological meaning of the stated HNK↔TAIJIFU genealogy",
+    "Any dated HNK milestone that should appear in the TAIJIFU canonical timeline"
+  ],
+  "guardrails": [
+    "Semantic relationship does not imply chronology.",
+    "Do not derive HNK dates from repository creation dates unless explicitly ruled as historical milestones.",
+    "Do not infer chronological precedence from wording such as born from, tool, manifestation, essence or becoming.",
+    "Chronological promotion requires a stable source locator or explicit creator ruling."
+  ]
+}
