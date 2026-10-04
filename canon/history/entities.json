@@ -1,12 +1,13 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "authority": "tehknesolutions/TAIJIFU-SITE",
-  "types": ["person", "organization", "event", "period", "relationship", "system"],
   "entities": [
-    {"id":"taijifu","type":"system","canonicalName":"TAIJIFU","status":"canonical","claimIds":["HIST-CLAIM-001","HIST-CLAIM-002","HIST-CLAIM-003"]},
-    {"id":"miguel-da-vinci","type":"person","canonicalName":"Miguel Da Vinci","status":"verified","claimIds":["HIST-CLAIM-001"],"note":"Name/creator role currently supported by repository Canon issue #7."},
-    {"id":"thales-walisson","type":"person","canonicalName":"Thales Walisson","status":"verified","claimIds":["HIST-CLAIM-001"],"note":"Spelling follows repository Canon issue #7. Other biographical/name variants require separate provenance."},
-    {"id":"hnk","type":"system","canonicalName":"HNK","status":"verified","claimIds":["HIST-CLAIM-003"]}
+    {"id":"taijifu","type":"organization","canonicalName":"TAIJIFU","status":"canonical","claimIds":["HIST-CLAIM-001","HIST-CLAIM-002","HIST-CLAIM-003","HIST-CLAIM-006","HIST-CLAIM-007"]},
+    {"id":"miguel-da-vinci","type":"person","canonicalName":"Miguel Da Vinci","status":"verified","claimIds":["HIST-CLAIM-001"]},
+    {"id":"thales-walisson","type":"person","canonicalName":"Thales Walisson","status":"canonical","claimIds":["HIST-CLAIM-001","HIST-CLAIM-004","HIST-CLAIM-005"]},
+    {"id":"hnk","type":"organization","canonicalName":"HNK","status":"verified","claimIds":["HIST-CLAIM-003"]},
+    {"id":"taijifu-hnk-relationship","type":"relationship","canonicalName":"TAIJIFU ↔ HNK","status":"verified","claimIds":["HIST-CLAIM-003"]}
   ],
-  "note": "Historical entities require source-backed claims and provenance before canonical promotion."
+  "types": ["person", "organization", "event", "period", "relationship"],
+  "note": "Historical entities require source-backed claims/provenance or explicit creator ruling before canonical promotion."
 }
