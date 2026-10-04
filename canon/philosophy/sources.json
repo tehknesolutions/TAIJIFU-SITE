@@ -1,6 +1,6 @@
 {
-  "version": "0.2.0",
-  "status": "P3-01_EVIDENCE_DISCOVERY",
+  "version": "0.3.0",
+  "status": "P3-01_RECONCILIATION",
   "authority": "tehknesolutions/TAIJIFU-SITE",
   "rules": {
     "singleOfficialAuthority": true,
@@ -43,6 +43,15 @@
       "domains": ["principle", "method", "value"],
       "claimExtraction": "CANDIDATE_ONLY",
       "notes": "Ten explicit SimpleWay Taijifu training principles; evidence only until reconciled with current Taijifu Canon."
+    },
+    {
+      "sourceId": "PHIL-SRC-0004",
+      "sourceClass": "OFFICIAL_CURRENT",
+      "locator": "tehknesolutions/TAIJIFU-SITE:issue#7@2026-09-24T15:03:49Z",
+      "role": "CURRENT_CANON_DECISION_RECORD",
+      "domains": ["manifesto", "principle", "method", "value", "terminology"],
+      "claimExtraction": "CANON_ELIGIBLE",
+      "notes": "Repository-owner decision record explicitly labeled CANON. Establishes Taijifu as 'Arte Marcial de se Adaptar', the approved TAI/JI/FU semantic triad, two maxims, and the HNK/Taijifu relationship. Visual/presentation statements remain outside philosophical promotion unless separately classified."
     }
   ]
 }
