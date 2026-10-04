@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   buildExperienceHierarchy,
+  contextualNavigationNodes,
   visibleExperienceNodes,
   type ExperienceHierarchy,
 } from './spatial-ui.js';
@@ -40,6 +41,20 @@ describe('Spatial UI experience hierarchy', () => {
     expect(focused.some((node) => node.id === 'tai')).toBe(true);
     expect(focused.some((node) => node.id === 'ji')).toBe(true);
     expect(focused.some((node) => node.id === 'fu')).toBe(true);
+  });
+
+  it('projects a contextual legend from existing canonical destinations', () => {
+    const hierarchy = buildExperienceHierarchy(canonToExperienceNodes());
+    const initial = contextualNavigationNodes(hierarchy, null);
+    const focused = contextualNavigationNodes(hierarchy, 'fundamentos');
+
+    expect(initial.some((node) => node.id === 'home' && node.relation === 'root')).toBe(true);
+    expect(initial.some((node) => node.id === 'tai')).toBe(false);
+    expect(focused.some((node) => node.id === 'fundamentos' && node.relation === 'focus')).toBe(true);
+    expect(focused.some((node) => node.id === 'tai' && node.relation === 'focus-child')).toBe(true);
+    expect(focused.find((node) => node.id === 'tai')?.canonicalUrl).toBe(
+      canonToExperienceNodes().find((node) => node.id === 'tai')?.canonicalUrl,
+    );
   });
 
   it('has a deterministic fallback for unknown focus', () => {
