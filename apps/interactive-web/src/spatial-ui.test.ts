@@ -5,6 +5,7 @@ import {
   visibleExperienceNodes,
   type ExperienceHierarchy,
 } from './spatial-ui.js';
+import type { ExperienceNode } from './experience-shell.js';
 import { canonToExperienceNodes, experienceParentByRouteId } from './content/canon-registry.js';
 
 const flatten = (nodes: readonly import('./experience-shell.js').ExperienceNode[]): import('./experience-shell.js').ExperienceNode[] => nodes.flatMap((node) => [node, ...flatten(node.children)]);
@@ -44,19 +45,21 @@ describe('Spatial UI experience hierarchy', () => {
   });
 
   it('projects a contextual legend from the same visible hierarchy and canonical URLs', () => {
-    const hierarchy = buildExperienceHierarchy(canonToExperienceNodes());
+    const source: readonly ExperienceNode[] = [
+      { id: 'home', label: 'TAIJIFU', canonicalUrl: '/' },
+      { id: 'section', label: 'Section', canonicalUrl: '/section', parentId: 'home' },
+      { id: 'detail', label: 'Detail', canonicalUrl: '/section/detail', parentId: 'section' },
+    ];
+    const hierarchy = buildExperienceHierarchy(source);
     const initialVisible = visibleExperienceNodes(hierarchy, null);
     const initialLegend = contextualNavigationNodes(hierarchy, null);
-    const focusedVisible = visibleExperienceNodes(hierarchy, 'influencias');
-    const focusedLegend = contextualNavigationNodes(hierarchy, 'influencias');
+    const focusedVisible = visibleExperienceNodes(hierarchy, 'section');
+    const focusedLegend = contextualNavigationNodes(hierarchy, 'section');
 
     expect(initialLegend.map((node) => node.id)).toEqual(initialVisible.map((node) => node.id));
     expect(focusedLegend.map((node) => node.id)).toEqual(focusedVisible.map((node) => node.id));
-    expect(focusedLegend.find((node) => node.id === 'influencias')?.relation).toBe('focus');
-    expect(focusedLegend.find((node) => node.id === 'metodo')?.relation).toBe('focus-child');
-    expect(focusedLegend.find((node) => node.id === 'metodo')?.canonicalUrl).toBe(
-      canonToExperienceNodes().find((node) => node.id === 'metodo')?.canonicalUrl,
-    );
+    expect(focusedLegend.find((node) => node.id === 'section')?.relation).toBe('focus');
+    expect(focusedLegend.find((node) => node.id === 'detail')).toMatchObject({ relation: 'focus-child', canonicalUrl: '/section/detail', depth: 2 });
   });
 
   it('has a deterministic fallback for unknown focus', () => {
