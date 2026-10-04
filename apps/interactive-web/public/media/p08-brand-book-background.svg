@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="TAIJIFU brand book background texture">
+  <defs>
+    <filter id="mineral" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018 0.035" numOctaves="3" seed="20261004" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono" result="soft">
+        <feFuncR type="linear" slope="0.12" intercept="0.06"/>
+        <feFuncG type="linear" slope="0.12" intercept="0.06"/>
+        <feFuncB type="linear" slope="0.12" intercept="0.06"/>
+        <feFuncA type="linear" slope="0.22"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="soft" mode="screen"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="#11100f"/>
+  <rect x="0" y="0" width="1600" height="900" fill="#171615" filter="url(#mineral)" opacity="0.9"/>
+  <rect x="0" y="0" width="1600" height="900" fill="#121110" opacity="0.22"/>
+</svg>
