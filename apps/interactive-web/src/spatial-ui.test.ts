@@ -43,16 +43,18 @@ describe('Spatial UI experience hierarchy', () => {
     expect(focused.some((node) => node.id === 'fu')).toBe(true);
   });
 
-  it('projects a contextual legend from existing canonical destinations', () => {
+  it('projects a contextual legend from the same visible hierarchy and canonical URLs', () => {
     const hierarchy = buildExperienceHierarchy(canonToExperienceNodes());
-    const initial = contextualNavigationNodes(hierarchy, null);
-    const focused = contextualNavigationNodes(hierarchy, 'fundamentos');
+    const initialVisible = visibleExperienceNodes(hierarchy, null);
+    const initialLegend = contextualNavigationNodes(hierarchy, null);
+    const focusedVisible = visibleExperienceNodes(hierarchy, 'fundamentos');
+    const focusedLegend = contextualNavigationNodes(hierarchy, 'fundamentos');
 
-    expect(initial.some((node) => node.id === 'home' && node.relation === 'root')).toBe(true);
-    expect(initial.some((node) => node.id === 'tai')).toBe(false);
-    expect(focused.some((node) => node.id === 'fundamentos' && node.relation === 'focus')).toBe(true);
-    expect(focused.some((node) => node.id === 'tai' && node.relation === 'focus-child')).toBe(true);
-    expect(focused.find((node) => node.id === 'tai')?.canonicalUrl).toBe(
+    expect(initialLegend.map((node) => node.id)).toEqual(initialVisible.map((node) => node.id));
+    expect(focusedLegend.map((node) => node.id)).toEqual(focusedVisible.map((node) => node.id));
+    expect(focusedLegend.find((node) => node.id === 'fundamentos')?.relation).toBe('focus');
+    expect(focusedLegend.find((node) => node.id === 'tai')?.relation).toBe('focus-child');
+    expect(focusedLegend.find((node) => node.id === 'tai')?.canonicalUrl).toBe(
       canonToExperienceNodes().find((node) => node.id === 'tai')?.canonicalUrl,
     );
   });
