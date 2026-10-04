@@ -1,0 +1,76 @@
+{
+  "version": "0.1.0",
+  "status": "P3-01_RECONCILIATION_REQUIRED",
+  "authority": "tehknesolutions/TAIJIFU-SITE",
+  "rules": {
+    "legacyEvidenceDefaultsToCandidate": true,
+    "candidateDoesNotImplyCanon": true,
+    "claimsMustBeBoundedBySource": true
+  },
+  "claims": [
+    {
+      "claimId": "PHIL-CLM-0001",
+      "domain": "terminology",
+      "statement": "In the legacy SimpleWay Taijifu manifesto, Taijifu is described as the physical and martial system.",
+      "state": "CANDIDATE",
+      "sourceIds": ["PHIL-SRC-0002"],
+      "conflictState": "NONE",
+      "scope": "LEGACY_PRODUCT_DESCRIPTION"
+    },
+    {
+      "claimId": "PHIL-CLM-0002",
+      "domain": "method",
+      "statement": "In the legacy SimpleWay Taijifu manifesto, SimpleWay Taijifu is described as the teaching, practice, and evolution layer of Taijifu.",
+      "state": "CANDIDATE",
+      "sourceIds": ["PHIL-SRC-0002"],
+      "conflictState": "NONE",
+      "scope": "LEGACY_PRODUCT_RELATIONSHIP"
+    },
+    {
+      "claimId": "PHIL-CLM-0003",
+      "domain": "principle",
+      "statement": "The legacy SimpleWay Taijifu manifesto names a central progression sequence: learn fundamentals, practice, measure, correct, and advance.",
+      "state": "CANDIDATE",
+      "sourceIds": ["PHIL-SRC-0002"],
+      "conflictState": "NONE",
+      "scope": "LEGACY_PRODUCT_PRINCIPLE"
+    },
+    {
+      "claimId": "PHIL-CLM-0004",
+      "domain": "method",
+      "statement": "The legacy SimpleWay Taijifu manifesto states that its curriculum arises from real practice and progressive validation rather than remaining only theoretical.",
+      "state": "CANDIDATE",
+      "sourceIds": ["PHIL-SRC-0002"],
+      "conflictState": "NONE",
+      "scope": "LEGACY_PRODUCT_METHOD"
+    },
+    {
+      "claimId": "PHIL-CLM-0005",
+      "domain": "principle",
+      "statement": "The legacy SimpleWay Taijifu principles prioritize technique before power, control before speed, stability before complexity, progression before intensity, and precision before volume.",
+      "state": "CANDIDATE",
+      "sourceIds": ["PHIL-SRC-0003"],
+      "conflictState": "NONE",
+      "scope": "LEGACY_TRAINING_PRINCIPLES"
+    },
+    {
+      "claimId": "PHIL-CLM-0006",
+      "domain": "principle",
+      "statement": "The legacy SimpleWay Taijifu principles treat recovery as part of training and require evolution to be measurable and training to be adaptable to the practitioner.",
+      "state": "CANDIDATE",
+      "sourceIds": ["PHIL-SRC-0003"],
+      "conflictState": "NONE",
+      "scope": "LEGACY_TRAINING_PRINCIPLES"
+    },
+    {
+      "claimId": "PHIL-CLM-0007",
+      "domain": "principle",
+      "statement": "The legacy SimpleWay Taijifu principles state that physical conditioning and technique are integrated progressively and that safety takes priority over completing a training session.",
+      "state": "CANDIDATE",
+      "sourceIds": ["PHIL-SRC-0003"],
+      "conflictState": "NONE",
+      "scope": "LEGACY_TRAINING_PRINCIPLES"
+    }
+  ],
+  "canonRegistry": []
+}
