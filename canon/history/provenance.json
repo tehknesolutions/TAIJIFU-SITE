@@ -1,7 +1,11 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "authority": "tehknesolutions/TAIJIFU-SITE",
-  "records": [],
+  "records": [
+    {"claimId":"HIST-CLAIM-001","sourceId":"github:TAIJIFU-SITE:issue-7","sourceLocator":"https://github.com/tehknesolutions/TAIJIFU-SITE/issues/7#10-assinatura","classification":"current-explicit-canon","conflictState":"none","evidence":"Criado por Miguel Da Vinci e Thales Walisson — Desde 2026"},
+    {"claimId":"HIST-CLAIM-002","sourceId":"github:TAIJIFU-SITE:issue-7","sourceLocator":"https://github.com/tehknesolutions/TAIJIFU-SITE/issues/7#10-assinatura","classification":"current-explicit-canon","conflictState":"none","evidence":"Desde 2026"},
+    {"claimId":"HIST-CLAIM-003","sourceId":"github:TAIJIFU-SITE:issue-7","sourceLocator":"https://github.com/tehknesolutions/TAIJIFU-SITE/issues/7#essência","classification":"current-explicit-canon","conflictState":"none","evidence":"Relação HNK explicitly defines HNK and TAIJIFU semantic relationship."}
+  ],
   "contract": {
     "requiredForPromotion": ["claimId", "sourceId", "sourceLocator", "classification", "conflictState"],
     "conflictStates": ["none", "open", "resolved", "insufficient-evidence"]
