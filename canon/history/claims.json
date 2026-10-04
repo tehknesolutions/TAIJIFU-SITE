@@ -1,75 +1,15 @@
 {
-  "version": "0.3.0",
+  "version": "0.3.1",
   "authority": "tehknesolutions/TAIJIFU-SITE",
   "epic": "EPIC-002",
   "statuses": ["candidate", "verified", "canonical", "conflicted", "unresolved", "rejected"],
   "claims": [
-    {
-      "id": "HIST-CLAIM-001",
-      "subject": "taijifu",
-      "predicate": "createdBy",
-      "object": ["miguel-da-vinci", "thales-walisson"],
-      "status": "verified",
-      "statement": "TAIJIFU is signed in the repository Canon as created by Miguel Da Vinci and Thales Walisson.",
-      "sourceIds": ["github:TAIJIFU-SITE:issue-7"],
-      "notes": "Verified as an explicit repository Canon statement."
-    },
-    {
-      "id": "HIST-CLAIM-002",
-      "subject": "taijifu",
-      "predicate": "since",
-      "object": "2006",
-      "status": "canonical",
-      "statement": "TAIJIFU uses the historical marker 'Desde 2006'.",
-      "sourceIds": ["project:creator-ruling-2026-10-04"],
-      "notes": "Explicit creator ruling: Thales Walisson was born in 1992 and created the origin at age 14; 1992 + 14 establishes 2006 at year precision. This supersedes the earlier 'Desde 2026' signature as an origin marker."
-    },
-    {
-      "id": "HIST-CLAIM-003",
-      "subject": "taijifu",
-      "predicate": "relationshipToHNK",
-      "object": "TAIJIFU works with becoming/adaptation without abandoning essence; HNK is described as born from LOVE and becoming a tool/manifestation of LOVE.",
-      "status": "verified",
-      "sourceIds": ["github:TAIJIFU-SITE:issue-7"],
-      "notes": "Semantic/genealogical relationship explicitly stated in Canon Visual V1; a chronological HNK↔TAIJIFU history remains unresolved."
-    },
-    {
-      "id": "HIST-CLAIM-004",
-      "subject": "thales-walisson",
-      "predicate": "birthYear",
-      "object": "1992",
-      "status": "canonical",
-      "sourceIds": ["project:creator-ruling-2026-10-04"],
-      "notes": "Explicit creator-provided historical record used to establish the TAIJIFU 'Desde' marker."
-    },
-    {
-      "id": "HIST-CLAIM-005",
-      "subject": "thales-walisson",
-      "predicate": "ageAtTaijifuOrigin",
-      "object": 14,
-      "status": "canonical",
-      "sourceIds": ["project:creator-ruling-2026-10-04"],
-      "notes": "Explicit creator ruling that the age-14 record defines the historical 'Desde' marker."
-    },
-    {
-      "id": "HIST-CLAIM-006",
-      "subject": "taijifu",
-      "predicate": "originYear",
-      "object": "2006",
-      "status": "canonical",
-      "sourceIds": ["project:creator-ruling-2026-10-04"],
-      "derivedFrom": ["HIST-CLAIM-004", "HIST-CLAIM-005"],
-      "derivation": "1992 + 14 = 2006",
-      "notes": "Year precision only; no month/day is inferred."
-    },
-    {
-      "id": "HIST-CLAIM-007",
-      "subject": "taijifu",
-      "predicate": "modernFormalizationMarker",
-      "object": "2026",
-      "status": "candidate",
-      "sourceIds": ["github:TAIJIFU-SITE:issue-7"],
-      "notes": "The old 'Desde 2026' repository wording is preserved as historical evidence but is no longer the origin/since marker. Its exact modern meaning requires explicit classification before promotion."
-    }
+    {"id":"HIST-CLAIM-001","subject":"taijifu","predicate":"createdBy","object":["miguel-da-vinci","thales-walisson"],"status":"verified","statement":"TAIJIFU is signed in the repository Canon as created by Miguel Da Vinci and Thales Walisson.","sourceIds":["github:TAIJIFU-SITE:issue-7"],"notes":"Verified as an explicit repository Canon statement."},
+    {"id":"HIST-CLAIM-002","subject":"taijifu","predicate":"since","object":"2006","status":"canonical","statement":"TAIJIFU uses the historical marker 'Desde 2006'.","sourceIds":["project:creator-ruling-2026-10-04"],"notes":"Explicit creator ruling: the previously supplied record that Thales Walisson was born in 1992 and was 14 at the relevant historical marker exists to define TAIJIFU's 'Desde'. At year precision, 1992 + 14 establishes 2006. This supersedes the earlier 'Desde 2026' signature as an origin/continuity marker."},
+    {"id":"HIST-CLAIM-003","subject":"taijifu","predicate":"relationshipToHNK","object":"TAIJIFU works with becoming/adaptation without abandoning essence; HNK is described as born from LOVE and becoming a tool/manifestation of LOVE.","status":"verified","sourceIds":["github:TAIJIFU-SITE:issue-7"],"notes":"Semantic/genealogical relationship explicitly stated in Canon Visual V1; a chronological HNK↔TAIJIFU history remains unresolved."},
+    {"id":"HIST-CLAIM-004","subject":"thales-walisson","predicate":"birthYear","object":"1992","status":"canonical","sourceIds":["project:creator-ruling-2026-10-04"],"notes":"Explicit creator-provided historical record used to establish the TAIJIFU 'Desde' marker."},
+    {"id":"HIST-CLAIM-005","subject":"thales-walisson","predicate":"ageAtTaijifuSinceMarker","object":14,"status":"canonical","sourceIds":["project:creator-ruling-2026-10-04"],"notes":"Explicit creator ruling that the age-14 record defines the historical 'Desde' marker."},
+    {"id":"HIST-CLAIM-006","subject":"taijifu","predicate":"originYear","object":"2006","status":"canonical","sourceIds":["project:creator-ruling-2026-10-04"],"derivedFrom":["HIST-CLAIM-004","HIST-CLAIM-005"],"derivation":"1992 + 14 = 2006","notes":"Canonical origin/continuity year at year precision only; no month/day is inferred."},
+    {"id":"HIST-CLAIM-007","subject":"taijifu","predicate":"modernFormalizationMarker","object":"2026","status":"candidate","sourceIds":["github:TAIJIFU-SITE:issue-7"],"notes":"The old 'Desde 2026' repository wording is preserved as historical evidence but is no longer the origin/since marker. Its exact modern meaning requires explicit classification before promotion."}
   ]
 }
