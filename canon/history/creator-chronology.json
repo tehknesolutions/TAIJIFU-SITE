@@ -1,0 +1,45 @@
+{
+  "version": "0.1.0",
+  "authority": "tehknesolutions/TAIJIFU-SITE",
+  "epic": "EPIC-002",
+  "workPackage": "H2-02",
+  "records": [
+    {
+      "id": "CREATOR-CHRON-001",
+      "personId": "thales-walisson",
+      "year": 1992,
+      "precision": "year",
+      "event": "birth",
+      "status": "canonical",
+      "claimIds": ["HIST-CLAIM-004"],
+      "sourceIds": ["project:creator-ruling-2026-10-04"]
+    },
+    {
+      "id": "CREATOR-CHRON-002",
+      "personId": "thales-walisson",
+      "year": 2006,
+      "precision": "year",
+      "age": 14,
+      "event": "taijifu-historical-since-marker",
+      "status": "canonical",
+      "claimIds": ["HIST-CLAIM-002", "HIST-CLAIM-005", "HIST-CLAIM-006"],
+      "sourceIds": ["project:creator-ruling-2026-10-04"],
+      "note": "No month/day, location, curriculum state or naming-state detail is inferred."
+    },
+    {
+      "id": "CREATOR-CHRON-003",
+      "personId": "miguel-da-vinci",
+      "event": "taijifu-creator-attribution",
+      "status": "verified",
+      "claimIds": ["HIST-CLAIM-001"],
+      "sourceIds": ["github:TAIJIFU-SITE:issue-7"],
+      "note": "The available Canon verifies creator attribution but does not yet establish a dated personal chronology."
+    }
+  ],
+  "unresolved": [
+    "Exact dated chronology for Miguel Da Vinci",
+    "Exact role chronology between Miguel Da Vinci and Thales Walisson",
+    "Miguel/Thales father-son relationship requires explicit source-level evidence or creator ruling before promotion",
+    "Martial-art influences and their chronology require source-level evidence or explicit creator ruling before promotion"
+  ]
+}
