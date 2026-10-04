@@ -1,17 +1,27 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "authority": "tehknesolutions/TAIJIFU-SITE",
   "events": [
     {
       "id": "HIST-EVENT-001",
+      "date": "2006",
+      "precision": "year",
+      "title": "TAIJIFU historical origin marker",
+      "description": "The official historical 'Desde' marker is 2006, established from creator-provided records: Thales Walisson was born in 1992 and the origin is identified with age 14.",
+      "claimIds": ["HIST-CLAIM-002", "HIST-CLAIM-004", "HIST-CLAIM-005", "HIST-CLAIM-006"],
+      "status": "canonical",
+      "note": "1992 + 14 = 2006. Precision is year only; month/day are not inferred."
+    },
+    {
+      "id": "HIST-EVENT-002",
       "date": "2026",
       "precision": "year",
-      "title": "TAIJIFU canonical signature begins",
-      "description": "Repository Canon identifies TAIJIFU as created by Miguel Da Vinci and Thales Walisson and uses the signature 'Desde 2026'.",
-      "claimIds": ["HIST-CLAIM-001", "HIST-CLAIM-002"],
-      "status": "verified",
-      "note": "This establishes the repository-backed 'since 2026' statement, not an inferred exact founding day/month."
+      "title": "Modern TAIJIFU Canon/publication phase",
+      "description": "Repository Canon Visual V1 used the wording 'Desde 2026'. This wording is preserved as evidence of the modern phase but no longer defines the historical origin of TAIJIFU.",
+      "claimIds": ["HIST-CLAIM-001", "HIST-CLAIM-007"],
+      "status": "candidate",
+      "note": "Exact classification of the 2026 milestone (formalization, publication, relaunch or another modern phase) remains to be explicitly established."
     }
   ],
-  "note": "Events are added only when linked to historical claim and provenance records. Unknown dates remain unresolved rather than inferred."
+  "note": "TAIJIFU historical origin is canonical at year precision as 2006. Unknown month/day remain unresolved rather than inferred."
 }
