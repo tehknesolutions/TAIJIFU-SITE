@@ -88,11 +88,16 @@ export function contextualNavigationNodes(
 ): readonly ContextualNavigationNode[] {
   const focused = focusId ? findNode(hierarchy.nodes, focusId) : undefined;
   const result: ContextualNavigationNode[] = [];
-  const seen = new Set<string>();
+  const byId = new Map<string, number>();
   const add = (node: ExperienceHierarchyNode, depth: number, relation: ContextualNavigationNode['relation']) => {
-    if (seen.has(node.id)) return;
-    seen.add(node.id);
-    result.push(Object.freeze({ id: node.id, label: node.label, canonicalUrl: node.canonicalUrl, depth, relation }));
+    const existingIndex = byId.get(node.id);
+    const projected = Object.freeze({ id: node.id, label: node.label, canonicalUrl: node.canonicalUrl, depth, relation });
+    if (existingIndex !== undefined) {
+      if (relation === 'focus' || relation === 'focus-child') result[existingIndex] = projected;
+      return;
+    }
+    byId.set(node.id, result.length);
+    result.push(projected);
   };
 
   for (const root of hierarchy.nodes) {
@@ -101,7 +106,9 @@ export function contextualNavigationNodes(
   }
 
   if (focused) {
-    for (const child of focused.children) add(child, (nodeDepth(hierarchy.nodes, focused.id) ?? 0) + 1, 'focus-child');
+    const depth = nodeDepth(hierarchy.nodes, focused.id) ?? 0;
+    add(focused, depth, 'focus');
+    for (const child of focused.children) add(child, depth + 1, 'focus-child');
   }
 
   return Object.freeze(result);
