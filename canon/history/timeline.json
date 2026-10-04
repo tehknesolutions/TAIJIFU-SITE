@@ -1,6 +1,17 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "authority": "tehknesolutions/TAIJIFU-SITE",
-  "events": [],
+  "events": [
+    {
+      "id": "HIST-EVENT-001",
+      "date": "2026",
+      "precision": "year",
+      "title": "TAIJIFU canonical signature begins",
+      "description": "Repository Canon identifies TAIJIFU as created by Miguel Da Vinci and Thales Walisson and uses the signature 'Desde 2026'.",
+      "claimIds": ["HIST-CLAIM-001", "HIST-CLAIM-002"],
+      "status": "verified",
+      "note": "This establishes the repository-backed 'since 2026' statement, not an inferred exact founding day/month."
+    }
+  ],
   "note": "Events are added only when linked to historical claim and provenance records. Unknown dates remain unresolved rather than inferred."
 }
