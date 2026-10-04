@@ -101,7 +101,6 @@ export function contextualNavigationNodes(
   }
 
   if (focused) {
-    add(focused, nodeDepth(hierarchy.nodes, focused.id) ?? 0, 'focus');
     for (const child of focused.children) add(child, (nodeDepth(hierarchy.nodes, focused.id) ?? 0) + 1, 'focus-child');
   }
 
