@@ -12,13 +12,16 @@ export function createPresentationMediaOverlay(image: HTMLImageElement): Present
     show(mediaId) {
       if (!mediaId) {
         delete image.dataset.presentationMediaId;
+        image.dataset.presentationMediaState = 'hidden';
         image.removeAttribute('src');
         image.hidden = true;
         return;
       }
 
+      const nextUrl = getPresentationMediaUrl(mediaId);
       image.dataset.presentationMediaId = mediaId;
-      image.src = getPresentationMediaUrl(mediaId);
+      image.dataset.presentationMediaState = 'visible';
+      if (image.getAttribute('src') !== nextUrl) image.src = nextUrl;
       image.hidden = false;
     },
   });
