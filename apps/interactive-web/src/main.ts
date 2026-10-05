@@ -1,5 +1,6 @@
 import './presentation-media-overlay.css';
 import { bootstrapInteractiveWeb } from './browser-bootstrap.js';
+import { mountTrainingExperience } from './training/training-browser.js';
 import { renderInteractiveLegend, renderPrimaryNavigation, renderSemanticRoute } from './semantic-site.js';
 import { buildLocalizedExperienceNodes } from './content/canon-registry.js';
 import { renderInternationalEntry, renderLanguageSelector } from './content/international-entry.js';
@@ -35,6 +36,8 @@ else {
   const renderLegend = (focusId: string | null) => { if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend(activeLocale, focusId); }; renderLegend(null);
   const canonCurriculum = document.querySelector<HTMLElement>('#canon-curriculum'); if (canonCurriculum) canonCurriculum.innerHTML = renderCanonUIForLocale(activeLocale);
   const dojoMedia = document.querySelector<HTMLElement>('.dojo-gate__media'); if (dojoMedia) { const media = resolvePresentationMedia('r01-dojo-environment'); dojoMedia.dataset.mediaState = media.state; if (media.url) dojoMedia.style.setProperty('--tj-presentation-media-url', 'url("' + media.url + '")'); }
+  const trainingRoot = document.querySelector<HTMLElement>('[data-training-root]');
+  const training = trainingRoot ? mountTrainingExperience(trainingRoot) : null;
   const canvas = document.querySelector<HTMLCanvasElement>('#taijifu-experience'); const focusLabel = document.querySelector<HTMLOutputElement>('#interactive-focus-label');
   if (canvas) {
     const currentRoute = routeResolution.kind === 'localized-route' ? findSiteRoute(pathname) : null; const interactiveStage = canvas.closest<HTMLElement>('.interactive-stage');
@@ -46,6 +49,6 @@ else {
     applyPresentationStageState(interactiveStage, runtime.getPresentationMediaSnapshot()); wireLegend();
     const interactiveExperience = document.querySelector<HTMLElement>('#interactive-experience'); const surfaceStatus = document.querySelector<HTMLElement>('#interactive-surface-status'); if (interactiveExperience && surfaceStatus) applyInteractiveSurfaceState(interactiveExperience, surfaceStatus, runtime.surfaceAvailable);
     const dojoEntryLinks = document.querySelectorAll<HTMLAnchorElement>('[href="#interactive-experience"]'); for (const link of dojoEntryLinks) link.addEventListener('click', () => { runtime.focusNode('taijifu'); interactiveExperience?.focus({ preventScroll: true }); });
-    window.addEventListener('pagehide', () => runtime.dispose(), { once: true });
-  }
+    window.addEventListener('pagehide', () => { training?.dispose(); runtime.dispose(); }, { once: true });
+  } else if (training) window.addEventListener('pagehide', () => training.dispose(), { once: true });
 }
