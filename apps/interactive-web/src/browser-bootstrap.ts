@@ -2,6 +2,7 @@ import { mountBrowserThreeSurface } from './browser-three-surface.js';
 import { buildLocalizedExperienceNodes } from './content/canon-registry.js';
 import type { SupportedLocale } from './content/locale.js';
 import { createInteractiveWebExperience } from './experience.js';
+import { getPresentationMediaIdForRoute } from './presentation-media-map.js';
 import type { RenderFrame } from './renderer-adapter.js';
 import type { ProjectedFocus } from './three-focus.js';
 import type { WebSurfaceCanvas } from './three-web-surface.js';
@@ -37,14 +38,16 @@ export function bootstrapInteractiveWeb(options: {
   navigate: (url: string) => void;
   onFocus?: (focus: ProjectedFocus | null) => void;
   initialFocusNode?: string | null;
+  routeId?: string;
   presentationMediaId?: string;
   mountSurface?: MountSurface;
   trainingRoot?: HTMLElement | null;
   mountTraining?: MountTraining;
 }) {
+  const routeMediaId = getPresentationMediaIdForRoute(options.routeId ?? 'home');
   const experience = createInteractiveWebExperience({
     nodes: buildLocalizedExperienceNodes(options.locale ?? 'pt-BR'),
-    presentationMediaId: options.presentationMediaId ?? 'r01-dojo-environment',
+    presentationMediaId: options.presentationMediaId ?? routeMediaId,
   });
 
   const mountSurface = options.mountSurface ?? mountBrowserThreeSurface;
