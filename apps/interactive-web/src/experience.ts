@@ -9,8 +9,12 @@ export type InteractiveWebExperience = Readonly<{
 
 export function createInteractiveWebExperience(input: {
   nodes: readonly ExperienceNode[];
+  presentationMediaId?: string;
 }): InteractiveWebExperience {
-  const shell = createExperienceShell({ nodes: input.nodes });
+  const shell = createExperienceShell({
+    nodes: input.nodes,
+    presentationMediaId: input.presentationMediaId,
+  });
   const renderer = createRendererAdapter();
 
   return Object.freeze({
