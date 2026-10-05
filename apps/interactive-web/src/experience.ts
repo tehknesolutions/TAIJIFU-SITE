@@ -27,6 +27,6 @@ export function createInteractiveWebExperience(input: {
     shell,
     projection,
     manifestation,
-    frame: renderer.render(shell, projection),
+    frame: renderer.render(shell, projection, manifestation),
   });
 }
