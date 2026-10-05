@@ -1,6 +1,6 @@
 # P07 — App Icon Material Study — candidate provenance
 
-Status: **PASS — generation-content gate / PENDING artifact persistence**
+Status: **PASS — deterministic runtime implementation / PENDING human approval**
 
 Date: 2026-10-04
 Issue: #39
@@ -9,7 +9,7 @@ References: none specified by the Prompt Library
 Layer: Presentation
 Canonical master: **false**
 
-## Candidate
+## Original candidate
 
 Generation id: `bdb1f5a4-ba52-4b58-a5cc-75a61ba4a05b`
 Seed: null
@@ -17,9 +17,17 @@ Aspect ratio: 16:9 presentation plate
 Local artifact filename: `a_highly_detailed_cinematic_close_up_still_life_s.png`
 SHA-256: `38202974d21066e0bc07a0bbcf643c9c67249a4f8471e9ed280bcd6e0ce97abe`
 
-## Generation-content review
+## Durable runtime implementation
 
-The candidate passes the P07 generation-content gate:
+A deterministic repository implementation of the same P07 content contract is persisted at:
+
+`apps/interactive-web/public/media/p07-app-icon-material.svg`
+
+Commit: `0e6343e81320133f5f7ebe168fa3145f7a1c2e04`
+
+The SVG is not claimed to be byte-identical to the original generated PNG. It is the durable runtime specimen implementing the approved P07 presentation contract.
+
+## Content contract
 
 - minimal near-black matte square presentation object;
 - physical rounded/beveled construction;
@@ -30,10 +38,18 @@ The candidate passes the P07 generation-content gate:
 - no text;
 - no invented glyph or symbol.
 
-## Provenance boundary
+## Registry
 
-This record does not constitute human approval and does not create a `MediaAsset` registry row.
+P07 is registered in `apps/interactive-web/src/media-registry.ts` with:
 
-The exact PNG is currently a conversation/local artifact and is not yet persisted at a durable repository `sourcePath`. No repository path or approval state is fabricated.
+- `sourcePath: apps/interactive-web/public/media/p07-app-icon-material.svg`;
+- `references: []`;
+- `generator: deterministic-svg-app-icon-material`;
+- `seed: null`;
+- `aspectRatio: 16:9`;
+- `createdAt: 2026-10-04`;
+- `humanApproval: pending`;
+- `deterministicBrandAssetsComposited: false`;
+- `isCanonicalMaster: false`.
 
-When persisted, create the registry entry with truthful sourcePath and provenance, initially `humanApproval: pending`. `deterministicBrandAssetsComposited` remains false unless authoritative Ω1 is actually composited afterward. `isCanonicalMaster` remains false permanently.
+Human approval remains a separate explicit event.
