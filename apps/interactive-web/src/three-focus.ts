@@ -1,5 +1,7 @@
 import { Mesh, MeshStandardMaterial, type Camera, type Object3D } from 'three';
+import type { ManifestationIntensity } from './manifestation-adapter.js';
 import type { CanonicalNavigation } from './three-navigation.js';
+import { manifestationVisualToken } from './tkn-manifestation-grammar.js';
 
 export type ProjectedFocus=CanonicalNavigation&Readonly<{label:string}>;
 type FocusState='focused'|'current'|'peer'|'receded'|'neutral';
@@ -7,7 +9,7 @@ const TAIJIFU_PEERS=new Set(['tai','ji','fu']);
 function baseZ(node:Object3D):number{const value=node.userData.baseZ;return typeof value==='number'?value:0;}
 function isTaijifuPeer(node:Object3D|null):boolean{return !!node&&TAIJIFU_PEERS.has(node.userData.nodeId as string);}
 function baseEmissive(node:Object3D,material:MeshStandardMaterial):number{const stored=node.userData.baseEmissiveIntensity;if(typeof stored==='number')return stored;node.userData.baseEmissiveIntensity=material.emissiveIntensity;return material.emissiveIntensity;}
-function manifestationEmissive(node:Object3D,material:MeshStandardMaterial):number{const base=baseEmissive(node,material);const intensity=node.userData.manifestationIntensity;return intensity==='ritual'?Math.max(base,0.32):intensity==='artifact'?Math.max(base,0.18):base;}
+function manifestationEmissive(node:Object3D,material:MeshStandardMaterial):number{const base=baseEmissive(node,material);const raw=node.userData.manifestationIntensity;const intensity:ManifestationIntensity=raw==='artifact'||raw==='ritual'?''+raw as ManifestationIntensity:'signal';return Math.max(base,manifestationVisualToken(intensity).emissiveIntensity);}
 export function applyManifestationVisuals(nodes:readonly Object3D[]):void{for(const node of nodes){if(!(node instanceof Mesh)||!(node.material instanceof MeshStandardMaterial))continue;node.material.emissiveIntensity=manifestationEmissive(node,node.material);node.material.needsUpdate=true;}}
 function applyMaterialFocus(node:Object3D,state:FocusState):void{if(!(node instanceof Mesh)||!(node.material instanceof MeshStandardMaterial))return;const material=node.material;const manifested=manifestationEmissive(node,material);const baseOpacity=typeof node.userData.baseOpacity==='number'?node.userData.baseOpacity:material.opacity;if(typeof node.userData.baseOpacity!=='number')node.userData.baseOpacity=baseOpacity;material.transparent=true;material.emissiveIntensity=state==='focused'?Math.max(manifested,0.28):state==='receded'?Math.min(manifested,0.02):manifested;material.opacity=state==='receded'?Math.min(baseOpacity,0.42):baseOpacity;material.needsUpdate=true;}
 export function describeProjectedFocus(node:Object3D|null):ProjectedFocus|null{if(!node)return null;const{nodeId,label,canonicalUrl}=node.userData;if(typeof nodeId!=='string'||typeof label!=='string'||typeof canonicalUrl!=='string')return null;return Object.freeze({nodeId,label,canonicalUrl});}
