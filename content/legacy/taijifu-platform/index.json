@@ -1,0 +1,76 @@
+{
+  "sourceRepository": "Tehkne-Solutions/taijifu-platform",
+  "sourceRevision": "15c81fc99f0bf95560521098e70dec7a92915f24",
+  "authority": "legacy-candidate",
+  "fieldPolicy": [
+    "id",
+    "summary",
+    "practice"
+  ],
+  "nucleusCount": 128,
+  "belts": [
+    {
+      "id": "BELT-WHITE",
+      "name": "Branca",
+      "range": "N001-N012",
+      "file": "white-belt-content.json",
+      "count": 12
+    },
+    {
+      "id": "BELT-YELLOW",
+      "name": "Amarela",
+      "range": "N013-N024",
+      "file": "yellow-belt-content.json",
+      "count": 12
+    },
+    {
+      "id": "BELT-ORANGE",
+      "name": "Laranja",
+      "range": "N025-N036",
+      "file": "orange-belt-content.json",
+      "count": 12
+    },
+    {
+      "id": "BELT-RED",
+      "name": "Vermelha",
+      "range": "N037-N048",
+      "file": "red-belt-content.json",
+      "count": 12
+    },
+    {
+      "id": "BELT-GREEN",
+      "name": "Verde",
+      "range": "N049-N064",
+      "file": "green-belt-content.json",
+      "count": 16
+    },
+    {
+      "id": "BELT-CYAN",
+      "name": "Ciano",
+      "range": "N065-N080",
+      "file": "cyan-belt-content.json",
+      "count": 16
+    },
+    {
+      "id": "BELT-BLUE",
+      "name": "Azul",
+      "range": "N081-N096",
+      "file": "blue-belt-content.json",
+      "count": 16
+    },
+    {
+      "id": "BELT-VIOLET",
+      "name": "Violeta",
+      "range": "N097-N112",
+      "file": "violet-belt-content.json",
+      "count": 16
+    },
+    {
+      "id": "BELT-BROWN",
+      "name": "Marrom",
+      "range": "N113-N128",
+      "file": "brown-belt-content.json",
+      "count": 16
+    }
+  ]
+}
