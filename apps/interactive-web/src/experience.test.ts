@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { createInteractiveWebExperience } from './experience.js';
 
 describe('InteractiveWebExperience composition', () => {
-  it('composes the website shell through spatial projection and renderer adapter', () => {
+  it('composes shell, spatial projection, manifestation and renderer adapter', () => {
     const experience = createInteractiveWebExperience({
       nodes: [
         { id: 'tai', label: 'TAI', canonicalUrl: '/principios/tai/' },
@@ -12,6 +12,9 @@ describe('InteractiveWebExperience composition', () => {
     expect(experience.shell.productKind).toBe('interactive-web-site');
     expect(experience.projection.nodes).toEqual([
       { nodeId: 'tai', structure: 'peer' },
+    ]);
+    expect(experience.manifestation.nodes).toEqual([
+      { nodeId: 'tai', structure: 'peer', intensity: 'signal' },
     ]);
     expect(experience.frame.productKind).toBe('interactive-web-site');
     expect(experience.frame.nodes).toEqual([
