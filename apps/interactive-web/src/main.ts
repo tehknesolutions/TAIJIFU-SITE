@@ -11,6 +11,7 @@ import { renderLocalizedSeoHead } from './content/seo-localization.js';
 import { resolvePresentationMedia } from './media-runtime.js';
 import { wireHomeDojoLinks } from './home-dojo-wiring.js';
 import { applyInteractiveSurfaceState } from './interactive-surface-state.js';
+import { applyPresentationStageState } from './presentation-stage-state.js';
 
 const pathname = window.location.pathname;
 const redirect = legacyRedirectFor(pathname);
@@ -98,11 +99,13 @@ if (redirect) {
       routeId: currentRoute?.id ?? 'home',
       initialFocusNode: currentRoute?.id ?? null,
       presentationMediaElement,
+      onPresentationMediaStateChange: (snapshot) => applyPresentationStageState(interactiveStage, snapshot),
       onFocus: (focus) => {
         if (focusLabel) focusLabel.value = focus?.label ?? 'TAIJIFU';
         syncLegendFocus(focus?.nodeId ?? null);
       },
     });
+    applyPresentationStageState(interactiveStage, runtime.getPresentationMediaSnapshot());
     wireLegend();
 
     const interactiveExperience = document.querySelector<HTMLElement>('#interactive-experience');
