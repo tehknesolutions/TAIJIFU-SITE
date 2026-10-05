@@ -9,6 +9,7 @@ import { applyShellLocalization } from './content/shell-localization.js';
 import { findSiteRoute } from './content/site-ia.js';
 import { renderCanonUIForLocale } from './content/canon-ui-render.js';
 import { renderDojoNucleusPage } from './content/dojo-nucleus-page.js';
+import { wireDojoPracticeFocus } from './content/dojo-practice-focus.js';
 import { renderLocalizedSeoHead } from './content/seo-localization.js';
 import { resolvePresentationMedia } from './media-runtime.js';
 import { wireHomeDojoLinks } from './home-dojo-wiring.js';
@@ -27,6 +28,7 @@ else {
     document.documentElement.lang = routeResolution.locale;
     applyShellLocalization(document, routeResolution.locale);
     if (semanticContent) semanticContent.innerHTML = renderDojoNucleusPage(routeResolution.nucleusId, routeResolution.locale) ?? '<section class="canon-ui canon-ui--pending"><h1>TAIJIFU Dojo</h1><p>Núcleo não encontrado.</p></section>';
+    wireDojoPracticeFocus(document);
     document.querySelector<HTMLElement>('#interactive-experience')?.setAttribute('hidden', 'true');
   }
   else if (routeResolution.kind === 'localized-route') {
