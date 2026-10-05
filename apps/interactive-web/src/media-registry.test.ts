@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import {
+  DETERMINISTIC_PRESENTATION_FALLBACK,
   mediaRegistry,
   getMediaAsset,
+  getPresentationMediaSource,
   isApprovedPresentationMedia,
   type MediaAsset,
 } from './media-registry.js';
@@ -30,5 +32,15 @@ describe('presentation media registry', () => {
     expect(asset).toHaveProperty('createdAt');
     expect(asset).toHaveProperty('humanApproval');
     expect(asset).toHaveProperty('deterministicBrandAssetsComposited');
+  });
+
+  it('falls back for pending presentation media', () => {
+    expect(isApprovedPresentationMedia('p07-app-icon-material')).toBe(false);
+    expect(getPresentationMediaSource('p07-app-icon-material')).toBe(DETERMINISTIC_PRESENTATION_FALLBACK);
+  });
+
+  it('falls back for unknown presentation media', () => {
+    expect(isApprovedPresentationMedia('unknown-media')).toBe(false);
+    expect(getPresentationMediaSource('unknown-media')).toBe(DETERMINISTIC_PRESENTATION_FALLBACK);
   });
 });
