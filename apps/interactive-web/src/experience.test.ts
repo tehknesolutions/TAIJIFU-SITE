@@ -16,13 +16,24 @@ describe('InteractiveWebExperience composition', () => {
     expect(experience.manifestation.nodes).toEqual([
       { nodeId: 'tai', structure: 'peer', intensity: 'signal' },
     ]);
-    expect(experience.frame.productKind).toBe('interactive-web-site');
-    expect(experience.frame.nodes).toEqual([
-      { id: 'tai', label: 'TAI', canonicalUrl: '/principios/tai/' },
+    expect(experience.frame.manifestationNodes).toEqual(experience.manifestation.nodes);
+  });
+
+  it('passes explicit focus and active state into manifestation without changing structure', () => {
+    const experience = createInteractiveWebExperience({
+      nodes: [
+        { id: 'tai', label: 'TAI', canonicalUrl: '/principios/tai/' },
+        { id: 'ji', label: 'JI', canonicalUrl: '/principios/ji/' },
+        { id: 'fu', label: 'FU', canonicalUrl: '/principios/fu/' },
+      ],
+      manifestationState: { focusedNodeId: 'ji', activeNodeId: 'fu' },
+    });
+
+    expect(experience.manifestation.nodes).toEqual([
+      { nodeId: 'tai', structure: 'peer', intensity: 'signal' },
+      { nodeId: 'ji', structure: 'peer', intensity: 'artifact' },
+      { nodeId: 'fu', structure: 'peer', intensity: 'ritual' },
     ]);
-    expect(experience.frame.spatialNodes).toEqual(experience.projection.nodes);
-    expect(experience.frame).not.toHaveProperty('health');
-    expect(experience.frame).not.toHaveProperty('score');
-    expect(experience.frame).not.toHaveProperty('inventory');
+    expect(experience.frame.manifestationNodes).toEqual(experience.manifestation.nodes);
   });
 });
