@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Treino marcial junto à água">
+<defs>
+ <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#171817"/><stop offset=".6" stop-color="#596052"/><stop offset="1" stop-color="#b39b75"/></linearGradient>
+ <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#59655f"/><stop offset="1" stop-color="#17201e"/></linearGradient>
+ <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#4b4840"/><stop offset="1" stop-color="#171817"/></linearGradient>
+ <radialGradient id="light"><stop stop-color="#e2c38f" stop-opacity=".7"/><stop offset="1" stop-color="#e2c38f" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1600" height="900" fill="url(#sky)"/>
+<ellipse cx="1120" cy="250" rx="300" ry="230" fill="url(#light)"/>
+<path d="M0 420L190 350 360 430 550 315 760 425 950 335 1140 430 1330 350 1600 430V620H0Z" fill="#30342f"/>
+<path d="M0 505Q260 455 520 505T1040 500T1600 485V760H0Z" fill="url(#water)"/>
+<path d="M0 570Q250 540 520 575T1050 570T1600 550" fill="none" stroke="#d7d2bd" stroke-opacity=".2" stroke-width="8"/>
+<path d="M0 625Q250 590 500 630T1000 620T1600 605" fill="none" stroke="#b8c5bd" stroke-opacity=".14" stroke-width="5"/>
+<path d="M0 700L190 595 350 660 500 570 650 675 820 590 980 690 1160 570 1350 665 1600 560V900H0Z" fill="url(#rock)"/>
+<g fill="#0f1110">
+ <path d="M90 900L210 660 300 900Z"/><path d="M1320 900L1440 630 1540 900Z"/>
+</g>
+<!-- single adult practitioner, grounded and secondary -->
+<g transform="translate(870 640) scale(.7)" fill="#111310" stroke="#090a09" stroke-width="5">
+ <circle cx="0" cy="-95" r="18"/>
+ <path d="M-14-76L-35 8L-92 65L-78 82L-6 30L32 88L48 80L18 8L14-76Z"/>
+ <path d="M-25-15L-110 20L-104 37L-12 12Z"/>
+ <path d="M25-12L108 26L114 10L14-30Z"/>
+</g>
+<g fill="none" stroke="#d7d2bd" stroke-opacity=".18" stroke-width="4">
+ <ellipse cx="870" cy="735" rx="115" ry="20"/><ellipse cx="870" cy="735" rx="175" ry="31"/>
+</g>
+<rect width="1600" height="900" fill="none" stroke="#080908" stroke-width="24"/>
+</svg>
