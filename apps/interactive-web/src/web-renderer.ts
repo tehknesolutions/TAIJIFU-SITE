@@ -1,4 +1,5 @@
 import type { RenderFrame } from './renderer-adapter.js';
+import { getPresentationMediaUrl } from './media-registry.js';
 
 function escapeHtml(value: string): string {
   return value
@@ -17,5 +18,9 @@ export function renderFrameToHtml(frame: RenderFrame): string {
     )
     .join('');
 
-  return `<nav data-product-kind="${escapeHtml(frame.productKind)}">${links}</nav>`;
+  const media = frame.presentationMediaId
+    ? `<img data-presentation-media-id="${escapeHtml(frame.presentationMediaId)}" src="${escapeHtml(getPresentationMediaUrl(frame.presentationMediaId))}" alt="" loading="lazy">`
+    : '';
+
+  return `<nav data-product-kind="${escapeHtml(frame.productKind)}">${media}${links}</nav>`;
 }
