@@ -33,4 +33,17 @@ describe('presentation media overlay', () => {
   it('ignores show calls after dispose', () => {
     const image=document.createElement('img'); const overlay=createPresentationMediaOverlay(image); overlay.dispose(); overlay.show('p02-dojo-interior'); expect(image.hasAttribute('src')).toBe(false); expect(image.dataset.presentationMediaId).toBeUndefined();
   });
+  it('exposes deterministic lifecycle snapshots without adding UI state', () => {
+    const image=document.createElement('img'); const preload=document.createElement('img'); const overlay=createPresentationMediaOverlay(image,{createPreloadImage:()=>preload});
+    expect(overlay.getSnapshot()).toEqual({status:'idle',mediaId:undefined});
+    overlay.show('p02-dojo-interior');
+    expect(overlay.getSnapshot()).toEqual({status:'visible',mediaId:'p02-dojo-interior'});
+    image.src='/media/current.svg'; image.dataset.presentationMediaId='current'; image.hidden=false;
+    overlay.show('p03-martial-landscape');
+    expect(overlay.getSnapshot()).toEqual({status:'loading',mediaId:'current'});
+    preload.dispatchEvent(new Event('error'));
+    expect(overlay.getSnapshot()).toEqual({status:'failed',mediaId:'current'});
+    overlay.dispose();
+    expect(overlay.getSnapshot()).toEqual({status:'disposed',mediaId:'current'});
+  });
 });
