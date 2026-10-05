@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Estudo material de ícone de aplicativo TAIJIFU">
+<defs>
+ <linearGradient id="plate" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101110"/><stop offset=".5" stop-color="#2a2926"/><stop offset="1" stop-color="#0b0c0b"/></linearGradient>
+ <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#676159"/><stop offset=".45" stop-color="#252522"/><stop offset="1" stop-color="#090a09"/></linearGradient>
+ <radialGradient id="light"><stop stop-color="#d9c39c" stop-opacity=".24"/><stop offset="1" stop-color="#d9c39c" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1600" height="900" fill="#080908"/>
+<ellipse cx="800" cy="410" rx="470" ry="330" fill="url(#light)"/>
+<!-- physical rounded/beveled square -->
+<rect x="425" y="95" width="750" height="750" rx="92" fill="#050605" stroke="#050605" stroke-width="44"/>
+<rect x="450" y="120" width="700" height="700" rx="72" fill="url(#edge)" stroke="#777066" stroke-opacity=".20" stroke-width="5"/>
+<rect x="485" y="155" width="630" height="630" rx="52" fill="url(#plate)"/>
+<!-- centered blank physical inset reserved for deterministic Ω1 micro mark -->
+<rect x="650" y="320" width="300" height="300" rx="38" fill="#0b0c0b" stroke="#8a8173" stroke-opacity=".24" stroke-width="7"/>
+<rect x="675" y="345" width="250" height="250" rx="30" fill="#151615" stroke="#030403" stroke-width="4"/>
+<path d="M675 470H925M800 345V595" stroke="#c5b69d" stroke-opacity=".035" stroke-width="2"/>
+<rect x="0" y="0" width="1600" height="900" fill="none" stroke="#060706" stroke-width="28"/>
+</svg>
