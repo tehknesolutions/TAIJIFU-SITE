@@ -63,6 +63,31 @@ Brand Book v1 requires deterministic review of these modes:
 
 Screenshot baselines are evidence of presentation state. They do not become a new source of identity truth.
 
+## Internationalization boundary
+
+The visual system is locale-aware but Canon-independent from language.
+
+- Official locales: pt-BR, en, es.
+- Stable route/entity identity is shared across locales; localized slugs and labels are projections.
+- Canon/product body content must not silently fall back to another language when localization is pending.
+- Pending localization is an explicit product state and must remain visually complete and accessible.
+- Language-dependent layout changes belong to the regression matrix because text length is a presentation variable, not a Canon change.
+- Locale metadata and future hreflang/canonical declarations must use the same route identity governed by the IA registry.
+
+Authority: `docs/INTERNATIONALIZATION.md` and `apps/interactive-web/src/content/localization-contract.ts`.
+
+## Locale regression matrix
+
+For every release-ready localized route, deterministic review should include:
+
+| Locale | Content state | Regression requirement |
+| --- | --- | --- |
+| pt-BR | approved where recovered | Full visual + accessibility matrix |
+| en | approved or pending per route | No Portuguese leakage; pending state must be intentional |
+| es | approved or pending per route | No Portuguese leakage; pending state must be intentional |
+
+A locale is never considered visually complete merely because routing exists.
+
 ## Legacy identity policy
 
 Historical exploration is evidence, not current authority. Legacy documents should be marked historical/deprecated in place where practical rather than deleted. A historical artifact may explain how a decision emerged, but current implementation must trace to the authority map above.
