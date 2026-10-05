@@ -1,0 +1,10 @@
+.dojo-practice { max-width: 52rem; margin-top: 2rem; padding: clamp(1.25rem, 4vw, 2rem); border: 1px solid currentColor; }
+.dojo-practice__heading { display: flex; align-items: start; justify-content: space-between; gap: 1rem; }
+.dojo-practice__eyebrow, .dojo-practice__authority { margin: 0; font-size: .78rem; letter-spacing: .06em; opacity: .72; }
+.dojo-practice__heading h2 { margin: .25rem 0 0; }
+.dojo-practice__focus { border: 1px solid currentColor; padding: .65rem .9rem; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.dojo-practice__body { margin: 1.5rem 0; font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.7; }
+.dojo-nucleus-page[data-practice-focus="true"] > :not(.dojo-practice) { display: none; }
+.dojo-nucleus-page[data-practice-focus="true"] { max-width: 58rem; min-height: 100svh; display: grid; align-items: center; }
+.dojo-nucleus-page[data-practice-focus="true"] .dojo-practice { max-width: none; margin: 0; border-width: 2px; }
+@media (max-width: 640px) { .dojo-practice__heading { display: grid; } .dojo-practice__focus { width: 100%; } }
