@@ -15,6 +15,17 @@ describe('WebRenderer', () => {
     );
   });
 
+  it('renders presentation media through the registry fallback contract', () => {
+    const experience = createInteractiveWebExperience({
+      nodes: [],
+      presentationMediaId: 'p07-app-icon-material',
+    });
+
+    expect(renderFrameToHtml(experience.frame)).toBe(
+      '<nav data-product-kind="interactive-web-site"><img data-presentation-media-id="p07-app-icon-material" src="/media/p08-brand-book-background.svg" alt="" loading="lazy"></nav>',
+    );
+  });
+
   it('escapes labels and URLs instead of interpreting them as markup', () => {
     const experience = createInteractiveWebExperience({
       nodes: [
