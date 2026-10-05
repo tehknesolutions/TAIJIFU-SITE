@@ -19,6 +19,7 @@ export const visualRegressionMatrix: readonly VisualRegressionScenario[] = Objec
   scenario('mobile', 'pt-BR', '/pt-br/manifesto/', 390, 844, false, 'fallback', 'Compact composition preserves content and critical touch targets.', 'approved'),
   scenario('reduced-motion', 'pt-BR', '/pt-br/manifesto/', 1440, 1024, true, 'fallback', 'Navigation and focus remain complete without motion dependency.', 'approved'),
   scenario('no-media', 'pt-BR', '/pt-br/manifesto/', 1440, 1024, false, 'fallback', 'Dojo remains intentional using deterministic CSS and identity assets only.', 'approved'),
+  scenario('tablet', 'en', '/en/manifesto/', 1024, 1366, false, 'fallback', 'English tablet reflow preserves route and navigation semantics.', 'pending'),
 ]);
 
 scenario('tablet', 'en', '/en/manifesto/', 1024, 1366, false, 'fallback', 'English tablet reflow preserves route and navigation semantics.', 'pending'),
