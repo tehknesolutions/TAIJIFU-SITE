@@ -222,3 +222,9 @@ a { color: inherit; }
 .dojo-nucleus-page__sequence { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 3rem; padding-block: 1.25rem; border-block: 1px solid currentColor; }
 .dojo-nucleus-page__sequence a:last-child { text-align: right; }
 @media (max-width: 640px) { .dojo-nucleus-page__sequence { grid-template-columns: 1fr; } .dojo-nucleus-page__sequence a:last-child { text-align: left; } }
+
+.dojo-nucleus-page__path-context { max-width: 52rem; margin-top: 3rem; padding: 1.25rem; border: 1px solid currentColor; }
+.dojo-nucleus-page__path-label { margin: 0 0 1rem; font-size: .82rem; letter-spacing: .06em; text-transform: uppercase; opacity: .72; }
+.dojo-nucleus-page__path-context ol { display: grid; gap: .5rem; margin: 0; padding-left: 1.25rem; }
+.dojo-nucleus-page__path-context li.is-current { font-weight: 700; }
+.dojo-nucleus-page__path-context li.is-current a { text-decoration: underline; text-underline-offset: .2em; }
