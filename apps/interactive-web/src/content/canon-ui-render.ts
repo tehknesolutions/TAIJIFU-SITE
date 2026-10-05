@@ -1,4 +1,5 @@
 import { canonSnapshot } from './canon-snapshot.js';
+import { getDojoNucleus } from './canon-dojo-projection.js';
 import { localizeCanonEntity } from './canon-localization.js';
 import { isCanonContentReleaseReady } from './canon-ui-readiness.js';
 import type { SupportedLocale } from './locale.js';
@@ -34,7 +35,7 @@ export function renderGraduationTrack(): string {
 
 export function renderCanonHierarchy(): string {
   const belts = CanonHierarchy.map((belt) => {
-    const paths = belt.paths.map((path) => `<details class="canon-path"><summary>${escapeHtml(path.code)} · ${escapeHtml(path.name)}</summary><p>${escapeHtml(path.function)}</p><ol>${path.nuclei.map((nucleus) => `<li data-nucleus-id="${escapeHtml(nucleus.id)}">${escapeHtml(nucleus.name)}</li>`).join('')}</ol></details>`).join('');
+    const paths = belt.paths.map((path) => `<details class="canon-path"><summary>${escapeHtml(path.code)} · ${escapeHtml(path.name)}</summary><p>${escapeHtml(path.function)}</p><ol>${path.nuclei.map((nucleus) => { const dojo = getDojoNucleus(nucleus.id); return `<li data-nucleus-id="${escapeHtml(nucleus.id)}"><details class="canon-nucleus"><summary><span>${escapeHtml(nucleus.id)}</span> · ${escapeHtml(nucleus.name)}</summary>${dojo ? `<div class="canon-nucleus__instruction"><p class="canon-nucleus__authority">Conteúdo instrucional recuperado · ${escapeHtml(dojo.instructional.source.layer)}</p><h4>Resumo</h4><p>${escapeHtml(dojo.instructional.summary)}</p><h4>Prática</h4><p>${escapeHtml(dojo.instructional.practice)}</p><p class="canon-nucleus__provenance">Fonte: ${escapeHtml(dojo.instructional.source.repository)} · ${escapeHtml(dojo.instructional.source.revision)}</p></div>` : '<p class="canon-nucleus__missing">Conteúdo instrucional não disponível.</p>'}</details></li>`; }).join('')}</ol></details>`).join('');
     return `<details class="canon-belt"><summary>${belt.order}. ${escapeHtml(belt.name)}</summary><p>${escapeHtml(belt.function)}</p>${paths || '<p class="canon-synthesis">Estado de síntese.</p>'}</details>`;
   }).join('');
   return `<section class="canon-hierarchy" aria-labelledby="canon-hierarchy-title"><h2 id="canon-hierarchy-title">Canon curricular</h2><p>10 Faixas · 32 Caminhos · 128 Núcleos</p><div>${belts}</div></section>`;

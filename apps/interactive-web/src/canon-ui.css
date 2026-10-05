@@ -137,3 +137,10 @@ body {
   .canon-reconciliation-surface__mark { font-size: 3rem; }
   .canon-reconciliation-surface dl { grid-template-columns: 1fr; }
 }
+
+.canon-nucleus > summary { cursor: pointer; }
+.canon-nucleus__instruction { margin: .75rem 0 1rem; padding: 1rem; border-inline-start: 2px solid currentColor; }
+.canon-nucleus__authority, .canon-nucleus__provenance { font-size: .78rem; opacity: .72; }
+.canon-nucleus__instruction h4 { margin: .9rem 0 .25rem; font-size: .82rem; text-transform: uppercase; letter-spacing: .08em; }
+.canon-nucleus__instruction p { margin: .35rem 0; }
+.canon-nucleus__missing { opacity: .65; font-style: italic; }
