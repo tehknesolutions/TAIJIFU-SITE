@@ -4,7 +4,7 @@ import { createInteractiveWebExperience } from './experience.js';
 import { createThreeScene } from './three-renderer.js';
 
 describe('ThreeRenderer', () => {
-  it('projects the website frame into a Three.js scene without changing canonical semantics', () => {
+  it('projects canonical, spatial and manifestation data without changing semantics', () => {
     const experience = createInteractiveWebExperience({
       nodes: [{ id: 'tai', label: 'TAI', canonicalUrl: '/principios/tai/' }],
     });
@@ -14,7 +14,7 @@ describe('ThreeRenderer', () => {
     expect(projection.nodes).toHaveLength(1);
     expect(projection.nodes[0].userData).toEqual({
       nodeId: 'tai', label: 'TAI', canonicalUrl: '/principios/tai/', parentId: undefined,
-      visualRole: 'axis', baseZ: 0,
+      visualRole: 'axis', baseZ: 0, structure: 'peer', manifestationIntensity: 'signal',
     });
   });
 
