@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Amostra de tecido preto para aplicação marcial">
+<defs>
+ <linearGradient id="cloth" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#121211"/><stop offset=".5" stop-color="#252422"/><stop offset="1" stop-color="#0d0e0d"/></linearGradient>
+ <pattern id="weave" width="12" height="12" patternUnits="userSpaceOnUse">
+  <path d="M0 2H12M0 8H12M2 0V12M8 0V12" stroke="#8a8172" stroke-opacity=".10" stroke-width="1"/>
+ </pattern>
+ <linearGradient id="fold" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#050605" stop-opacity=".8"/><stop offset=".5" stop-color="#b1a38c" stop-opacity=".10"/><stop offset="1" stop-color="#050605" stop-opacity=".75"/></linearGradient>
+</defs>
+<rect width="1600" height="900" fill="#090a09"/>
+<path d="M80 110Q400 45 760 145T1520 105V790Q1150 860 760 760T80 800Z" fill="url(#cloth)"/>
+<path d="M80 110Q400 45 760 145T1520 105V790Q1150 860 760 760T80 800Z" fill="url(#weave)" opacity=".9"/>
+<path d="M180 210Q520 330 830 220T1450 250" fill="none" stroke="url(#fold)" stroke-width="90"/>
+<path d="M140 590Q480 490 790 610T1460 575" fill="none" stroke="url(#fold)" stroke-width="105"/>
+<!-- clean reserved embroidery field -->
+<rect x="560" y="300" width="480" height="300" rx="18" fill="#171716" fill-opacity=".32" stroke="#b2a58f" stroke-opacity=".10" stroke-width="2"/>
+<rect x="585" y="325" width="430" height="250" rx="12" fill="none" stroke="#0a0b0a" stroke-opacity=".55" stroke-width="2"/>
+<path d="M610 355H990M610 545H990" stroke="#aaa08e" stroke-opacity=".05" stroke-width="1"/>
+<rect width="1600" height="900" fill="none" stroke="#070807" stroke-width="28"/>
+</svg>
