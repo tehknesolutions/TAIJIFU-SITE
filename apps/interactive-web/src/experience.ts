@@ -1,6 +1,10 @@
 import type { ExperienceNode } from './experience-shell.js';
 import { createExperienceShell } from './experience-shell.js';
-import { createManifestationAdapter, type Manifestation } from './manifestation-adapter.js';
+import {
+  createManifestationAdapter,
+  type Manifestation,
+  type ManifestationState,
+} from './manifestation-adapter.js';
 import { createRendererAdapter, type RenderFrame } from './renderer-adapter.js';
 import { createSpatialProjection, type SpatialProjection } from './spatial-projection.js';
 
@@ -14,13 +18,14 @@ export type InteractiveWebExperience = Readonly<{
 export function createInteractiveWebExperience(input: {
   nodes: readonly ExperienceNode[];
   presentationMediaId?: string;
+  manifestationState?: ManifestationState;
 }): InteractiveWebExperience {
   const shell = createExperienceShell({
     nodes: input.nodes,
     presentationMediaId: input.presentationMediaId,
   });
   const projection = createSpatialProjection(shell);
-  const manifestation = createManifestationAdapter().manifest(projection);
+  const manifestation = createManifestationAdapter().manifest(projection, input.manifestationState);
   const renderer = createRendererAdapter();
 
   return Object.freeze({
