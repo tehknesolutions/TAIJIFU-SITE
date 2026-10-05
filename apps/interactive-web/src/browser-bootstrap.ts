@@ -3,6 +3,7 @@ import { buildLocalizedExperienceNodes } from './content/canon-registry.js';
 import type { SupportedLocale } from './content/locale.js';
 import { createInteractiveWebExperience } from './experience.js';
 import { getPresentationMediaIdForRoute } from './presentation-media-map.js';
+import { createPresentationMediaOverlay } from './presentation-media-overlay.js';
 import type { RenderFrame } from './renderer-adapter.js';
 import type { ProjectedFocus } from './three-focus.js';
 import type { WebSurfaceCanvas } from './three-web-surface.js';
@@ -21,6 +22,7 @@ export function bootstrapInteractiveWeb(options: {
   navigate: (url: string) => void;
   onFocus?: (focus: ProjectedFocus | null) => void;
   onPresentationMediaChange?: (mediaId: string | undefined) => void;
+  presentationMediaElement?: HTMLImageElement | null;
   initialFocusNode?: string | null;
   routeId?: string;
   presentationMediaId?: string;
@@ -29,14 +31,21 @@ export function bootstrapInteractiveWeb(options: {
   mountTraining?: MountTraining;
 }) {
   const routeMediaId = getPresentationMediaIdForRoute(options.routeId ?? 'home');
+  const initialMediaId = options.presentationMediaId ?? routeMediaId;
   const experience = createInteractiveWebExperience({
     nodes: buildLocalizedExperienceNodes(options.locale ?? 'pt-BR'),
-    presentationMediaId: options.presentationMediaId ?? routeMediaId,
+    presentationMediaId: initialMediaId,
   });
+  const mediaOverlay = options.presentationMediaElement
+    ? createPresentationMediaOverlay(options.presentationMediaElement)
+    : null;
+  mediaOverlay?.show(initialMediaId);
 
   const handleFocus = (focus: ProjectedFocus | null) => {
     options.onFocus?.(focus);
-    options.onPresentationMediaChange?.(focus ? getPresentationMediaIdForRoute(focus.nodeId) : routeMediaId);
+    const mediaId = focus ? getPresentationMediaIdForRoute(focus.nodeId) : routeMediaId;
+    mediaOverlay?.show(mediaId);
+    options.onPresentationMediaChange?.(mediaId);
   };
 
   const mountSurface = options.mountSurface ?? mountBrowserThreeSurface;
