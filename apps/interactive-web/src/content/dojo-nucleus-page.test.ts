@@ -14,6 +14,17 @@ describe('Dojo nucleus page', () => {
     expect(html).toContain('N004');
   });
 
+  it('renders a focusable practice surface without inventing practice metadata', () => {
+    const html = renderDojoNucleusPage('NUC-N001', 'pt-BR')!;
+    expect(html).toContain('class="dojo-practice"');
+    expect(html).toContain('data-practice-authority="legacy-candidate"');
+    expect(html).toContain('Entrar no modo prática');
+    expect(html).toContain('Núcleo 1/4');
+    expect(html).not.toContain('repetições');
+    expect(html).not.toContain('duração');
+    expect(html).not.toContain('concluído');
+  });
+
   it('does not invent an EN or ES translation', () => {
     expect(renderDojoNucleusPage('NUC-N001', 'en')).toContain('Tradução oficial');
     expect(renderDojoNucleusPage('NUC-N001', 'es')).toContain('Tradução oficial');
