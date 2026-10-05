@@ -35,15 +35,10 @@ describe('presentation media overlay', () => {
   });
   it('exposes deterministic lifecycle snapshots without adding UI state', () => {
     const image=document.createElement('img'); const preload=document.createElement('img'); const overlay=createPresentationMediaOverlay(image,{createPreloadImage:()=>preload});
-    expect(overlay.getSnapshot()).toEqual({status:'idle',mediaId:undefined});
-    overlay.show('p02-dojo-interior');
-    expect(overlay.getSnapshot()).toEqual({status:'visible',mediaId:'p02-dojo-interior'});
-    image.src='/media/current.svg'; image.dataset.presentationMediaId='current'; image.hidden=false;
-    overlay.show('p03-martial-landscape');
-    expect(overlay.getSnapshot()).toEqual({status:'loading',mediaId:'current'});
-    preload.dispatchEvent(new Event('error'));
-    expect(overlay.getSnapshot()).toEqual({status:'failed',mediaId:'current'});
-    overlay.dispose();
-    expect(overlay.getSnapshot()).toEqual({status:'disposed',mediaId:'current'});
+    expect(overlay.getSnapshot()).toEqual({status:'idle',mediaId:undefined}); overlay.show('p02-dojo-interior'); expect(overlay.getSnapshot()).toEqual({status:'visible',mediaId:'p02-dojo-interior'}); image.src='/media/current.svg'; image.dataset.presentationMediaId='current'; image.hidden=false; overlay.show('p03-martial-landscape'); expect(overlay.getSnapshot()).toEqual({status:'loading',mediaId:'current'}); preload.dispatchEvent(new Event('error')); expect(overlay.getSnapshot()).toEqual({status:'failed',mediaId:'current'}); overlay.dispose(); expect(overlay.getSnapshot()).toEqual({status:'disposed',mediaId:'current'});
+  });
+  it('notifies only when the observable snapshot actually changes', () => {
+    const image=document.createElement('img'); image.src='/media/current.svg'; image.dataset.presentationMediaId='current'; image.hidden=false; const preload=document.createElement('img'); const onStateChange=vi.fn(); const overlay=createPresentationMediaOverlay(image,{createPreloadImage:()=>preload,onStateChange});
+    overlay.show('p02-dojo-interior'); overlay.show('p02-dojo-interior'); expect(onStateChange).toHaveBeenCalledTimes(1); expect(onStateChange).toHaveBeenLastCalledWith({status:'loading',mediaId:'current'}); preload.dispatchEvent(new Event('load')); expect(onStateChange).toHaveBeenLastCalledWith({status:'visible',mediaId:'p02-dojo-interior'}); overlay.dispose(); expect(onStateChange).toHaveBeenLastCalledWith({status:'disposed',mediaId:'p02-dojo-interior'}); const calls=onStateChange.mock.calls.length; preload.dispatchEvent(new Event('error')); expect(onStateChange).toHaveBeenCalledTimes(calls);
   });
 });
