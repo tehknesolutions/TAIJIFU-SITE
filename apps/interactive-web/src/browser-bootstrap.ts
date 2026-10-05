@@ -37,12 +37,14 @@ export function bootstrapInteractiveWeb(options: {
   navigate: (url: string) => void;
   onFocus?: (focus: ProjectedFocus | null) => void;
   initialFocusNode?: string | null;
+  presentationMediaId?: string;
   mountSurface?: MountSurface;
   trainingRoot?: HTMLElement | null;
   mountTraining?: MountTraining;
 }) {
   const experience = createInteractiveWebExperience({
     nodes: buildLocalizedExperienceNodes(options.locale ?? 'pt-BR'),
+    presentationMediaId: options.presentationMediaId ?? 'r01-dojo-environment',
   });
 
   const mountSurface = options.mountSurface ?? mountBrowserThreeSurface;
