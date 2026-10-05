@@ -8,6 +8,9 @@ export type DojoNucleusNavigation = Readonly<{
   path: Readonly<{ id: string; code: string; name: string }>;
   previous: Readonly<{ id: string; name: string; url: string }> | null;
   next: Readonly<{ id: string; name: string; url: string }> | null;
+  pathPosition: number;
+  pathSize: number;
+  pathNuclei: readonly Readonly<{ id: string; name: string; url: string }>[];
 }>;
 
 export function getDojoNucleusNavigation(nucleusId: string, locale: SupportedLocale): DojoNucleusNavigation | null {
@@ -24,11 +27,16 @@ export function getDojoNucleusNavigation(nucleusId: string, locale: SupportedLoc
     return nucleus && route ? Object.freeze({ id, name: nucleus.name, url: route.canonicalUrl }) : null;
   };
 
+  const pathNuclei = Object.freeze(path.nucleusIds.map(routeFor).filter((item): item is Readonly<{ id: string; name: string; url: string }> => item !== null));
+
   return Object.freeze({
     nucleusId,
     belt: Object.freeze({ id: belt.id, name: belt.name }),
     path: Object.freeze({ id: path.id, code: path.code, name: path.name }),
     previous: pathIndex > 0 ? routeFor(path.nucleusIds[pathIndex - 1]) : null,
     next: pathIndex < path.nucleusIds.length - 1 ? routeFor(path.nucleusIds[pathIndex + 1]) : null,
+    pathPosition: pathIndex + 1,
+    pathSize: path.nucleusIds.length,
+    pathNuclei,
   });
 }
