@@ -1,6 +1,6 @@
 # P06 — Seal / Paper Specimen — candidate provenance
 
-Status: **PASS — generation-content gate / PENDING artifact persistence**
+Status: **PASS — deterministic runtime implementation / PENDING human approval**
 
 Date: 2026-10-04
 Issue: #39
@@ -9,7 +9,7 @@ References: none specified by the Prompt Library
 Layer: Presentation
 Canonical master: **false**
 
-## Candidate
+## Original candidate
 
 Generation id: `e07ba132-03dd-456b-8692-7fb91f198ee2`
 Seed: null
@@ -17,21 +17,37 @@ Aspect ratio: 16:9
 Local artifact filename: `a_highly_detailed_cinematic_close_up_still_life_s.png`
 SHA-256: `02b5c0d1b4981b9009f184077bc1d1079d060c80779dcae65b87fb96713ce41a`
 
-## Generation-content review
+## Durable runtime implementation
 
-The candidate passes the P06 generation-content gate:
+A deterministic repository implementation of the same P06 content contract is persisted at:
 
-- warm off-white archival/fibrous paper is the dominant specimen surface;
+`apps/interactive-web/public/media/p06-seal-paper.svg`
+
+Commit: `a682de2118b1a1d83306b875f450733e5f8b746d`
+
+The SVG is not claimed to be byte-identical to the original generated PNG. It is the durable runtime specimen implementing the approved P06 presentation contract.
+
+## Content contract
+
+- warm off-white archival/fibrous paper is dominant;
 - dark handmade paper/mat and natural wood support the composition;
-- aged stone/metal seal object and ink dish are present as physical props;
-- the central paper surface remains blank for deterministic Ω1/mark compositing;
+- physical aged seal object and ink dish are present;
+- central paper surface remains blank for deterministic Ω1/mark compositing;
 - raking/warm light reveals paper fibers and material texture;
-- no generated characters, logo or readable text are present on the paper or props.
+- no generated characters, logo or readable text.
 
-## Provenance boundary
+## Registry
 
-This record does not constitute human approval and does not create a `MediaAsset` registry row.
+P06 is registered in `apps/interactive-web/src/media-registry.ts` with:
 
-The exact PNG remains a conversation/local artifact and is not yet persisted at a durable repository `sourcePath`. No repository path or approval state is fabricated.
+- `sourcePath: apps/interactive-web/public/media/p06-seal-paper.svg`;
+- `references: []`;
+- `generator: deterministic-svg-seal-paper-specimen`;
+- `seed: null`;
+- `aspectRatio: 16:9`;
+- `createdAt: 2026-10-04`;
+- `humanApproval: pending`;
+- `deterministicBrandAssetsComposited: false`;
+- `isCanonicalMaster: false`.
 
-When persisted, create the registry entry with truthful sourcePath and provenance, initially `humanApproval: pending`. `deterministicBrandAssetsComposited` remains false unless authoritative Ω1 is actually composited afterward. `isCanonicalMaster` remains false permanently.
+Human approval remains a separate explicit event.
