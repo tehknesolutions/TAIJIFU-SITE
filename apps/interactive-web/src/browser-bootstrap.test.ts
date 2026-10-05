@@ -14,36 +14,13 @@ describe('Interactive web browser bootstrap', () => {
     const focusNode = vi.fn();
     const mountSurface = vi.fn(() => ({ dispose, focusNode }));
 
-    const runtime = bootstrapInteractiveWeb({
-      canvas,
-      navigate,
-      onFocus,
-      mountSurface,
-    });
+    const runtime = bootstrapInteractiveWeb({ canvas, navigate, onFocus, mountSurface });
 
     expect(runtime.experience.frame.productKind).toBe('interactive-web-site');
     expect(runtime.experience.frame.presentationMediaId).toBe('r01-dojo-environment');
-    expect(runtime.experience.frame.nodes[0]).toEqual(
-      expect.objectContaining({
-        id: 'home',
-        label: 'TAIJIFU',
-        canonicalUrl: '/',
-      }),
-    );
-    expect(runtime.experience.frame.nodes).toContainEqual(
-      expect.objectContaining({
-        id: 'tai',
-        label: 'TAI',
-        canonicalUrl: '/pt-br/principios/tai/',
-        parentId: 'fundamentos',
-      }),
-    );
-    expect(mountSurface).toHaveBeenNthCalledWith(1, {
-      canvas,
-      frame: runtime.experience.frame,
-      navigate,
-      onFocus,
-    });
+    expect(runtime.experience.frame.nodes[0]).toEqual(expect.objectContaining({ id: 'home', label: 'TAIJIFU', canonicalUrl: '/' }));
+    expect(runtime.experience.frame.nodes).toContainEqual(expect.objectContaining({ id: 'tai', label: 'TAI', canonicalUrl: '/pt-br/principios/tai/', parentId: 'fundamentos' }));
+    expect(mountSurface).toHaveBeenNthCalledWith(1, { canvas, frame: runtime.experience.frame, navigate, onFocus });
 
     runtime.focusNode('tai');
     expect(focusNode).toHaveBeenCalledWith('tai');
@@ -56,27 +33,27 @@ describe('Interactive web browser bootstrap', () => {
     expect(dispose).toHaveBeenCalledTimes(2);
   });
 
-  it('allows an explicit governed presentation-media slot', () => {
+  it('selects presentation media from the explicit route contract', () => {
     const mountSurface = vi.fn(() => ({ dispose: vi.fn(), focusNode: vi.fn() }));
-    const runtime = bootstrapInteractiveWeb({
-      canvas: {} as never,
-      navigate: vi.fn(),
-      mountSurface,
-      presentationMediaId: 'p03-martial-landscape',
-    });
+    const runtime = bootstrapInteractiveWeb({ canvas: {} as never, navigate: vi.fn(), mountSurface, routeId: 'fundamentos' });
+    expect(runtime.experience.frame.presentationMediaId).toBe('p02-dojo-interior');
+  });
 
+  it('does not invent presentation media for an unmapped route', () => {
+    const mountSurface = vi.fn(() => ({ dispose: vi.fn(), focusNode: vi.fn() }));
+    const runtime = bootstrapInteractiveWeb({ canvas: {} as never, navigate: vi.fn(), mountSurface, routeId: 'historia' });
+    expect(runtime.experience.frame.presentationMediaId).toBeUndefined();
+  });
+
+  it('allows an explicit governed presentation-media slot to override route selection', () => {
+    const mountSurface = vi.fn(() => ({ dispose: vi.fn(), focusNode: vi.fn() }));
+    const runtime = bootstrapInteractiveWeb({ canvas: {} as never, navigate: vi.fn(), mountSurface, routeId: 'fundamentos', presentationMediaId: 'p03-martial-landscape' });
     expect(runtime.experience.frame.presentationMediaId).toBe('p03-martial-landscape');
   });
 
   it('uses the governed locale when building the interactive experience', () => {
     const mountSurface = vi.fn(() => ({ dispose: vi.fn(), focusNode: vi.fn() }));
-    const runtime = bootstrapInteractiveWeb({
-      canvas: {} as never,
-      navigate: vi.fn(),
-      mountSurface,
-      locale: 'pt-BR',
-    });
-
+    const runtime = bootstrapInteractiveWeb({ canvas: {} as never, navigate: vi.fn(), mountSurface, locale: 'pt-BR' });
     expect(runtime.experience.frame.nodes).toContainEqual(expect.objectContaining({ id: 'historia', label: 'História' }));
   });
 
@@ -86,19 +63,10 @@ describe('Interactive web browser bootstrap', () => {
     const trainingDispose = vi.fn();
     const mountTraining = vi.fn(() => ({ getState: vi.fn(), dispose: trainingDispose }));
     const mountSurface = vi.fn(() => ({ dispose: vi.fn(), focusNode: vi.fn() }));
-
-    const runtime = bootstrapInteractiveWeb({
-      canvas,
-      navigate: vi.fn(),
-      mountSurface,
-      trainingRoot,
-      mountTraining,
-    });
-
+    const runtime = bootstrapInteractiveWeb({ canvas, navigate: vi.fn(), mountSurface, trainingRoot, mountTraining });
     expect(mountTraining).toHaveBeenCalledOnce();
     expect(mountTraining).toHaveBeenCalledWith(trainingRoot);
     expect(runtime.trainingAvailable).toBe(true);
-
     runtime.dispose();
     expect(trainingDispose).toHaveBeenCalledOnce();
   });
@@ -106,14 +74,7 @@ describe('Interactive web browser bootstrap', () => {
   it('does not mount personalized training on routes without its root', () => {
     const mountTraining = vi.fn();
     const mountSurface = vi.fn(() => ({ dispose: vi.fn(), focusNode: vi.fn() }));
-
-    const runtime = bootstrapInteractiveWeb({
-      canvas: {} as never,
-      navigate: vi.fn(),
-      mountSurface,
-      mountTraining,
-    });
-
+    const runtime = bootstrapInteractiveWeb({ canvas: {} as never, navigate: vi.fn(), mountSurface, mountTraining });
     expect(mountTraining).not.toHaveBeenCalled();
     expect(runtime.trainingAvailable).toBe(false);
   });
