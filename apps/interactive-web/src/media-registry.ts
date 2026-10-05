@@ -17,3 +17,4 @@ Object.freeze({id:'p08-brand-book-background',promptId:'P08',references:Object.f
 export function getMediaAsset(id:string):MediaAsset { const asset=mediaRegistry.find(candidate=>candidate.id===id); if(!asset) throw new Error('Unknown presentation media asset: '+id); return asset; }
 export function isApprovedPresentationMedia(id:string):boolean { const asset=mediaRegistry.find(candidate=>candidate.id===id); return asset?.layer==='presentation' && asset.humanApproval==='approved'; }
 export function getPresentationMediaSource(id:string):string { const asset=mediaRegistry.find(candidate=>candidate.id===id); return asset?.layer==='presentation' && asset.humanApproval==='approved' ? asset.sourcePath : DETERMINISTIC_PRESENTATION_FALLBACK; }
+export function getPresentationMediaUrl(id:string):string { return getPresentationMediaSource(id).replace('apps/interactive-web/public', ''); }
