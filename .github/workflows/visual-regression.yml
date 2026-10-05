@@ -1,0 +1,49 @@
+name: Visual Regression
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.17.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Chromium
+        run: pnpm --dir apps/interactive-web exec playwright install --with-deps chromium
+
+      - name: Run approved visual regression
+        run: pnpm --dir apps/interactive-web test:visual
+
+      - name: Upload Playwright artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: taijifu-visual-regression
+          path: |
+            apps/interactive-web/test-results
+            apps/interactive-web/playwright-report
+          if-no-files-found: ignore
+          retention-days: 14
