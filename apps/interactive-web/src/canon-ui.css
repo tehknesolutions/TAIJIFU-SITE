@@ -144,3 +144,5 @@ body {
 .canon-nucleus__instruction h4 { margin: .9rem 0 .25rem; font-size: .82rem; text-transform: uppercase; letter-spacing: .08em; }
 .canon-nucleus__instruction p { margin: .35rem 0; }
 .canon-nucleus__missing { opacity: .65; font-style: italic; }
+
+.canon-nucleus__link { display: inline-block; margin-top: .8rem; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
