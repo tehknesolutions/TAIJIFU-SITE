@@ -38,16 +38,31 @@ describe('Interactive web browser bootstrap', () => {
   it('reports governed media changes when the live surface focus changes', () => {
     let surfaceOnFocus: ((focus: { nodeId: string; label: string; canonicalUrl: string } | null) => void) | undefined;
     const mountSurface = vi.fn((options) => { surfaceOnFocus = options.onFocus; return { dispose: vi.fn(), focusNode: vi.fn() }; });
-    const onFocus = vi.fn();
-    const onPresentationMediaChange = vi.fn();
+    const onFocus = vi.fn(); const onPresentationMediaChange = vi.fn();
     bootstrapInteractiveWeb({ canvas: {} as never, navigate: vi.fn(), mountSurface, onFocus, onPresentationMediaChange });
-
     surfaceOnFocus?.({ nodeId: 'fundamentos', label: 'Fundamentos', canonicalUrl: '/pt-br/fundamentos/' });
     expect(onFocus).toHaveBeenCalledWith(expect.objectContaining({ nodeId: 'fundamentos' }));
     expect(onPresentationMediaChange).toHaveBeenLastCalledWith('p02-dojo-interior');
-
     surfaceOnFocus?.({ nodeId: 'historia', label: 'História', canonicalUrl: '/pt-br/historia/' });
     expect(onPresentationMediaChange).toHaveBeenLastCalledWith(undefined);
+  });
+
+  it('drives a DOM presentation overlay from governed route media', () => {
+    let surfaceOnFocus: ((focus: { nodeId: string; label: string; canonicalUrl: string } | null) => void) | undefined;
+    const mountSurface = vi.fn((options) => { surfaceOnFocus = options.onFocus; return { dispose: vi.fn(), focusNode: vi.fn() }; });
+    const presentationMediaElement = document.createElement('img');
+    bootstrapInteractiveWeb({ canvas: {} as never, navigate: vi.fn(), mountSurface, presentationMediaElement });
+
+    expect(presentationMediaElement.dataset.presentationMediaId).toBe('r01-dojo-environment');
+    expect(presentationMediaElement.getAttribute('src')).toBe('/media/p08-brand-book-background.svg');
+
+    surfaceOnFocus?.({ nodeId: 'fundamentos', label: 'Fundamentos', canonicalUrl: '/pt-br/fundamentos/' });
+    expect(presentationMediaElement.dataset.presentationMediaId).toBe('p02-dojo-interior');
+    expect(presentationMediaElement.getAttribute('src')).toBe('/media/p08-brand-book-background.svg');
+
+    surfaceOnFocus?.({ nodeId: 'historia', label: 'História', canonicalUrl: '/pt-br/historia/' });
+    expect(presentationMediaElement.hidden).toBe(true);
+    expect(presentationMediaElement.hasAttribute('src')).toBe(false);
   });
 
   it('uses the governed locale when building the interactive experience', () => {
