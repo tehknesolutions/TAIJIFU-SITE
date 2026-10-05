@@ -34,3 +34,15 @@ jobs:
 
       - name: Run interactive-web tests
         run: pnpm --dir apps/interactive-web test -- --run
+
+      - name: Build interactive-web
+        run: pnpm --dir apps/interactive-web build
+
+      - name: Upload verified web artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: taijifu-interactive-web
+          path: apps/interactive-web/dist
+          if-no-files-found: error
+          retention-days: 14
