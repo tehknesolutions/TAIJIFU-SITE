@@ -22,6 +22,7 @@ describe('Interactive web browser bootstrap', () => {
     });
 
     expect(runtime.experience.frame.productKind).toBe('interactive-web-site');
+    expect(runtime.experience.frame.presentationMediaId).toBe('r01-dojo-environment');
     expect(runtime.experience.frame.nodes[0]).toEqual(
       expect.objectContaining({
         id: 'home',
@@ -53,6 +54,18 @@ describe('Interactive web browser bootstrap', () => {
 
     runtime.dispose();
     expect(dispose).toHaveBeenCalledTimes(2);
+  });
+
+  it('allows an explicit governed presentation-media slot', () => {
+    const mountSurface = vi.fn(() => ({ dispose: vi.fn(), focusNode: vi.fn() }));
+    const runtime = bootstrapInteractiveWeb({
+      canvas: {} as never,
+      navigate: vi.fn(),
+      mountSurface,
+      presentationMediaId: 'p03-martial-landscape',
+    });
+
+    expect(runtime.experience.frame.presentationMediaId).toBe('p03-martial-landscape');
   });
 
   it('uses the governed locale when building the interactive experience', () => {
