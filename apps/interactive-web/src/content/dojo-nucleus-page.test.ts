@@ -10,6 +10,8 @@ describe('Dojo nucleus page', () => {
     expect(html).toContain('legacy-candidate');
     expect(html).toContain('Núcleo');
     expect(html).toContain('N002');
+    expect(html).toContain('Núcleo 1/4');
+    expect(html).toContain('N004');
   });
 
   it('does not invent an EN or ES translation', () => {
