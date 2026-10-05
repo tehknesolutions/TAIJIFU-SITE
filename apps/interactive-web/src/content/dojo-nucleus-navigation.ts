@@ -17,6 +17,7 @@ export function getDojoNucleusNavigation(nucleusId: string, locale: SupportedLoc
   const belt = path ? canonSnapshot.belts.find(({ id }) => id === path.beltId) : null;
   if (!path || !belt) return null;
 
+  const pathIndex = path.nucleusIds.indexOf(nucleusId);
   const routeFor = (id: string) => {
     const nucleus = canonSnapshot.nuclei.find(({ id: candidate }) => candidate === id);
     const route = findDojoNucleusRoute(id, locale);
@@ -27,7 +28,7 @@ export function getDojoNucleusNavigation(nucleusId: string, locale: SupportedLoc
     nucleusId,
     belt: Object.freeze({ id: belt.id, name: belt.name }),
     path: Object.freeze({ id: path.id, code: path.code, name: path.name }),
-    previous: nucleusIndex > 0 ? routeFor(canonSnapshot.nuclei[nucleusIndex - 1].id) : null,
-    next: nucleusIndex < canonSnapshot.nuclei.length - 1 ? routeFor(canonSnapshot.nuclei[nucleusIndex + 1].id) : null,
+    previous: pathIndex > 0 ? routeFor(path.nucleusIds[pathIndex - 1]) : null,
+    next: pathIndex < path.nucleusIds.length - 1 ? routeFor(path.nucleusIds[pathIndex + 1]) : null,
   });
 }
