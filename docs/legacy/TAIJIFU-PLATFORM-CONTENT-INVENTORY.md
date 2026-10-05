@@ -14,7 +14,7 @@ The historical platform explicitly defined itself as both the official informati
 
 The historical platform declares:
 
-- Canon 1.0: 4 Bases, 10 belts, 32 Caminhos, 128 Núcleos;
+- Canon 1.0: 4 Bases, 10 belts, 32 Caminhos, 128 Núleos;
 - Site Oficial as the highest-priority public reference surface;
 - Manifesto and identity;
 - history and provenance;
@@ -48,7 +48,20 @@ Application and API surfaces for practice, evidence, AI, community, profile/stat
 
 A structured content package exists with `data`, `schema`, `scripts` and `src`.
 
-The `data` directory includes belt content/slices for multiple belt levels (observed examples: blue, brown, cyan, green, orange, red, violet and others in the tree). These files are direct migration candidates for curriculum/Academy content and must be reviewed before any rewrite from memory.
+The `data` directory includes belt content/slices for multiple belt levels. These files are direct migration candidates for curriculum/Academy content and must be reviewed before any rewrite from memory.
+
+#### Verified Canon alignment
+
+Direct comparison against `TAIJIFU-CANON-1.0` confirms that the historical belt content is not an unrelated curriculum: it is keyed to the same current nucleus identifiers and meanings.
+
+Verified examples:
+
+- `orange-belt-content.json` covers `NUC-N025`–`NUC-N036`; these IDs align with the current Canon sequence beginning with **Cadeia Cinética**, **Alavanca, Base e Postura**, **Geração e Redirecionamento de Força**, **Mecânica de Falha**, **Função versus Técnica**, **Seleção de Ferramentas**, **Redundância e Alternativas**, **Custo, Risco e Eficiência**, **Defesa em Camadas**, **Proteção e Reposicionamento**, **Escape, Reversão e Recuperação** and **Falhas, Defesas e Contramedidas**.
+- `green-belt-content.json` covers `NUC-N049`–`NUC-N064`; these IDs align with current Canon transitions/integration such as **Tai → Ji**, **Ji → Fu**, **Fu → Tai**, **Recuperação entre Estados**, zone integration and **Síntese das Quatro Bases**.
+- `blue-belt-content.json` covers `NUC-N081`–`NUC-N096`; these IDs align with the current Canon block from **Capacity State** through **Sustentação Longitudinal da Competência**.
+- `blue-belt-slice.json` identifies `BELT-BLUE`, function `Sustentar`, paths C21–C24 and nuclei N081–N096. This matches the current Canon belt record: Azul / Sustentar / C21–C24.
+
+The content files add `summary` and `practice` fields to nucleus IDs whose canonical names already exist in the current snapshot. This makes them high-value migration candidates for Academy/Dojo instructional material. Their presence does **not** by itself change the immutable Canon entity names/structure.
 
 ### `packages/canon`
 
@@ -78,7 +91,8 @@ Historical reusable UI. It is a visual/product reference, not automatic authorit
 
 ## Consolidation queue
 
-- [ ] Inventory all files under `packages/content/data` and map them to current belts/Caminhos/Núcleos.
+- [~] Inventory all files under `packages/content/data` and map them to current belts/Caminhos/Núcleos. **Started and direct ID-level alignment verified for Orange, Green and Blue.**
+- [ ] Complete the same verification for the remaining belt content/slice files.
 - [ ] Inventory `packages/canon` and diff its entities against the current Canon snapshot.
 - [ ] Recover Integral Method source/data and map it to public Método.
 - [ ] Recover PFI source/data and map it to Método + training engine candidates.
