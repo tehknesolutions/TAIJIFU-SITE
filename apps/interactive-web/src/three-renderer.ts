@@ -124,6 +124,8 @@ export function createThreeScene(frame: RenderFrame): ThreeSceneProjection {
   addDojoArchitecture(scene);
 
   const byId = new Map(frame.nodes.map((node) => [node.id, node]));
+  const spatialById = new Map(frame.spatialNodes.map((node) => [node.nodeId, node]));
+  const manifestationById = new Map(frame.manifestationNodes.map((node) => [node.nodeId, node]));
   const nodes = frame.nodes.map((node, index) => {
     const isRoot = node.id === 'home';
     const role = dojoHotspotRole(node.id);
@@ -140,6 +142,8 @@ export function createThreeScene(frame: RenderFrame): ThreeSceneProjection {
     const mesh = new THREE.Mesh(geometry, material);
     mesh.position.copy(hasCanonicalRoot ? hierarchicalPosition(node, frame.nodes, byId) : gridPosition(index, frame.nodes.length));
     mesh.rotation.x = isRoot ? 0 : -0.08;
+    const spatial = spatialById.get(node.id);
+    const manifestation = manifestationById.get(node.id);
     mesh.userData = {
       nodeId: node.id,
       label: node.label,
@@ -147,6 +151,8 @@ export function createThreeScene(frame: RenderFrame): ThreeSceneProjection {
       parentId: node.parentId,
       visualRole: isRoot ? 'origin' : role,
       baseZ: mesh.position.z,
+      structure: spatial?.structure ?? 'default',
+      manifestationIntensity: manifestation?.intensity ?? 'signal',
     };
     scene.add(mesh);
     return mesh;
