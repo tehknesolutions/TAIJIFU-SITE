@@ -37,14 +37,11 @@ if (redirect) {
       });
     }
     const semanticRoute = renderSemanticRoute(pathname);
-    if (semanticRoute && semanticContent) {
-      semanticContent.innerHTML = renderLanguageSelector(routeResolution.routeId, routeResolution.locale) + semanticRoute;
-    }
+    if (semanticRoute && semanticContent) semanticContent.innerHTML = renderLanguageSelector(routeResolution.routeId, routeResolution.locale) + semanticRoute;
   }
 
   const activeLocale = routeResolution.kind === 'localized-route' ? routeResolution.locale : 'pt-BR';
   wireHomeDojoLinks(document.querySelectorAll<HTMLAnchorElement>('[data-route-id]'), activeLocale);
-
   const primaryNavigation = document.querySelector<HTMLElement>('#primary-navigation');
   if (primaryNavigation) primaryNavigation.innerHTML = renderPrimaryNavigation(activeLocale);
 
@@ -70,6 +67,14 @@ if (redirect) {
 
   if (canvas) {
     const currentRoute = routeResolution.kind === 'localized-route' ? findSiteRoute(pathname) : null;
+    const interactiveStage = canvas.closest<HTMLElement>('.interactive-stage');
+    const presentationMediaElement = document.createElement('img');
+    presentationMediaElement.className = 'interactive-presentation-media';
+    presentationMediaElement.hidden = true;
+    presentationMediaElement.alt = '';
+    presentationMediaElement.setAttribute('aria-hidden', 'true');
+    interactiveStage?.prepend(presentationMediaElement);
+
     let runtime: ReturnType<typeof bootstrapInteractiveWeb>;
     const wireLegend = () => {
       if (!interactiveLegend) return;
@@ -83,16 +88,15 @@ if (redirect) {
         link.addEventListener('blur', blur);
       }
     };
-    const syncLegendFocus = (nodeId: string | null) => {
-      renderLegend(nodeId);
-      wireLegend();
-    };
+    const syncLegendFocus = (nodeId: string | null) => { renderLegend(nodeId); wireLegend(); };
 
     runtime = bootstrapInteractiveWeb({
       locale: activeLocale,
       canvas,
       navigate: (canonicalUrl) => window.location.assign(canonicalUrl),
+      routeId: currentRoute?.id ?? 'home',
       initialFocusNode: currentRoute?.id ?? null,
+      presentationMediaElement,
       onFocus: (focus) => {
         if (focusLabel) focusLabel.value = focus?.label ?? 'TAIJIFU';
         syncLegendFocus(focus?.nodeId ?? null);
@@ -102,9 +106,7 @@ if (redirect) {
 
     const interactiveExperience = document.querySelector<HTMLElement>('#interactive-experience');
     const surfaceStatus = document.querySelector<HTMLElement>('#interactive-surface-status');
-    if (interactiveExperience && surfaceStatus) {
-      applyInteractiveSurfaceState(interactiveExperience, surfaceStatus, runtime.surfaceAvailable);
-    }
+    if (interactiveExperience && surfaceStatus) applyInteractiveSurfaceState(interactiveExperience, surfaceStatus, runtime.surfaceAvailable);
 
     const dojoEntryLinks = document.querySelectorAll<HTMLAnchorElement>('[href="#interactive-experience"]');
     for (const link of dojoEntryLinks) {
