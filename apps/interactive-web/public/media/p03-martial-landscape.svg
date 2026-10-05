@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Paisagem marcial TAIJIFU">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#161615"/><stop offset=".55" stop-color="#5a4a37"/><stop offset="1" stop-color="#b9986d"/></linearGradient>
+  <linearGradient id="mountain" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#24231f"/><stop offset="1" stop-color="#51483d"/></linearGradient>
+  <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#292721"/><stop offset="1" stop-color="#0e0f0e"/></linearGradient>
+  <radialGradient id="sun"><stop stop-color="#f1d39a" stop-opacity=".85"/><stop offset="1" stop-color="#f1d39a" stop-opacity="0"/></radialGradient>
+  <linearGradient id="water" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#55534b"/><stop offset="1" stop-color="#1b1c1a"/></linearGradient>
+</defs>
+<rect width="1600" height="900" fill="url(#sky)"/>
+<circle cx="1170" cy="250" r="260" fill="url(#sun)"/>
+<path d="M0 530L170 390 330 500 500 275 690 485 870 330 1040 500 1210 300 1390 455 1600 315V680H0Z" fill="url(#mountain)"/>
+<path d="M0 585Q250 525 500 580T1000 575T1600 560V720H0Z" fill="#32302a"/>
+<path d="M0 625Q280 590 560 625T1120 620T1600 605V760H0Z" fill="url(#water)" opacity=".82"/>
+<path d="M0 665Q240 640 480 665T960 662T1440 670T1600 655" fill="none" stroke="#d8c9ac" stroke-opacity=".14" stroke-width="7"/>
+<path d="M0 735H1600V900H0Z" fill="url(#ground)"/>
+<path d="M0 785H1600M0 845H1600" stroke="#8b6d4e" stroke-opacity=".14" stroke-width="4"/>
+<g fill="#171613" opacity=".9">
+ <path d="M170 735Q205 640 245 735Z"/><path d="M1320 735Q1360 635 1400 735Z"/>
+ <path d="M265 735Q300 655 335 735Z"/><path d="M1230 735Q1265 650 1300 735Z"/>
+</g>
+<!-- single distant adult practitioner: grounded stance, dark clothing -->
+<g transform="translate(825 645) scale(.62)" fill="#11110f" stroke="#0a0a09" stroke-width="5">
+ <circle cx="0" cy="-78" r="17"/>
+ <path d="M-13-60L-28 10L-88 68L-76 82L-4 30L28 84L45 78L15 8L13-60Z"/>
+ <path d="M-22-5L-98 38L-91 51L-8 22Z"/>
+ <path d="M22-5L91 38L98 24L12 8Z"/>
+</g>
+<g stroke="#e1c79a" stroke-opacity=".12" stroke-width="6">
+ <path d="M0 610Q300 590 620 610T1240 608T1600 595"/>
+ <path d="M0 650Q300 630 620 650T1240 648T1600 635"/>
+</g>
+<rect width="1600" height="900" fill="none" stroke="#070706" stroke-width="24"/>
+</svg>
