@@ -4,6 +4,7 @@ export default defineConfig({
   testDir: './tests/visual',
   timeout: 30_000,
   expect: { timeout: 5_000 },
+  snapshotPathTemplate: '{testDir}/{testFilePath}-snapshots/{arg}{ext}',
   use: {
     ...devices['Desktop Chrome'],
     baseURL: 'http://127.0.0.1:4173',
