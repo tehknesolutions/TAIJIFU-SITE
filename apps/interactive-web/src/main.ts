@@ -1,4 +1,5 @@
 import './presentation-media-overlay.css';
+import './dojo-practice-focus.css';
 import { bootstrapInteractiveWeb } from './browser-bootstrap.js';
 import { mountTrainingExperience } from './training/training-browser.js';
 import { renderInteractiveLegend, renderPrimaryNavigation, renderSemanticRoute } from './semantic-site.js';
