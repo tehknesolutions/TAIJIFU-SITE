@@ -8,6 +8,8 @@ describe('Dojo nucleus page', () => {
     expect(html).toContain('Resumo');
     expect(html).toContain('Prática');
     expect(html).toContain('legacy-candidate');
+    expect(html).toContain('Núcleo');
+    expect(html).toContain('N002');
   });
 
   it('does not invent an EN or ES translation', () => {

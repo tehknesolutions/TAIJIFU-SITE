@@ -217,3 +217,8 @@ a { color: inherit; }
 .dojo-nucleus-page section h2 { margin-top: 1.75rem; }
 .dojo-nucleus-page footer { display: grid; gap: .4rem; margin-top: 2rem; }
 .dojo-nucleus-page__localization { border: 1px solid currentColor; padding: 1rem; }
+
+.dojo-nucleus-page__breadcrumb { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 2rem; font-size: .8rem; opacity: .72; }
+.dojo-nucleus-page__sequence { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 3rem; padding-block: 1.25rem; border-block: 1px solid currentColor; }
+.dojo-nucleus-page__sequence a:last-child { text-align: right; }
+@media (max-width: 640px) { .dojo-nucleus-page__sequence { grid-template-columns: 1fr; } .dojo-nucleus-page__sequence a:last-child { text-align: left; } }
