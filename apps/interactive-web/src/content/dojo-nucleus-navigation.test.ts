@@ -30,3 +30,14 @@ describe('path boundaries', () => {
     expect(boundary[1]?.previous?.id).not.toBe('NUC-N004');
   });
 });
+
+describe('full path context', () => {
+  it('exposes all four Canon nuclei with a 1-based position', () => {
+    const nav = getDojoNucleusNavigation('NUC-N002', 'pt-BR');
+    expect(nav?.pathPosition).toBe(2);
+    expect(nav?.pathSize).toBe(4);
+    expect(nav?.pathNuclei.map(({ id }) => id)).toEqual([
+      'NUC-N001', 'NUC-N002', 'NUC-N003', 'NUC-N004',
+    ]);
+  });
+});
