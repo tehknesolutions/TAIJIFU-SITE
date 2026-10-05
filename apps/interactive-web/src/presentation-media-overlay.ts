@@ -52,6 +52,11 @@ export function createPresentationMediaOverlay(
         image.src = nextUrl;
         image.hidden = false;
       }, { once: true });
+      preload.addEventListener('error', () => {
+        if (version !== requestVersion) return;
+        image.dataset.presentationMediaState = 'visible';
+        image.hidden = false;
+      }, { once: true });
       preload.src = nextUrl;
     },
   });
