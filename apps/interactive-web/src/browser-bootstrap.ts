@@ -13,35 +13,18 @@ type MountedSurface = Readonly<{ focusNode(nodeId: string | null): void; dispose
 type MountedTraining = Readonly<{ getState(): unknown; dispose(): void }>;
 type MountSurface = (options: { canvas: WebSurfaceCanvas; frame: RenderFrame; navigate: (url: string) => void; onFocus?: (focus: ProjectedFocus | null) => void }) => MountedSurface;
 type MountTraining = (root: HTMLElement) => MountedTraining;
-
 const unavailableSurface: MountedSurface = Object.freeze({ focusNode: () => undefined, dispose: () => undefined });
 
-export function bootstrapInteractiveWeb(options: {
-  locale?: SupportedLocale;
-  canvas: WebSurfaceCanvas;
-  navigate: (url: string) => void;
-  onFocus?: (focus: ProjectedFocus | null) => void;
-  onPresentationMediaChange?: (mediaId: string | undefined) => void;
-  presentationMediaElement?: HTMLImageElement | null;
-  initialFocusNode?: string | null;
-  routeId?: string;
-  presentationMediaId?: string;
-  mountSurface?: MountSurface;
-  trainingRoot?: HTMLElement | null;
-  mountTraining?: MountTraining;
-}) {
+export function bootstrapInteractiveWeb(options: { locale?: SupportedLocale; canvas: WebSurfaceCanvas; navigate: (url: string) => void; onFocus?: (focus: ProjectedFocus | null) => void; onPresentationMediaChange?: (mediaId: string | undefined) => void; presentationMediaElement?: HTMLImageElement | null; initialFocusNode?: string | null; routeId?: string; presentationMediaId?: string; mountSurface?: MountSurface; trainingRoot?: HTMLElement | null; mountTraining?: MountTraining; }) {
   const routeMediaId = getPresentationMediaIdForRoute(options.routeId ?? 'home');
   const initialMediaId = options.presentationMediaId ?? routeMediaId;
-  const experience = createInteractiveWebExperience({
-    nodes: buildLocalizedExperienceNodes(options.locale ?? 'pt-BR'),
-    presentationMediaId: initialMediaId,
-  });
-  const mediaOverlay = options.presentationMediaElement
-    ? createPresentationMediaOverlay(options.presentationMediaElement)
-    : null;
+  const experience = createInteractiveWebExperience({ nodes: buildLocalizedExperienceNodes(options.locale ?? 'pt-BR'), presentationMediaId: initialMediaId });
+  const mediaOverlay = options.presentationMediaElement ? createPresentationMediaOverlay(options.presentationMediaElement) : null;
   mediaOverlay?.show(initialMediaId);
+  let disposed = false;
 
   const handleFocus = (focus: ProjectedFocus | null) => {
+    if (disposed) return;
     options.onFocus?.(focus);
     const mediaId = focus ? getPresentationMediaIdForRoute(focus.nodeId) : routeMediaId;
     mediaOverlay?.show(mediaId);
@@ -49,29 +32,13 @@ export function bootstrapInteractiveWeb(options: {
   };
 
   const mountSurface = options.mountSurface ?? mountBrowserThreeSurface;
-  let surface: MountedSurface;
-  let surfaceAvailable = true;
-  try {
-    surface = mountSurface({ canvas: options.canvas, frame: experience.frame, navigate: options.navigate, onFocus: handleFocus });
-  } catch {
-    surface = unavailableSurface;
-    surfaceAvailable = false;
-  }
-
+  let surface: MountedSurface; let surfaceAvailable = true;
+  try { surface = mountSurface({ canvas: options.canvas, frame: experience.frame, navigate: options.navigate, onFocus: handleFocus }); }
+  catch { surface = unavailableSurface; surfaceAvailable = false; }
   if (options.initialFocusNode) surface.focusNode(options.initialFocusNode);
 
-  const trainingRoot = options.trainingRoot ?? null;
-  const mountTraining = options.mountTraining ?? mountTrainingExperience;
-  let training: MountedTraining | null = null;
-  if (trainingRoot) {
-    try { training = mountTraining(trainingRoot); } catch { training = null; }
-  }
+  const trainingRoot = options.trainingRoot ?? null; const mountTraining = options.mountTraining ?? mountTrainingExperience; let training: MountedTraining | null = null;
+  if (trainingRoot) { try { training = mountTraining(trainingRoot); } catch { training = null; } }
 
-  return Object.freeze({
-    experience,
-    surfaceAvailable,
-    trainingAvailable: training !== null,
-    focusNode: (nodeId: string | null) => surface.focusNode(nodeId),
-    dispose: () => { training?.dispose(); surface.dispose(); },
-  });
+  return Object.freeze({ experience, surfaceAvailable, trainingAvailable: training !== null, focusNode: (nodeId: string | null) => { if (!disposed) surface.focusNode(nodeId); }, dispose: () => { if (disposed) return; disposed = true; mediaOverlay?.dispose(); training?.dispose(); surface.dispose(); } });
 }
