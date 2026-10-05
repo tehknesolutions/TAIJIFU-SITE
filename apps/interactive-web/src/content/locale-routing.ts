@@ -1,9 +1,11 @@
 import { parseLocalePrefix, type SupportedLocale } from './locale.js';
 import { findSiteRoute, resolveLegacyRedirect } from './site-ia.js';
+import { findDojoNucleusByPath } from './dojo-nucleus-routes.js';
 
 export type LocalizedPathResolution =
   | Readonly<{ kind: 'international-entry' }>
   | Readonly<{ kind: 'localized-route'; locale: SupportedLocale; routeId: string }>
+  | Readonly<{ kind: 'dojo-nucleus'; locale: SupportedLocale; nucleusId: string }>
   | Readonly<{ kind: 'not-found' }>;
 
 export function resolveLocalizedPath(pathname: string): LocalizedPathResolution {
@@ -11,6 +13,9 @@ export function resolveLocalizedPath(pathname: string): LocalizedPathResolution 
 
   const locale = parseLocalePrefix(pathname);
   if (!locale) return Object.freeze({ kind: 'not-found' });
+
+  const dojoNucleus = findDojoNucleusByPath(pathname);
+  if (dojoNucleus) return Object.freeze({ kind: 'dojo-nucleus', locale, nucleusId: dojoNucleus.nucleusId });
 
   const route = findSiteRoute(pathname);
   if (!route?.localized?.[locale] || route.localized[locale].canonicalUrl !== pathname) {

@@ -209,3 +209,11 @@ a { color: inherit; }
 .canon-curriculum__item { margin-top: .5rem; }
 .canon-curriculum__item ul { margin-block: .6rem 0; padding-left: 1.25rem; }
 .canon-curriculum__item li { padding-block: .18rem; }
+.dojo-nucleus-page { max-width: 70rem; margin: 0 auto; padding: clamp(3rem, 8vw, 7rem) clamp(1.25rem, 5vw, 4rem); }
+.dojo-nucleus-page header { max-width: 52rem; margin-bottom: 3rem; }
+.dojo-nucleus-page__id, .dojo-nucleus-page__authority, .dojo-nucleus-page__localization, .dojo-nucleus-page footer { font-size: .82rem; letter-spacing: .04em; opacity: .72; }
+.dojo-nucleus-page h1 { margin: .4rem 0 1rem; font-size: clamp(2.4rem, 6vw, 5.5rem); }
+.dojo-nucleus-page section { max-width: 52rem; padding-block: 2rem; border-block-start: 1px solid currentColor; }
+.dojo-nucleus-page section h2 { margin-top: 1.75rem; }
+.dojo-nucleus-page footer { display: grid; gap: .4rem; margin-top: 2rem; }
+.dojo-nucleus-page__localization { border: 1px solid currentColor; padding: 1rem; }
