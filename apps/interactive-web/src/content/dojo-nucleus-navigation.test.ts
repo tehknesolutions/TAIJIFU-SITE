@@ -21,3 +21,12 @@ describe('Dojo nucleus sequence navigation', () => {
     expect(getDojoNucleusNavigation('NUC-N001', 'es')?.next?.url).toMatch(/^\/es\/dojo\/nucleos\//);
   });
 });
+
+
+describe('path boundaries', () => {
+  it('does not cross from one Canon path into another', () => {
+    const boundary = ['NUC-N004', 'NUC-N005'].map((id) => getDojoNucleusNavigation(id, 'pt-BR'));
+    expect(boundary[0]?.next?.id).not.toBe('NUC-N005');
+    expect(boundary[1]?.previous?.id).not.toBe('NUC-N004');
+  });
+});
