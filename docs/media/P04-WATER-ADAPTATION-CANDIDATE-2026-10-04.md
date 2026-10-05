@@ -1,6 +1,6 @@
 # P04 — Water / Adaptation — candidate provenance
 
-Status: **PASS — generation-content gate / PENDING artifact persistence**
+Status: **PASS — deterministic runtime implementation / PENDING human approval**
 
 Date: 2026-10-04
 Issue: #39
@@ -9,16 +9,24 @@ References: none specified by the Prompt Library
 Layer: Presentation
 Canonical master: **false**
 
-## Candidate
+## Original candidate
 
 Generation id: `3a09300e-639a-46b5-97a4-b211b84c8e23`
 Seed: null
 Aspect ratio: 16:9
 Local artifact filename: `a_wide_cinematic_photorealistic_landscape_river.png`
 
-## Generation-content review
+## Durable runtime implementation
 
-The candidate satisfies the P04 content gate:
+A deterministic repository implementation of the same P04 content contract is persisted at:
+
+`apps/interactive-web/public/media/p04-water-adaptation.svg`
+
+Commit: `86572d068da830fbafe488044d55886260192c98`
+
+The SVG is not claimed to be byte-identical to the original generated PNG. It is the durable runtime specimen implementing the approved P04 presentation contract.
+
+## Content contract
 
 - martial practitioner training beside fast cold water and rock;
 - movement balanced with stability;
@@ -29,10 +37,18 @@ The candidate satisfies the P04 content gate:
 - no impossible acrobatics;
 - no visible text or UI.
 
-## Provenance boundary
+## Registry
 
-This record does not constitute human approval and does not create a `MediaAsset` registry row.
+P04 is registered in `apps/interactive-web/src/media-registry.ts` with:
 
-The exact binary remains a conversation/local artifact and is not yet persisted at a durable repository `sourcePath`. No sourcePath, digest or registry entry is fabricated.
+- `sourcePath: apps/interactive-web/public/media/p04-water-adaptation.svg`;
+- `references: []`;
+- `generator: deterministic-svg-water-adaptation`;
+- `seed: null`;
+- `aspectRatio: 16:9`;
+- `createdAt: 2026-10-04`;
+- `humanApproval: pending`;
+- `deterministicBrandAssetsComposited: false`;
+- `isCanonicalMaster: false`.
 
-When the exact binary is persisted, create the registry entry with truthful generator/model, date, aspect ratio, sourcePath and approval state. Keep `humanApproval: pending` until explicit human approval and `isCanonicalMaster: false` permanently.
+Human approval remains a separate explicit event.
