@@ -38,7 +38,7 @@ export function renderSemanticRoute(pathname: string): string | null { const rou
 export function renderInteractiveLegend(locale: SupportedLocale = 'pt-BR', focusId: string | null = null): string {
   const hierarchy = buildExperienceHierarchy(buildLocalizedExperienceNodes(locale));
   return contextualNavigationNodes(hierarchy, focusId)
-    .map((node) => `<a class="node-legend__item node-legend__item--${escapeHtml(node.relation)}" data-node-id="${escapeHtml(node.id)}" data-node-depth="${node.depth}" data-node-relation="${escapeHtml(node.relation)}" href="${escapeHtml(node.canonicalUrl)}"${node.relation === 'focus' ? ' aria-current="location"' : ''}>${escapeHtml(node.label)}</a>`)
+    .map((node) => `<a class="node-legend__item node-legend__item--${escapeHtml(node.relation)}" data-node-id="${escapeHtml(node.id)}" data-node-depth="${node.depth}" data-node-relation="${escapeHtml(node.relation)}" data-manifestation="${escapeHtml(node.manifestation)}" href="${escapeHtml(node.canonicalUrl)}"${node.relation === 'focus' ? ' aria-current="location"' : ''}>${escapeHtml(node.label)}</a>`)
     .join('');
 }
 export function canonicalRedirectFor(pathname: string): string | null { return resolveLegacyRedirect(pathname); }
