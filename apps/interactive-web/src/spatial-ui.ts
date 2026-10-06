@@ -1,3 +1,4 @@
+import { manifestationForContext, type ManifestationIntensity } from '@taijifu/design-tokens';
 import type { ExperienceNode } from './experience-shell.js';
 
 export type ExperienceHierarchyNode = Readonly<{
@@ -18,7 +19,7 @@ export type ContextualNavigationNode = Readonly<{
   canonicalUrl: string;
   depth: number;
   relation: 'root' | 'child' | 'focus' | 'focus-child';
-  manifestation: 'signal' | 'artifact';
+  manifestation: ManifestationIntensity;
 }>;
 
 export function buildExperienceHierarchy(
@@ -97,7 +98,9 @@ export function contextualNavigationNodes(
         : depth === 0
           ? 'root'
           : 'child';
-    const manifestation: ContextualNavigationNode['manifestation'] = relation === 'focus' || relation === 'focus-child' ? 'artifact' : 'signal';
+    const manifestation: ContextualNavigationNode['manifestation'] = relation === 'focus' || relation === 'focus-child'
+      ? manifestationForContext('focused-node')
+      : manifestationForContext('navigation');
     return Object.freeze({ id: node.id, label: node.label, canonicalUrl: node.canonicalUrl, depth, relation, manifestation });
   }));
 }
