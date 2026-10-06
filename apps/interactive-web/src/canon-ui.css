@@ -146,3 +146,68 @@ body {
 .canon-nucleus__missing { opacity: .65; font-style: italic; }
 
 .canon-nucleus__link { display: inline-block; margin-top: .8rem; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
+
+
+/* Living Identity — Artifact grammar for canonical curriculum objects. */
+.canon-curriculum{
+  --tj-artifact-intensity:var(--tj-intensity-artifact);
+  --tj-artifact-depth:var(--tj-depth-artifact);
+}
+.canon-curriculum__group{
+  position:relative;
+  border-block-start:1px solid color-mix(in srgb,var(--tj-color-metal) 34%,transparent);
+  background:linear-gradient(90deg,color-mix(in srgb,var(--tj-surface-deep) 72%,transparent),transparent 72%);
+}
+.canon-curriculum__group>summary{
+  min-height:3.25rem;
+  padding:var(--tj-space-2);
+  font-family:var(--tj-font-heading);
+  letter-spacing:.035em;
+}
+.canon-curriculum__items{
+  display:grid;
+  gap:var(--tj-space-2);
+  padding:0 var(--tj-space-2) var(--tj-space-3);
+}
+.canon-curriculum__item{
+  position:relative;
+  border-inline-start:2px solid color-mix(in srgb,var(--tj-color-fu) calc(var(--tj-artifact-intensity) * 100%),transparent);
+  background:color-mix(in srgb,var(--tj-surface-elevated) 82%,transparent);
+  box-shadow:0 calc(.35rem * var(--tj-artifact-depth)) calc(1.25rem * var(--tj-artifact-depth)) rgba(0,0,0,.18);
+}
+.canon-curriculum__item>summary,
+.canon-curriculum__item>h3{
+  margin:0;
+  padding:var(--tj-space-2);
+  font-family:var(--tj-font-heading);
+}
+.canon-curriculum__item>p{padding-inline:var(--tj-space-2)}
+.canon-curriculum__item>ul{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:1px;
+  padding:var(--tj-space-2);
+}
+.canon-curriculum__item>ul>li{
+  min-height:4rem;
+  padding:var(--tj-space-1);
+  border:1px solid color-mix(in srgb,var(--tj-color-metal) 22%,transparent);
+  background:color-mix(in srgb,var(--tj-surface-void) 86%,transparent);
+  transition:
+    transform var(--tj-motion-ji) var(--tj-motion-easing-standard),
+    border-color var(--tj-motion-tai) var(--tj-motion-easing-standard);
+}
+.canon-curriculum__item>ul>li:hover{
+  transform:translateY(calc(-.08rem * var(--tj-artifact-depth)));
+  border-color:color-mix(in srgb,var(--tj-color-fu) 48%,transparent);
+}
+.canon-curriculum summary:focus-visible{
+  outline:2px solid var(--tj-color-fu);
+  outline-offset:3px;
+}
+@media(max-width:48rem){
+  .canon-curriculum__item>ul{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .canon-curriculum__item>ul>li:hover{transform:none}
+}
