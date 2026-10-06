@@ -3,7 +3,6 @@ import './dojo-practice-focus.css';
 import { bootstrapInteractiveWeb } from './browser-bootstrap.js';
 import { mountTrainingExperience } from './training/training-browser.js';
 import { renderInteractiveLegend, renderPrimaryNavigation, renderSemanticRoute } from './semantic-site.js';
-import { buildLocalizedExperienceNodes } from './content/canon-registry.js';
 import { renderInternationalEntry, renderLanguageSelector } from './content/international-entry.js';
 import { legacyRedirectFor, resolveLocalizedPath } from './content/locale-routing.js';
 import { applyShellLocalization } from './content/shell-localization.js';
@@ -14,7 +13,7 @@ import { renderDojoNucleusPage } from './content/dojo-nucleus-page.js';
 import { wireDojoPracticeFocus } from './content/dojo-practice-focus.js';
 import { renderLocalizedSeoHead } from './content/seo-localization.js';
 import { resolvePresentationMedia } from './media-runtime.js';
-import { wireHomeDojoLinks } from './home-dojo-wiring.js';
+import { wireDojoEntryLinks, wireHomeDojoLinks } from './home-dojo-wiring.js';
 import { applyInteractiveSurfaceState } from './interactive-surface-state.js';
 import { applyPresentationStageState } from './presentation-stage-state.js';
 import { wireLegendFocus } from './legend-focus-wiring.js';
@@ -48,6 +47,7 @@ else {
   }
   const activeLocale = routeResolution.kind === 'localized-route' || routeResolution.kind === 'dojo-entry' || routeResolution.kind === 'dojo-nucleus' ? routeResolution.locale : 'pt-BR';
   wireHomeDojoLinks(document.querySelectorAll<HTMLAnchorElement>('[data-route-id]'), activeLocale);
+  wireDojoEntryLinks(document.querySelectorAll<HTMLAnchorElement>('[data-dojo-entry]'), activeLocale);
   const primaryNavigation = document.querySelector<HTMLElement>('#primary-navigation'); if (primaryNavigation) primaryNavigation.innerHTML = renderPrimaryNavigation(activeLocale);
   const interactiveLegend = document.querySelector<HTMLElement>('#interactive-node-links');
   const renderLegend = (focusId: string | null) => { if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend(activeLocale, focusId); }; renderLegend(null);
@@ -65,7 +65,6 @@ else {
     runtime = bootstrapInteractiveWeb({ locale: activeLocale, canvas, navigate: (canonicalUrl) => window.location.assign(canonicalUrl), routeId: currentRoute?.id ?? 'home', initialFocusNode: currentRoute?.id ?? null, presentationMediaElement, onPresentationMediaStateChange: (snapshot) => applyPresentationStageState(interactiveStage, snapshot), onFocus: (focus) => { if (focusLabel) focusLabel.value = focus?.label ?? 'TAIJIFU'; syncLegendFocus(focus?.nodeId ?? null); } });
     applyPresentationStageState(interactiveStage, runtime.getPresentationMediaSnapshot()); wireLegend();
     const interactiveExperience = document.querySelector<HTMLElement>('#interactive-experience'); const surfaceStatus = document.querySelector<HTMLElement>('#interactive-surface-status'); if (interactiveExperience && surfaceStatus) applyInteractiveSurfaceState(interactiveExperience, surfaceStatus, runtime.surfaceAvailable);
-    const dojoEntryLinks = document.querySelectorAll<HTMLAnchorElement>('[href="#interactive-experience"]'); for (const link of dojoEntryLinks) link.addEventListener('click', () => { runtime.focusNode('taijifu'); interactiveExperience?.focus({ preventScroll: true }); });
     window.addEventListener('pagehide', () => { training?.dispose(); runtime.dispose(); }, { once: true });
   } else if (training) window.addEventListener('pagehide', () => training.dispose(), { once: true });
 }
