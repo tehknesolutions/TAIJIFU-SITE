@@ -27,7 +27,7 @@ if (homeGate) homeGate.dataset.manifestation = manifestationForContext('home');
 const redirect = legacyRedirectFor(pathname);
 if (redirect) window.location.replace(redirect);
 else {
-  const routeResolution = resolveLocalizedPath(pathname);
+  const routeResolution = resolveLocalizedPath(pathname, import.meta.env.BASE_URL);
   const semanticContent = document.querySelector<HTMLElement>('#semantic-content');
   if (routeResolution.kind === 'international-entry') { document.documentElement.lang = 'en'; if (semanticContent) semanticContent.innerHTML = renderInternationalEntry(); }
   else if (routeResolution.kind === 'dojo-entry') {
