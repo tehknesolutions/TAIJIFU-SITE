@@ -18,6 +18,8 @@ export type DojoNucleusNavigation = Readonly<{
   next: Readonly<{ id: string; name: string; url: string }> | null;
   previousPath: DojoPathTransition | null;
   nextPath: DojoPathTransition | null;
+  beltPathPosition: number;
+  beltPathCount: number;
   pathPosition: number;
   pathSize: number;
   pathNuclei: readonly Readonly<{ id: string; name: string; url: string }>[];
@@ -31,6 +33,7 @@ export function getDojoNucleusNavigation(nucleusId: string, locale: SupportedLoc
   if (!path || !belt) return null;
 
   const pathIndex = path.nucleusIds.indexOf(nucleusId);
+  const beltPathIndex = belt.pathIds.indexOf(path.code);
   const canonPathIndex = canonSnapshot.paths.findIndex(({ id }) => id === path.id);
   const routeFor = (id: string) => {
     const nucleus = canonSnapshot.nuclei.find(({ id: candidate }) => candidate === id);
@@ -54,6 +57,8 @@ export function getDojoNucleusNavigation(nucleusId: string, locale: SupportedLoc
     next: pathIndex < path.nucleusIds.length - 1 ? routeFor(path.nucleusIds[pathIndex + 1]) : null,
     previousPath: pathIndex === 0 ? transitionFor(canonSnapshot.paths[canonPathIndex - 1], 'last') : null,
     nextPath: pathIndex === path.nucleusIds.length - 1 ? transitionFor(canonSnapshot.paths[canonPathIndex + 1], 'first') : null,
+    beltPathPosition: beltPathIndex + 1,
+    beltPathCount: belt.pathIds.length,
     pathPosition: pathIndex + 1,
     pathSize: path.nucleusIds.length,
     pathNuclei,
