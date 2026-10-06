@@ -1,4 +1,4 @@
-import { mediaRegistry } from './media-registry.js';
+import { DETERMINISTIC_PRESENTATION_FALLBACK, mediaRegistry } from './media-registry.js';
 
 export type PresentationMediaResolution = Readonly<{
   state: 'asset' | 'fallback';
@@ -8,7 +8,7 @@ export type PresentationMediaResolution = Readonly<{
 export function resolvePresentationMedia(id: string): PresentationMediaResolution {
   const asset = mediaRegistry.find((candidate) => candidate.id === id);
   if (!asset || asset.humanApproval !== 'approved') {
-    return Object.freeze({ state: 'fallback' as const, url: null });
+    return Object.freeze({ state: 'fallback' as const, url: publicMediaUrl(DETERMINISTIC_PRESENTATION_FALLBACK) });
   }
 
   return Object.freeze({
