@@ -3,7 +3,7 @@ import { toggleDojoPracticeFocus, wireDojoPracticeFocus } from './dojo-practice-
 
 describe('Dojo practice focus', () => {
   it('enters and exits focus without creating progress state', () => {
-    document.body.innerHTML = '<article class="dojo-nucleus-page"><section class="dojo-practice"><button data-dojo-practice-focus aria-pressed="false">PRATICAR ESTE NÚCLEO</button></section></article>';
+    document.body.innerHTML = '<article class="dojo-nucleus-page"><section class="dojo-practice"><button data-dojo-practice-focus data-practice-enter-label="PRATICAR ESTE NÚCLEO" data-practice-exit-label="SAIR DO MODO PRÁTICA" aria-pressed="false">PRATICAR ESTE NÚCLEO</button></section></article>';
     const root = document.querySelector<HTMLElement>('.dojo-nucleus-page')!;
     const button = document.querySelector<HTMLButtonElement>('[data-dojo-practice-focus]')!;
     toggleDojoPracticeFocus(root, button);
@@ -17,8 +17,18 @@ describe('Dojo practice focus', () => {
     expect(button.textContent).toBe('PRATICAR ESTE NÚCLEO');
   });
 
+  it('preserves English action labels when toggling practice focus', () => {
+    document.body.innerHTML = '<article class="dojo-nucleus-page"><section class="dojo-practice"><button data-dojo-practice-focus data-practice-enter-label="PRACTICE THIS NUCLEUS" data-practice-exit-label="EXIT PRACTICE MODE" aria-pressed="false">PRACTICE THIS NUCLEUS</button></section></article>';
+    const root = document.querySelector<HTMLElement>('.dojo-nucleus-page')!;
+    const button = document.querySelector<HTMLButtonElement>('[data-dojo-practice-focus]')!;
+    toggleDojoPracticeFocus(root, button);
+    expect(button.textContent).toBe('EXIT PRACTICE MODE');
+    toggleDojoPracticeFocus(root, button);
+    expect(button.textContent).toBe('PRACTICE THIS NUCLEUS');
+  });
+
   it('exits practice focus with Escape and returns focus to the action', () => {
-    document.body.innerHTML = '<article class="dojo-nucleus-page"><section class="dojo-practice"><button data-dojo-practice-focus aria-pressed="false">PRATICAR ESTE NÚCLEO</button></section></article>';
+    document.body.innerHTML = '<article class="dojo-nucleus-page"><section class="dojo-practice"><button data-dojo-practice-focus data-practice-enter-label="PRATICAR ESTE NÚCLEO" data-practice-exit-label="SAIR DO MODO PRÁTICA" aria-pressed="false">PRATICAR ESTE NÚCLEO</button></section></article>';
     const root = document.querySelector<HTMLElement>('.dojo-nucleus-page')!;
     const button = document.querySelector<HTMLButtonElement>('[data-dojo-practice-focus]')!;
     wireDojoPracticeFocus(document);
