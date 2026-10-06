@@ -18,8 +18,10 @@ describe('Dojo nucleus page', () => {
     const html = renderDojoNucleusPage('NUC-N001', 'pt-BR')!;
     expect(html).toContain('class="dojo-practice"');
     expect(html).toContain('data-practice-authority="legacy-candidate"');
-    expect(html).toContain('Entrar no modo prática');
+    expect(html).toContain('PRATICAR ESTE NÚCLEO');
+    expect(html).toContain('data-practice-exit-label="SAIR DO MODO PRÁTICA"');
     expect(html).toContain('Núcleo 1/4');
+    expect(html).not.toContain('Entrar no modo prática');
     expect(html).not.toContain('repetições');
     expect(html).not.toContain('duração');
     expect(html).not.toContain('concluído');
