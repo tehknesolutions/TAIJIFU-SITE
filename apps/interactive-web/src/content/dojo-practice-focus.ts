@@ -3,7 +3,7 @@ export function toggleDojoPracticeFocus(root: HTMLElement, button: HTMLButtonEle
   if (entering) root.dataset.practiceFocus = 'true';
   else delete root.dataset.practiceFocus;
   button.setAttribute('aria-pressed', entering ? 'true' : 'false');
-  button.textContent = entering ? 'Sair do modo prática' : 'Entrar no modo prática';
+  button.textContent = entering ? 'SAIR DO MODO PRÁTICA' : 'PRATICAR ESTE NÚCLEO';
   if (entering) root.querySelector<HTMLElement>('.dojo-practice')?.focus({ preventScroll: true });
 }
 
