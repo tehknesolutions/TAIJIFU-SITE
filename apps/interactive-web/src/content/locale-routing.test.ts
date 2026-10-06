@@ -8,6 +8,12 @@ describe('TAIJIFU locale routing', () => {
     expect(resolveLocalizedPath('/es/fundamentos/')).toMatchObject({ locale: 'es', routeId: 'fundamentos' });
   });
 
+  it('resolves the localized Dojo curriculum entry independently from Nucleus pages', () => {
+    expect(resolveLocalizedPath('/pt-br/dojo/')).toEqual({ kind: 'dojo-entry', locale: 'pt-BR' });
+    expect(resolveLocalizedPath('/en/dojo/')).toEqual({ kind: 'dojo-entry', locale: 'en' });
+    expect(resolveLocalizedPath('/es/dojo/')).toEqual({ kind: 'dojo-entry', locale: 'es' });
+  });
+
   it('preserves the root as international entry rather than localized content', () => {
     expect(resolveLocalizedPath('/')).toEqual({ kind: 'international-entry' });
   });
