@@ -51,6 +51,36 @@ describe('TAIJIFU semantic design tokens', () => {
     }));
   });
 
+  it('exposes living-identity intensity, surface, depth, energy and semantic motion roles', () => {
+    expect(designTokens.intensity).toEqual(expect.objectContaining({
+      signal: '--tj-intensity-signal',
+      artifact: '--tj-intensity-artifact',
+      ritual: '--tj-intensity-ritual',
+    }));
+    expect(designTokens.surface).toEqual(expect.objectContaining({
+      void: '--tj-surface-void',
+      elevated: '--tj-surface-elevated',
+      deep: '--tj-surface-deep',
+      metal: '--tj-surface-metal',
+    }));
+    expect(designTokens.depth).toEqual(expect.objectContaining({
+      signal: '--tj-depth-signal',
+      artifact: '--tj-depth-artifact',
+      ritual: '--tj-depth-ritual',
+    }));
+    expect(designTokens.energy).toEqual(expect.objectContaining({
+      signal: '--tj-energy-signal',
+      artifact: '--tj-energy-artifact',
+      ritual: '--tj-energy-ritual',
+    }));
+    expect(designTokens.motion.semantic).toEqual(expect.objectContaining({
+      tai: '--tj-motion-tai',
+      ji: '--tj-motion-ji',
+      fu: '--tj-motion-fu',
+    }));
+    expect(css).not.toMatch(/#[0-9a-f]{3,8}\\b/i);
+  });
+
   it('keeps TypeScript and CSS token surfaces synchronized', () => {
     expectCssVariables(designTokens);
   });
@@ -60,5 +90,8 @@ describe('TAIJIFU semantic design tokens', () => {
     expect(css).toContain('--tj-motion-duration-fast: 0ms;');
     expect(css).toContain('--tj-motion-duration-standard: 0ms;');
     expect(css).toContain('--tj-motion-duration-deliberate: 0ms;');
+    expect(css).toContain('--tj-motion-tai: 0ms;');
+    expect(css).toContain('--tj-motion-ji: 0ms;');
+    expect(css).toContain('--tj-motion-fu: 0ms;');
   });
 });
