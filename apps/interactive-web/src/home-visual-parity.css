@@ -22,3 +22,40 @@ html{color-scheme:dark;background:var(--tj-home-bg)}body{background:var(--tj-hom
 .dojo-gate__hnk{position:absolute;right:2.5rem;bottom:1.5rem;display:grid;text-align:right;line-height:1.05}.dojo-gate__hnk strong{color:var(--tj-home-gold);font-family:var(--tj-font-display);font-size:1.4rem;letter-spacing:.16em}.dojo-gate__hnk span,.dojo-gate__hnk small{font-size:.48rem;letter-spacing:.16em;opacity:.72}
 @media(max-width:64rem){.dojo-banner{opacity:.7}.dojo-banner--left{left:1.5%}.dojo-banner--right{right:1.5%}.dojo-gate__hnk{right:1rem}}
 @media(max-width:48rem){.site-header__search,.dojo-banner,.dojo-gate__hnk{display:none}.dojo-gate__identity{width:clamp(7rem,32vw,10rem)}}
+
+
+/* Living Identity — Ritual manifestation. Canonical mark topology remains unchanged. */
+.dojo-gate{
+  --tj-home-intensity:var(--tj-intensity-ritual);
+  --tj-home-depth:var(--tj-depth-ritual);
+}
+.dojo-gate__identity{
+  isolation:isolate;
+}
+.dojo-gate__identity::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  inset:-18%;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 35%,color-mix(in srgb,var(--tj-home-tai) calc(var(--tj-home-intensity) * 42%),transparent),transparent 52%),
+    radial-gradient(circle at 66% 42%,color-mix(in srgb,var(--tj-home-ji) calc(var(--tj-home-intensity) * 40%),transparent),transparent 54%),
+    radial-gradient(circle at 52% 70%,color-mix(in srgb,var(--tj-home-gold) calc(var(--tj-home-intensity) * 34%),transparent),transparent 58%);
+  filter:blur(calc(.45rem * var(--tj-home-depth)));
+  opacity:var(--tj-home-intensity);
+  pointer-events:none;
+}
+.dojo-gate__identity img{
+  mix-blend-mode:screen;
+  opacity:.96;
+}
+.dojo-axis{
+  border-color:color-mix(in srgb,currentColor calc(var(--tj-home-intensity) * 38%),transparent);
+}
+.dojo-axis:hover,.dojo-axis:focus-visible{
+  transform:translateY(calc(-.12rem * var(--tj-home-depth)));
+}
+@media(prefers-reduced-motion:reduce){
+  .dojo-axis:hover,.dojo-axis:focus-visible{transform:none}
+}
