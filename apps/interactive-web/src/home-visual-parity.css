@@ -25,7 +25,7 @@ html{color-scheme:dark;background:var(--tj-home-bg)}body{background:var(--tj-hom
 
 
 /* Living Identity — Ritual manifestation. Canonical mark topology remains unchanged. */
-.dojo-gate{
+.dojo-gate[data-manifestation="ritual"]{
   --tj-home-intensity:var(--tj-intensity-ritual);
   --tj-home-depth:var(--tj-depth-ritual);
 }
