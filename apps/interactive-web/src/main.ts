@@ -19,8 +19,11 @@ import { wireDojoEntryLinks, wireHomeDojoLinks } from './home-dojo-wiring.js';
 import { applyInteractiveSurfaceState } from './interactive-surface-state.js';
 import { applyPresentationStageState } from './presentation-stage-state.js';
 import { wireLegendFocus } from './legend-focus-wiring.js';
+import { manifestationForContext } from '@taijifu/design-tokens';
 
 const pathname = window.location.pathname;
+const homeGate = document.querySelector<HTMLElement>('.dojo-gate');
+if (homeGate) homeGate.dataset.manifestation = manifestationForContext('home');
 const redirect = legacyRedirectFor(pathname);
 if (redirect) window.location.replace(redirect);
 else {
