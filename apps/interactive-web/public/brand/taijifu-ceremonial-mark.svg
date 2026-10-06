@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc">
+<title id="title">TAIJIFU ceremonial four-part mark</title><desc id="desc">Presentation mark for the official cinematic home: four adaptive forms in red, blue, gold and black around a golden center.</desc>
+<defs>
+ <radialGradient id="core"><stop offset="0" stop-color="#f7dfa1"/><stop offset=".48" stop-color="#d4a343"/><stop offset="1" stop-color="#7c4d16"/></radialGradient>
+ <linearGradient id="red" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#df5144"/><stop offset=".5" stop-color="#9d241f"/><stop offset="1" stop-color="#47100f"/></linearGradient>
+ <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#61a5c7"/><stop offset=".48" stop-color="#24688e"/><stop offset="1" stop-color="#0b283c"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0bd"/><stop offset=".48" stop-color="#d2a24b"/><stop offset="1" stop-color="#6e4618"/></linearGradient>
+ <linearGradient id="black" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#49443b"/><stop offset=".5" stop-color="#171714"/><stop offset="1" stop-color="#050505"/></linearGradient>
+ <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceAlpha" stdDeviation="22"/><feOffset dy="20"/><feComponentTransfer><feFuncA type="linear" slope=".65"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<g filter="url(#shadow)" stroke="#d7b56c" stroke-opacity=".28" stroke-width="7">
+ <path fill="url(#red)" d="M486 103C298 111 139 249 105 430c-20 108 14 222 91 299 57 57 135 91 215 94-86-73-126-177-105-277 19-91 78-168 161-209 47-23 76-72 73-124-2-43-19-81-54-110Z"/>
+ <path fill="url(#blue)" d="M897 486C889 298 751 139 570 105c-108-20-222 14-299 91-57 57-91 135-94 215 73-86 177-126 277-105 91 19 168 78 209 161 23 47 72 76 124 73 43-2 81-19 110-54Z"/>
+ <path fill="url(#gold)" d="M514 897c188-8 347-146 381-327 20-108-14-222-91-299-57-57-135-91-215-94 86 73 126 177 105 277-19 91-78 168-161 209-47 23-76 72-73 124 2 43 19 81 54 110Z"/>
+ <path fill="url(#black)" d="M103 514c8 188 146 347 327 381 108 20 222-14 299-91 57-57 91-135 94-215-73 86-177 126-277 105-91-19-168-78-209-161-23-47-72-76-124-73-43 2-81 19-110 54Z"/>
+</g>
+<circle cx="500" cy="500" r="111" fill="#090907" stroke="#d3a54e" stroke-width="10"/>
+<circle cx="500" cy="500" r="73" fill="url(#core)" stroke="#f1d691" stroke-width="5"/>
+<circle cx="476" cy="473" r="20" fill="#fff4c9" opacity=".55"/>
+</svg>
