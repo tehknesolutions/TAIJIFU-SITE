@@ -29,9 +29,30 @@
   --tj-type-tracking-display: -0.02em;
   --tj-type-tracking-meta: 0.08em;
 
+  /* Living Identity semantic intensity. Values describe presentation energy, not Canon. */
+  --tj-intensity-signal: 0.18;
+  --tj-intensity-artifact: 0.42;
+  --tj-intensity-ritual: 0.82;
+
+  --tj-surface-void: var(--tj-color-ink);
+  --tj-surface-elevated: color-mix(in srgb, var(--tj-color-ink), var(--tj-color-paper) 8%);
+  --tj-surface-deep: color-mix(in srgb, var(--tj-color-ink), var(--tj-color-ji) 12%);
+  --tj-surface-metal: var(--tj-color-metal);
+
+  --tj-depth-signal: 0;
+  --tj-depth-artifact: 1;
+  --tj-depth-ritual: 2;
+
+  --tj-energy-signal: var(--tj-intensity-signal);
+  --tj-energy-artifact: var(--tj-intensity-artifact);
+  --tj-energy-ritual: var(--tj-intensity-ritual);
+
   --tj-motion-duration-fast: 120ms;
   --tj-motion-duration-standard: 220ms;
   --tj-motion-duration-deliberate: 420ms;
+  --tj-motion-tai: var(--tj-motion-duration-deliberate);
+  --tj-motion-ji: var(--tj-motion-duration-standard);
+  --tj-motion-fu: var(--tj-motion-duration-deliberate);
   --tj-motion-easing-standard: ease;
   --tj-motion-easing-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
 
@@ -46,5 +67,8 @@
     --tj-motion-duration-fast: 0ms;
     --tj-motion-duration-standard: 0ms;
     --tj-motion-duration-deliberate: 0ms;
+    --tj-motion-tai: 0ms;
+    --tj-motion-ji: 0ms;
+    --tj-motion-fu: 0ms;
   }
 }
