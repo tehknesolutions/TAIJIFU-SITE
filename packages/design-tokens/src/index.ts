@@ -80,3 +80,5 @@ export const designTokens = Object.freeze({
 } as const);
 
 export type TaijifuDesignTokens = typeof designTokens;
+
+export * from './identity.js';
