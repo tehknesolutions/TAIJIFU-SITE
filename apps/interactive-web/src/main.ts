@@ -9,6 +9,7 @@ import { legacyRedirectFor, resolveLocalizedPath } from './content/locale-routin
 import { applyShellLocalization } from './content/shell-localization.js';
 import { findSiteRoute } from './content/site-ia.js';
 import { renderCanonUIForLocale } from './content/canon-ui-render.js';
+import { renderDojoEntryMap } from './content/dojo-entry-map.js';
 import { renderDojoNucleusPage } from './content/dojo-nucleus-page.js';
 import { wireDojoPracticeFocus } from './content/dojo-practice-focus.js';
 import { renderLocalizedSeoHead } from './content/seo-localization.js';
@@ -25,6 +26,12 @@ else {
   const routeResolution = resolveLocalizedPath(pathname);
   const semanticContent = document.querySelector<HTMLElement>('#semantic-content');
   if (routeResolution.kind === 'international-entry') { document.documentElement.lang = 'en'; if (semanticContent) semanticContent.innerHTML = renderInternationalEntry(); }
+  else if (routeResolution.kind === 'dojo-entry') {
+    document.documentElement.lang = routeResolution.locale;
+    applyShellLocalization(document, routeResolution.locale);
+    if (semanticContent) semanticContent.innerHTML = renderDojoEntryMap(routeResolution.locale);
+    document.querySelector<HTMLElement>('#interactive-experience')?.setAttribute('hidden', 'true');
+  }
   else if (routeResolution.kind === 'dojo-nucleus') {
     document.documentElement.lang = routeResolution.locale;
     applyShellLocalization(document, routeResolution.locale);
@@ -39,7 +46,7 @@ else {
     if (seoMarkup) { const template = document.createElement('template'); template.innerHTML = seoMarkup; template.content.querySelectorAll('link').forEach((link) => { link.dataset.taijifuI18nSeo = 'true'; seoHead.appendChild(link); }); }
     const semanticRoute = renderSemanticRoute(pathname); if (semanticRoute && semanticContent) semanticContent.innerHTML = renderLanguageSelector(routeResolution.routeId, routeResolution.locale) + semanticRoute;
   }
-  const activeLocale = routeResolution.kind === 'localized-route' || routeResolution.kind === 'dojo-nucleus' ? routeResolution.locale : 'pt-BR';
+  const activeLocale = routeResolution.kind === 'localized-route' || routeResolution.kind === 'dojo-entry' || routeResolution.kind === 'dojo-nucleus' ? routeResolution.locale : 'pt-BR';
   wireHomeDojoLinks(document.querySelectorAll<HTMLAnchorElement>('[data-route-id]'), activeLocale);
   const primaryNavigation = document.querySelector<HTMLElement>('#primary-navigation'); if (primaryNavigation) primaryNavigation.innerHTML = renderPrimaryNavigation(activeLocale);
   const interactiveLegend = document.querySelector<HTMLElement>('#interactive-node-links');
