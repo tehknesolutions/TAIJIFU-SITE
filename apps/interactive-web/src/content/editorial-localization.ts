@@ -10,6 +10,10 @@ export type EditorialLocalizationRecord = Readonly<{
   sourceRelease: 'TAIJIFU-CANON-1.0';
 }>;
 
+const fieldIds = Object.freeze(
+  primaryNavigationDefinitions.map((entry) => `navigation.${entry.id}`),
+);
+
 const authoritativePtBR = Object.freeze(Object.fromEntries(
   primaryNavigationDefinitions.map((entry) => [`navigation.${entry.id}`, entry.ptBR.label]),
 ) as Record<string, string>);
