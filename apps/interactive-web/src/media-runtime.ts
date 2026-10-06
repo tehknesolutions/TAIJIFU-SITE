@@ -5,20 +5,22 @@ export type PresentationMediaResolution = Readonly<{
   url: string | null;
 }>;
 
-export function resolvePresentationMedia(id: string): PresentationMediaResolution {
+export function resolvePresentationMedia(id: string, base = '/'): PresentationMediaResolution {
   const asset = mediaRegistry.find((candidate) => candidate.id === id);
   if (!asset || asset.humanApproval !== 'approved') {
-    return Object.freeze({ state: 'fallback' as const, url: publicMediaUrl(DETERMINISTIC_PRESENTATION_FALLBACK) });
+    return Object.freeze({ state: 'fallback' as const, url: publicMediaUrl(DETERMINISTIC_PRESENTATION_FALLBACK, base) });
   }
 
   return Object.freeze({
     state: 'asset' as const,
-    url: publicMediaUrl(asset.sourcePath),
+    url: publicMediaUrl(asset.sourcePath, base),
   });
 }
 
-function publicMediaUrl(sourcePath: string): string {
+function publicMediaUrl(sourcePath: string, base: string): string {
   const marker = '/public/';
   const publicIndex = sourcePath.indexOf(marker);
-  return publicIndex >= 0 ? `/${sourcePath.slice(publicIndex + marker.length)}` : sourcePath;
+  if (publicIndex < 0) return sourcePath;
+  const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+  return `${normalizedBase}${sourcePath.slice(publicIndex + marker.length)}`;
 }
