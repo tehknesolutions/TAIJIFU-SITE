@@ -11,10 +11,19 @@ type DojoPathTransition = Readonly<{
 }>;
 
 type DojoBeltPath = DojoPathTransition & Readonly<{ current: boolean }>;
+type DojoBeltNavigation = Readonly<{
+  id: string;
+  name: string;
+  entryPathCode: string;
+  entryNucleusId: string;
+  url: string;
+  current: boolean;
+}>;
 
 export type DojoNucleusNavigation = Readonly<{
   nucleusId: string;
   belt: Readonly<{ id: string; name: string }>;
+  belts: readonly DojoBeltNavigation[];
   path: Readonly<{ id: string; code: string; name: string }>;
   previous: Readonly<{ id: string; name: string; url: string }> | null;
   next: Readonly<{ id: string; name: string; url: string }> | null;
@@ -57,10 +66,18 @@ export function getDojoNucleusNavigation(nucleusId: string, locale: SupportedLoc
     if (!transition) throw new Error(`Missing Canon Path ${code} for ${belt.id}`);
     return Object.freeze({ ...transition, current: candidate!.id === path.id });
   }));
+  const belts = Object.freeze(canonSnapshot.belts.map((candidateBelt) => {
+    const entryPathCode = candidateBelt.pathIds[0];
+    const entryPath = canonSnapshot.paths.find((candidatePath) => candidatePath.beltId === candidateBelt.id && candidatePath.code === entryPathCode);
+    const transition = transitionFor(entryPath, 'first');
+    if (!transition) throw new Error(`Missing Canon Belt entry for ${candidateBelt.id}`);
+    return Object.freeze({ id: candidateBelt.id, name: candidateBelt.name, entryPathCode, entryNucleusId: transition.entryNucleusId, url: transition.url, current: candidateBelt.id === belt.id });
+  }));
 
   return Object.freeze({
     nucleusId,
     belt: Object.freeze({ id: belt.id, name: belt.name }),
+    belts,
     path: Object.freeze({ id: path.id, code: path.code, name: path.name }),
     previous: pathIndex > 0 ? routeFor(path.nucleusIds[pathIndex - 1]) : null,
     next: pathIndex < path.nucleusIds.length - 1 ? routeFor(path.nucleusIds[pathIndex + 1]) : null,
