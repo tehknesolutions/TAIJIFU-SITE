@@ -9,20 +9,24 @@ export type LocalizedPathResolution =
   | Readonly<{ kind: 'dojo-nucleus'; locale: SupportedLocale; nucleusId: string }>
   | Readonly<{ kind: 'not-found' }>;
 
-export function resolveLocalizedPath(pathname: string): LocalizedPathResolution {
-  if (pathname === '/') return Object.freeze({ kind: 'international-entry' });
+export function resolveLocalizedPath(pathname: string, deploymentBase = '/'): LocalizedPathResolution {
+  const normalizedBase = deploymentBase === '/' ? '/' : deploymentBase.replace(/\/$/, '');
+  const routePath = normalizedBase !== '/' && pathname.startsWith(normalizedBase)
+    ? pathname.slice(normalizedBase.length) || '/'
+    : pathname;
+  if (routePath === '/') return Object.freeze({ kind: 'international-entry' });
 
-  const locale = parseLocalePrefix(pathname);
+  const locale = parseLocalePrefix(routePath);
   if (!locale) return Object.freeze({ kind: 'not-found' });
 
   const dojoEntryUrl = locale === 'pt-BR' ? '/pt-br/dojo/' : locale === 'en' ? '/en/dojo/' : '/es/dojo/';
-  if (pathname === dojoEntryUrl) return Object.freeze({ kind: 'dojo-entry', locale });
+  if (routePath === dojoEntryUrl) return Object.freeze({ kind: 'dojo-entry', locale });
 
-  const dojoNucleus = findDojoNucleusByPath(pathname);
+  const dojoNucleus = findDojoNucleusByPath(routePath);
   if (dojoNucleus) return Object.freeze({ kind: 'dojo-nucleus', locale, nucleusId: dojoNucleus.nucleusId });
 
-  const route = findSiteRoute(pathname);
-  if (!route?.localized?.[locale] || route.localized[locale].canonicalUrl !== pathname) {
+  const route = findSiteRoute(routePath);
+  if (!route?.localized?.[locale] || route.localized[locale].canonicalUrl !== routePath) {
     return Object.freeze({ kind: 'not-found' });
   }
 
