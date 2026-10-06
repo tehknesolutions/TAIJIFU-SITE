@@ -57,7 +57,7 @@ else {
   const interactiveLegend = document.querySelector<HTMLElement>('#interactive-node-links');
   const renderLegend = (focusId: string | null) => { if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend(activeLocale, focusId); }; renderLegend(null);
   const canonCurriculum = document.querySelector<HTMLElement>('#canon-curriculum'); if (canonCurriculum) canonCurriculum.innerHTML = renderCanonUIForLocale(activeLocale);
-  const dojoMedia = document.querySelector<HTMLElement>('.dojo-gate__media'); if (dojoMedia) { const media = resolvePresentationMedia('r01-dojo-environment'); dojoMedia.dataset.mediaState = media.state; if (media.url) dojoMedia.style.setProperty('--tj-presentation-media-url', 'url("' + media.url + '")'); }
+  const dojoMedia = document.querySelector<HTMLElement>('.dojo-gate__media'); if (dojoMedia) { const media = resolvePresentationMedia('r01-dojo-environment', import.meta.env.BASE_URL); dojoMedia.dataset.mediaState = media.state; if (media.url) dojoMedia.style.setProperty('--tj-presentation-media-url', 'url("' + media.url + '")'); }
   const trainingRoot = document.querySelector<HTMLElement>('[data-training-root]');
   const training = trainingRoot ? mountTrainingExperience(trainingRoot) : null;
   const canvas = document.querySelector<HTMLCanvasElement>('#taijifu-experience'); const focusLabel = document.querySelector<HTMLOutputElement>('#interactive-focus-label');
