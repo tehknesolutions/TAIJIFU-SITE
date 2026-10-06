@@ -60,7 +60,9 @@ describe('Spatial UI experience hierarchy', () => {
     expect(initialLegend.map((node) => node.id)).toEqual(initialVisible.map((node) => node.id));
     expect(focusedLegend.map((node) => node.id)).toEqual(focusedVisible.map((node) => node.id));
     expect(focusedLegend.find((node) => node.id === 'section')?.relation).toBe('focus');
-    expect(focusedLegend.find((node) => node.id === 'detail')).toMatchObject({ relation: 'focus-child', canonicalUrl: '/section/detail', depth: 2 });
+    expect(focusedLegend.find((node) => node.id === 'section')).toMatchObject({ manifestation: 'artifact' });
+    expect(focusedLegend.find((node) => node.id === 'detail')).toMatchObject({ relation: 'focus-child', manifestation: 'artifact', canonicalUrl: '/section/detail', depth: 2 });
+    expect(focusedLegend.find((node) => node.id === 'home')).toMatchObject({ manifestation: 'signal' });
   });
 
   it('has a deterministic fallback for unknown focus', () => {
