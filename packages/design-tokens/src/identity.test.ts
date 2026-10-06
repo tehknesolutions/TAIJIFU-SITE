@@ -3,6 +3,8 @@ import {
   assertIdentityAxisMapping,
   assertManifestationIntensity,
   manifestationAdaptations,
+  manifestationContract,
+  manifestationForContext,
   protectedIdentityDimensions,
   taijifuIdentityGrammar,
 } from './identity.js';
@@ -39,5 +41,21 @@ describe('TAIJIFU Living Identity invariants', () => {
     expect(() => assertIdentityAxisMapping('ji', 'manifestation')).toThrow();
     expect(() => assertIdentityAxisMapping('fu', 'essence')).toThrow();
     expect(() => assertIdentityAxisMapping('tai', 'essence')).not.toThrow();
+  });
+  it('centralizes manifestation contexts and keeps Ritual scarce', () => {
+    expect(manifestationContract.signal.allowedContexts).toEqual([
+      'navigation', 'labels', 'peripheral-nodes',
+    ]);
+    expect(manifestationContract.artifact.allowedContexts).toEqual([
+      'belt', 'path', 'nucleus', 'focused-node',
+    ]);
+    expect(manifestationContract.ritual.allowedContexts).toEqual([
+      'home', 'dojo-entry', 'path-transition',
+    ]);
+
+    expect(manifestationForContext('navigation')).toBe('signal');
+    expect(manifestationForContext('nucleus')).toBe('artifact');
+    expect(manifestationForContext('dojo-entry')).toBe('ritual');
+    expect(manifestationForContext('path-transition')).toBe('ritual');
   });
 });
