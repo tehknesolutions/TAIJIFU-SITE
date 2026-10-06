@@ -9,6 +9,13 @@ describe('presentation media runtime', () => {
     });
   });
 
+  it('resolves fallback media under a GitHub Pages base', () => {
+    expect(resolvePresentationMedia('r01-dojo-environment', '/TAIJIFU-SITE/')).toEqual({
+      state: 'fallback',
+      url: '/TAIJIFU-SITE/media/p08-brand-book-background.svg',
+    });
+  });
+
   it('falls back safely when the requested media is unknown', () => {
     expect(resolvePresentationMedia('missing-media')).toEqual({
       state: 'fallback',
