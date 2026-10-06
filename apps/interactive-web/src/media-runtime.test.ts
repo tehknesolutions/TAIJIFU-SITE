@@ -5,7 +5,7 @@ describe('presentation media runtime', () => {
   it('keeps pending media on the deterministic fallback', () => {
     expect(resolvePresentationMedia('r01-dojo-environment')).toEqual({
       state: 'fallback',
-      url: null,
+      url: '/media/p08-brand-book-background.svg',
     });
   });
 
