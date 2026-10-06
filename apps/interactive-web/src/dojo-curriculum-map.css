@@ -158,3 +158,40 @@
 @media (prefers-reduced-motion: reduce) {
   .dojo-map li a { transition: none; }
 }
+
+
+/* Living Identity — Ritual is reserved for structural Path boundaries. */
+.dojo-nucleus-page__path-transition[data-manifestation="ritual"]{
+  --tj-path-ritual-intensity:var(--tj-intensity-ritual);
+  --tj-path-ritual-depth:var(--tj-depth-ritual);
+  position:relative;
+  isolation:isolate;
+  padding-block:var(--tj-space-xl);
+  border-block:1px solid color-mix(in srgb,var(--tj-color-fu) 34%,transparent);
+}
+.dojo-nucleus-page__path-transition[data-manifestation="ritual"]::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  background:
+    radial-gradient(circle at 18% 50%,color-mix(in srgb,var(--tj-color-tai) 10%,transparent),transparent 36%),
+    radial-gradient(circle at 82% 50%,color-mix(in srgb,var(--tj-color-ji) 10%,transparent),transparent 36%),
+    linear-gradient(90deg,transparent,color-mix(in srgb,var(--tj-color-fu) 7%,transparent),transparent);
+  opacity:var(--tj-path-ritual-intensity);
+  pointer-events:none;
+}
+.dojo-nucleus-page__path-transition-link{
+  transition:
+    transform var(--tj-motion-ji) var(--tj-motion-easing-standard),
+    border-color var(--tj-motion-fu) var(--tj-motion-easing-emphasized);
+}
+.dojo-nucleus-page__path-transition-link:hover,
+.dojo-nucleus-page__path-transition-link:focus-visible{
+  transform:translateY(calc(-.1rem * var(--tj-path-ritual-depth)));
+  border-color:color-mix(in srgb,var(--tj-color-fu) 52%,transparent);
+}
+@media(prefers-reduced-motion:reduce){
+  .dojo-nucleus-page__path-transition-link:hover,
+  .dojo-nucleus-page__path-transition-link:focus-visible{transform:none}
+}
