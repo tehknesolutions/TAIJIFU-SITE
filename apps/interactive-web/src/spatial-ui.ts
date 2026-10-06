@@ -18,6 +18,7 @@ export type ContextualNavigationNode = Readonly<{
   canonicalUrl: string;
   depth: number;
   relation: 'root' | 'child' | 'focus' | 'focus-child';
+  manifestation: 'signal' | 'artifact';
 }>;
 
 export function buildExperienceHierarchy(
@@ -96,7 +97,8 @@ export function contextualNavigationNodes(
         : depth === 0
           ? 'root'
           : 'child';
-    return Object.freeze({ id: node.id, label: node.label, canonicalUrl: node.canonicalUrl, depth, relation });
+    const manifestation: ContextualNavigationNode['manifestation'] = relation === 'focus' || relation === 'focus-child' ? 'artifact' : 'signal';
+    return Object.freeze({ id: node.id, label: node.label, canonicalUrl: node.canonicalUrl, depth, relation, manifestation });
   }));
 }
 
