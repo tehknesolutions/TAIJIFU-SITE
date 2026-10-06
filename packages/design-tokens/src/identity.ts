@@ -41,3 +41,31 @@ export function assertIdentityAxisMapping(axis: IdentityAxis, role: string): voi
     throw new Error(`PROTECTED_IDENTITY_ROLE_REMAP:${axis}:${role}`);
   }
 }
+
+
+export const manifestationContract = Object.freeze({
+  signal: Object.freeze({
+    purpose: 'orientation-context',
+    allowedContexts: Object.freeze(['navigation', 'labels', 'peripheral-nodes'] as const),
+  }),
+  artifact: Object.freeze({
+    purpose: 'canonical-object-presence',
+    allowedContexts: Object.freeze(['belt', 'path', 'nucleus', 'focused-node'] as const),
+  }),
+  ritual: Object.freeze({
+    purpose: 'structural-threshold',
+    allowedContexts: Object.freeze(['home', 'dojo-entry', 'path-transition'] as const),
+  }),
+} as const);
+
+export type ManifestationContext =
+  typeof manifestationContract[ManifestationIntensity]['allowedContexts'][number];
+
+export function manifestationForContext(context: ManifestationContext): ManifestationIntensity {
+  for (const intensity of manifestationIntensities) {
+    if ((manifestationContract[intensity].allowedContexts as readonly string[]).includes(context)) {
+      return intensity;
+    }
+  }
+  throw new Error(`UNSUPPORTED_MANIFESTATION_CONTEXT:${context}`);
+}
