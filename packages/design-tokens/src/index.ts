@@ -32,11 +32,37 @@ export const designTokens = Object.freeze({
       meta: '--tj-type-tracking-meta',
     }),
   }),
+  intensity: Object.freeze({
+    signal: '--tj-intensity-signal',
+    artifact: '--tj-intensity-artifact',
+    ritual: '--tj-intensity-ritual',
+  }),
+  surface: Object.freeze({
+    void: '--tj-surface-void',
+    elevated: '--tj-surface-elevated',
+    deep: '--tj-surface-deep',
+    metal: '--tj-surface-metal',
+  }),
+  depth: Object.freeze({
+    signal: '--tj-depth-signal',
+    artifact: '--tj-depth-artifact',
+    ritual: '--tj-depth-ritual',
+  }),
+  energy: Object.freeze({
+    signal: '--tj-energy-signal',
+    artifact: '--tj-energy-artifact',
+    ritual: '--tj-energy-ritual',
+  }),
   motion: Object.freeze({
     duration: Object.freeze({
       fast: '--tj-motion-duration-fast',
       standard: '--tj-motion-duration-standard',
       deliberate: '--tj-motion-duration-deliberate',
+    }),
+    semantic: Object.freeze({
+      tai: '--tj-motion-tai',
+      ji: '--tj-motion-ji',
+      fu: '--tj-motion-fu',
     }),
     easing: Object.freeze({
       standard: '--tj-motion-easing-standard',
