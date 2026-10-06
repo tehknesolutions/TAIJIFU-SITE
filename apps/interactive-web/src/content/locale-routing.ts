@@ -5,6 +5,7 @@ import { findDojoNucleusByPath } from './dojo-nucleus-routes.js';
 export type LocalizedPathResolution =
   | Readonly<{ kind: 'international-entry' }>
   | Readonly<{ kind: 'localized-route'; locale: SupportedLocale; routeId: string }>
+  | Readonly<{ kind: 'dojo-entry'; locale: SupportedLocale }>
   | Readonly<{ kind: 'dojo-nucleus'; locale: SupportedLocale; nucleusId: string }>
   | Readonly<{ kind: 'not-found' }>;
 
@@ -13,6 +14,9 @@ export function resolveLocalizedPath(pathname: string): LocalizedPathResolution 
 
   const locale = parseLocalePrefix(pathname);
   if (!locale) return Object.freeze({ kind: 'not-found' });
+
+  const dojoEntryUrl = locale === 'pt-BR' ? '/pt-br/dojo/' : locale === 'en' ? '/en/dojo/' : '/es/dojo/';
+  if (pathname === dojoEntryUrl) return Object.freeze({ kind: 'dojo-entry', locale });
 
   const dojoNucleus = findDojoNucleusByPath(pathname);
   if (dojoNucleus) return Object.freeze({ kind: 'dojo-nucleus', locale, nucleusId: dojoNucleus.nucleusId });
