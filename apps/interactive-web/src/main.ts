@@ -21,11 +21,17 @@ import { applyPresentationStageState } from './presentation-stage-state.js';
 import { wireLegendFocus } from './legend-focus-wiring.js';
 import { manifestationForContext } from '@taijifu/design-tokens';
 
+const deploymentBase = import.meta.env.BASE_URL;
+function withDeploymentBase(url: string): string {
+  if (!url.startsWith('/') || url.startsWith('//') || deploymentBase === '/') return url;
+  const prefix = deploymentBase.replace(/\/$/, '');
+  return url === prefix || url.startsWith(prefix + '/') ? url : prefix + url;
+}
 const pathname = window.location.pathname;
 const homeGate = document.querySelector<HTMLElement>('.dojo-gate');
 if (homeGate) homeGate.dataset.manifestation = manifestationForContext('home');
 const redirect = legacyRedirectFor(pathname);
-if (redirect) window.location.replace(redirect);
+if (redirect) window.location.replace(withDeploymentBase(redirect));
 else {
   const routeResolution = resolveLocalizedPath(pathname, import.meta.env.BASE_URL);
   const semanticContent = document.querySelector<HTMLElement>('#semantic-content');
@@ -53,7 +59,13 @@ else {
   const activeLocale = routeResolution.kind === 'localized-route' || routeResolution.kind === 'dojo-entry' || routeResolution.kind === 'dojo-nucleus' ? routeResolution.locale : 'pt-BR';
   wireHomeDojoLinks(document.querySelectorAll<HTMLAnchorElement>('[data-route-id]'), activeLocale);
   wireDojoEntryLinks(document.querySelectorAll<HTMLAnchorElement>('[data-dojo-entry]'), activeLocale);
+  document.querySelectorAll<HTMLAnchorElement>('a[href^="/"]').forEach((anchor) => {
+    anchor.href = withDeploymentBase(anchor.getAttribute('href') ?? '/');
+  });
   const primaryNavigation = document.querySelector<HTMLElement>('#primary-navigation'); if (primaryNavigation) primaryNavigation.innerHTML = renderPrimaryNavigation(activeLocale);
+  primaryNavigation?.querySelectorAll<HTMLAnchorElement>('a[href^="/"]').forEach((anchor) => {
+    anchor.href = withDeploymentBase(anchor.getAttribute('href') ?? '/');
+  });
   const interactiveLegend = document.querySelector<HTMLElement>('#interactive-node-links');
   const renderLegend = (focusId: string | null) => { if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend(activeLocale, focusId); }; renderLegend(null);
   const canonCurriculum = document.querySelector<HTMLElement>('#canon-curriculum'); if (canonCurriculum) canonCurriculum.innerHTML = renderCanonUIForLocale(activeLocale);
@@ -67,7 +79,7 @@ else {
     let runtime: ReturnType<typeof bootstrapInteractiveWeb>;
     const wireLegend = () => wireLegendFocus(interactiveLegend, (nodeId) => runtime.focusNode(nodeId));
     const syncLegendFocus = (nodeId: string | null) => { renderLegend(nodeId); wireLegend(); };
-    runtime = bootstrapInteractiveWeb({ locale: activeLocale, canvas, navigate: (canonicalUrl) => window.location.assign(canonicalUrl), routeId: currentRoute?.id ?? 'home', initialFocusNode: currentRoute?.id ?? null, presentationMediaElement, onPresentationMediaStateChange: (snapshot) => applyPresentationStageState(interactiveStage, snapshot), onFocus: (focus) => { if (focusLabel) focusLabel.value = focus?.label ?? 'TAIJIFU'; syncLegendFocus(focus?.nodeId ?? null); } });
+    runtime = bootstrapInteractiveWeb({ locale: activeLocale, canvas, navigate: (canonicalUrl) => window.location.assign(withDeploymentBase(canonicalUrl)), routeId: currentRoute?.id ?? 'home', initialFocusNode: currentRoute?.id ?? null, presentationMediaElement, onPresentationMediaStateChange: (snapshot) => applyPresentationStageState(interactiveStage, snapshot), onFocus: (focus) => { if (focusLabel) focusLabel.value = focus?.label ?? 'TAIJIFU'; syncLegendFocus(focus?.nodeId ?? null); } });
     applyPresentationStageState(interactiveStage, runtime.getPresentationMediaSnapshot()); wireLegend();
     const interactiveExperience = document.querySelector<HTMLElement>('#interactive-experience'); const surfaceStatus = document.querySelector<HTMLElement>('#interactive-surface-status'); if (interactiveExperience && surfaceStatus) applyInteractiveSurfaceState(interactiveExperience, surfaceStatus, runtime.surfaceAvailable);
     window.addEventListener('pagehide', () => { training?.dispose(); runtime.dispose(); }, { once: true });
