@@ -20,13 +20,9 @@ import { applyInteractiveSurfaceState } from './interactive-surface-state.js';
 import { applyPresentationStageState } from './presentation-stage-state.js';
 import { wireLegendFocus } from './legend-focus-wiring.js';
 import { manifestationForContext } from '@taijifu/design-tokens';
+import { withDeploymentBase } from './deployment-path.js';
 
 const deploymentBase = import.meta.env.BASE_URL;
-function withDeploymentBase(url: string): string {
-  if (!url.startsWith('/') || url.startsWith('//') || deploymentBase === '/') return url;
-  const prefix = deploymentBase.replace(/\/$/, '');
-  return url === prefix || url.startsWith(prefix + '/') ? url : prefix + url;
-}
 const pathname = window.location.pathname;
 const routePathname = deploymentBase !== '/' && pathname.startsWith(deploymentBase.replace(/\/$/, '') + '/')
   ? pathname.slice(deploymentBase.replace(/\/$/, '').length)
@@ -34,7 +30,7 @@ const routePathname = deploymentBase !== '/' && pathname.startsWith(deploymentBa
 const homeGate = document.querySelector<HTMLElement>('.dojo-gate');
 if (homeGate) homeGate.dataset.manifestation = manifestationForContext('home');
 const redirect = legacyRedirectFor(routePathname);
-if (redirect) window.location.replace(withDeploymentBase(redirect));
+if (redirect) window.location.replace(withDeploymentBase(redirect, deploymentBase));
 else {
   const routeResolution = resolveLocalizedPath(pathname, import.meta.env.BASE_URL);
   const semanticContent = document.querySelector<HTMLElement>('#semantic-content');
@@ -63,7 +59,7 @@ else {
   wireHomeDojoLinks(document.querySelectorAll<HTMLAnchorElement>('[data-route-id]'), activeLocale);
   wireDojoEntryLinks(document.querySelectorAll<HTMLAnchorElement>('[data-dojo-entry]'), activeLocale);
   document.querySelectorAll<HTMLAnchorElement>('a[href^="/"]').forEach((anchor) => {
-    anchor.href = withDeploymentBase(anchor.getAttribute('href') ?? '/');
+    anchor.href = withDeploymentBase(anchor.getAttribute('href') ?? '/', deploymentBase);
   });
   const primaryNavigation = document.querySelector<HTMLElement>('#primary-navigation'); if (primaryNavigation) primaryNavigation.innerHTML = renderPrimaryNavigation(activeLocale);
   primaryNavigation?.querySelectorAll<HTMLAnchorElement>('a[href^="/"]').forEach((anchor) => {
@@ -76,7 +72,7 @@ else {
     if (!anchor || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || anchor.hasAttribute('download') || (anchor.target && anchor.target !== '_self')) return;
     const href = anchor.getAttribute('href');
     if (!href || !href.startsWith('/') || href.startsWith('//')) return;
-    const resolved = withDeploymentBase(href);
+    const resolved = withDeploymentBase(href, deploymentBase);
     if (resolved !== href) anchor.href = resolved;
   }, { capture: true });
   const interactiveLegend = document.querySelector<HTMLElement>('#interactive-node-links');
@@ -92,7 +88,7 @@ else {
     let runtime: ReturnType<typeof bootstrapInteractiveWeb>;
     const wireLegend = () => wireLegendFocus(interactiveLegend, (nodeId) => runtime.focusNode(nodeId));
     const syncLegendFocus = (nodeId: string | null) => { renderLegend(nodeId); wireLegend(); };
-    runtime = bootstrapInteractiveWeb({ locale: activeLocale, canvas, navigate: (canonicalUrl) => window.location.assign(withDeploymentBase(canonicalUrl)), routeId: currentRoute?.id ?? 'home', initialFocusNode: currentRoute?.id ?? null, presentationMediaElement, onPresentationMediaStateChange: (snapshot) => applyPresentationStageState(interactiveStage, snapshot), onFocus: (focus) => { if (focusLabel) focusLabel.value = focus?.label ?? 'TAIJIFU'; syncLegendFocus(focus?.nodeId ?? null); } });
+    runtime = bootstrapInteractiveWeb({ locale: activeLocale, canvas, navigate: (canonicalUrl) => window.location.assign(withDeploymentBase(canonicalUrl, deploymentBase)), routeId: currentRoute?.id ?? 'home', initialFocusNode: currentRoute?.id ?? null, presentationMediaElement, onPresentationMediaStateChange: (snapshot) => applyPresentationStageState(interactiveStage, snapshot), onFocus: (focus) => { if (focusLabel) focusLabel.value = focus?.label ?? 'TAIJIFU'; syncLegendFocus(focus?.nodeId ?? null); } });
     applyPresentationStageState(interactiveStage, runtime.getPresentationMediaSnapshot()); wireLegend();
     const interactiveExperience = document.querySelector<HTMLElement>('#interactive-experience'); const surfaceStatus = document.querySelector<HTMLElement>('#interactive-surface-status'); if (interactiveExperience && surfaceStatus) applyInteractiveSurfaceState(interactiveExperience, surfaceStatus, runtime.surfaceAvailable);
     window.addEventListener('pagehide', () => { training?.dispose(); runtime.dispose(); }, { once: true });
