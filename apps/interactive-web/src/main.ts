@@ -28,9 +28,12 @@ function withDeploymentBase(url: string): string {
   return url === prefix || url.startsWith(prefix + '/') ? url : prefix + url;
 }
 const pathname = window.location.pathname;
+const routePathname = deploymentBase !== '/' && pathname.startsWith(deploymentBase.replace(/\/$/, '') + '/')
+  ? pathname.slice(deploymentBase.replace(/\/$/, '').length)
+  : pathname;
 const homeGate = document.querySelector<HTMLElement>('.dojo-gate');
 if (homeGate) homeGate.dataset.manifestation = manifestationForContext('home');
-const redirect = legacyRedirectFor(pathname);
+const redirect = legacyRedirectFor(routePathname);
 if (redirect) window.location.replace(withDeploymentBase(redirect));
 else {
   const routeResolution = resolveLocalizedPath(pathname, import.meta.env.BASE_URL);
@@ -54,7 +57,7 @@ else {
     const seoHead = document.head; seoHead.querySelectorAll('link[data-taijifu-i18n-seo]').forEach((node) => node.remove());
     const seoMarkup = renderLocalizedSeoHead(routeResolution.routeId, routeResolution.locale);
     if (seoMarkup) { const template = document.createElement('template'); template.innerHTML = seoMarkup; template.content.querySelectorAll('link').forEach((link) => { link.dataset.taijifuI18nSeo = 'true'; seoHead.appendChild(link); }); }
-    const semanticRoute = renderSemanticRoute(pathname); if (semanticRoute && semanticContent) semanticContent.innerHTML = renderLanguageSelector(routeResolution.routeId, routeResolution.locale) + semanticRoute;
+    const semanticRoute = renderSemanticRoute(routePathname); if (semanticRoute && semanticContent) semanticContent.innerHTML = renderLanguageSelector(routeResolution.routeId, routeResolution.locale) + semanticRoute;
   }
   const activeLocale = routeResolution.kind === 'localized-route' || routeResolution.kind === 'dojo-entry' || routeResolution.kind === 'dojo-nucleus' ? routeResolution.locale : 'pt-BR';
   wireHomeDojoLinks(document.querySelectorAll<HTMLAnchorElement>('[data-route-id]'), activeLocale);
@@ -66,6 +69,16 @@ else {
   primaryNavigation?.querySelectorAll<HTMLAnchorElement>('a[href^="/"]').forEach((anchor) => {
     anchor.href = withDeploymentBase(anchor.getAttribute('href') ?? '/');
   });
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    const anchor = target.closest<HTMLAnchorElement>('a[href]');
+    if (!anchor || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || anchor.hasAttribute('download') || (anchor.target && anchor.target !== '_self')) return;
+    const href = anchor.getAttribute('href');
+    if (!href || !href.startsWith('/') || href.startsWith('//')) return;
+    const resolved = withDeploymentBase(href);
+    if (resolved !== href) anchor.href = resolved;
+  }, { capture: true });
   const interactiveLegend = document.querySelector<HTMLElement>('#interactive-node-links');
   const renderLegend = (focusId: string | null) => { if (interactiveLegend) interactiveLegend.innerHTML = renderInteractiveLegend(activeLocale, focusId); }; renderLegend(null);
   const canonCurriculum = document.querySelector<HTMLElement>('#canon-curriculum'); if (canonCurriculum) canonCurriculum.innerHTML = renderCanonUIForLocale(activeLocale);
@@ -74,7 +87,7 @@ else {
   const training = trainingRoot ? mountTrainingExperience(trainingRoot) : null;
   const canvas = document.querySelector<HTMLCanvasElement>('#taijifu-experience'); const focusLabel = document.querySelector<HTMLOutputElement>('#interactive-focus-label');
   if (canvas) {
-    const currentRoute = routeResolution.kind === 'localized-route' ? findSiteRoute(pathname) : null; const interactiveStage = canvas.closest<HTMLElement>('.interactive-stage');
+    const currentRoute = routeResolution.kind === 'localized-route' ? findSiteRoute(routePathname) : null; const interactiveStage = canvas.closest<HTMLElement>('.interactive-stage');
     const presentationMediaElement = document.createElement('img'); presentationMediaElement.className = 'interactive-presentation-media'; presentationMediaElement.hidden = true; presentationMediaElement.alt = ''; presentationMediaElement.setAttribute('aria-hidden', 'true'); interactiveStage?.prepend(presentationMediaElement);
     let runtime: ReturnType<typeof bootstrapInteractiveWeb>;
     const wireLegend = () => wireLegendFocus(interactiveLegend, (nodeId) => runtime.focusNode(nodeId));
